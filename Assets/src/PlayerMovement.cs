@@ -2,8 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
-    [Range(0f, 10f)]
-    [SerializeField] float m_speed = default;
+    [SerializeField] BaseEntity m_controlling = default;
     Vector2 m_movementDirection = Vector2.zero;
     Rigidbody2D RB2D => GetComponent<Rigidbody2D>();
     public void OnMove(InputAction.CallbackContext value)
@@ -12,6 +11,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        RB2D?.AddForce(m_speed * m_movementDirection * Time.deltaTime, ForceMode2D.Impulse);
+        RB2D?.AddForce(m_controlling.BaseProperty.MoveSpeed * m_movementDirection * Time.deltaTime, ForceMode2D.Impulse);
     }
 }
