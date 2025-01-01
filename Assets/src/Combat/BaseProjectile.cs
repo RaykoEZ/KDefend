@@ -7,17 +7,16 @@ using UnityEngine.WSA;
 [Serializable]
 public struct ProjectileProperty 
 {
+    public int Damage;
+    public int PierceCount;
+    public int ShotsPerCycle;
     public float Speed;
     public float Life;
-    public int PierceCount;
-    public int Damage;
-}
-public interface IWeapon 
-{
-    public void Fire(Vector2 direction);
+    public float DelayPerShot;
+    public float DelayPerCycle;
 }
 [RequireComponent(typeof(Rigidbody2D))]
-public class BaseProjectile : MonoBehaviour, IWeapon
+public class BaseProjectile : MonoBehaviour
 {
     protected bool m_isFlying = false;
     protected float m_lifeTimer = 0f;
@@ -47,7 +46,17 @@ public class BaseProjectile : MonoBehaviour, IWeapon
             OnHit(result);
         }
     }
-    public virtual void Fire(Vector2 directionNormalized) 
+    protected static T NewProjectileInstance<T>(T prefabRef, Transform parent) where T:BaseProjectile
+    {
+        return Instantiate(prefabRef, parent, true);
+    }
+    // call to fire off a projectile
+    public static void Fire<T>(T prefabRef, Transform parent, Vector2 directionNormalized) where T : BaseProjectile
+    {
+        T proj = NewProjectileInstance(prefabRef, parent);
+        proj?.Launch(directionNormalized);
+    }
+    protected virtual void Launch(Vector2 directionNormalized) 
     {
         // start update
         m_direction = directionNormalized;

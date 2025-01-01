@@ -2,7 +2,12 @@
 using UnityEngine.InputSystem;
 
 public class Player : BaseCharacter 
-{ 
+{
+    // turn off firing
+    void Update()
+    {
+        m_firing = Mouse.current.leftButton.isPressed;
+    }
     // Trigger this when player clicks to fire weapon
     public void OnFire() 
     {

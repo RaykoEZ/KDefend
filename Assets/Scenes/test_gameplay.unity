@@ -839,7 +839,19 @@ MonoBehaviour:
     m_ActionId: d304daec-fe15-4f36-a8ae-dde9ec77679b
     m_ActionName: Player/Look[/Mouse/delta,/Pen/delta]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3701492829331852976}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnFire
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: de0cf229-b477-4733-bf66-3e6f4b121b3e
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
@@ -1097,6 +1109,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 525bc216ac8e3514f98909b8af055a6d, type: 3}
+--- !u!114 &3701492829331852976 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4097968068867644644, guid: 525bc216ac8e3514f98909b8af055a6d, type: 3}
+  m_PrefabInstance: {fileID: 3701492829331852975}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7511a3faadc7c784584119a95a1f1fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5122440429167275019
 PrefabInstance:
   m_ObjectHideFlags: 0
