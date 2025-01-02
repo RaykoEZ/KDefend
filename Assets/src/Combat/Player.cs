@@ -3,6 +3,11 @@ using UnityEngine.InputSystem;
 
 public class Player : BaseCharacter 
 {
+    [SerializeField] BaseProjectile m_testShot = default;
+    void Start()
+    {
+        m_currentWeapon = m_testShot;
+    }
     // turn off firing
     void Update()
     {
@@ -11,9 +16,13 @@ public class Player : BaseCharacter
     // Trigger this when player clicks to fire weapon
     public void OnFire() 
     {
+        FireWeapon();
+    }
+    // get current aiming direction
+    protected override Vector2 GetAimDirection()
+    {
         Vector2 world = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         Vector2 pos = new Vector2(rb.position.x, rb.position.y);
-        Vector2 dir = (world - pos).normalized;
-        FireWeapon(dir);
+        return (world - pos).normalized;
     }
 }

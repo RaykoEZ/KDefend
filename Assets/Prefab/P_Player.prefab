@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 6352745746455249992}
   - component: {fileID: 5469588330984188005}
   - component: {fileID: 4097968068867644644}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: P_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,6 +508,10 @@ MonoBehaviour:
   m_onDefeat:
     m_PersistentCalls:
       m_Calls: []
+  m_onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  m_testShot: {fileID: 5641416596222669894, guid: c6ec8db9dcff0a146a8e41d15e8c90b5, type: 3}
 --- !u!1001 &3391481262146333822
 PrefabInstance:
   m_ObjectHideFlags: 0
