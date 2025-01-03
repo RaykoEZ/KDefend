@@ -17,7 +17,9 @@ public class BaseEntity : MonoBehaviour
     [SerializeField] protected UnityEvent<int> m_onTakeDamage = default;
     protected EntityProperty m_current;
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
-    public EntityProperty BaseProperty => m_base;
+    public EntityProperty BaseStats => m_base;
+    public EntityProperty CurrentStats { get => m_current;}
+
     void Awake()
     {
         m_current = m_base;
@@ -34,7 +36,7 @@ public class BaseEntity : MonoBehaviour
     {
         m_current.Health -= baseDamage;
         m_onTakeDamage?.Invoke(baseDamage);
-        if (m_current.Health <= 0f) 
+        if (CurrentStats.Health <= 0f) 
         {
             OnDefeat();
         }

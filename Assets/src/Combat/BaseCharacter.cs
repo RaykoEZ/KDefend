@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 public class BaseCharacter : BaseEntity 
 {
     protected bool m_firing = false;

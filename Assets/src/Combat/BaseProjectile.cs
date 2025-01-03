@@ -35,7 +35,7 @@ public class BaseProjectile : MonoBehaviour, IHitsEntity
             rb.MovePosition(rb.position +
                 (Time.deltaTime * m_property.Speed * m_direction));
             yield return new WaitForEndOfFrame();
-            m_lifeTimer += Time.deltaTime;
+            m_lifeTimer += Time.fixedDeltaTime;
             if (m_lifeTimer >= Property.Life)
             {
                 m_isFlying = false;

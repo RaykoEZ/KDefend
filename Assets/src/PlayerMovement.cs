@@ -11,6 +11,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        RB2D?.AddForce(m_controlling.BaseProperty.MoveSpeed * m_movementDirection * Time.deltaTime, ForceMode2D.Impulse);
+        RB2D?.AddForce(m_controlling.BaseStats.MoveSpeed * m_movementDirection * Time.deltaTime, ForceMode2D.Impulse);
     }
 }

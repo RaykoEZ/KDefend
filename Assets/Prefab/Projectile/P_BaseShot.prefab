@@ -112,7 +112,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 40, y: 40}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!50 &6614913905169282793
 Rigidbody2D:
@@ -159,7 +159,7 @@ MonoBehaviour:
     Speed: 15
     Life: 1
     DelayPerShot: 0.1
-    DelayPerCycle: 0.5
+    DelayPerCycle: 0.2
 --- !u!58 &792987912367956665
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -185,7 +185,7 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 192
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
