@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 8405887945171300126}
   - component: {fileID: 8648738531902545254}
   - component: {fileID: 2273697011688774770}
+  - component: {fileID: 329814037991214225}
   m_Layer: 7
   m_Name: P_Hostile
   m_TagString: Untagged
@@ -323,7 +324,7 @@ Animator:
   m_GameObject: {fileID: 5266097158630861302}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 624aa2e9c6028c849bd7d930266b9eef, type: 2}
+  m_Controller: {fileID: 9100000, guid: 42c9ce88be7526f4785a49808acf8956, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -347,7 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_base:
-    Health: 3
+    Health: 10
     MoveSpeed: 1
   m_onDefeat:
     m_PersistentCalls:
@@ -367,6 +368,18 @@ MonoBehaviour:
           m_StringArgument: takeHit
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!225 &329814037991214225
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5266097158630861302}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5281512484494855909
 GameObject:
   m_ObjectHideFlags: 0
