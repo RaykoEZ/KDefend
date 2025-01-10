@@ -7,6 +7,11 @@ public struct EnemySpawnPattern
     public int KillsForEarlySpawn;
     public float SecondsElapsed;
 }
+public struct EntityState 
+{
+    public int Hp;
+    public Vector2 Position;
+}
 public class Hostile : BaseCharacter 
 {
     [SerializeField] float m_moveInterval = default;

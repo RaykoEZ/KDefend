@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+// A script tp spawn an Entity within specified collider bound
 public class RangedSpawner : MonoBehaviour 
 {
     [SerializeField] Collider2D m_spawnRange = default;
