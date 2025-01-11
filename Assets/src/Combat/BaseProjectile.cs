@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.WSA;
 // Object shot from weapon
 // has speed, direction, life, and on-hit effect
 [Serializable]
@@ -19,7 +18,7 @@ public interface IHitsEntity
     public void OnHit<T>(T hit) where T : BaseEntity;
 }
 [RequireComponent(typeof(Rigidbody2D))]
-public class BaseProjectile : MonoBehaviour, IHitsEntity
+public class BaseProjectile : BaseWeapon, IHitsEntity
 {
     protected bool m_isFlying = true;
     protected float m_lifeTimer = 0f;
@@ -44,29 +43,19 @@ public class BaseProjectile : MonoBehaviour, IHitsEntity
         }
         EndProjectile();
     }
-
-    protected static T NewProjectileInstance<T>(T prefabRef, Transform parent) where T:BaseProjectile
+    public override void OnHit<T>(T hit)
     {
-        return Instantiate(prefabRef, parent);
+        hit?.TakeDamage(Property.Damage);
+        // kill object when hitting a target, unless we pierce
+        m_isFlying = false;
     }
     // call to fire off a projectile
-    public static void Fire<T>(T prefabRef, Transform parent, Vector2 directionNormalized) where T : BaseProjectile
-    {
-        T proj = NewProjectileInstance(prefabRef, parent);
-        proj?.Launch(directionNormalized);
-    }
-    protected virtual void Launch(Vector2 directionNormalized) 
+    protected override void LaunchAttack(Vector2 directionNormalized) 
     {
         // start update
         m_direction = directionNormalized;
         m_isFlying = true;
         StartCoroutine(Flying());
-    }
-    public virtual void OnHit<T>(T hit) where T: BaseEntity 
-    {
-        hit?.TakeDamage(Property.Damage);
-        // kill object when hitting a target, unless we pierce
-        m_isFlying = false;
     }
     protected virtual void EndProjectile() 
     {

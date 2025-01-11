@@ -26,7 +26,7 @@ public class BaseCharacter : BaseEntity
             // shoot a fire cycle
             for (int i = 0; i < numShots; i++)
             {
-                BaseProjectile.Fire(m_currentWeapon, transform, GetAimDirection());
+                BaseWeapon.Attack(m_currentWeapon, transform, GetAimDirection());
                 yield return new WaitForSeconds(m_currentWeapon.Property.DelayPerShot);
             }
             // next firing cycle

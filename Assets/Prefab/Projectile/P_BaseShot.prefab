@@ -155,9 +155,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_property:
     Damage: 1
-    ShotsPerCycle: 5
+    ShotsPerCycle: 3
     Speed: 15
-    Life: 1
+    Life: 1.5
     DelayPerShot: 0.1
     DelayPerCycle: 0.2
 --- !u!58 &792987912367956665
