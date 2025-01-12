@@ -8,7 +8,7 @@ public class BaseCharacter : BaseEntity
     protected Coroutine m_weaponCall;
     protected virtual Vector2 GetAimDirection()
     {
-        return Vector2.down;
+        return Vector2.up;
     }
     public virtual void FireWeapon() 
     {
@@ -20,14 +20,14 @@ public class BaseCharacter : BaseEntity
     }
     IEnumerator Fire_Internal() 
     {
-        int numShots = m_currentWeapon.Property.ShotsPerCycle;
+        int numShots = m_currentWeapon.Property.AttackPerCycle;
         while (m_firing)
         {
             // shoot a fire cycle
             for (int i = 0; i < numShots; i++)
             {
                 BaseWeapon.Attack(m_currentWeapon, transform, GetAimDirection());
-                yield return new WaitForSeconds(m_currentWeapon.Property.DelayPerShot);
+                yield return new WaitForSeconds(m_currentWeapon.Property.DelayPerAttack);
             }
             // next firing cycle
             yield return new WaitForSeconds(m_currentWeapon.Property.DelayPerCycle);

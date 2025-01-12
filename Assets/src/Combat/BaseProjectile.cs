@@ -4,13 +4,13 @@ using UnityEngine;
 // Object shot from weapon
 // has speed, direction, life, and on-hit effect
 [Serializable]
-public struct ProjectileProperty 
+public struct WeaponProperty 
 {
     public int Damage;
-    public int ShotsPerCycle;
+    public int AttackPerCycle;
     public float Speed;
     public float Life;
-    public float DelayPerShot;
+    public float DelayPerAttack;
     public float DelayPerCycle;
 }
 public interface IHitsEntity
@@ -22,8 +22,6 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
 {
     protected bool m_isFlying = true;
     protected float m_lifeTimer = 0f;
-    [SerializeField] protected ProjectileProperty m_property = default;
-    public ProjectileProperty Property => m_property;
     protected Vector2 m_direction;
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
     IEnumerator Flying()
@@ -45,7 +43,7 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
     }
     public override void OnHit<T>(T hit)
     {
-        hit?.TakeDamage(Property.Damage);
+        base.OnHit(hit);
         // kill object when hitting a target, unless we pierce
         m_isFlying = false;
     }

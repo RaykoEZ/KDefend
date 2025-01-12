@@ -2,6 +2,11 @@
 
 public static class GameUtil 
 {
+    public static void AimTowards2D(Transform toAim, Vector2 directionNormalized)
+    {
+        float angle = Mathf.Atan2(directionNormalized.y, directionNormalized.x) * Mathf.Rad2Deg;
+        toAim.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
     // Spawn a gameobject a prefab reference (preferrably)
     public static T SpawnObject<T>(T spawnRef, Vector3 position, Transform parent = null) where T : MonoBehaviour
     {
