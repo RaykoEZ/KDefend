@@ -155,11 +155,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_property:
     Damage: 1
-    ShotsPerCycle: 3
-    Speed: 15
+    AttackPerCycle: 3
+    Speed: 12
     Life: 1.5
-    DelayPerShot: 0.1
-    DelayPerCycle: 0.2
+    DelayPerAttack: 0.1
+    DelayPerCycle: 0.5
 --- !u!58 &792987912367956665
 CircleCollider2D:
   m_ObjectHideFlags: 0

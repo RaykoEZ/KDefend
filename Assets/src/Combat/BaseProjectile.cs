@@ -12,6 +12,7 @@ public struct WeaponProperty
     public float Life;
     public float DelayPerAttack;
     public float DelayPerCycle;
+    public float PushPower;
 }
 public interface IHitsEntity
 {
@@ -24,6 +25,7 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
     protected float m_lifeTimer = 0f;
     protected Vector2 m_direction;
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
+    public override bool InstantiateWeapon => true;
     IEnumerator Flying()
     {
         while (m_isFlying)

@@ -3,10 +3,11 @@ using UnityEngine.InputSystem;
 
 public class Player : BaseCharacter 
 {
+    [SerializeField] MeleeAttack m_bat = default;
     [SerializeField] BaseProjectile m_testShot = default;
     void Start()
     {
-        m_currentWeapon = m_testShot;
+        m_currentWeapon = m_bat;
     }
     // turn off firing
     void Update()
@@ -16,7 +17,7 @@ public class Player : BaseCharacter
     // Trigger this when player clicks to fire weapon
     public void OnFire() 
     {
-        FireWeapon();
+        UseWeapon();
     }
     // get current aiming direction
     protected override Vector2 GetAimDirection()
