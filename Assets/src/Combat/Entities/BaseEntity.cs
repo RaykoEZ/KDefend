@@ -26,6 +26,7 @@ public class BaseEntity : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.attachedRigidbody == null) return;
         // when projectile hit this body, trigger on hit effects from projectile
         if (collision.attachedRigidbody.TryGetComponent(out IHitsEntity result))
         {

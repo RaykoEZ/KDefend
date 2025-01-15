@@ -12,7 +12,7 @@ public struct EntityState
     public int Hp;
     public Vector2 Position;
 }
-public class Hostile : BaseCharacter 
+public class Enemy : BaseCharacter 
 {
     [SerializeField] float m_moveInterval = default;
     protected Transform m_target;

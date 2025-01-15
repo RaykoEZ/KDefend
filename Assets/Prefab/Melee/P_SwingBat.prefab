@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 1461608455177269941}
   - component: {fileID: 4196518955656310880}
   - component: {fileID: 9168377722667972178}
+  - component: {fileID: 8225221762246870552}
   m_Layer: 6
   m_Name: P_SwingBat
   m_TagString: Untagged
@@ -178,13 +179,15 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 6b63c256ecf26b643b7badf70ae0fe51, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: -5776143862223942449, guid: 6b63c256ecf26b643b7badf70ae0fe51, type: 2}
     value: {fileID: 8879951555312761157}
+  - key: {fileID: 6418839956483404551, guid: 6b63c256ecf26b643b7badf70ae0fe51, type: 2}
+    value: {fileID: 8225221762246870552}
   m_ExposedReferences:
     m_References: []
 --- !u!95 &8879951555312761157
@@ -281,6 +284,36 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 3
+--- !u!114 &8225221762246870552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6987028416217158585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 7ec9a208db1740649bcdf930182ee276, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1461608455177269941}
+          m_TargetAssemblyTypeName: MeleeAttack, Assembly-CSharp
+          m_MethodName: set_InProgress
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8558031836188549792
 GameObject:
   m_ObjectHideFlags: 0
