@@ -12,11 +12,13 @@ public struct EntityState
     public int Hp;
     public Vector2 Position;
 }
+public delegate void OnEnemyUpdate(Enemy toUpdate);
 public class Enemy : BaseCharacter 
 {
     [SerializeField] float m_moveInterval = default;
     protected Transform m_target;
     Coroutine m_movement;
+    public event OnEnemyUpdate OnDefeated;
     public void Init(Transform target)
     {
         m_target = target;
@@ -34,6 +36,7 @@ public class Enemy : BaseCharacter
     {
         StopMoving();
         base.OnDefeat();
+        OnDefeated?.Invoke(this);
     }
     public void StartMoving()
     {

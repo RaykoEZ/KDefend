@@ -6,7 +6,7 @@ using UnityEngine.Timeline;
 public class GameOverUI : MonoBehaviour 
 {
     [SerializeField] EnemyWaveManager m_wave = default;
-    [SerializeField] PlayerHomeBase m_base = default;
+    [SerializeField] PlayerBase m_base = default;
     [SerializeField] AudioSource m_gameplayBgm = default;
     [SerializeField] TimelineAsset m_gameOverSequence = default;
     [SerializeField] TimelineAsset m_victorySequence = default;
@@ -17,7 +17,6 @@ public class GameOverUI : MonoBehaviour
     private void Start()
     {
         m_wave.OnAllCleared += OnVictory;
-        m_base.GameOver += TriggerGameOverVisual;
     }
     private void OnVictory()
     {

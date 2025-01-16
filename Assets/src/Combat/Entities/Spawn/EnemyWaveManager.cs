@@ -9,7 +9,7 @@ public class EnemyWaveManager : MonoBehaviour
 {
     [SerializeField] List<EnemyWaveDetail> m_waves = default;
     [SerializeField] List<EnemySpawner> m_spawners = default;
-    [SerializeField] PlayerHomeBase m_playerBase;
+    [SerializeField] PlayerBase m_playerBase;
     [SerializeField] PlayableDirector m_countdownDirector = default;
     [SerializeField] AudioClip m_finalWave = default;
     [SerializeField] AudioSource m_gameplayBgm = default;
@@ -61,13 +61,12 @@ public class EnemyWaveManager : MonoBehaviour
             int i = 0;
             OnStart?.Invoke(m_currentWave + 1);
             // spawn reward
-            m_playerBase.SpawnRewardProjectiles();
             // wait for wave countdown
             yield return new WaitForSeconds(3f);
             foreach (var group in wave.GroupsToSpawn)
             {
                 // spawn the group
-                spawners[i].SpawnEnemies(group.SpawnRef, group.NumToSpawn, 0.1f, InitEnenmy);
+                spawners[i].Spawn(group.SpawnRef, group.NumToSpawn, 0.1f, InitEnenmy);
                 // increment enemy count
                 m_numEnemies += group.NumToSpawn;
                 i++;
@@ -84,26 +83,18 @@ public class EnemyWaveManager : MonoBehaviour
     }
     void InitEnenmy(Enemy spawned) 
     {
-        if(spawned is BossYeetus) 
-        {
-            m_gameplayBgm.Stop();
-            m_gameplayBgm.clip = m_finalWave;
-            m_gameplayBgm.Play();
-        }
 
         spawned.Init(m_playerBase.transform);
-        spawned.OnDefeat += OnEnemyDefeated;
+        spawned.OnDefeated += OnEnemyDefeated;
     }
     void OnEnemyDefeated(Enemy defeated) 
     {
-        defeated.OnDefeat -= OnEnemyDefeated;
+        defeated.OnDefeated -= OnEnemyDefeated;
         m_numEnemies--;
         // if we cleared the wave early
         if(m_numEnemies == 0 && m_currentWave < m_waves.Count && m_waitingForNextWave) 
         {
             m_waitingForNextWave = false;
-            // spawn reward
-            m_playerBase.SpawnRewardProjectiles();
             PauseWave();
             m_currentWave++;
             StartWave();
