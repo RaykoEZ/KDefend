@@ -30,7 +30,6 @@ public class MeleeAttack : BaseWeapon
             m_currentDirection = directionNormalized;
             m_director.Play(m_attackPattern);
         }
-
     }
     protected virtual void OnCombo() 
     {

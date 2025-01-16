@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
-
 [Serializable]
 public struct EntityProperty
 {
@@ -19,7 +18,6 @@ public class BaseEntity : MonoBehaviour
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
     public EntityProperty BaseStats => m_base;
     public EntityProperty CurrentStats { get => m_current;}
-
     void Awake()
     {
         m_current = m_base;
