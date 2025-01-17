@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_testDisplay: {fileID: 3936617444520062260}
-  m_toTest: {fileID: 5411007304080064069}
+  m_toTest: {fileID: 3308682475385634148}
 --- !u!1 &9150827575702415000
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +440,7 @@ GameObject:
   - component: {fileID: 9117104022689447671}
   - component: {fileID: 5830867969958832293}
   - component: {fileID: 7468880985112389627}
-  - component: {fileID: 5411007304080064069}
+  - component: {fileID: 3308682475385634148}
   - component: {fileID: 8690273023820964136}
   - component: {fileID: 2010627843166983346}
   - component: {fileID: 6237842638876752895}
@@ -509,7 +509,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5411007304080064069
+--- !u!114 &3308682475385634148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -518,16 +518,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 9150827575702415000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96d10e0c93bb0a84aa872f045210d54d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5951773f943a01444a150dff586203b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_base:
-    Health: 5000
+    Health: 3000
     MoveSpeed: 0
   m_onDefeat:
     m_PersistentCalls:
       m_Calls: []
   m_onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  m_onInteract:
     m_PersistentCalls:
       m_Calls: []
 --- !u!95 &8690273023820964136

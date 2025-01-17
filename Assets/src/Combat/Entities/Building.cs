@@ -2,13 +2,6 @@
 {
     public abstract void Interact();
 }
-public class PlayerBase : Building
-{
-    public override void Interact()
-    {
-
-    }
-}
 public class Shop : Building 
 {
     public override void Interact()

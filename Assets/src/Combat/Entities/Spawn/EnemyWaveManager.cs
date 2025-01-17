@@ -10,9 +10,6 @@ public class EnemyWaveManager : MonoBehaviour
     [SerializeField] List<EnemyWaveDetail> m_waves = default;
     [SerializeField] List<EnemySpawner> m_spawners = default;
     [SerializeField] PlayerBase m_playerBase;
-    [SerializeField] PlayableDirector m_countdownDirector = default;
-    [SerializeField] AudioClip m_finalWave = default;
-    [SerializeField] AudioSource m_gameplayBgm = default;
 
     Coroutine m_spawnWave;
     public event OnAllWaveCleared OnAllCleared;
@@ -32,11 +29,8 @@ public class EnemyWaveManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         // stop bgm until we start next wave
-        m_countdownDirector.Play();
-        yield return new WaitForSeconds(3f);
         StartWave();
         yield return new WaitForSeconds(0.8f);
-        m_gameplayBgm?.Play();
     }
     public void StartWave() 
     {
@@ -83,7 +77,6 @@ public class EnemyWaveManager : MonoBehaviour
     }
     void InitEnenmy(Enemy spawned) 
     {
-
         spawned.Init(m_playerBase.transform);
         spawned.OnDefeated += OnEnemyDefeated;
     }

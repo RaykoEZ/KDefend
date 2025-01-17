@@ -1,20 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-// snapshot of the game state
-[Serializable]
-public struct KDefenderGameState 
-{
-    public int SecondsElapsed;
-    public int EnemiesKilled;
-    // State of player entities
-    public EntityState CafeValue;
-    public EntityState PlayerValue;
-    public List<EntityState> HostileStates;
-}
 // simple game timer counting up/down in seconds
 public class GameTimer : MonoBehaviour 
 {
