@@ -160,6 +160,7 @@ MonoBehaviour:
     Life: 1.5
     DelayPerAttack: 0.1
     DelayPerCycle: 0.5
+    PushPower: 0
 --- !u!58 &792987912367956665
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -9,8 +9,7 @@ public class EnemyWaveManager : MonoBehaviour
 {
     [SerializeField] List<EnemyWaveDetail> m_waves = default;
     [SerializeField] List<EnemySpawner> m_spawners = default;
-    [SerializeField] PlayerBase m_playerBase;
-
+    [SerializeField] List<BaseEntity> m_targetPriorityList = default;
     Coroutine m_spawnWave;
     public event OnAllWaveCleared OnAllCleared;
     public event OnWaveStart OnStart;
@@ -77,7 +76,7 @@ public class EnemyWaveManager : MonoBehaviour
     }
     void InitEnenmy(Enemy spawned) 
     {
-        spawned.Init(m_playerBase.transform);
+        spawned.Init(m_targetPriorityList);
         spawned.OnDefeated += OnEnemyDefeated;
     }
     void OnEnemyDefeated(Enemy defeated) 

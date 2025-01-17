@@ -22,7 +22,7 @@ public class BaseEntity : MonoBehaviour
     {
         m_current = m_base;
     }
-    void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.attachedRigidbody == null) return;
         // when projectile hit this body, trigger on hit effects from projectile

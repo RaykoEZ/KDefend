@@ -404,7 +404,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1fba2a6246be3084883bdec38fb721e2, type: 2}
   m_spawners:
   - {fileID: 1979116756}
-  m_playerBase: {fileID: 6870658619572179179}
+  m_targetPriorityList:
+  - {fileID: 3701492829331852976}
+  - {fileID: 6870658619572179179}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,7 +773,7 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 4498b9313d6a2dc498267999b67202e1, type: 2}
---- !u!43 &1618612691
+--- !u!43 &1922397480
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

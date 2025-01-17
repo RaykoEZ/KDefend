@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 [Serializable]
 public struct EnemySpawnPattern
@@ -16,21 +17,30 @@ public delegate void OnEnemyUpdate(Enemy toUpdate);
 public class Enemy : BaseCharacter, IHitsEntity
 {
     [SerializeField] int m_contactDamage = default;
+    [SerializeField] EnemyTargetFinder m_targeting = default;
+    protected int m_targetPriority = -1;
+    protected float m_speedVariant;
     protected Transform m_target;
     Coroutine m_movement;
     public event OnEnemyUpdate OnDefeated;
-    public void Init(Transform target)
+    public void Init(List<BaseEntity> interests)
     {
-        m_target = target;
-        StartMoving();
+        m_targeting?.AddTargets(interests);
+        m_speedVariant = UnityEngine.Random.Range(0.8f, 1.15f);
     }
     public virtual void StartAttack(Vector2 dirNormalize) 
     {
     }
-    protected void SwitchTarget(BaseEntity newTarget) 
+    public void UpdateTarget(BaseEntity newTarget) 
     {
         if (newTarget == null) return;
         m_target = newTarget.transform;
+        StopMoving();
+        StartMoving();
+    }
+    public void TargetLost() 
+    {
+        StopMoving();
     }
     public override void TakeDamage(int baseDamage)
     {
@@ -46,14 +56,14 @@ public class Enemy : BaseCharacter, IHitsEntity
         OnDefeated?.Invoke(this);
         Destroy(gameObject);
     }
-    public void StartMoving()
+    public virtual void StartMoving()
     {
         if (m_movement == null && m_target != null)
         {
             m_movement = StartCoroutine(Movement());
         }
     }
-    public void StopMoving()
+    public virtual void StopMoving()
     {
         if (m_movement != null)
         {
@@ -61,28 +71,33 @@ public class Enemy : BaseCharacter, IHitsEntity
             m_movement = null;
         }
     }
-    IEnumerator HitStun(float duration) 
+    protected virtual IEnumerator HitStun(float duration) 
     {
         StopMoving();
         yield return new WaitForSeconds(duration);
         StartMoving();
     }
-    IEnumerator Movement()
+    protected virtual IEnumerator Movement()
     {
         float dist = Vector3.Distance(transform.position, m_target.position);
         float t = 0f;
         while (dist > 0.01f)
         {
-            t += CurrentStats.MoveSpeed * Time.deltaTime;
+            t += CurrentStats.MoveSpeed * m_speedVariant * 0.005f * Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, m_target.position, t);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForEndOfFrame();
             dist = Vector3.Distance(transform.position, m_target.position);
         }
         m_movement = null;
     }
-
+    // contact damage
     public virtual void OnHit<T>(T hit) where T : BaseEntity
     {
-        hit?.TakeDamage(m_contactDamage);
+        if (hit is IPushable push && hit is Player)
+        {
+            hit?.TakeDamage(m_contactDamage);
+            Vector2 dir = hit.transform.position - transform.position;
+            push.Push(dir.normalized, 1f);
+        }
     }
 }

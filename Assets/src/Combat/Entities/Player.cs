@@ -4,9 +4,10 @@ using UnityEngine.InputSystem;
 public class Player : BaseCharacter 
 {
     [SerializeField] MeleeAttack m_bat = default;
+    [SerializeField] BaseProjectile m_shoot = default;
     void Start()
     {
-        m_currentWeapon = m_bat;
+        m_currentWeapon = m_shoot;
     }
     // turn off firing
     void Update()
