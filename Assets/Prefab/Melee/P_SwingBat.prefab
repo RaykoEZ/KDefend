@@ -241,7 +241,7 @@ MonoBehaviour:
     Speed: 1
     Life: 0
     DelayPerAttack: 0
-    DelayPerCycle: 0.5
+    DelayPerCycle: 1.2
     PushPower: 1
   m_director: {fileID: 3520696863709434456}
   m_attackPattern: {fileID: 11400000, guid: 6b63c256ecf26b643b7badf70ae0fe51, type: 2}

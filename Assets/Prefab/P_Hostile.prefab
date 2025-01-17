@@ -394,8 +394,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_base:
-    Health: 10
-    MoveSpeed: 1
+    Health: 50
+    MoveSpeed: 0.5
   m_onDefeat:
     m_PersistentCalls:
       m_Calls: []
@@ -414,7 +414,7 @@ MonoBehaviour:
           m_StringArgument: takeHit
           m_BoolArgument: 0
         m_CallState: 2
-  m_moveInterval: 0
+  m_contactDamage: 5
 --- !u!225 &329814037991214225
 CanvasGroup:
   m_ObjectHideFlags: 0

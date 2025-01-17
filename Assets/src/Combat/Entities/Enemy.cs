@@ -13,9 +13,9 @@ public struct EntityState
     public Vector2 Position;
 }
 public delegate void OnEnemyUpdate(Enemy toUpdate);
-public class Enemy : BaseCharacter 
+public class Enemy : BaseCharacter, IHitsEntity
 {
-    [SerializeField] float m_moveInterval = default;
+    [SerializeField] int m_contactDamage = default;
     protected Transform m_target;
     Coroutine m_movement;
     public event OnEnemyUpdate OnDefeated;
@@ -32,11 +32,19 @@ public class Enemy : BaseCharacter
         if (newTarget == null) return;
         m_target = newTarget.transform;
     }
+    public override void TakeDamage(int baseDamage)
+    {
+        // the lower the enemy hp, the greater the stun duration
+        float stunDuration = BaseStats.Health / (CurrentStats.Health + 0.1f);
+        stunDuration = Mathf.Clamp(stunDuration, 0.1f, 3f);
+        StartCoroutine(HitStun(stunDuration));
+        base.TakeDamage(baseDamage);
+    }
     protected override void OnDefeat()
     {
-        StopMoving();
         base.OnDefeat();
         OnDefeated?.Invoke(this);
+        Destroy(gameObject);
     }
     public void StartMoving()
     {
@@ -53,17 +61,28 @@ public class Enemy : BaseCharacter
             m_movement = null;
         }
     }
+    IEnumerator HitStun(float duration) 
+    {
+        StopMoving();
+        yield return new WaitForSeconds(duration);
+        StartMoving();
+    }
     IEnumerator Movement()
     {
         float dist = Vector3.Distance(transform.position, m_target.position);
         float t = 0f;
         while (dist > 0.01f)
         {
-            t += m_moveInterval * Time.deltaTime;
+            t += CurrentStats.MoveSpeed * Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, m_target.position, t);
             yield return new WaitForSeconds(0.5f);
             dist = Vector3.Distance(transform.position, m_target.position);
         }
         m_movement = null;
+    }
+
+    public virtual void OnHit<T>(T hit) where T : BaseEntity
+    {
+        hit?.TakeDamage(m_contactDamage);
     }
 }
