@@ -20,33 +20,31 @@ public class Enemy : BaseCharacter, IHitsEntity
     [SerializeField] EnemyTargetFinder m_targeting = default;
     protected int m_targetPriority = -1;
     protected float m_speedVariant;
+    protected BaseEntity m_defaultTarget;
     protected Transform m_target;
     Coroutine m_movement;
     public event OnEnemyUpdate OnDefeated;
-    public void Init(List<BaseEntity> interests)
+    public void Init(List<BaseEntity> interests, BaseEntity defaultTarget)
     {
         m_targeting?.AddTargets(interests);
+        m_defaultTarget = defaultTarget;
+        m_target = defaultTarget.transform;
         m_speedVariant = UnityEngine.Random.Range(0.8f, 1.15f);
-    }
-    public virtual void StartAttack(Vector2 dirNormalize) 
-    {
+        StartMoving();
     }
     public void UpdateTarget(BaseEntity newTarget) 
     {
         if (newTarget == null) return;
         m_target = newTarget.transform;
-        StopMoving();
-        StartMoving();
     }
     public void TargetLost() 
     {
-        StopMoving();
+        UpdateTarget(m_defaultTarget);
     }
     public override void TakeDamage(int baseDamage)
     {
         // the lower the enemy hp, the greater the stun duration
-        float stunDuration = BaseStats.Health / (CurrentStats.Health + 0.1f);
-        stunDuration = Mathf.Clamp(stunDuration, 0.1f, 3f);
+        float stunDuration = UnityEngine.Random.Range(0.05f, 0.1f);
         StartCoroutine(HitStun(stunDuration));
         base.TakeDamage(baseDamage);
     }
@@ -93,11 +91,16 @@ public class Enemy : BaseCharacter, IHitsEntity
     // contact damage
     public virtual void OnHit<T>(T hit) where T : BaseEntity
     {
-        if (hit is IPushable push && hit is Player)
+        if ( hit is Player || hit is PlayerBase)
         {
             hit?.TakeDamage(m_contactDamage);
-            Vector2 dir = hit.transform.position - transform.position;
-            push.Push(dir.normalized, 1f);
         }
+        Vector2 dir = hit.transform.position - transform.position;
+        if (hit is IPushable push)
+        {
+            push.Push(dir.normalized, 0.25f);
+        }
+        Push(-dir.normalized, 0.25f);
+        StartCoroutine(HitStun(0.25f));
     }
 }

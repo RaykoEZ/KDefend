@@ -695,8 +695,9 @@ MonoBehaviour:
           m_StringArgument: takeHit
           m_BoolArgument: 0
         m_CallState: 2
-  m_bat: {fileID: 8583768850648414185}
-  m_shoot: {fileID: 5641416596222669894, guid: c6ec8db9dcff0a146a8e41d15e8c90b5, type: 3}
+  m_weapons:
+  - {fileID: 5641416596222669894, guid: c6ec8db9dcff0a146a8e41d15e8c90b5, type: 3}
+  - {fileID: 8583768850648414185}
 --- !u!95 &3890917468139254870
 Animator:
   serializedVersion: 5

@@ -1,18 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : BaseCharacter 
 {
-    [SerializeField] MeleeAttack m_bat = default;
-    [SerializeField] BaseProjectile m_shoot = default;
-    void Start()
-    {
-        m_currentWeapon = m_shoot;
-    }
     // turn off firing
     void Update()
     {
-        m_firing = Mouse.current.leftButton.isPressed;
+        m_keepFiring = Mouse.current.leftButton.isPressed;
     }
     void OnCollisionEnter2D(Collision2D collision)
     {

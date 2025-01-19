@@ -1,6 +1,6 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 // Anything that can be pushed away by a force
 public interface IPushable
 {
@@ -8,39 +8,46 @@ public interface IPushable
 }
 public class BaseCharacter : BaseEntity , IPushable
 {
-    protected bool m_firing = false;
-    protected BaseWeapon m_currentWeapon;
-    protected Coroutine m_weaponCall;
+    [SerializeField] protected List<BaseWeapon> m_weapons = default;
+    protected List<bool> m_attackingWeapons;
+    protected bool m_keepFiring = false;
+    protected override void Awake()
+    {
+        base.Awake();
+        m_attackingWeapons = new List<bool>(m_weapons.Count);
+        for (int i = 0; i < m_weapons.Count; i++)
+        {
+            m_attackingWeapons.Add(false);
+        }
+    }
     protected virtual Vector2 GetAimDirection()
     {
         return Vector2.up;
     }
     public virtual void UseWeapon() 
     {
-        if (!m_firing) 
+        if (m_keepFiring) return;
+        for (int i = 0; i < m_weapons.Count; i++)
         {
-            m_firing = true;
-            m_weaponCall = StartCoroutine(Fire_Internal());
+            if (m_attackingWeapons[i]) continue;
+            StartCoroutine(AttackCycle(i));
         }
     }
-    IEnumerator Fire_Internal() 
+    IEnumerator AttackCycle(int weaponIndex) 
     {
-        int numShots = m_currentWeapon.Property.AttackPerCycle;
-        while (m_firing)
+        BaseWeapon weapon = m_weapons[weaponIndex];
+        if (weapon == null) yield break;
+        m_attackingWeapons[weaponIndex] = true;
+        while (m_attackingWeapons[weaponIndex])
         {
-            // shoot a fire cycle
-            for (int i = 0; i < numShots; i++)
-            {
-                BaseWeapon.Attack(m_currentWeapon, transform, GetAimDirection(), m_currentWeapon.InstantiateWeapon);
-                yield return new WaitForSeconds(m_currentWeapon.Property.DelayPerAttack);
-            }
+            //fire cycle
+            yield return weapon.Attack(weapon, transform, GetAimDirection(), weapon.InstantiateWeapon);
             // next firing cycle
-            yield return new WaitForSeconds(m_currentWeapon.Property.DelayPerCycle);
+            yield return new WaitForSeconds(weapon.Property.DelayPerCycle);
+            // hold fire >> continue cycle
+            m_attackingWeapons[weaponIndex] = m_keepFiring;
         }
-        m_firing = false;
-        m_weaponCall = null;
     }
-
     public void Push(Vector2 dir, float power)
     {
         StartCoroutine(Push_Internal(dir, power));

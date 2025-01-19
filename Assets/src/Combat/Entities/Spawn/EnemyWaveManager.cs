@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
 
 public delegate void OnWaveStart(int waveNumber);
 public delegate void OnAllWaveCleared();
@@ -10,6 +9,7 @@ public class EnemyWaveManager : MonoBehaviour
     [SerializeField] List<EnemyWaveDetail> m_waves = default;
     [SerializeField] List<EnemySpawner> m_spawners = default;
     [SerializeField] List<BaseEntity> m_targetPriorityList = default;
+    [SerializeField] BaseEntity m_defaultAggroTarget = default;
     Coroutine m_spawnWave;
     public event OnAllWaveCleared OnAllCleared;
     public event OnWaveStart OnStart;
@@ -76,7 +76,7 @@ public class EnemyWaveManager : MonoBehaviour
     }
     void InitEnenmy(Enemy spawned) 
     {
-        spawned.Init(m_targetPriorityList);
+        spawned.Init(m_targetPriorityList, m_defaultAggroTarget);
         spawned.OnDefeated += OnEnemyDefeated;
     }
     void OnEnemyDefeated(Enemy defeated) 

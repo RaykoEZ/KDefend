@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 2273697011688774770}
   - component: {fileID: 329814037991214225}
   m_Layer: 7
-  m_Name: P_Hostile
+  m_Name: P_BasicEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -509,8 +509,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_base:
-    Health: 50
-    MoveSpeed: 1
+    Health: 100
+    MoveSpeed: 0.9
   m_onDefeat:
     m_PersistentCalls:
       m_Calls: []
@@ -529,7 +529,8 @@ MonoBehaviour:
           m_StringArgument: takeHit
           m_BoolArgument: 0
         m_CallState: 2
-  m_contactDamage: 5
+  m_weapons: []
+  m_contactDamage: 2
   m_targeting: {fileID: 6771108399994705402}
 --- !u!225 &329814037991214225
 CanvasGroup:
