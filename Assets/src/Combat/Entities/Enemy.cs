@@ -8,6 +8,7 @@ public struct EnemySpawnPattern
     public int KillsForEarlySpawn;
     public float SecondsElapsed;
 }
+[Serializable]
 public struct EntityState 
 {
     public int Hp;

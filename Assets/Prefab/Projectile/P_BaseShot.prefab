@@ -157,9 +157,9 @@ MonoBehaviour:
     Damage: 1
     AttackPerCycle: 3
     Speed: 12
-    Life: 1.5
-    DelayPerAttack: 0.1
-    DelayPerCycle: 0.5
+    Life: 3
+    DelayPerAttack: 0.2
+    DelayPerCycle: 0.8
     PushPower: 0
 --- !u!58 &792987912367956665
 CircleCollider2D:

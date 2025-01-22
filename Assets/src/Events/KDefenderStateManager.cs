@@ -3,8 +3,12 @@ using UnityEngine.Events;
 
 public class KDefenderStateManager : MonoBehaviour 
 {
+    [SerializeField] KDefenderGameState m_defaultState = default;
     [SerializeField] UnityEvent<KDefenderGameState> m_onStateUpdate = default;
     KDefenderGameState m_current;
+
+    public KDefenderGameState Current => m_current;
+
     // As an alternate game mode
     // Will implement with the KeepQuiet saves system
     public KDefenderGameState TryLoadSaveState()
@@ -18,7 +22,7 @@ public class KDefenderStateManager : MonoBehaviour
     }
     void Start()
     {
-        UpdateState(KDefenderGameState.Default);
+        UpdateState(m_defaultState);
     }
     public void UpdateState(KDefenderGameState newState) 
     {

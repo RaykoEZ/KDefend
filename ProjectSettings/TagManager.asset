@@ -14,7 +14,7 @@ TagManager:
   - Player
   - Hostile
   - Detection
-  - 
+  - Building
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
     locked: 0
   - name: Gameplay
     uniqueID: 1818725071
+    locked: 0
+  - name: UI
+    uniqueID: 1893958443
     locked: 0
