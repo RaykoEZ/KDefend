@@ -4,6 +4,7 @@ using UnityEngine.Events;
 public class KDefenderStateManager : MonoBehaviour 
 {
     [SerializeField] KDefenderGameState m_defaultState = default;
+    [SerializeField] GameTimer m_timer = default;
     [SerializeField] UnityEvent<KDefenderGameState> m_onStateUpdate = default;
     KDefenderGameState m_current;
 

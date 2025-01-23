@@ -4,7 +4,7 @@ using UnityEngine.ResourceManagement.Util;
 
 // snapshot of the game state
 [Serializable]
-public struct KDefenderGameState 
+public struct KDefenderGameState
 {
     public int SecondsElapsed;
     public int EnemiesKilled;
