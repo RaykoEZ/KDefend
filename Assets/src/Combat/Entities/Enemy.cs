@@ -97,11 +97,12 @@ public class Enemy : BaseCharacter, IHitsEntity
             hit?.TakeDamage(m_contactDamage);
         }
         Vector2 dir = hit.transform.position - transform.position;
-        if (hit is IPushable push)
+        if (hit is IPushable push && !(hit is Enemy))
         {
             push.Push(dir.normalized, 0.25f);
+            Push(-dir.normalized, 0.25f);
+            StartCoroutine(HitStun(0.25f));
         }
-        Push(-dir.normalized, 0.25f);
-        StartCoroutine(HitStun(0.25f));
+
     }
 }

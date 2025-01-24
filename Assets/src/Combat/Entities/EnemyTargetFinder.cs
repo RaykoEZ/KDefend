@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEditor.Rendering.CameraUI;
 // Detects target entity in sight
 [RequireComponent(typeof(Collider2D))]
 public class EnemyTargetFinder : MonoBehaviour
@@ -33,7 +34,8 @@ public class EnemyTargetFinder : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.attachedRigidbody.TryGetComponent(out BaseEntity exiting)) 
+        if (collision.attachedRigidbody.TryGetComponent(out BaseEntity exiting) &&
+            m_targetPriorityList.Contains(exiting)) 
         {
             int p = m_targetPriorityList.IndexOf(exiting);
             if (p == m_targetPriority) 

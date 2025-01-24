@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class KDefenderStateManager : MonoBehaviour 
@@ -6,6 +7,7 @@ public class KDefenderStateManager : MonoBehaviour
     [SerializeField] KDefenderGameState m_defaultState = default;
     [SerializeField] GameTimer m_timer = default;
     [SerializeField] UnityEvent<KDefenderGameState> m_onStateUpdate = default;
+    [SerializeField] UnityEvent m_onGameOver = default;
     KDefenderGameState m_current;
 
     public KDefenderGameState Current => m_current;
@@ -29,5 +31,9 @@ public class KDefenderStateManager : MonoBehaviour
     {
         m_current = newState;
         m_onStateUpdate?.Invoke(m_current);
+    }
+    public void OnGameOver() 
+    {
+        m_onGameOver?.Invoke();
     }
 }

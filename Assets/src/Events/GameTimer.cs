@@ -9,7 +9,6 @@ public class GameTimer : MonoBehaviour
     [SerializeField] TextMeshProUGUI m_secondDisplay = default;
     [SerializeField] UnityEvent m_onTimeOut = default;
     [SerializeField] UnityEvent<int> m_onTimeElapsed = default;
-    TimerEventHandler<KDefenderGameState> m_timerEvents = new TimerEventHandler<KDefenderGameState>();
     int m_secondsElapsed = 1;   
     Coroutine m_timer;
     void Start()
