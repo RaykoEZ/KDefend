@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine.ResourceManagement.Util;
 
 // snapshot of the game state
 [Serializable]
@@ -12,4 +11,11 @@ public struct KDefenderGameState
     public EntityState CafeValue;
     public EntityState PlayerValue;
     public List<EntityState> HostileStates;
+    public InventoryState Inventory;
+}
+[Serializable]
+public struct InventoryState 
+{
+    public List<ItemProperty> ItemProperties;
+    public List<int> ItemStackCount;
 }
