@@ -4,15 +4,15 @@ using UnityEngine;
 public class TimerEventManager : MonoBehaviour 
 {
     [SerializeField] List<KDefenderTimerEvent> m_eventsToTrigger = default;
-    TimerEventHandler<KDefenderTimerEvent, KDefenderGameState> m_timerEvents = 
-        new TimerEventHandler<KDefenderTimerEvent, KDefenderGameState>();
+    TimerEventHandler<KDefenderTimerEvent> m_timerEvents = 
+        new TimerEventHandler<KDefenderTimerEvent>();
     public List<KDefenderTimerEvent> EventsToTrigger { get => m_eventsToTrigger; }
     void Start()
     {
         m_timerEvents.AddEvents(m_eventsToTrigger);
     }
-    public void OnTimeElapsed(int secondsElapsed) 
+    public void OnTimeElapsed(GameEventContext e) 
     {
-        m_timerEvents?.OnTimeElapsed(secondsElapsed);
+        m_timerEvents?.OnTimeElapsed(e);
     }
 }

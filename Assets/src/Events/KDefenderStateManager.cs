@@ -1,16 +1,6 @@
-﻿
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
-public class InventoryManager : MonoBehaviour 
-{   
-    protected Inventory<Item> m_heldItems = new Inventory<Item>();
-    protected List<Item> ItemSlots => m_heldItems.ItemList;
-    public InventoryState GetState() 
-    {
-        return m_heldItems.GetState();
-    }
-}
 public class KDefenderStateManager : MonoBehaviour 
 {
     [SerializeField] KDefenderGameState m_defaultState = default;
@@ -35,6 +25,7 @@ public class KDefenderStateManager : MonoBehaviour
     void Start()
     {
         UpdateState(m_defaultState);
+        m_timer.StartTimer();
     }
     public void UpdateState(KDefenderGameState newState) 
     {

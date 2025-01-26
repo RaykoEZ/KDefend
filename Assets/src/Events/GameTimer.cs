@@ -1,20 +1,17 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 // simple game timer counting up/down in seconds
 public class GameTimer : MonoBehaviour 
 {
-    [SerializeField] int m_initTest = default;
     [SerializeField] TextMeshProUGUI m_secondDisplay = default;
     [SerializeField] UnityEvent m_onTimeOut = default;
-    [SerializeField] UnityEvent<int> m_onTimeElapsed = default;
+    [SerializeField] UnityEvent<GameEventContext> m_onTimeElapsed = default;
+    [SerializeField] KDefenderStateManager m_gameState = default;
     int m_secondsElapsed = 1;   
     Coroutine m_timer;
-    void Start()
-    {
-        StartTimer(m_initTest);
-    }
     // start timer from beginning
     public void StartTimer(int initTime = 1, bool countdown = false) 
     {
@@ -58,7 +55,12 @@ public class GameTimer : MonoBehaviour
             }
             else 
             {
-                m_onTimeElapsed?.Invoke(m_secondsElapsed);
+                Dictionary<GameEventTriggerType, object> p = new Dictionary<GameEventTriggerType, object>
+                {
+                    {GameEventTriggerType.Time, m_secondsElapsed}
+                };
+                GameEventContext e = new GameEventContext(m_gameState.Current, p);
+                m_onTimeElapsed?.Invoke(e);
             }
         }
     }

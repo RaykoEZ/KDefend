@@ -1,21 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 [Serializable]
 public struct ItemProperty
 {
-    public bool Consumable;
     public string Name;
     public string Description;
     public int ItemCost;
+    public GameEventTriggerType TriggerType;
 }
-public interface IItem 
+[Serializable]
+public enum GameEventTriggerType
+{
+    Time,
+    TakeDamage,
+    Attack,
+    ObtainItem,
+    DiscardItem,
+    StartOfMove,
+    OnMoving
+}
+public interface IItem
 {
     ItemProperty Property { get; }
     // Use as counter from item amount/level
     int StackCount { get; set; }
-    public void Activate();
+    public bool Activate(GameEventContext e);
     public void OnPickup();
 }
 // class to contain item property and interaction triggers
@@ -31,8 +41,9 @@ public class Item : MonoBehaviour , IItem
     {
         m_onPickup?.Invoke(this);
     }
-    public virtual void Activate() 
+    public virtual bool Activate(GameEventContext e)
     {
         m_onUse?.Invoke(this);
+        return true;
     }
 }

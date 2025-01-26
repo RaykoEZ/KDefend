@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 public class Inventory<T> where T : IItem 
 {
     protected HashSet<T> m_itemSet;
@@ -14,7 +13,14 @@ public class Inventory<T> where T : IItem
         m_itemSet = new HashSet<T>();
         AddRange(items);
     }
-
+    public List<T> Filter(Predicate<T> match)
+    {
+        return ItemList.FindAll(match);
+    }
+    public bool TryGetValue(T toGet, out T result) 
+    {
+        return m_itemSet.TryGetValue(toGet, out result);
+    }
     public InventoryState GetState()
     {
         List<ItemProperty> prop = new List<ItemProperty>();
@@ -31,17 +37,9 @@ public class Inventory<T> where T : IItem
         };
         return ret;
     }
-    public void ActivateItem(T toUse) 
+    public void Remove(T toRemove) 
     {
-        if (m_itemSet.TryGetValue(toUse, out T result)) 
-        {
-            result?.Activate();
-            toUse.StackCount -= toUse.Property.Consumable? 1 : 0;
-            if (toUse.StackCount == 0)
-            {
-                m_itemSet.Remove(toUse);
-            } 
-        }
+        m_itemSet.Remove(toRemove);
     }
     public void Add(T toAdd) 
     {
