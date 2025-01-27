@@ -17,7 +17,7 @@ public class InventoryManager : MonoBehaviour
         m_heldItems.Add(obtained);
         m_onObtainItem?.Invoke(obtained);
     }
-    public IEnumerator OnTriggerItemEffects(GameEventContext e) 
+    public IEnumerator OnTriggerItemEffects(KDefenderEventContext e) 
     {
         foreach (var item in HeldItems)
         {
@@ -25,7 +25,7 @@ public class InventoryManager : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
-    protected void TryActivateItem(GameEventContext e, Item toUse)
+    protected void TryActivateItem(KDefenderEventContext e, Item toUse)
     {
         if (m_heldItems.TryGetValue(toUse, out Item result))
         {

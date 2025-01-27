@@ -25,7 +25,7 @@ public interface IItem
     ItemProperty Property { get; }
     // Use as counter from item amount/level
     int StackCount { get; set; }
-    public bool Activate(GameEventContext e);
+    public bool Activate(KDefenderEventContext e);
     public void OnPickup();
 }
 // class to contain item property and interaction triggers
@@ -41,7 +41,7 @@ public class Item : MonoBehaviour , IItem
     {
         m_onPickup?.Invoke(this);
     }
-    public virtual bool Activate(GameEventContext e)
+    public virtual bool Activate(KDefenderEventContext e)
     {
         m_onUse?.Invoke(this);
         return true;

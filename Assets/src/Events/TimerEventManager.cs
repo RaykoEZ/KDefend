@@ -11,7 +11,7 @@ public class TimerEventManager : MonoBehaviour
     {
         m_timerEvents.AddEvents(m_eventsToTrigger);
     }
-    public void OnTimeElapsed(GameEventContext e) 
+    public void OnTimeElapsed(KDefenderEventContext e) 
     {
         m_timerEvents?.OnTimeElapsed(e);
     }

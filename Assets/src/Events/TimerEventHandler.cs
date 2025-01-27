@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 // handle any timer events
-public class TimerEventHandler<T0> where T0 : ITimerEvent<GameEventContext>
+public class TimerEventHandler<T0> where T0 : ITimerEvent<KDefenderEventContext>
 {
     public List<T0> Events => m_events;
     protected List<T0> m_events;
     // Get a copy of the current game state from a state manager
-    GameEventContext m_currentState;
+    KDefenderEventContext m_currentState;
     Dictionary<int, List<T0>> m_eventSet;
     public TimerEventHandler() 
     {
@@ -36,7 +36,7 @@ public class TimerEventHandler<T0> where T0 : ITimerEvent<GameEventContext>
         }
     }
     // Listen to timer with this
-    public void OnTimeElapsed(GameEventContext e) 
+    public void OnTimeElapsed(KDefenderEventContext e) 
     {
         if (e.EventPayload == null || !e.EventPayload.ContainsKey(GameEventTriggerType.Time)) return;
         int secondsElapsed = (int)e.EventPayload[GameEventTriggerType.Time];

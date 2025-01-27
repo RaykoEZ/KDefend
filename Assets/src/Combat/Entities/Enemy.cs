@@ -11,7 +11,7 @@ public struct EnemySpawnPattern
 [Serializable]
 public struct EntityState 
 {
-    public int Hp;
+    public EntityProperty Property;
     public Vector2 Position;
 }
 public delegate void OnEnemyUpdate(Enemy toUpdate);

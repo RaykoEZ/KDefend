@@ -8,8 +8,8 @@ public class GameTimer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI m_secondDisplay = default;
     [SerializeField] UnityEvent m_onTimeOut = default;
-    [SerializeField] UnityEvent<GameEventContext> m_onTimeElapsed = default;
-    [SerializeField] KDefenderStateManager m_gameState = default;
+    [SerializeField] UnityEvent<KDefenderEventContext> m_onTimeElapsed = default;
+    [SerializeField] KDefenderDataSource m_gameState = default;
     int m_secondsElapsed = 1;   
     Coroutine m_timer;
     // start timer from beginning
@@ -59,7 +59,7 @@ public class GameTimer : MonoBehaviour
                 {
                     {GameEventTriggerType.Time, m_secondsElapsed}
                 };
-                GameEventContext e = new GameEventContext(m_gameState.Current, p);
+                KDefenderEventContext e = new KDefenderEventContext(m_gameState.Current, p);
                 m_onTimeElapsed?.Invoke(e);
             }
         }
