@@ -1,14 +1,17 @@
-﻿using System;
+﻿using Curry.Events;
+using Curry.Game;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
+
 public class KDefenderStateManager : MonoBehaviour 
 {
     [SerializeField] KDefenderGameState m_defaultState = default;
+    [SerializeField] ObjectiveManager m_objectives = default;
     [SerializeField] GameTimer m_timer = default;
     [SerializeField] UnityEvent<KDefenderGameState> m_onStateUpdate = default;
     [SerializeField] UnityEvent m_onGameOver = default;
     KDefenderGameState m_current;
-
     public KDefenderGameState Current => m_current;
 
     // As an alternate game mode
@@ -31,6 +34,14 @@ public class KDefenderStateManager : MonoBehaviour
     {
         m_current = newState;
         m_onStateUpdate?.Invoke(m_current);
+    }
+    public void ObjectiveComplete(IObjective obj) 
+    { 
+    
+    }
+    public void ObjectiveFail(IObjective obj)
+    {
+
     }
     public void OnGameOver() 
     {

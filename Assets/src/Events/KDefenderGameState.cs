@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Curry.Events;
+using System;
 using System.Collections.Generic;
 
 // snapshot of the game state
@@ -10,8 +11,11 @@ public struct KDefenderGameState
     // State of player entities
     public EntityState CafeValue;
     public EntityState PlayerValue;
-    public List<EntityState> HostileStates;
     public InventoryState Inventory;
+    public List<EntityState> HostileStates;
+    public List<GameObjective> Active;
+    public List<GameObjective> Completed;
+    public List<GameObjective> Failed;
 }
 [Serializable]
 public struct InventoryState 
