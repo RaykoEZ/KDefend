@@ -21,15 +21,15 @@ public class InventoryManager : MonoBehaviour
     {
         foreach (var item in HeldItems)
         {
-            TryActivateItem(e, item);
+            TryUdateCollectible(e, item);
             yield return new WaitForEndOfFrame();
         }
     }
-    protected void TryActivateItem(KDefenderEventContext e, Item toUse)
+    protected void TryUdateCollectible(KDefenderEventContext e, Item toUse)
     {
         if (m_heldItems.TryGetValue(toUse, out Item result))
         {
-            result?.Activate(e);
+            result?.Update(e);
         }
     }
 }
