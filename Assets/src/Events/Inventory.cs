@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-public class Inventory<T> where T : IItem 
+public class Inventory<T> where T : IItem
 {
     protected HashSet<T> m_itemSet;
     public List<T> ItemList => new List<T>(m_itemSet);

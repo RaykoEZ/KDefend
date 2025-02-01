@@ -54,7 +54,7 @@ public class Item : MonoBehaviour , IItem
             OnPickup();
         }
     }  
-    public virtual void Update(KDefenderEventContext e) 
+    public virtual void UpdateState(KDefenderEventContext e) 
     {
     }
     public virtual void OnPickup()
@@ -81,9 +81,18 @@ public class Consumable : Item
         base.OnPickup();
     }
 }
+public class WeaponDrop : Item 
+{
+    [SerializeField] BaseWeapon m_weaponRef = default;
+    public override void OnPickup()
+    {
+        m_heldBy?.AddWeapon(m_weaponRef);
+        base.OnPickup();
+    }
+}
 public class Collectible : Item 
 {
-    public override void Update(KDefenderEventContext e)
+    public override void UpdateState(KDefenderEventContext e)
     {
         bool check = MatchActivationCondition(e);
         if (check) 

@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 
 public class MeleeAttack : BaseWeapon
@@ -41,7 +40,7 @@ public class MeleeAttack : BaseWeapon
         base.OnHit(hit);
         if (hit is IPushable push) 
         {
-            push.Push(m_currentDirection, Property.PushPower);
+            push.Push(m_currentDirection, WeaponProperty.PushPower);
         }
     }
 }

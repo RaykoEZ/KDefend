@@ -43,7 +43,7 @@ public class BaseCharacter : BaseEntity , IPushable
             //fire cycle
             yield return weapon.Attack(weapon, transform, GetAimDirection(), weapon.InstantiateWeapon);
             // next firing cycle
-            yield return new WaitForSeconds(weapon.Property.DelayPerCycle);
+            yield return new WaitForSeconds(weapon.WeaponProperty.DelayPerCycle);
             // hold fire >> continue cycle
             m_attackingWeapons[weaponIndex] = m_keepFiring;
         }

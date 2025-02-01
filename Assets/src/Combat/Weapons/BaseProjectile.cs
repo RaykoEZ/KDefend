@@ -32,10 +32,10 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
         {
             // move projectile
             rb.MovePosition(rb.position +
-                (Time.deltaTime * m_property.Speed * m_direction));
+                (Time.deltaTime * m_weaponProperty.Speed * m_direction));
             yield return new WaitForEndOfFrame();
             m_lifeTimer += Time.fixedDeltaTime;
-            if (m_lifeTimer >= Property.Life)
+            if (m_lifeTimer >= WeaponProperty.Life)
             {
                 m_isFlying = false;
                 EndProjectile();

@@ -29,7 +29,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (m_heldItems.TryGetValue(toUse, out Item result))
         {
-            result?.Update(e);
+            result?.UpdateState(e);
         }
     }
 }
