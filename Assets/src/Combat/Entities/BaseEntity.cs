@@ -31,6 +31,22 @@ public class BaseEntity : MonoBehaviour
             result?.OnHit(this);
         }
     }
+    public void ModifySpeed(float mod) 
+    {
+        float change = Mathf.Abs(mod) * m_base.MoveSpeed;
+        if (mod > 0f) 
+        {
+            m_current.MoveSpeed = Mathf.Min(3f, m_current.MoveSpeed + change);
+        }
+        else 
+        {
+            m_current.MoveSpeed = Mathf.Max(0f, m_current.MoveSpeed - change);
+        }
+    }
+    public void Heal(int heal) 
+    {
+        m_current.Health += Mathf.Abs(heal);
+    }
     public virtual void TakeDamage(int baseDamage) 
     {
         m_current.Health -= baseDamage;

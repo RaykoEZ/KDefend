@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using Unity.Properties;
 using UnityEngine;
-public abstract class BaseWeapon : Item, IHitsEntity
+public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
 {
     [SerializeField] protected WeaponProperty m_weaponProperty = default;
     protected Coroutine m_attack;

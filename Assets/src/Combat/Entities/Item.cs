@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using static Cinemachine.CinemachineOrbitalTransposer;
@@ -38,9 +39,10 @@ public class Item : MonoBehaviour , IItem
     [SerializeField] protected ItemProperty m_property = default;
     [SerializeField] protected UnityEvent<Item> m_onUse = default;
     [SerializeField] protected UnityEvent<Item> m_onPickup = default;
+    [SerializeField] List<EffectModule> m_effects = default;
     protected int m_stackCount = 1;
     protected bool m_isEffectActive = false;
-    protected Player m_heldBy;
+    protected Player m_user;
     public ItemProperty Property => m_property;
     public int StackCount { get => m_stackCount; set => m_stackCount = value; }
     // Pickup trigger
@@ -50,7 +52,7 @@ public class Item : MonoBehaviour , IItem
         // when projectile hit this body, trigger on hit effects from projectile
         if (col.attachedRigidbody.TryGetComponent(out Player result))
         {
-            m_heldBy = result;
+            m_user = result;
             OnPickup();
         }
     }  
@@ -86,7 +88,7 @@ public class WeaponDrop : Item
     [SerializeField] BaseWeapon m_weaponRef = default;
     public override void OnPickup()
     {
-        m_heldBy?.AddWeapon(m_weaponRef);
+        m_user?.AddWeapon(m_weaponRef);
         base.OnPickup();
     }
 }
