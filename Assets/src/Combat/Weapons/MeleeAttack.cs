@@ -12,7 +12,6 @@ public class MeleeAttack : BaseWeapon
     public override bool InstantiateWeapon => false;
     public virtual bool ComboFrame { protected get => comboFrame; set => comboFrame = value; }
     public virtual bool InProgress { protected get => inProgress; set => inProgress = value; }
-    Vector2 m_currentDirection = Vector2.zero;
     protected override void LaunchAttack(Vector2 directionNormalized)
     {
         if (InProgress && !ComboFrame)
@@ -27,20 +26,11 @@ public class MeleeAttack : BaseWeapon
         }
         else 
         {
-            m_currentDirection = directionNormalized;
             m_director.Play(m_attackPattern);
         }
     }
     protected virtual void OnCombo() 
     {
         ComboFrame = false;
-    }
-    public override void OnHit<T>(T hit)
-    {
-        base.OnHit(hit);
-        if (hit is IPushable push) 
-        {
-            push.Push(m_currentDirection, WeaponProperty.PushPower);
-        }
     }
 }

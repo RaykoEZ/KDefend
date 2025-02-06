@@ -23,7 +23,6 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
 {
     protected bool m_isFlying = true;
     protected float m_lifeTimer = 0f;
-    protected Vector2 m_direction;
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
     public override bool InstantiateWeapon => true;
     IEnumerator Flying()
@@ -32,8 +31,8 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
         {
             // move projectile
             rb.MovePosition(rb.position +
-                (Time.deltaTime * m_weaponProperty.Speed * m_direction));
-            yield return new WaitForEndOfFrame();
+                (Time.deltaTime * m_weaponProperty.Speed * m_currentDirection));
+            yield return new WaitForFixedUpdate();
             m_lifeTimer += Time.fixedDeltaTime;
             if (m_lifeTimer >= WeaponProperty.Life)
             {
@@ -53,7 +52,7 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
     protected override void LaunchAttack(Vector2 directionNormalized) 
     {
         // start update
-        m_direction = directionNormalized;
+        m_currentDirection = directionNormalized;
         m_isFlying = true;
         StartCoroutine(Flying());
     }

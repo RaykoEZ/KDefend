@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Unity.Properties;
 using UnityEngine;
 public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
 {
@@ -10,6 +9,7 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
     public abstract bool InstantiateWeapon { get; }
     public bool Firing => firing;
     public virtual WeaponProperty WeaponProperty => m_weaponProperty;
+    protected Vector2 m_currentDirection = Vector2.zero;
     protected static T NewAttackInstance<T>(T prefabRef, Transform parent) where T : BaseWeapon
     {
         return Instantiate(prefabRef, parent);
@@ -22,6 +22,7 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
         {
             // play behaviour for each attack instance (e.g. a swing of a bat/a bullet flying)
             T instance = instantiate ? NewAttackInstance(weaponRef, parent) : weaponRef;
+            m_currentDirection = directionNormalized;
             instance?.LaunchAttack(directionNormalized);
             yield return new WaitForSeconds(WeaponProperty.DelayPerAttack);
         }
@@ -35,6 +36,10 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
     public virtual void OnHit<T>(T hit) where T : BaseEntity
     {
         hit?.TakeDamage(WeaponProperty.Damage);
+        if (hit is IPushable push)
+        {
+            push.Push(m_currentDirection, WeaponProperty.PushPower);
+        }
     }
     protected abstract void LaunchAttack(Vector2 directionNormalized);
 }

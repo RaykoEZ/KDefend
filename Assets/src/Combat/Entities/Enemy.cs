@@ -14,10 +14,12 @@ public struct EntityState
     public EntityProperty Property;
     public Vector2 Position;
 }
+
 public delegate void OnEnemyUpdate(Enemy toUpdate);
 public class Enemy : BaseCharacter, IHitsEntity
 {
     [SerializeField] int m_contactDamage = default;
+    [SerializeField] float m_separationFromTarget = default;
     [SerializeField] EnemyTargetFinder m_targeting = default;
     protected int m_targetPriority = -1;
     protected float m_speedVariant;
@@ -80,10 +82,11 @@ public class Enemy : BaseCharacter, IHitsEntity
     {
         float dist = Vector3.Distance(transform.position, m_target.position);
         float t = 0f;
-        while (dist > 0.01f)
+        while (dist > m_separationFromTarget)
         {
             t += CurrentStats.MoveSpeed * m_speedVariant * 0.005f * Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, m_target.position, t);
+            transform.position =
+                Vector3.Lerp(transform.position, m_target.position, t);
             yield return new WaitForEndOfFrame();
             dist = Vector3.Distance(transform.position, m_target.position);
         }
@@ -103,6 +106,24 @@ public class Enemy : BaseCharacter, IHitsEntity
             Push(-dir.normalized, 0.25f);
             StartCoroutine(HitStun(0.25f));
         }
-
     }
+}
+
+public class Grunt : Enemy 
+{
+    Agent m_currentLeader;
+    public void InitLeader(Agent agent) 
+    {
+        if (agent == null) return;
+        m_currentLeader = agent;
+    }
+
+}
+public class Agent : Enemy 
+{
+
+}
+public class Executive : Enemy 
+{ 
+
 }

@@ -3,11 +3,16 @@ using UnityEngine.Events;
 
 public class KDefenderDataSource : BaseSaveSource<KDefenderGameState>
 {
-    [SerializeField] KDefenderStateManager m_gameState = default;
+    [SerializeField] KDefenderGameState m_defaultState = default;
     [SerializeField] UnityEvent<KDefenderGameState> m_onSave = default;
+    void Start()
+    {
+        Init(m_defaultState);
+        UpdateSave();
+    }
+
     public override void UpdateSave(bool saveToFile = false)
     {
-        m_gameState?.UpdateSave();
         m_onSave?.Invoke(m_currentGameState);
     }
 }

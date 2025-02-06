@@ -8,4 +8,3 @@ public class SummonObject : EffectModule
         Instantiate(m_toSpawn, transform.parent, true);
     }
 }
-

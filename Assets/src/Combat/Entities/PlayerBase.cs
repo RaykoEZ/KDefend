@@ -5,13 +5,12 @@ using UnityEngine.Rendering;
 public class PlayerBase : Building
 {
     [SerializeField] UnityEvent m_onInteract = default;
-    [SerializeField] KDefenderDataSource m_state = default;
-    void Start()
-    {
-        m_current = m_state.Current.CafeValue.Property;
-    }
     public override void Interact()
     {
-
+        m_onInteract?.Invoke();
+    }
+    public virtual void Init(KDefenderGameState state) 
+    {
+        m_current = state.CafeValue.Property;
     }
 }
