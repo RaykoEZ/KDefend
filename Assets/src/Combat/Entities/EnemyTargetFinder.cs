@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEditor.Rendering.CameraUI;
 // Detects target entity in sight
 [RequireComponent(typeof(Collider2D))]
 public class EnemyTargetFinder : MonoBehaviour
@@ -11,7 +10,7 @@ public class EnemyTargetFinder : MonoBehaviour
     int m_targetPriority = -1;
     List<BaseEntity> m_targetPriorityList = new List<BaseEntity>();
     List<BaseEntity> m_targetsInView = new List<BaseEntity>();
-    public List<BaseEntity> TargetsInSight { get => m_targetsInView; }
+    public IReadOnlyList<BaseEntity> TargetPriorityList { get => m_targetPriorityList;}
     public void AddTargets(List<BaseEntity> interests)
     {
         m_targetPriorityList.AddRange(interests);

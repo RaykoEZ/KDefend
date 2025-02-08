@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
+
 [Serializable]
 public struct EnemySpawnPattern
 {
@@ -14,19 +17,26 @@ public struct EntityState
     public EntityProperty Property;
     public Vector2 Position;
 }
-
+// base enemy behaviour
 public delegate void OnEnemyUpdate(Enemy toUpdate);
 public class Enemy : BaseCharacter, IHitsEntity
 {
     [SerializeField] int m_contactDamage = default;
+    [SerializeField] float m_attackRangeRadius = default;
     [SerializeField] float m_separationFromTarget = default;
     [SerializeField] EnemyTargetFinder m_targeting = default;
     protected int m_targetPriority = -1;
     protected float m_speedVariant;
-    protected BaseEntity m_defaultTarget;
+    private BaseEntity m_defaultTarget;
     protected Transform m_target;
     Coroutine m_movement;
+    public IReadOnlyList<BaseEntity> TargetsOfInterest => m_targeting.TargetPriorityList;
+    public BaseEntity DefaultTarget { get => m_defaultTarget; }
     public event OnEnemyUpdate OnDefeated;
+    protected override Vector2 GetAimDirection()
+    {
+        return m_target == null? Vector2.zero : (m_target.position - transform.position).normalized;
+    }
     public void Init(List<BaseEntity> interests, BaseEntity defaultTarget)
     {
         m_targeting?.AddTargets(interests);
@@ -40,9 +50,9 @@ public class Enemy : BaseCharacter, IHitsEntity
         if (newTarget == null) return;
         m_target = newTarget.transform;
     }
-    public void TargetLost() 
+    public void OnLosingTarget() 
     {
-        UpdateTarget(m_defaultTarget);
+        StartMoving();
     }
     public override void TakeDamage(int baseDamage)
     {
@@ -90,7 +100,21 @@ public class Enemy : BaseCharacter, IHitsEntity
             yield return new WaitForEndOfFrame();
             dist = Vector3.Distance(transform.position, m_target.position);
         }
+        // do something after reaching destination
         m_movement = null;
+    }
+    public virtual void OnTargetSighted(BaseEntity target) 
+    {
+        float distance = Vector2.Distance(transform.position, target.transform.position);
+        if(distance <= m_attackRangeRadius) 
+        {
+            UseWeapon();
+        }
+        else 
+        {
+            UpdateTarget(target);
+            StartMoving();
+        }
     }
     // contact damage
     public virtual void OnHit<T>(T hit) where T : BaseEntity
@@ -108,22 +132,45 @@ public class Enemy : BaseCharacter, IHitsEntity
         }
     }
 }
-
-public class Grunt : Enemy 
+//enemy agent behaviour
+[RequireComponent(typeof(Enemy))]
+public class Agent : MonoBehaviour
 {
-    Agent m_currentLeader;
-    public void InitLeader(Agent agent) 
+    [SerializeField] int m_numPerSummon = default;
+    [SerializeField] Enemy m_toSummon = default;
+    [SerializeField] EnemySpawner m_spawner = default;
+    public virtual void SummonGrunts() 
     {
-        if (agent == null) return;
-        m_currentLeader = agent;
+        m_spawner?.Spawn(m_toSummon, m_numPerSummon, 0.5f, CommandGrunts);
     }
-
+    protected virtual void CommandGrunts(Enemy toCommand) 
+    {
+        Enemy self = GetComponent<Enemy>();
+        toCommand?.Init(self.TargetsOfInterest as List<BaseEntity>, self.DefaultTarget);
+    }
 }
-public class Agent : Enemy 
+// Script for Executive enemy behaviours
+public class Executive : MonoBehaviour 
 {
-
-}
-public class Executive : Enemy 
-{ 
-
+    [Range(1f, 1024f)]
+    [SerializeField] float m_retreatRadius = default;
+    [SerializeField] EnemyWaveManager m_waveSpawner = default;
+    // Clear nearby enemy upon defeat
+    public virtual void SoundRetreat() 
+    {
+        m_waveSpawner?.PauseWave();
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, m_retreatRadius, Vector2.zero);
+        foreach (var item in hits)
+        {
+            if (item.transform.TryGetComponent(out Enemy result))
+            {
+                // destroy for now
+                Destroy(result);
+            }
+        }
+    }
+    public virtual void Reinforcement() 
+    {
+        m_waveSpawner?.StartWave();
+    }
 }

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public delegate void OnWaveStart(int waveNumber);
-public delegate void OnAllWaveCleared();
 public class EnemyWaveManager : MonoBehaviour
 {
     [SerializeField] List<EnemyWaveDetail> m_waves = default;
@@ -14,12 +13,9 @@ public class EnemyWaveManager : MonoBehaviour
     [SerializeField] BaseEntity m_defaultAggroTarget = default;
     [SerializeField] CoroutineManager m_waveSpawn = default;
     bool m_waveInProgress = false;
-    public event OnAllWaveCleared OnAllCleared;
     public event OnWaveStart OnStart;
     // current wave number
     int m_currentWave = 0;
-    int m_numEnemies = 0;
-    bool m_waitingForNextWave = false;
     public int CurrentWave => m_currentWave;
 
     // Start is called before the first frame update
@@ -45,7 +41,6 @@ public class EnemyWaveManager : MonoBehaviour
     {
         if (!m_waveInProgress) return;
         m_waveSpawn.StopCurrentCoroutine();
-        m_waitingForNextWave = false;
         m_waveInProgress = false;
     }
     public virtual void Spawn(EnemyWaveDetail newWave) 
@@ -58,8 +53,6 @@ public class EnemyWaveManager : MonoBehaviour
         {
             // spawn the group
             spawners[i].Spawn(group.SpawnRef, group.NumToSpawn, 0.1f, InitEnenmy);
-            // increment enemy count
-            m_numEnemies += group.NumToSpawn;
             i++;
         }
     }
@@ -71,9 +64,7 @@ public class EnemyWaveManager : MonoBehaviour
             OnStart?.Invoke(m_currentWave + 1);
             Spawn(wave);
             // after spawning, wait for a set duration
-            m_waitingForNextWave = true;
             yield return new WaitForSeconds(wave.SecondsBeforeNextWave);
-            m_waitingForNextWave = false;
             // Increment to spawn next wave
             m_currentWave++;
         }
@@ -82,23 +73,5 @@ public class EnemyWaveManager : MonoBehaviour
     void InitEnenmy(Enemy spawned) 
     {
         spawned.Init(m_targetPriorityList, m_defaultAggroTarget);
-        spawned.OnDefeated += OnEnemyDefeated;
-    }
-    void OnEnemyDefeated(Enemy defeated) 
-    {
-        defeated.OnDefeated -= OnEnemyDefeated;
-        m_numEnemies--;
-        // if we cleared the wave early
-        if(m_numEnemies == 0 && m_currentWave < m_waves.Count && m_waitingForNextWave) 
-        {
-            m_waitingForNextWave = false;
-            PauseWave();
-            m_currentWave++;
-            StartWave();
-        }
-        else if (m_numEnemies == 0 && m_currentWave >= m_waves.Count) 
-        {
-            OnAllCleared?.Invoke();
-        }
     }
 }

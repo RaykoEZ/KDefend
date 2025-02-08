@@ -16,7 +16,6 @@ public class GameOverUI : MonoBehaviour
     bool m_gameOver = false;
     private void Start()
     {
-        m_wave.OnAllCleared += OnVictory;
     }
     private void OnVictory()
     {
