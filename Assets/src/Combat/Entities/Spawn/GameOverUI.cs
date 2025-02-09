@@ -14,10 +14,7 @@ public class GameOverUI : MonoBehaviour
     [SerializeField] AudioSource m_bgm = default;
     [SerializeField] TextMeshProUGUI m_resultText = default;
     bool m_gameOver = false;
-    private void Start()
-    {
-    }
-    private void OnVictory()
+    public void OnVictory()
     {
         if (m_gameOver) return;
         m_gameplayBgm.Stop();
@@ -27,7 +24,7 @@ public class GameOverUI : MonoBehaviour
         m_bgm?.Play();
         m_director?.Play();
     }
-    private void TriggerGameOverVisual()
+    public void TriggerGameOverVisual()
     {
         // if already game over, don't game over again
         if (m_gameOver) return;

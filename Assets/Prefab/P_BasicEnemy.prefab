@@ -179,7 +179,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2273697011688774770}
         m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: TargetLost
+        m_MethodName: OnLosingTarget
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -531,10 +531,8 @@ MonoBehaviour:
         m_CallState: 2
   m_weapons: []
   m_contactDamage: 2
+  m_attackRangeRadius: 0
   m_separationFromTarget: 7.05
-  m_movementPriorities:
-    m_objectiveWeight: 0.828
-    m_formationWeight: 0.331
   m_targeting: {fileID: 6771108399994705402}
 --- !u!225 &329814037991214225
 CanvasGroup:

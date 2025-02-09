@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_secondsBeforeNextWave: 3
   m_groupsToSpawn:
-  - m_numToSpawn: 1
+  - m_numToSpawn: 3
     m_spawnRef: {fileID: 2273697011688774770, guid: 7f155d21df903a04bacc50e3a541ab5d, type: 3}
