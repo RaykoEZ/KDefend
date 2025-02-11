@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7070725024773549861}
   - component: {fileID: 7766091768381820142}
   - component: {fileID: 8875515838101310566}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,8 +87,8 @@ GameObject:
   - component: {fileID: 6614913905169282793}
   - component: {fileID: 5641416596222669894}
   - component: {fileID: 792987912367956665}
-  m_Layer: 6
-  m_Name: P_BaseShot
+  m_Layer: 7
+  m_Name: P_BaseShot_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +112,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!50 &6614913905169282793
 Rigidbody2D:
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_weaponProperty:
     Damage: 1
     AttackPerCycle: 3
-    Speed: 500
+    Speed: 950
     Life: 3.52
     DelayPerAttack: 0.32
     DelayPerCycle: 1.01
@@ -186,7 +186,7 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 64
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295

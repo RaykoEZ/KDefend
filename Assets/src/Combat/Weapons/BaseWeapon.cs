@@ -10,28 +10,30 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
     public bool Firing => firing;
     public virtual WeaponProperty WeaponProperty => m_weaponProperty;
     protected Vector2 m_currentDirection = Vector2.zero;
-    protected static T NewAttackInstance<T>(T prefabRef, Transform parent) where T : BaseWeapon
+    protected static T NewAttackInstance<T>(T prefabRef, Transform user) where T : BaseWeapon
     {
-        return Instantiate(prefabRef, parent);
+        T ret = Instantiate(prefabRef, user.parent);
+        ret.transform.position = user.position;
+        return ret;
     }
-    protected IEnumerator AttackSequence<T>(T weaponRef, Transform parent, Vector2 directionNormalized, bool instantiate = true)
+    protected IEnumerator AttackSequence<T>(T weaponRef, Transform user, Vector2 directionNormalized, bool instantiate = true)
     where T: BaseWeapon
     {
         // shoot a fire cycle
         for (int i = 0; i < WeaponProperty.AttackPerCycle; i++)
         {
             // play behaviour for each attack instance (e.g. a swing of a bat/a bullet flying)
-            T instance = instantiate ? NewAttackInstance(weaponRef, parent) : weaponRef;
+            T instance = instantiate ? NewAttackInstance(weaponRef, user) : weaponRef;
             m_currentDirection = directionNormalized;
             instance?.LaunchAttack(directionNormalized);
             yield return new WaitForSeconds(WeaponProperty.DelayPerAttack);
         }
     }
     // call to fire off a projectile
-    public IEnumerator Attack<T>(T weaponRef, Transform parent, Vector2 directionNormalized, bool instantiate = true) 
+    public IEnumerator Attack<T>(T weaponRef, Transform user, Vector2 directionNormalized, bool instantiate = true) 
     where T : BaseWeapon
     {
-        yield return AttackSequence(weaponRef, parent, directionNormalized, instantiate);
+        yield return AttackSequence(weaponRef, user, directionNormalized, instantiate);
     }
     public virtual void OnHit<T>(T hit) where T : BaseEntity
     {

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 [Serializable]
 public struct EnemySpawnPattern
@@ -22,17 +20,22 @@ public delegate void OnEnemyUpdate(Enemy toUpdate);
 public class Enemy : BaseCharacter, IHitsEntity
 {
     [SerializeField] int m_contactDamage = default;
-    [SerializeField] float m_attackRangeRadius = default;
     [SerializeField] float m_separationFromTarget = default;
-    [SerializeField] EnemyTargetFinder m_targeting = default;
+    [SerializeField] RangeDetector m_targeting = default;
+    [SerializeField] BaseEntity m_defaultTEST = default;
     protected int m_targetPriority = -1;
     protected float m_speedVariant;
     private BaseEntity m_defaultTarget;
     protected Transform m_target;
     Coroutine m_movement;
+    Coroutine m_attack;
     public IReadOnlyList<BaseEntity> TargetsOfInterest => m_targeting.TargetPriorityList;
     public BaseEntity DefaultTarget { get => m_defaultTarget; }
     public event OnEnemyUpdate OnDefeated;
+    void Start() 
+    {
+        Init(new List<BaseEntity>(), m_defaultTEST);
+    }
     protected override Vector2 GetAimDirection()
     {
         return m_target == null? Vector2.zero : (m_target.position - transform.position).normalized;
@@ -42,16 +45,22 @@ public class Enemy : BaseCharacter, IHitsEntity
         m_targeting?.AddTargets(interests);
         m_defaultTarget = defaultTarget;
         m_target = defaultTarget.transform;
-        m_speedVariant = UnityEngine.Random.Range(0.8f, 1.15f);
+        m_speedVariant = UnityEngine.Random.Range(0.8f, 1.1f);
         StartMoving();
     }
     public void UpdateTarget(BaseEntity newTarget) 
     {
         if (newTarget == null) return;
         m_target = newTarget.transform;
+        // if not moving, start chasing
+        StartMoving();
     }
     public void OnLosingTarget() 
     {
+        m_keepFiring = false;
+        StopCoroutine(m_attack);
+        m_attack = null;
+        // if not moving, start chasing
         StartMoving();
     }
     public override void TakeDamage(int baseDamage)
@@ -82,6 +91,10 @@ public class Enemy : BaseCharacter, IHitsEntity
             m_movement = null;
         }
     }
+    public void ResetTarget() 
+    {
+        m_target = m_defaultTarget.transform;
+    }
     protected virtual IEnumerator HitStun(float duration) 
     {
         StopMoving();
@@ -94,26 +107,32 @@ public class Enemy : BaseCharacter, IHitsEntity
         float t = 0f;
         while (dist > m_separationFromTarget)
         {
-            t += CurrentStats.MoveSpeed * m_speedVariant * 0.005f * Time.deltaTime;
+            t += CurrentStats.MoveSpeed * m_speedVariant * 0.00001f * Time.deltaTime;
             transform.position =
                 Vector3.Lerp(transform.position, m_target.position, t);
             yield return new WaitForEndOfFrame();
             dist = Vector3.Distance(transform.position, m_target.position);
         }
-        // do something after reaching destination
+        UseWeapon();
         m_movement = null;
     }
-    public virtual void OnTargetSighted(BaseEntity target) 
+    public override void UseWeapon()
     {
-        float distance = Vector2.Distance(transform.position, target.transform.position);
-        if(distance <= m_attackRangeRadius) 
+        if (m_attack == null)
         {
-            UseWeapon();
+            m_keepFiring = true;
+            m_attack = StartCoroutine(AttackCycle_Sequence());
         }
-        else 
+    }
+    // make attack pattern sequential vs silmultaneous
+    IEnumerator AttackCycle_Sequence() 
+    {
+        while (m_keepFiring)
         {
-            UpdateTarget(target);
-            StartMoving();
+            for (int i = 0; i < m_weapons.Count; i++)
+            {
+                yield return Attack_Internal(m_weapons[i]);
+            }
         }
     }
     // contact damage

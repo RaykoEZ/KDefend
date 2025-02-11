@@ -45,15 +45,12 @@ public class EnemyWaveManager : MonoBehaviour
     }
     public virtual void Spawn(EnemyWaveDetail newWave) 
     {
-        // random spawners
-        List<EnemySpawner> spawners = SamplingUtil.SampleFromList(
-                m_spawners, newWave.GroupsToSpawn.Count, uniqueResults: true);
         int i = 0;
         foreach (var group in newWave.GroupsToSpawn)
         {
+            i = UnityEngine.Random.Range(0, m_spawners.Count);
             // spawn the group
-            spawners[i].Spawn(group.SpawnRef, group.NumToSpawn, 0.1f, InitEnenmy);
-            i++;
+            m_spawners[i].Spawn(group.SpawnRef, group.NumToSpawn, 0.1f, InitEnenmy);
         }
     }
     IEnumerator Spawn_Internal() 

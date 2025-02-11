@@ -3,14 +3,19 @@ using UnityEngine;
 using UnityEngine.Events;
 // Detects target entity in sight
 [RequireComponent(typeof(Collider2D))]
-public class EnemyTargetFinder : MonoBehaviour
+public class RangeDetector : MonoBehaviour
 {
     [SerializeField] UnityEvent<BaseEntity> m_targetSighted = default;
     [SerializeField] UnityEvent m_targetLost = default;
+    [SerializeField] List<BaseEntity> TEST_P_LIST = default;
     int m_targetPriority = -1;
     List<BaseEntity> m_targetPriorityList = new List<BaseEntity>();
     List<BaseEntity> m_targetsInView = new List<BaseEntity>();
     public IReadOnlyList<BaseEntity> TargetPriorityList { get => m_targetPriorityList;}
+    void Start()
+    {
+        m_targetPriorityList.AddRange(TEST_P_LIST);
+    }
     public void AddTargets(List<BaseEntity> interests)
     {
         m_targetPriorityList.AddRange(interests);

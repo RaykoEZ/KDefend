@@ -30,10 +30,10 @@ public class BaseCharacter : BaseEntity , IPushable
         for (int i = 0; i < m_weapons.Count; i++)
         {
             if (m_attackingWeapons[i]) continue;
-            StartCoroutine(AttackCycle(i));
+            StartCoroutine(AttackCycle_Internal(i));
         }
     }
-    IEnumerator AttackCycle(int weaponIndex) 
+    protected virtual IEnumerator AttackCycle_Internal(int weaponIndex) 
     {
         BaseWeapon weapon = m_weapons[weaponIndex];
         if (weapon == null) yield break;
@@ -41,12 +41,17 @@ public class BaseCharacter : BaseEntity , IPushable
         while (m_attackingWeapons[weaponIndex])
         {
             //fire cycle
-            yield return weapon.Attack(weapon, transform, GetAimDirection(), weapon.InstantiateWeapon);
-            // next firing cycle
-            yield return new WaitForSeconds(weapon.WeaponProperty.DelayPerCycle);
+            yield return Attack_Internal(weapon);
             // hold fire >> continue cycle
             m_attackingWeapons[weaponIndex] = m_keepFiring;
         }
+    }
+    protected IEnumerator Attack_Internal(BaseWeapon weapon)
+    {
+        //fire cycle
+        yield return weapon?.Attack(weapon, transform, GetAimDirection(), weapon.InstantiateWeapon);
+        // next firing cycle
+        yield return new WaitForSeconds(weapon.WeaponProperty.DelayPerCycle);
     }
     public void Push(Vector2 dir, float power)
     {

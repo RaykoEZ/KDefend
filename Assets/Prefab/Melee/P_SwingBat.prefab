@@ -242,7 +242,7 @@ MonoBehaviour:
     Life: 0
     DelayPerAttack: 0
     DelayPerCycle: 1
-    PushPower: 3
+    PushPower: 4
   m_director: {fileID: 3520696863709434456}
   m_attackPattern: {fileID: 11400000, guid: 6b63c256ecf26b643b7badf70ae0fe51, type: 2}
 --- !u!114 &4196518955656310880

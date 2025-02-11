@@ -189,6 +189,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  TEST_P_LIST: []
 --- !u!1 &4262557973896689082
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +461,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.05
   m_LinearDrag: 5
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -510,7 +511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_base:
     Health: 100
-    MoveSpeed: 0.5
+    MoveSpeed: 80.1
   m_onDefeat:
     m_PersistentCalls:
       m_Calls: []
@@ -531,9 +532,9 @@ MonoBehaviour:
         m_CallState: 2
   m_weapons: []
   m_contactDamage: 2
-  m_attackRangeRadius: 0
   m_separationFromTarget: 7.05
   m_targeting: {fileID: 6771108399994705402}
+  m_defaultTEST: {fileID: 0}
 --- !u!225 &329814037991214225
 CanvasGroup:
   m_ObjectHideFlags: 0
