@@ -4,16 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(Enemy))]
 public class Agent : MonoBehaviour
 {
-    [SerializeField] int m_numPerSummon = default;
-    [SerializeField] Enemy m_toSummon = default;
-    [SerializeField] EnemySpawner m_spawner = default;
-    public virtual void SummonGrunts() 
+    public virtual void CommandGrunts(BaseEntity toCommand) 
     {
-        m_spawner?.Spawn(m_toSummon, m_numPerSummon, 0.5f, CommandGrunts);
-    }
-    protected virtual void CommandGrunts(Enemy toCommand) 
-    {
-        Enemy self = GetComponent<Enemy>();
-        toCommand?.Init(self.TargetsOfInterest as List<BaseEntity>, self.DefaultTarget);
+        if (toCommand is Enemy ally) 
+        {
+            Enemy self = GetComponent<Enemy>();
+            ally?.Init(self.TargetsOfInterest as List<BaseEntity>, self.DefaultTarget);
+        }     
     }
 }

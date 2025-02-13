@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7070725024773549861}
   - component: {fileID: 7766091768381820142}
   - component: {fileID: 8875515838101310566}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 6614913905169282793}
   - component: {fileID: 5641416596222669894}
   - component: {fileID: 792987912367956665}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: P_BaseShot_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,12 +154,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_weaponProperty:
-    Damage: 1
+    Damage: 5
     AttackPerCycle: 3
     Speed: 950
     Life: 3.52
-    DelayPerAttack: 0.32
-    DelayPerCycle: 1.01
+    DelayPerAttack: 0.1
+    DelayPerCycle: 0.49
     PushPower: 2.5
 --- !u!58 &792987912367956665
 CircleCollider2D:
@@ -186,7 +186,7 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2750090880964351020}
   - component: {fileID: 6138257259042952897}
   - component: {fileID: 723298269197459613}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Img_bat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 4196518955656310880}
   - component: {fileID: 9168377722667972178}
   - component: {fileID: 8225221762246870552}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: P_SwingBat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 5949002469254056873}
   - component: {fileID: 8580155374921990554}
   - component: {fileID: 2178798687648713233}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Img_swing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

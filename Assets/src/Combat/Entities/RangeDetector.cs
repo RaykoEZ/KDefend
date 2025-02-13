@@ -5,6 +5,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider2D))]
 public class RangeDetector : MonoBehaviour
 {
+    [SerializeField] bool m_detectAnyEntity = default;
     [SerializeField] UnityEvent<BaseEntity> m_targetSighted = default;
     [SerializeField] UnityEvent m_targetLost = default;
     [SerializeField] List<BaseEntity> TEST_P_LIST = default;
@@ -23,8 +24,9 @@ public class RangeDetector : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (m_targetPriorityList == null) return;
-        if (collision.attachedRigidbody.TryGetComponent(out BaseEntity entering) &&
-            m_targetPriorityList.Contains(entering))
+        bool check = (collision.attachedRigidbody.TryGetComponent(out BaseEntity entering) &&
+            m_targetPriorityList.Contains(entering));
+        if (m_detectAnyEntity || check)
         {
             m_targetsInView.Add(entering);
             // send priority value

@@ -57,11 +57,36 @@ public class Enemy : BaseCharacter, IHitsEntity
     }
     public void OnLosingTarget() 
     {
-        m_keepFiring = false;
-        StopCoroutine(m_attack);
-        m_attack = null;
         // if not moving, start chasing
         StartMoving();
+    }
+    public void StartMoving()
+    {
+        if (m_movement == null && m_target != null)
+        {
+            m_movement = StartCoroutine(Movement());
+        }
+    }
+    public void StopMoving()
+    {
+        if (m_movement != null)
+        {
+            StopCoroutine(m_movement);
+            m_movement = null;
+        }
+    }
+    public void StopAttack() 
+    {
+        if (m_attack != null)
+        {
+            m_keepFiring = false;
+            StopCoroutine(m_attack);
+            m_attack = null;
+        }
+    }
+    public void ResetTarget()
+    {
+        m_target = m_defaultTarget.transform;
     }
     public override void TakeDamage(int baseDamage)
     {
@@ -75,25 +100,6 @@ public class Enemy : BaseCharacter, IHitsEntity
         base.OnDefeat();
         OnDefeated?.Invoke(this);
         Destroy(gameObject);
-    }
-    public virtual void StartMoving()
-    {
-        if (m_movement == null && m_target != null)
-        {
-            m_movement = StartCoroutine(Movement());
-        }
-    }
-    public virtual void StopMoving()
-    {
-        if (m_movement != null)
-        {
-            StopCoroutine(m_movement);
-            m_movement = null;
-        }
-    }
-    public void ResetTarget() 
-    {
-        m_target = m_defaultTarget.transform;
     }
     protected virtual IEnumerator HitStun(float duration) 
     {

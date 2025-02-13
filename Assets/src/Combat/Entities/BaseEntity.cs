@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public struct EntityProperty
 {
     public int Health;
-    [Range(0f, 100f)]
+    [Range(0f, 200f)]
     public float MoveSpeed;
 }
 [RequireComponent(typeof(Rigidbody2D))]

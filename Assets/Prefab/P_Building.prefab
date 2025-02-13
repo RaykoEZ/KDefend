@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2511710152612974149}
   - component: {fileID: 6738129401160004916}
   - component: {fileID: 539237904688196488}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Img_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 8977567183536711846}
   - component: {fileID: 1418665430087603472}
   - component: {fileID: 9110283726621589620}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 8877701458824579177}
   - component: {fileID: 3936617444520062260}
   - component: {fileID: 656767490245769287}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: hpTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 8690273023820964136}
   - component: {fileID: 2010627843166983346}
   - component: {fileID: 6237842638876752895}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: P_Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -454,7 +454,19 @@ MonoBehaviour:
     MoveSpeed: 0
   m_onDefeat:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: KDefenderStateManager, Assembly-CSharp
+        m_MethodName: OnGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_onTakeDamage:
     m_PersistentCalls:
       m_Calls:

@@ -15,8 +15,8 @@ TagManager:
   - Hostile
   - Detection
   - Building
-  - 
-  - 
+  - Attack_Player
+  - Attack_Hostile
   - 
   - 
   - 
