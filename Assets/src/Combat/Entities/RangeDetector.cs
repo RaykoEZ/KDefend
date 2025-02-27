@@ -21,6 +21,10 @@ public class RangeDetector : MonoBehaviour
     {
         m_targetPriorityList.AddRange(interests);
     }
+    public bool IsInRange(BaseEntity target) 
+    {
+        return m_targetsInView.Contains(target);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (m_targetPriorityList == null) return;

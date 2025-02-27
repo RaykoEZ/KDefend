@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [Serializable]
 public struct EnemySpawnPattern
@@ -20,13 +21,14 @@ public delegate void OnEnemyUpdate(Enemy toUpdate);
 public class Enemy : BaseCharacter, IHitsEntity
 {
     [SerializeField] int m_contactDamage = default;
-    [SerializeField] float m_separationFromTarget = default;
-    [SerializeField] RangeDetector m_targeting = default;
+    [SerializeField] NavMeshAgent m_nav = default;
+    [SerializeField] protected RangeDetector m_attackRange = default;
+    [SerializeField] protected RangeDetector m_targeting = default;
     [SerializeField] BaseEntity m_defaultTEST = default;
     protected int m_targetPriority = -1;
     protected float m_speedVariant;
     private BaseEntity m_defaultTarget;
-    protected Transform m_target;
+    protected BaseEntity m_target;
     Coroutine m_movement;
     Coroutine m_attack;
     public IReadOnlyList<BaseEntity> TargetsOfInterest => m_targeting.TargetPriorityList;
@@ -38,20 +40,33 @@ public class Enemy : BaseCharacter, IHitsEntity
     }
     protected override Vector2 GetAimDirection()
     {
-        return m_target == null? Vector2.zero : (m_target.position - transform.position).normalized;
+        return m_target == null? Vector2.zero : (m_target.transform.position - transform.position).normalized;
+    }
+    void SetupNavigation() 
+    {
+        m_nav.updateRotation = false;
+        m_nav.updateUpAxis = false;
+        NavMeshHit hit;
+        bool isNear = NavMesh.SamplePosition(transform.position,
+            out hit, 1.0f, NavMesh.AllAreas);
+        if (isNear) 
+        {
+            transform.position = hit.position;
+        }
     }
     public void Init(List<BaseEntity> interests, BaseEntity defaultTarget)
     {
         m_targeting?.AddTargets(interests);
         m_defaultTarget = defaultTarget;
-        m_target = defaultTarget.transform;
+        m_target = defaultTarget;
         m_speedVariant = UnityEngine.Random.Range(0.8f, 1.1f);
+        SetupNavigation();
         StartMoving();
     }
     public void UpdateTarget(BaseEntity newTarget) 
     {
         if (newTarget == null) return;
-        m_target = newTarget.transform;
+        m_target = newTarget;
         // if not moving, start chasing
         StartMoving();
     }
@@ -64,6 +79,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     {
         if (m_movement == null && m_target != null)
         {
+            m_nav.isStopped = false;
             m_movement = StartCoroutine(Movement());
         }
     }
@@ -72,6 +88,8 @@ public class Enemy : BaseCharacter, IHitsEntity
         if (m_movement != null)
         {
             StopCoroutine(m_movement);
+            m_nav.velocity = Vector3.zero;
+            m_nav.isStopped = true;
             m_movement = null;
         }
     }
@@ -86,12 +104,12 @@ public class Enemy : BaseCharacter, IHitsEntity
     }
     public void ResetTarget()
     {
-        m_target = m_defaultTarget.transform;
+        m_target = m_defaultTarget;
     }
     public override void TakeDamage(int baseDamage)
     {
         // the lower the enemy hp, the greater the stun duration
-        float stunDuration = UnityEngine.Random.Range(0.05f, 0.1f);
+        float stunDuration = UnityEngine.Random.Range(0.3f, 0.75f);
         StartCoroutine(HitStun(stunDuration));
         base.TakeDamage(baseDamage);
     }
@@ -109,17 +127,17 @@ public class Enemy : BaseCharacter, IHitsEntity
     }
     protected virtual IEnumerator Movement()
     {
-        float dist = Vector3.Distance(transform.position, m_target.position);
-        float t = 0f;
-        while (dist > m_separationFromTarget)
+        m_nav?.SetDestination(m_target.transform.position);
+        float dist = Vector2.Distance(transform.position, m_target.transform.position);
+        while (dist > m_nav.stoppingDistance)
         {
-            t += CurrentStats.MoveSpeed * m_speedVariant * 0.00001f * Time.deltaTime;
-            transform.position =
-                Vector3.Lerp(transform.position, m_target.position, t);
-            yield return new WaitForEndOfFrame();
-            dist = Vector3.Distance(transform.position, m_target.position);
+            m_nav?.SetDestination(m_target.transform.position);
+            yield return new WaitForSeconds(0.1f);
         }
-        UseWeapon();
+        if (m_attackRange.IsInRange(m_target)) 
+        {
+            UseWeapon();
+        }
         m_movement = null;
     }
     public override void UseWeapon()
