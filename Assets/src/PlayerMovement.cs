@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     {
         m_movementDirection = value.ReadValue<Vector2>();
     }
-    void Update()
+    void FixedUpdate()
     {
         RB2D?.AddForce(m_controlling.CurrentStats.MoveSpeed * m_movementDirection * Time.deltaTime, ForceMode2D.Impulse);
     }

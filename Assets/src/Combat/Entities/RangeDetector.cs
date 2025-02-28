@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+
 // Detects target entity in sight
 [RequireComponent(typeof(Collider2D))]
 public class RangeDetector : MonoBehaviour

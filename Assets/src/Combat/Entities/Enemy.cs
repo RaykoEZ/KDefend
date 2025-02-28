@@ -18,11 +18,10 @@ public struct EntityState
 }
 // base enemy behaviour
 public delegate void OnEnemyUpdate(Enemy toUpdate);
+[RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : BaseCharacter, IHitsEntity
 {
     [SerializeField] int m_contactDamage = default;
-    [SerializeField] NavMeshAgent m_nav = default;
-    [SerializeField] protected RangeDetector m_attackRange = default;
     [SerializeField] protected RangeDetector m_targeting = default;
     [SerializeField] BaseEntity m_defaultTEST = default;
     protected int m_targetPriority = -1;
@@ -33,6 +32,8 @@ public class Enemy : BaseCharacter, IHitsEntity
     Coroutine m_attack;
     public IReadOnlyList<BaseEntity> TargetsOfInterest => m_targeting.TargetPriorityList;
     public BaseEntity DefaultTarget { get => m_defaultTarget; }
+    public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
+
     public event OnEnemyUpdate OnDefeated;
     void Start() 
     {
@@ -44,8 +45,9 @@ public class Enemy : BaseCharacter, IHitsEntity
     }
     void SetupNavigation() 
     {
-        m_nav.updateRotation = false;
-        m_nav.updateUpAxis = false;
+        var nav = Navigator;
+        nav.updateRotation = false;
+        nav.updateUpAxis = false;
         NavMeshHit hit;
         bool isNear = NavMesh.SamplePosition(transform.position,
             out hit, 1.0f, NavMesh.AllAreas);
@@ -79,7 +81,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     {
         if (m_movement == null && m_target != null)
         {
-            m_nav.isStopped = false;
+            Navigator.isStopped = false;
             m_movement = StartCoroutine(Movement());
         }
     }
@@ -88,8 +90,8 @@ public class Enemy : BaseCharacter, IHitsEntity
         if (m_movement != null)
         {
             StopCoroutine(m_movement);
-            m_nav.velocity = Vector3.zero;
-            m_nav.isStopped = true;
+            Navigator.velocity = Vector3.zero;
+            Navigator.isStopped = true;
             m_movement = null;
         }
     }
@@ -116,6 +118,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     protected override void OnDefeat()
     {
         base.OnDefeat();
+        StopMoving();
         OnDefeated?.Invoke(this);
         Destroy(gameObject);
     }
@@ -127,16 +130,13 @@ public class Enemy : BaseCharacter, IHitsEntity
     }
     protected virtual IEnumerator Movement()
     {
-        m_nav?.SetDestination(m_target.transform.position);
+        var nav = Navigator;
+        nav?.SetDestination(m_target.transform.position);
         float dist = Vector2.Distance(transform.position, m_target.transform.position);
-        while (dist > m_nav.stoppingDistance)
+        while (dist > nav.stoppingDistance)
         {
-            m_nav?.SetDestination(m_target.transform.position);
+            nav?.SetDestination(m_target.transform.position);
             yield return new WaitForSeconds(0.1f);
-        }
-        if (m_attackRange.IsInRange(m_target)) 
-        {
-            UseWeapon();
         }
         m_movement = null;
     }
