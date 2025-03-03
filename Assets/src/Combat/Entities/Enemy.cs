@@ -59,11 +59,16 @@ public class Enemy : BaseCharacter, IHitsEntity
     public void Init(List<BaseEntity> interests, BaseEntity defaultTarget)
     {
         m_targeting?.AddTargets(interests);
+        EnemyAggroHandler.Add(this);
         m_defaultTarget = defaultTarget;
         m_target = defaultTarget;
         m_speedVariant = UnityEngine.Random.Range(0.8f, 1.1f);
         SetupNavigation();
         StartMoving();
+    }
+    public void SetAggro(bool enable = true) 
+    {
+        m_targeting.enabled = enable;
     }
     public void UpdateTarget(BaseEntity newTarget) 
     {
@@ -119,6 +124,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     {
         base.OnDefeat();
         StopMoving();
+        EnemyAggroHandler.Remove(this);
         OnDefeated?.Invoke(this);
         Destroy(gameObject);
     }
