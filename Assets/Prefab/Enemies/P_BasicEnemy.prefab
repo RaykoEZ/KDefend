@@ -418,10 +418,7 @@ MonoBehaviour:
         m_CallState: 2
   m_weapons: []
   m_contactDamage: 2
-  m_nav: {fileID: 1902514370079539247}
-  m_attackRange: {fileID: 0}
   m_targeting: {fileID: 3399095250520629921}
-  m_defaultTEST: {fileID: 0}
 --- !u!225 &329814037991214225
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -686,11 +683,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: TEST_P_LIST.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.size
@@ -730,11 +727,11 @@ PrefabInstance:
       objectReference: {fileID: 2273697011688774770}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ResetTarget
+      value: StartMoving
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: OnLosingTarget
+      value: StartMoving
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[0].m_CallState

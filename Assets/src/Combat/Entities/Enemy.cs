@@ -23,21 +23,21 @@ public class Enemy : BaseCharacter, IHitsEntity
 {
     [SerializeField] int m_contactDamage = default;
     [SerializeField] protected RangeDetector m_targeting = default;
-    [SerializeField] BaseEntity m_defaultTEST = default;
     protected int m_targetPriority = -1;
     protected float m_speedVariant;
-    private BaseEntity m_defaultTarget;
+    private Vector2 m_defaultTarget;
+    protected Vector2 m_currentDestination;
     protected BaseEntity m_target;
     Coroutine m_movement;
     Coroutine m_attack;
     public IReadOnlyList<BaseEntity> TargetsOfInterest => m_targeting.TargetPriorityList;
-    public BaseEntity DefaultTarget { get => m_defaultTarget; }
+    public BaseEntity CurrentTarget { get => m_target; }
     public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
 
     public event OnEnemyUpdate OnDefeated;
     void Start() 
     {
-        Init(new List<BaseEntity>(), m_defaultTEST);
+        Init(new List<BaseEntity>());
     }
     protected override Vector2 GetAimDirection()
     {
@@ -56,11 +56,11 @@ public class Enemy : BaseCharacter, IHitsEntity
             transform.position = hit.position;
         }
     }
-    public void Init(List<BaseEntity> interests, BaseEntity defaultTarget)
+    public void Init(List<BaseEntity> interests, BaseEntity defaultTarget = null)
     {
         m_targeting?.AddTargets(interests);
         EnemyAggroHandler.Add(this);
-        m_defaultTarget = defaultTarget;
+        m_defaultTarget = defaultTarget == null? transform.position : defaultTarget.transform.position;
         m_target = defaultTarget;
         m_speedVariant = UnityEngine.Random.Range(0.8f, 1.1f);
         SetupNavigation();
@@ -77,14 +77,9 @@ public class Enemy : BaseCharacter, IHitsEntity
         // if not moving, start chasing
         StartMoving();
     }
-    public void OnLosingTarget() 
-    {
-        // if not moving, start chasing
-        StartMoving();
-    }
     public void StartMoving()
     {
-        if (m_movement == null && m_target != null)
+        if (m_movement == null)
         {
             Navigator.isStopped = false;
             m_movement = StartCoroutine(Movement());
@@ -109,9 +104,16 @@ public class Enemy : BaseCharacter, IHitsEntity
             m_attack = null;
         }
     }
-    public void ResetTarget()
+    public virtual void ResetTarget()
     {
-        m_target = m_defaultTarget;
+        float duration = UnityEngine.Random.Range(1f, 5f);
+        StartCoroutine(Standby(duration));
+    }
+    protected virtual IEnumerator Standby(float duration) 
+    {
+        StopMoving();
+        yield return new WaitForSeconds(duration);
+        m_target = null;
     }
     public override void TakeDamage(int baseDamage)
     {
@@ -137,12 +139,14 @@ public class Enemy : BaseCharacter, IHitsEntity
     protected virtual IEnumerator Movement()
     {
         var nav = Navigator;
-        nav?.SetDestination(m_target.transform.position);
-        float dist = Vector2.Distance(transform.position, m_target.transform.position);
+        m_currentDestination = m_target == null ? m_defaultTarget : m_target.transform.position;
+        nav?.SetDestination(m_currentDestination);
+        float dist = Vector2.Distance(transform.position, m_currentDestination);
         while (dist > nav.stoppingDistance)
         {
-            nav?.SetDestination(m_target.transform.position);
+            nav?.SetDestination(m_currentDestination);
             yield return new WaitForSeconds(0.1f);
+            m_currentDestination = m_target == null? m_defaultTarget : m_target.transform.position;
         }
         m_movement = null;
     }

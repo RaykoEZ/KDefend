@@ -431,7 +431,6 @@ MonoBehaviour:
   - {fileID: 5641416596222669894, guid: 229dbdfb609ee0a4a86293a2193b7bc5, type: 3}
   m_contactDamage: 2
   m_targeting: {fileID: 9122164603370267837}
-  m_defaultTEST: {fileID: 0}
 --- !u!225 &1629039000261977648
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -704,7 +703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.size
@@ -715,7 +714,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
+      propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9163418665096585045}
+    - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
+      propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 9163418665096585045}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
@@ -727,12 +734,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
+      propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 9163418665096585045}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StopAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
+      propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: StartMoving
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -747,11 +762,19 @@ PrefabInstance:
       value: Enemy, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
+      propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Enemy, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: Enemy, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
+      propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
@@ -866,11 +889,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
+      propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -922,11 +949,11 @@ PrefabInstance:
       objectReference: {fileID: 4990510352727728998}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ResetTarget
+      value: StopAttack
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: OnLosingTarget
+      value: StopAttack
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -949,6 +976,10 @@ PrefabInstance:
       value: Reinforcement
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
+      propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Enemy, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: Enemy, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -959,6 +990,10 @@ PrefabInstance:
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: Executive, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
+      propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: 74d46ad6703e697449b4000995f035dd, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName

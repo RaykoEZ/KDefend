@@ -9,7 +9,7 @@ public class Agent : MonoBehaviour
         if (toCommand is Enemy ally) 
         {
             Enemy self = GetComponent<Enemy>();
-            ally?.Init(self.TargetsOfInterest as List<BaseEntity>, self.DefaultTarget);
+            ally?.Init(self.TargetsOfInterest as List<BaseEntity>, self.CurrentTarget);
         }     
     }
 }
