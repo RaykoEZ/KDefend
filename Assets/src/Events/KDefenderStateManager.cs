@@ -3,7 +3,6 @@ using Curry.Game;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
-
 public class KDefenderStateManager : MonoBehaviour 
 {
     [SerializeField] ObjectiveManager m_objectives = default;
