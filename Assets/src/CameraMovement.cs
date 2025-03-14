@@ -8,7 +8,7 @@ public class CameraMovement : MonoBehaviour
     public RectTransform Player;
     public float damping;
     private Vector3 velocity = Vector3.zero;
-    void Update()
+    void FixedUpdate()
     {
         Vector3 movePosition = new Vector3(
             Mathf.Clamp(Player.position.x, -m_movementBounds.extents.x, m_movementBounds.extents.x),
