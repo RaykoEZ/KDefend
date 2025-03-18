@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Curry.UI;
 using UnityEngine;
 using Curry.Events;
 using UnityEngine.Events;

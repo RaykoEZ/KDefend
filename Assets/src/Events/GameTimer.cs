@@ -13,12 +13,12 @@ public class GameTimer : MonoBehaviour
     int m_secondsElapsed = 1;   
     Coroutine m_timer;
     // start timer from beginning
-    public void StartTimer(int initTime = 1, bool countdown = false) 
+    public void StartTimer(int initTime = 1) 
     {
         if (m_timer != null) return;
         m_secondsElapsed = initTime;
         m_secondDisplay.text = initTime.ToString();
-        m_timer = StartCoroutine(UpdateTimer(countdown));
+        m_timer = StartCoroutine(UpdateTimer());
     }
     // Stop timer but keep current time
     public void Pause() 
@@ -28,10 +28,10 @@ public class GameTimer : MonoBehaviour
         m_timer = null;
     }
     // Start timer from previous pause value
-    public void Resume(bool countdown = false) 
+    public void Resume() 
     {
         if (m_timer != null) return;
-        m_timer = StartCoroutine(UpdateTimer(countdown));
+        m_timer = StartCoroutine(UpdateTimer());
     }
     public void ResetTmer(int initTime = 1) 
     {
@@ -40,13 +40,13 @@ public class GameTimer : MonoBehaviour
         m_timer = null;
         m_secondsElapsed = initTime;
     }
-    IEnumerator UpdateTimer(bool countdown) 
+    IEnumerator UpdateTimer() 
     {
         while (m_secondsElapsed > 0) 
         {
             yield return new WaitForSeconds(1f);
             // counting down/up
-            m_secondsElapsed += countdown? -1 : 1;
+            m_secondsElapsed++;
             m_secondDisplay.text = m_secondsElapsed.ToString();
             if (m_secondsElapsed == 0) 
             {
