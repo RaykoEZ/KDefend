@@ -1,24 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-
-public delegate void OnTimeOut<T>(T sender);
-public class DeliveryIcon : MonoBehaviour 
+[CreateAssetMenu(fileName = "deli_", menuName = "New Delivery Droptable", order = 0)]
+public class DeliveryDropTable : ScriptableObject
 {
-    int m_currentTimer = 1;
-    DeliveryObjective m_currentRef;
-    public event OnTimeOut<DeliveryIcon> TimerOut;
-    public int CurrentTimer { get => m_currentTimer; }
-    public DeliveryObjective CurrentDelivery => m_currentRef;
-    public virtual void UpdateTimer(KDefenderEventContext _) 
-    {
-        // counting down
-        m_currentTimer--;
-        if (m_currentTimer == 0)
-        {
-            TimerOut?.Invoke(this);
-        }
-    }
+    [SerializeField] List<DeliveryDetail> m_dropList = default;
+    public List<DeliveryDetail> DropList { get => m_dropList; }
 }
+[Serializable]
+public struct DeliveryDetail 
+{
+    public int Rank;
+    public int DestinationIndex;
+    // affects drop chance
+    public float DropChanceWeight;
+    public string Title;
+    public string Description;
+
+}
+public delegate void OnTimeOut<T>(T sender);
 public class DeliveryPrompter : MonoBehaviour 
 {
     [SerializeField] List<DeliveryIcon> m_currentIcons = default;
