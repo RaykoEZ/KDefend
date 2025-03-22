@@ -12,11 +12,12 @@ public struct DeliveryDetail
 {
     public int Rank;
     public int DestinationIndex;
+    public DeliveryType DeliverType;
     // affects drop chance
     public float DropChanceWeight;
     public string Title;
+    [TextArea(5, 10)]
     public string Description;
-
 }
 public delegate void OnTimeOut<T>(T sender);
 public class DeliveryPrompter : MonoBehaviour 
