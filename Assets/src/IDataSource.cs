@@ -5,7 +5,6 @@ public interface IDataSource<T>
     public T Current { get; }
     public void Init(T save);
     public void UpdateSave(bool saveToFile = false);
-
 }
 public abstract class BaseSaveSource<T> : MonoBehaviour, IDataSource<T>
 {

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87f3299908035e34aa4cd8a37eb1a209, type: 3}
+  m_Name: deli_init
+  m_EditorClassIdentifier: 
+  m_dropList:
+  - DestinationIndex: 0
+    DeliverType: 0
+    PointReward: 300
+    DropChanceWeight: 0
+    Title: 0_firstJob
+    Description: Complete your first deliver.
+  - DestinationIndex: 5
+    DeliverType: 0
+    PointReward: 320
+    DropChanceWeight: 0
+    Title: 1_aRegular
+    Description: A regular of the bar, same item, same place, as always.
+  - DestinationIndex: 2
+    DeliverType: 1
+    PointReward: 700
+    DropChanceWeight: 0
+    Title: 2_firstIntel
+    Description: 

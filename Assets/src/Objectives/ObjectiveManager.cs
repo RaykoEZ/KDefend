@@ -60,24 +60,6 @@ namespace Curry.Game
         {
             Shutdown();
         }
-        protected virtual void Init(  
-            List<GameObjective> active, 
-            List<GameObjective> completed,
-            List<GameObjective> failed) 
-        {
-            foreach (IObjective objective in active)
-            {
-                NewActiveObjective(objective);
-            }
-            foreach (IObjective complete in completed)
-            {
-                m_completed.Add(complete);
-            }
-            foreach (IObjective fail in failed)
-            {
-                m_failed.Add(fail);
-            }
-        }
         protected virtual void Shutdown()
         {
             foreach (IObjective objective in GetObjectives(ObjectiveState.Active))

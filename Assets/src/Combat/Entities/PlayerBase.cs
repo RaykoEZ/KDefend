@@ -11,6 +11,5 @@ public class PlayerBase : Building
     }
     public virtual void Init(KDefenderGameState state) 
     {
-        m_current = state.CafeValue.Property;
     }
 }

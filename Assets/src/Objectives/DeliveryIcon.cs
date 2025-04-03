@@ -8,10 +8,9 @@ public class DeliveryIcon : HideableUI
     [SerializeField] Sprite m_deliTypeSmuggle = default;
 
     [SerializeField] Image m_deliverType = default;
-    [SerializeField] Image m_rank = default;
     DeliveryObjective m_currentRef;
     public DeliveryObjective CurrentDelivery => m_currentRef;
-    public void SetupIcon(DeliveryObjective obj)
+    public void StartIcon(DeliveryObjective obj)
     {
         m_currentRef = obj;
         Sprite deliType;
@@ -33,12 +32,14 @@ public class DeliveryIcon : HideableUI
         }
         m_deliverType.sprite = deliType;
         SetSize(0);
+        Show();
     }
     public void ResetIcon()
     {
         SetSize(0);
         // reset to empty
         m_currentRef = null;
+        Hide();
     }
     public void SetSize(int size = 0) 
     {

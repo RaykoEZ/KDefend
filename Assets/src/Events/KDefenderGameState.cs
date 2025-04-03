@@ -6,16 +6,13 @@ using System.Collections.Generic;
 [Serializable]
 public struct KDefenderGameState
 {
-    public int SecondsElapsed;
+    public int CurrentLevel;
     public int EnemiesKilled;
     // State of player entities
-    public EntityState CafeValue;
     public EntityState PlayerValue;
     public InventoryState Inventory;
     public List<EntityState> HostileStates;
-    public List<DeliveryObjective> Active;
     public List<DeliveryObjective> Completed;
-    public List<DeliveryObjective> Failed;
 }
 [Serializable]
 public struct InventoryState 

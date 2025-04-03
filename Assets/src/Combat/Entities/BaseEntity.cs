@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem.LowLevel;
+
 [Serializable]
 public struct EntityProperty
 {
@@ -30,6 +32,11 @@ public class BaseEntity : MonoBehaviour
         {
             result?.OnHit(this);
         }
+    }
+    public virtual void Init(EntityState state) 
+    {
+        transform.position = state.Position;
+        m_current = state.Property;
     }
     public void ModifySpeed(float mod) 
     {
