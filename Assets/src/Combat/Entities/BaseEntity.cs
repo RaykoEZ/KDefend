@@ -22,7 +22,7 @@ public class BaseEntity : MonoBehaviour
     public EntityProperty CurrentStats { get => m_current;}
     protected virtual void Awake()
     {
-        m_current = m_base;
+        //m_current = m_base;
     }
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {

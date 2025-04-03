@@ -3,6 +3,8 @@ using Curry.Game;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem.LowLevel;
+
 public class KDefenderStateManager : MonoBehaviour 
 {
     [SerializeField] KDefenderGameState m_defaultState = default;
@@ -28,6 +30,7 @@ public class KDefenderStateManager : MonoBehaviour
     void Start()
     {
         m_dataSource?.Init(m_defaultState);
+        UpdateSave(m_defaultState);
         m_timer.StartTimer();
     }
     public void ObjectiveComplete(IObjective obj) 
