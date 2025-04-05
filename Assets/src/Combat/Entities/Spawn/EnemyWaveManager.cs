@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public delegate void OnWaveStart(int waveNumber);
 public class EnemyWaveManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class EnemyWaveManager : MonoBehaviour
     [SerializeField] List<EnemyWaveDetail> m_waves = default;
     [SerializeField] List<EnemySpawner> m_spawners = default;
     [SerializeField] List<BaseEntity> m_targetPriorityList = default;
+    [SerializeField] UnityEvent<List<BaseEntity>> m_onWaveSpawn = default;
     [SerializeField] BaseEntity m_defaultAggroTarget = default;
     [SerializeField] CoroutineManager m_waveSpawn = default;
     bool m_waveInProgress = false;
@@ -62,6 +64,7 @@ public class EnemyWaveManager : MonoBehaviour
             Spawn(wave);
             // after spawning, wait for a set duration
             yield return new WaitForSeconds(wave.SecondsBeforeNextWave);
+            //m_onWaveSpawn?.Invoke(); here
             // Increment to spawn next wave
             m_currentWave++;
         }

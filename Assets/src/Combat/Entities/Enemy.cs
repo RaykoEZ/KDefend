@@ -10,6 +10,18 @@ public struct EnemySpawnPattern
     public int KillsForEarlySpawn;
     public float SecondsElapsed;
 }
+public enum EnemyType 
+{ 
+    Scout,
+    Agent,
+    Command
+}
+[Serializable]
+public struct EnemyState
+{
+    public EnemyType Type;
+    public EntityState State;
+}
 [Serializable]
 public struct EntityState 
 {

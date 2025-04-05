@@ -11,8 +11,9 @@ public struct KDefenderGameState
     // State of player entities
     public EntityState PlayerValue;
     public InventoryState Inventory;
-    public List<EntityState> HostileStates;
+    public List<EnemyState> HostileStates;
     public List<DeliveryObjective> Completed;
+    public List<DeliveryObjective> Active;
 }
 [Serializable]
 public struct InventoryState 
