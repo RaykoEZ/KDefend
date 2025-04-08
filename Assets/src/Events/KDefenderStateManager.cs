@@ -1,87 +1,58 @@
-﻿using Curry.Events;
+﻿using System.Collections.Generic;
+using Curry.Events;
 using Curry.Game;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem.LowLevel;
-public class EnemyManager : MonoBehaviour 
-{
-    [SerializeField] Transform m_spawnParent = default;
-    [SerializeField] Enemy m_scoutRef = default;
-    [SerializeField] Enemy m_agentRef = default;
-    List<BaseEntity> m_activeEnemies = default;
-
-    public IReadOnlyList<BaseEntity> ActiveEnemies { get => m_activeEnemies;}
-    public void SpawnEnemies(List<EnemyState> states) 
-    {
-        Enemy spawnRef;
-        foreach (var item in states)
-        {
-            spawnRef = GetSpawnRef(item);
-            var instance = GameUtil.SpawnObject(spawnRef,
-                item.State.Position, m_spawnParent);
-            m_activeEnemies.Add(instance);
-        }
-    }
-    protected Enemy GetSpawnRef(EnemyState state) 
-    {
-        Enemy ret = null;
-        switch (state.Type)
-        {
-            case EnemyType.Scout:
-                ret = m_scoutRef;
-                break;
-            case EnemyType.Agent:
-                ret = m_agentRef;
-                break;
-            case EnemyType.Command:
-                break;
-            default:
-                ret = m_scoutRef;
-                break;
-        }
-        return ret;
-    }
-    public void OnEnemySpawned(List<BaseEntity> spawned) 
-    {
-        if (spawned == null || spawned.Count == 0) return;
-        m_activeEnemies.AddRange(spawned);
-    }
-}
 public class KDefenderStateManager : MonoBehaviour 
 {
     [SerializeField] KDefenderGameState m_defaultState = default;
     [SerializeField] KDefenderDataSource m_dataSource = default;
 
     [SerializeField] EnemyManager m_enemy = default;
-    [SerializeField] ObjectiveManager m_objectives = default;
+    [SerializeField] DeliveryManager m_objectives = default;
     [SerializeField] InventoryManager m_inventory = default;
     [SerializeField] Player m_player = default;
     [SerializeField] GameTimer m_timer = default;
     [SerializeField] UnityEvent<KDefenderGameState> m_onStateUpdate = default;
     [SerializeField] UnityEvent m_onGameOver = default;
+    int m_currentLevel = 0;
+    int m_killCount = 0;
     // As an alternate game mode
     // Will implement with the KeepQuiet saves system
-    public KDefenderGameState TryLoadSaveState()
+    public void TryLoadSaveState(KDefenderGameState newState)
     {
-        KDefenderGameState result = new KDefenderGameState { };
-        return result;
-    }
-    public void UpdateSave(KDefenderGameState newState) 
-    {
+        m_currentLevel = newState.CurrentLevel;
+        m_killCount = newState.EnemiesKilled;
         // set player state
+        m_currentLevel = newState.CurrentLevel;
         m_player?.Init(newState.PlayerValue);
+        m_enemy?.Init(newState.HostileStates);
+        m_objectives.Init(newState.Completed, newState.Active);
         m_onStateUpdate?.Invoke(newState);
+    }
+    // get current states from managers
+    public void SyncSave() 
+    {
+        var newState = new KDefenderGameState
+        {
+            CurrentLevel = m_currentLevel,
+            EnemiesKilled = m_killCount,
+            PlayerValue = m_player.CurrentStats,
+            Inventory = m_inventory.GetState(),
+            HostileStates = m_enemy.EnemyStates(),
+            // Objectives here
+            Completed = m_objectives.GetDetailsOf(
+                ObjectiveManager<DeliveryDetail>.ObjectiveState.Complete),
+            Active = m_objectives.GetDetailsOf(
+                ObjectiveManager<DeliveryDetail>.ObjectiveState.Active)
+        };
+        m_dataSource.Init(newState);
     }
     void Start()
     {
         m_dataSource?.Init(m_defaultState);
-        UpdateSave(m_defaultState);
+        TryLoadSaveState(m_defaultState);
         m_timer.StartTimer();
-    }
-    public void ObjectiveComplete(IObjective obj) 
-    { 
-    
     }
     public void OnGameOver() 
     {

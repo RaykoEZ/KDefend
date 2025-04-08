@@ -10,8 +10,8 @@ public class EnemyWaveManager : MonoBehaviour
 {
     [SerializeField] List<EnemyWaveDetail> m_waves = default;
     [SerializeField] List<EnemySpawner> m_spawners = default;
-    [SerializeField] List<BaseEntity> m_targetPriorityList = default;
-    [SerializeField] UnityEvent<List<BaseEntity>> m_onWaveSpawn = default;
+    [SerializeField] UnityEvent<Enemy> m_onEnemySpawn = default;
+    [SerializeField] UnityEvent<Enemy> m_onEnemyDefeat= default;
     [SerializeField] BaseEntity m_defaultAggroTarget = default;
     [SerializeField] CoroutineManager m_waveSpawn = default;
     bool m_waveInProgress = false;
@@ -64,7 +64,6 @@ public class EnemyWaveManager : MonoBehaviour
             Spawn(wave);
             // after spawning, wait for a set duration
             yield return new WaitForSeconds(wave.SecondsBeforeNextWave);
-            //m_onWaveSpawn?.Invoke(); here
             // Increment to spawn next wave
             m_currentWave++;
         }
@@ -72,6 +71,8 @@ public class EnemyWaveManager : MonoBehaviour
     }
     void InitEnenmy(Enemy spawned) 
     {
-        spawned.Init(m_targetPriorityList, m_defaultAggroTarget);
+        spawned.Init(m_defaultAggroTarget);
+        spawned.OnDefeated += (a) => { m_onEnemyDefeat?.Invoke(a); }; 
+        m_onEnemySpawn?.Invoke(spawned);
     }
 }

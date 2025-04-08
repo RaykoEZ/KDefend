@@ -9,26 +9,13 @@ public enum DeliveryType
     Smuggle
 }
 [Serializable]
-public class DeliveryObjective : IObjective
+public class DeliveryObjective : GameObjective<DeliveryDetail>
 {
-    [SerializeField] DeliveryDetail m_detail = default;
-    public virtual string Title => m_detail.Title;
-    public virtual string Description => m_detail.Description;
-    public DeliveryDetail Detail { get => m_detail; }
-    public event OnObjectiveUpdate OnComplete;
-    public event OnObjectiveUpdate OnFail;
-    public virtual void Init() { }
-    public virtual void Shutdown() { }
+    [SerializeField] protected DeliveryDetail m_detail = default;
+
+    public override DeliveryDetail Detail => m_detail;
     public virtual void Setup(DeliveryDetail detail) 
     {
         m_detail = detail;
-    }
-    public virtual void Complete()
-    {
-        OnComplete?.Invoke(this);
-    }
-    public virtual void Fail()
-    {
-        OnFail?.Invoke(this);
     }
 }

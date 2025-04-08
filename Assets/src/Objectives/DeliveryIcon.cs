@@ -8,14 +8,14 @@ public class DeliveryIcon : HideableUI
     [SerializeField] Sprite m_deliTypeSmuggle = default;
 
     [SerializeField] Image m_deliverType = default;
-    DeliveryObjective m_currentRef;
-    public DeliveryObjective CurrentDelivery => m_currentRef;
-    public void StartIcon(DeliveryObjective obj)
+    DeliveryDetail m_currentRef;
+    public DeliveryDetail CurrentDelivery => m_currentRef;
+    public void StartIcon(DeliveryDetail obj)
     {
         m_currentRef = obj;
         Sprite deliType;
         // Setup visual
-        switch (m_currentRef.Detail.DeliverType)
+        switch (m_currentRef.DeliverType)
         {
             case DeliveryType.Food:
                 deliType = m_deliTypeFood;
@@ -38,7 +38,7 @@ public class DeliveryIcon : HideableUI
     {
         SetSize(0);
         // reset to empty
-        m_currentRef = null;
+        m_currentRef = new DeliveryDetail { };
         Hide();
     }
     public void SetSize(int size = 0) 

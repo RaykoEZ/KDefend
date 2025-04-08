@@ -7,6 +7,6 @@ public class Test_StatsDisplay : MonoBehaviour
     [SerializeField] BaseEntity m_toTest = default;
     void Update()
     {
-        m_testDisplay.text = m_toTest.CurrentStats.Health.ToString();
+        m_testDisplay.text = m_toTest.CurrentStats.Property.Health.ToString();
     }
 }

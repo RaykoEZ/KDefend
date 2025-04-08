@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace Curry.Game
 {
-    public class ObjectiveManager : MonoBehaviour
+    public abstract class ObjectiveManager<T> : MonoBehaviour where T: IObjective
     {
         public enum ObjectiveState
         {
@@ -13,21 +13,22 @@ namespace Curry.Game
             Complete,
             Fail
         }
-        [SerializeField] protected UnityEvent<IObjective> m_newObjective = default;
-        [SerializeField] protected UnityEvent<IObjective> m_objectiveComplete = default;
-        [SerializeField] protected UnityEvent<IObjective> m_objectiveFail = default;
-        /// Preloaded objectives
-        [SerializeField] protected List<GameObjective> m_initObjectives = default;
-        protected List<IObjective> m_active = new List<IObjective>();
-        protected List<IObjective> m_completed = new List<IObjective>();
-        protected List<IObjective> m_failed = new List<IObjective>();
-        public event OnObjectiveUpdate OnNewObjective;
-        public event OnObjectiveUpdate ObjectiveCompleted;
-        public event OnObjectiveUpdate OnFailure;
-        public IReadOnlyList<GameObjective> GetObjectives(ObjectiveState state)
+        [SerializeField] protected UnityEvent<T> m_newObjective = default;
+        [SerializeField] protected UnityEvent<T> m_objectiveComplete = default;
+        [SerializeField] protected UnityEvent<T> m_objectiveFail = default;
+        /// Preloaded objectives for test
+        [SerializeField] protected List<T> m_TEST_initObjectives = default;
+        private List<GameObjective<T>> m_active = new List<GameObjective<T>>();
+        private List<GameObjective<T>> m_completed = new List<GameObjective<T>>();
+        private List<GameObjective<T>> m_failed = new List<GameObjective<T>>();
+
+        public event OnObjectiveUpdate<T> OnNewObjective;
+        public event OnObjectiveUpdate<T> ObjectiveCompleted;
+        public event OnObjectiveUpdate<T> OnFailure;
+        public IReadOnlyList<GameObjective<T>> GetObjectives(ObjectiveState state)
         {
-            List<GameObjective> ret = new List<GameObjective>();
-            List<IObjective> toGet;
+            List<GameObjective<T>> ret = new List<GameObjective<T>>();
+            List<GameObjective<T>> toGet;
             switch (state)
             {
                 case ObjectiveState.Active:
@@ -45,16 +46,25 @@ namespace Curry.Game
             }
             foreach (var item in toGet)
             {
-                ret.Add(item as GameObjective);
+                ret.Add(item);
             }
             return ret; 
         }
+        public List<T> GetDetailsOf(ObjectiveState state)
+        {
+            var toGet = GetObjectives(state);
+            var ret = new List<T>();
+            foreach (var item in toGet)
+            {
+                ret.Add(item.Detail);
+            }
+            return ret;
+        }
         protected void Start()
         {
-            foreach (IObjective objective in m_initObjectives)
-            {
-                NewActiveObjective(objective);
-            }
+#if UNITY_EDITOR
+            Init(new List<T>(), m_TEST_initObjectives);
+#endif
         }
         protected void OnDestroy()
         {
@@ -62,57 +72,48 @@ namespace Curry.Game
         }
         protected virtual void Shutdown()
         {
-            foreach (IObjective objective in GetObjectives(ObjectiveState.Active))
+            foreach (GameObjective<T> objective in GetObjectives(ObjectiveState.Active))
             {
                 ShutdownObjective(objective);
             }
         }
-        public bool TryGetByTitle(string title, out IObjective result) 
+        public abstract void Init(
+            List<T> completedObjectives,
+            List<T> newObjectives);
+        public GameObjective<T> GetByTitle(string title) 
         {
-            bool ret = !string.IsNullOrEmpty(title);
-            result = null;
-            if (ret) 
-            {
-                result = m_active.Find((x) => x.Title == title);
-            }
-            return ret && result != null;
+            return m_active.Find((x) => x.Detail.Title == title);
         }
-        public void NewActiveObjective(IObjective objective)
+        public void NewActiveObjective(GameObjective<T> objective)
         {
             PrepareObjective(objective, true);
             m_active.Add(objective);
-            OnNewObjective?.Invoke(objective);
-            m_newObjective?.Invoke(objective);
+            OnNewObjective?.Invoke(objective.Detail);
+            m_newObjective?.Invoke(objective.Detail);
         }
-        protected virtual void OnObjectiveComplete(IObjective completed) 
+        protected virtual void OnObjectiveComplete(GameObjective<T> completed) 
         {
-            if (m_active.Contains(completed))
-            {
-                // Do some animation/notification for callbacks:
-                ObjectiveCompleted?.Invoke(completed);
-                m_objectiveComplete?.Invoke(completed);
-                CleanupObjective(completed);
-                m_completed.Add(completed);
-            }
+            // Do some animation/notification for callbacks:
+            ObjectiveCompleted?.Invoke(completed.Detail);
+            m_objectiveComplete?.Invoke(completed.Detail);
+            CleanupObjective(completed);
+            m_completed.Add(completed);      
         }
-        protected virtual void OnObjectiveFail(IObjective failed)
+        protected virtual void OnObjectiveFail(GameObjective<T> failed)
         {
-            if (m_active.Contains(failed))
-            {
-                OnFailure?.Invoke(failed);
-                m_objectiveFail?.Invoke(failed);
-                CleanupObjective(failed);
-                m_failed.Add(failed);
-            }
+            OnFailure?.Invoke(failed.Detail);
+            m_objectiveFail?.Invoke(failed.Detail);
+            CleanupObjective(failed);
+            m_failed.Add(failed);
         }
-        void CleanupObjective(IObjective completed)
+        void CleanupObjective(GameObjective<T> completed)
         {
             completed.OnComplete -= OnObjectiveComplete;
             completed.OnFail -= OnObjectiveFail;
             completed?.Shutdown();
             m_active.Remove(completed);
         }
-        protected void PrepareObjective(IObjective objective, bool isActive)
+        protected void PrepareObjective(GameObjective<T> objective, bool isActive)
         {
             objective?.Init();
             if (isActive) 
@@ -121,7 +122,7 @@ namespace Curry.Game
                 objective.OnFail += OnObjectiveFail;
             }
         }
-        protected void ShutdownObjective(IObjective objective)
+        protected void ShutdownObjective(GameObjective<T> objective)
         {
             objective?.Shutdown();
             objective.OnComplete -= OnObjectiveComplete;

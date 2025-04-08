@@ -17,39 +17,53 @@ public enum EnemyType
     Command
 }
 [Serializable]
-public struct EnemyState
+public struct EnemyState : IEquatable<EnemyState>
 {
     public EnemyType Type;
     public EntityState State;
+    public bool Equals(EnemyState other)
+    {
+        return Type == other.Type && State.Equals(other.State);
+    }
 }
 [Serializable]
-public struct EntityState 
+public struct EntityState : IEquatable<EntityState>
 {
     public EntityProperty Property;
     public Vector2 Position;
+
+    public bool Equals(EntityState other)
+    {
+        return Position == other.Position &&
+            Property.Health == other.Property.Health &&
+            Property.MoveSpeed == other.Property.MoveSpeed;
+    }
 }
 // base enemy behaviour
 public delegate void OnEnemyUpdate(Enemy toUpdate);
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : BaseCharacter, IHitsEntity
 {
+    [SerializeField] EnemyType m_type = default;
     [SerializeField] int m_contactDamage = default;
     [SerializeField] protected RangeDetector m_targeting = default;
-    protected int m_targetPriority = -1;
     protected float m_speedVariant;
     private Vector2 m_defaultTarget;
     protected Vector2 m_currentDestination;
     protected BaseEntity m_target;
     Coroutine m_movement;
     Coroutine m_attack;
-    public IReadOnlyList<BaseEntity> TargetsOfInterest => m_targeting.TargetPriorityList;
     public BaseEntity CurrentTarget { get => m_target; }
     public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
+    public EnemyState State => 
+        new EnemyState { 
+            Type = m_type, 
+            State = CurrentStats };
 
     public event OnEnemyUpdate OnDefeated;
     void Start() 
     {
-        Init(new List<BaseEntity>());
+        Init();
     }
     protected override Vector2 GetAimDirection()
     {
@@ -68,9 +82,8 @@ public class Enemy : BaseCharacter, IHitsEntity
             transform.position = hit.position;
         }
     }
-    public void Init(List<BaseEntity> interests, BaseEntity defaultTarget = null)
+    public void Init(BaseEntity defaultTarget = null)
     {
-        m_targeting?.AddTargets(interests);
         EnemyAggroHandler.Add(this);
         m_defaultTarget = defaultTarget == null? transform.position : defaultTarget.transform.position;
         m_target = defaultTarget;
@@ -137,11 +150,16 @@ public class Enemy : BaseCharacter, IHitsEntity
     protected override void OnDefeat()
     {
         base.OnDefeat();
+        OnDefeated?.Invoke(this);
+        Despawn();
+    }
+    public void Despawn() 
+    {
         StopMoving();
         EnemyAggroHandler.Remove(this);
-        OnDefeated?.Invoke(this);
         Destroy(gameObject);
     }
+
     protected virtual IEnumerator HitStun(float duration) 
     {
         StopMoving();

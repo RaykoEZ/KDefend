@@ -4,7 +4,6 @@ using UnityEngine;
 // Allows aggro control on map events
 public class EnemyAggroHandler : MonoBehaviour 
 {
-    static HashSet<Transform> m_enemyBaseList = new HashSet<Transform>();
     static HashSet<Enemy> m_currentAggroList = new HashSet<Enemy>();
     public static void Add(Enemy enemy) 
     {

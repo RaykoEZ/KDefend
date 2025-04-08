@@ -18,7 +18,7 @@ public class PlayerCreditManager : MonoBehaviour
     }
     public void OnPayment(int pay) 
     {
-        if (m_player.CurrentStats.Health <= pay) 
+        if (m_player.CurrentStats.Property.Health <= pay) 
         {
             // cannot afford, Notify
         }

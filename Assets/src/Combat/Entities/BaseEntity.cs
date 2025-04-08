@@ -19,7 +19,10 @@ public class BaseEntity : MonoBehaviour
     protected EntityProperty m_current;
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
     public EntityProperty BaseStats => m_base;
-    public EntityProperty CurrentStats { get => m_current;}
+    public EntityState CurrentStats { 
+        get => new EntityState { 
+            Property = m_current,
+            Position = transform.position};}
     protected virtual void Awake()
     {
         //m_current = m_base;
@@ -58,7 +61,7 @@ public class BaseEntity : MonoBehaviour
     {
         m_current.Health -= baseDamage;
         m_onTakeDamage?.Invoke(baseDamage);
-        if (CurrentStats.Health <= 0f) 
+        if (CurrentStats.Property.Health <= 0f) 
         {
             OnDefeat();
         }

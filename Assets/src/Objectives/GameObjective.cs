@@ -4,15 +4,12 @@ using Curry.Game;
 
 namespace Curry.Events
 {
-    [Serializable]
-    public class GameObjective : MonoBehaviour, IObjective
+    public delegate void OnObjectiveUpdate<T>(T completed);
+    public abstract class GameObjective<T> where T : IObjective
     {
-        [SerializeField] protected string m_title = default;
-        [SerializeField] protected string m_description = default;
-        public event OnObjectiveUpdate OnComplete;
-        public event OnObjectiveUpdate OnFail;
-        public virtual string Title => m_title;
-        public virtual string Description => m_description;
+        public event OnObjectiveUpdate<GameObjective<T>> OnComplete;
+        public event OnObjectiveUpdate<GameObjective<T>> OnFail;
+        public abstract T Detail { get; }
         public virtual void Init() { }
         public virtual void Shutdown() { }
         public virtual void Complete() 

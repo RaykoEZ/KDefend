@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 // Handles enemy spawning
 public class EnemySpawner : EntitySpawner<Enemy>
 {
