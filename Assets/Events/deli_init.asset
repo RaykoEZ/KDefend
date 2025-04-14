@@ -16,18 +16,15 @@ MonoBehaviour:
   - DestinationIndex: 0
     DeliverType: 0
     PointReward: 300
-    DropChanceWeight: 0
     Title: 0_firstJob
-    Description: Complete your first deliver.
+    Description: First deliver.
   - DestinationIndex: 5
     DeliverType: 0
     PointReward: 320
-    DropChanceWeight: 0
-    Title: 1_aRegular
-    Description: A regular of the bar, same item, same place, as always.
+    Title: 1_regular
+    Description: A regular, same item, same place.
   - DestinationIndex: 2
     DeliverType: 1
     PointReward: 700
-    DropChanceWeight: 0
-    Title: 2_firstIntel
-    Description: 
+    Title: 2_intel0
+    Description: ???
