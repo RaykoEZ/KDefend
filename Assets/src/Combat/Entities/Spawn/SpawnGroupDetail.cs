@@ -7,24 +7,25 @@ public struct EnemySpawnItem
 {
     [SerializeField] int m_numToSpawn;
     // if < 0, pick random spawn location from list
-    [SerializeField] int m_spawnLocationIndex;
     [SerializeField] Enemy m_spawnRef;
     public int NumToSpawn => m_numToSpawn;
     public Enemy SpawnRef => m_spawnRef;
-    public int SpawnLocationIndex => m_spawnLocationIndex;
 }
 //Contains all enemies to spawn in a wave
 [CreateAssetMenu(fileName = "Wave_", menuName = "Jams/EnemySpawning/Create a new enemy wave detail", order = 1)]
-public class EnemyWaveDetail : ScriptableObject 
+public class SpawnGroupDetail : ScriptableObject 
 {
     // time to wait before next wave, start counting down after we spawned all enemies in this wave 
+    [SerializeField] int m_spawnLocationIndex;
     [SerializeField] float m_secondsBeforeNextWave = default;
+
     // A group of enemies spawn from the same spawner location
     [SerializeField] List<EnemySpawnItem> m_groupsToSpawn = default;
+    public int SpawnLocationIndex => m_spawnLocationIndex;
     public float SecondsBeforeNextWave => m_secondsBeforeNextWave;
-    public List<EnemySpawnItem> GroupsToSpawn => m_groupsToSpawn;
+    public SpawnContainer GroupsToSpawn => new SpawnContainer(m_groupsToSpawn);
 }
-
+// Index for the list in spawn dictionary in SpawnContainer
 public struct SpawnId : IEquatable<SpawnId>
 {
     int m_location;
@@ -36,10 +37,21 @@ public struct SpawnId : IEquatable<SpawnId>
         return Location == other.Location && IndexInList == other.IndexInList;
     }
 }
-public class SpawnContainer : MonoBehaviour 
+[Serializable]
+public class SpawnContainer 
 {
-
-    Dictionary<int, List<EnemySpawnItem>> m_spawnsByLocation = new Dictionary<int, List<EnemySpawnItem>>();
-    // use for timer spawns
-    Dictionary<int, List<SpawnId>> m_spawnBytimeFrame = new Dictionary<int, List<SpawnId>>();
+    [SerializeField] List<EnemySpawnItem> m_items = new List<EnemySpawnItem>();
+    public IReadOnlyList<EnemySpawnItem> Items => m_items;
+    public SpawnContainer(SpawnContainer copy) 
+    {
+        m_items = new List<EnemySpawnItem>(copy.m_items);
+    }
+    public SpawnContainer(IReadOnlyList<EnemySpawnItem> list) 
+    {
+        m_items = new List<EnemySpawnItem>(list);
+    }
+    public void AddRange(IReadOnlyList<EnemySpawnItem> add) 
+    {
+        m_items.AddRange(add);
+    }
 }

@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public delegate void OnWaveStart(int waveNumber);
 public class EnemyWaveManager : MonoBehaviour
 {
-    [SerializeField] List<EnemyWaveDetail> m_waves = default;
+    [SerializeField] List<SpawnGroupDetail> m_waves = default;
     [SerializeField] List<EnemySpawner> m_spawners = default;
     [SerializeField] UnityEvent<Enemy> m_onEnemySpawn = default;
     [SerializeField] UnityEvent<Enemy> m_onEnemyDefeat= default;
@@ -45,10 +45,10 @@ public class EnemyWaveManager : MonoBehaviour
         m_waveSpawn.StopCurrentCoroutine();
         m_waveInProgress = false;
     }
-    public virtual void Spawn(EnemyWaveDetail newWave) 
+    public virtual void Spawn(SpawnGroupDetail newWave) 
     {
         int i = 0;
-        foreach (var group in newWave.GroupsToSpawn)
+        foreach (var group in newWave.GroupsToSpawn.Items)
         {
             i = UnityEngine.Random.Range(0, m_spawners.Count);
             // spawn the group
@@ -59,7 +59,7 @@ public class EnemyWaveManager : MonoBehaviour
     {
         while (m_currentWave < m_waves.Count) 
         {
-            EnemyWaveDetail wave = m_waves[m_currentWave];
+            SpawnGroupDetail wave = m_waves[m_currentWave];
             OnStart?.Invoke(m_currentWave + 1);
             Spawn(wave);
             // after spawning, wait for a set duration
