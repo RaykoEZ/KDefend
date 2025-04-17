@@ -4,36 +4,30 @@ using UnityEngine;
 
 namespace Curry.Util
 {
-
     public class CoroutineManager : MonoBehaviour
     {
         protected delegate void OnCoroutineInterrupt(IEnumerator runThis);
         protected Stack<IEnumerator> m_coroutines = new Stack<IEnumerator>();
         protected IEnumerator m_currentCoroutine = default;
         protected OnCoroutineInterrupt m_onCoroutineInterrupted = default;
-
         bool m_coroutineInProgress = false;
         public bool CoroutineInProgress => m_coroutineInProgress;
         void OnEnable()
         {
             Init();
         }
-
         void OnDisable()
         {
             Shutdown();
         }
-
         protected virtual void Init()
         {
             m_onCoroutineInterrupted += OnCoroutineInterrupted;
         }
-
         protected virtual void Shutdown()
         {
             m_onCoroutineInterrupted -= OnCoroutineInterrupted;
         }
-
         public void ScheduleCoroutine(IEnumerator coroutine, bool interruptNow = false)
         {
             if (interruptNow)
@@ -45,7 +39,6 @@ namespace Curry.Util
                 m_coroutines.Push(coroutine);
             }
         }
-
         public void StartScheduledCoroutines()
         {
             if (CoroutineInProgress && m_coroutines.Count == 0)
@@ -55,7 +48,6 @@ namespace Curry.Util
 
             StartCoroutine(StartCurrentCoroutine());
         }
-
         public void StopCurrentCoroutine()
         {
             StopCoroutine(StartCurrentCoroutine());
@@ -77,7 +69,6 @@ namespace Curry.Util
             }
             StartCoroutine(StartInterruptCoroutine(runThis));
         }
-
         IEnumerator StartCurrentCoroutine()
         {
             while (m_coroutines.Count > 0)
@@ -88,7 +79,6 @@ namespace Curry.Util
                 m_coroutineInProgress = false;
             }
         }
-
         IEnumerator StartInterruptCoroutine(IEnumerator coroutine)
         {
             m_coroutineInProgress = true;
@@ -97,6 +87,5 @@ namespace Curry.Util
             m_coroutineInProgress = false;
             StartCurrentCoroutine();
         }
-
     }
 }

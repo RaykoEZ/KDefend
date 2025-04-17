@@ -1,18 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-
+// handles all enemy state and
+// spawns all pre-existing enemies from save data
 public class EnemyManager : MonoBehaviour 
 {
     [SerializeField] Transform m_spawnParent = default;
+    [SerializeField] EnemyWaveManager m_waveSpawn = default;
     [SerializeField] Enemy m_scoutRef = default;
     [SerializeField] Enemy m_agentRef = default;
-    // waves triggered by game event
-    [SerializeField] List<SpawnCollection> m_staticSpawns = default;
-    // frequent spawns bound by timer, depending on game state
-    [SerializeField] List<SpawnCollection> m_routineSpawns = default;
     List<Enemy> m_activeEnemies = default;
-    Dictionary<int, SpawnContainer> m_staticPool = new Dictionary<int, SpawnContainer>();
-    Dictionary<int, SpawnContainer> m_routinePool = new Dictionary<int, SpawnContainer>();
 
     public IReadOnlyList<Enemy> ActiveEnemies { get => m_activeEnemies;}
     public List<EnemyState> EnemyStates() 
@@ -26,9 +22,6 @@ public class EnemyManager : MonoBehaviour
     }
     public void Init(List<EnemyState> newState) 
     {
-        // setup spawn pools
-        m_staticPool = SpawnCollection.CreateCollections(m_staticSpawns);
-        m_routinePool = SpawnCollection.CreateCollections(m_routineSpawns);
         // clear all previous enemies and respawn according to new state
         foreach (var item in m_activeEnemies)
         {
@@ -36,10 +29,6 @@ public class EnemyManager : MonoBehaviour
         }
         m_activeEnemies.Clear();
         SpawnEnemies(newState);
-    }
-    public void SpawnNewWave() 
-    { 
-    
     }
     public void SpawnEnemies(List<EnemyState> states) 
     {

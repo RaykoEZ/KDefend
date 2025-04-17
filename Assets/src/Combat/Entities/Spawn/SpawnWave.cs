@@ -1,10 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 // The container of one spawn wave, consists of spawn on multiple locations
-public class SpawnCollection : ScriptableObject
+[CreateAssetMenu(fileName = "spwnWave_", menuName = "Jams/EnemySpawning/SpawnWave", order = 0)]
+public class SpawnWave : ScriptableObject
 {
-    [SerializeField] List<SpawnGroupDetail> m_enemyGroups = default;
-    public static Dictionary<int, SpawnContainer> CreateDictionary(List<SpawnGroupDetail> enemyGroup)
+    [SerializeField] float m_secondsBeforeNextWave = default;
+    [SerializeField] List<SpawnGroup> m_enemyGroups = default;
+    // < 0f for stop spawning
+    public float SecondsBeforeSpawn => m_secondsBeforeNextWave;
+    public IReadOnlyList<SpawnGroup> EnemyGroups { get => m_enemyGroups; }
+    public static Dictionary<int, SpawnContainer> CreateDictionary(IReadOnlyList<SpawnGroup> enemyGroup)
     {
         Dictionary<int, SpawnContainer> ret = new Dictionary<int, SpawnContainer>();
         SpawnContainer c;
@@ -20,16 +25,6 @@ public class SpawnCollection : ScriptableObject
                 result?.AddRange(c.Items);
             }
         }
-        return ret;
-    }
-    public static Dictionary<int, SpawnContainer> CreateCollections(List<SpawnCollection> collection)
-    {
-        List<SpawnGroupDetail> toAdd = new List<SpawnGroupDetail>();
-        foreach (var item in collection)
-        {
-            toAdd.AddRange(item.m_enemyGroups);
-        }
-        Dictionary<int, SpawnContainer> ret = CreateDictionary(toAdd);
         return ret;
     }
 }
