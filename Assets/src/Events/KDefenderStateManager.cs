@@ -21,10 +21,10 @@ public class KDefenderStateManager : MonoBehaviour
     // Will implement with the KeepQuiet saves system
     public void TryLoadSaveState(KDefenderGameState newState)
     {
-        m_currentLevel = newState.CurrentLevel;
+        m_currentLevel = newState.CurrentThreatLevel;
         m_killCount = newState.EnemiesKilled;
         // set player state
-        m_currentLevel = newState.CurrentLevel;
+        m_currentLevel = newState.CurrentThreatLevel;
         m_player?.Init(newState.PlayerValue);
         m_enemy?.Init(newState.HostileStates);
         m_objectives.Init(newState.Completed, newState.Active);
@@ -35,11 +35,11 @@ public class KDefenderStateManager : MonoBehaviour
     {
         var newState = new KDefenderGameState
         {
-            CurrentLevel = m_currentLevel,
+            CurrentThreatLevel = m_currentLevel,
             EnemiesKilled = m_killCount,
             PlayerValue = m_player.CurrentStats,
             Inventory = m_inventory.GetState(),
-            HostileStates = m_enemy.EnemyStates(),
+            HostileStates = m_enemy.GetEnemyStates(),
             // Objectives here
             Completed = m_objectives.GetDetailsOf(
                 ObjectiveManager<DeliveryDetail>.ObjectiveState.Complete),

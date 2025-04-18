@@ -11,8 +11,8 @@ public class EnemyWaveManager : MonoBehaviour
 {
     // waves triggered by game event
     [SerializeField] List<SpawnWave> m_staticSpawns = default;
-    // frequent spawns bound by timer, depending on game state
-    [SerializeField] List<SpawnWave> m_routineSpawns = default;
+    // frequent spawns bound by timer, depending on threat level and game state trigger
+    [SerializeField] List<SpawnWave> m_routineSpawnStages = default;
     // Spawner in locations
     [SerializeField] List<EnemySpawner> m_spawners = default;
     [SerializeField] UnityEvent<Enemy> m_onEnemySpawn = default;
@@ -22,8 +22,8 @@ public class EnemyWaveManager : MonoBehaviour
     bool m_waveInProgress = false;
     public event OnWaveStart OnStart;
     // current wave number
-    int m_currentWave = 0;
-    public int CurrentWave => m_currentWave;
+    int m_currentThreatStage = 0;
+    public int CurrentWave => m_currentThreatStage;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +46,7 @@ public class EnemyWaveManager : MonoBehaviour
 
         m_waveInProgress = true;
         //make coroutine handle regular spawns
-        m_waveSpawn.ScheduleCoroutine(RoutineSpawn_Internal(m_routineSpawns), true);
+        m_waveSpawn.ScheduleCoroutine(RoutineSpawn_Internal(), true);
     }
     // trigger static spawn with scene/script events
     public void StaticSpawn(int spawnIndex) 
@@ -55,12 +55,6 @@ public class EnemyWaveManager : MonoBehaviour
         {
             SpawnWave(m_staticSpawns[spawnIndex]);
         }
-    }
-    public void StopWave() 
-    {
-        if (!m_waveInProgress) return;
-        m_waveSpawn.StopCurrentCoroutine();
-        m_waveInProgress = false;
     }
     public virtual void SpawnGroup(SpawnGroup newGroup) 
     {
@@ -80,27 +74,37 @@ public class EnemyWaveManager : MonoBehaviour
             SpawnGroup(group);
         }
     }
-    // spawn one wave of enemies
-    IEnumerator RoutineSpawn_Internal(List<SpawnWave> waves) 
+    public void StopRoutineWave()
     {
-        foreach (var item in waves)
-        {
-            m_currentWave++;
-            OnStart?.Invoke(m_currentWave + 1);
-            yield return new WaitForSeconds(item.SecondsBeforeSpawn);
-            // spawn a wave of enemies
-            SpawnWave(item);
-            // neegative delay = pause
-            if (item.SecondsBeforeSpawn < 0f)
-            {
-                StopWave();
-                yield break;
-            }
-            // after spawning, wait for a set duration
-            yield return new WaitForSeconds(item.SecondsBeforeSpawn);
-            // Increment to spawn next wave
-        }           
+        if (!m_waveInProgress) return;
+        m_waveSpawn.StopCurrentCoroutine();
         m_waveInProgress = false;
+    }
+    // increase threat level
+    public void IncreaseThreat() 
+    {
+        // Increment to spawn next wave
+        m_currentThreatStage = Mathf.Min(m_currentThreatStage + 1, m_routineSpawnStages.Count - 1);
+        OnStart?.Invoke(m_currentThreatStage);
+    }
+    public void DecreseThreat() 
+    {
+        // Increment to spawn next wave
+        m_currentThreatStage = Mathf.Max(m_currentThreatStage - 1, 0);
+        OnStart?.Invoke(m_currentThreatStage);
+    }
+    // spawn one wave of enemies
+    IEnumerator RoutineSpawn_Internal() 
+    {
+        while (m_waveInProgress) 
+        {
+            SpawnWave wave = m_routineSpawnStages[m_currentThreatStage];
+            float delay = wave.SecondsBeforeSpawn < 0f ? 60f : wave.SecondsBeforeSpawn;
+            // spawn a wave of enemies
+            SpawnWave(wave);
+            // after spawning, wait for a set duration
+            yield return new WaitForSeconds(delay);
+        }             
     }
     void PrepareEnenmy(Enemy spawned) 
     {

@@ -6,9 +6,8 @@ using System.Collections.Generic;
 [Serializable]
 public struct KDefenderGameState
 {
-    public int CurrentLevel;
+    public int CurrentThreatLevel;
     public int EnemiesKilled;
-    public int CurrentRoutineWave;
     // State of player entities
     public EntityState PlayerValue;
     public InventoryState Inventory;

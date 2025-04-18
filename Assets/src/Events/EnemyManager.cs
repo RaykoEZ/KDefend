@@ -1,17 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+
 // handles all enemy state and
 // spawns all pre-existing enemies from save data
 public class EnemyManager : MonoBehaviour 
 {
     [SerializeField] Transform m_spawnParent = default;
-    [SerializeField] EnemyWaveManager m_waveSpawn = default;
-    [SerializeField] Enemy m_scoutRef = default;
-    [SerializeField] Enemy m_agentRef = default;
+    [SerializeField] EnemyAssetCollection m_enemyRefs = default;
     List<Enemy> m_activeEnemies = default;
-
     public IReadOnlyList<Enemy> ActiveEnemies { get => m_activeEnemies;}
-    public List<EnemyState> EnemyStates() 
+    public List<EnemyState> GetEnemyStates() 
     {
         var ret = new List<EnemyState>();
         foreach (var item in ActiveEnemies)
@@ -35,31 +33,12 @@ public class EnemyManager : MonoBehaviour
         Enemy spawnRef;
         foreach (var item in states)
         {
-            spawnRef = GetSpawnRef(item);
+            spawnRef = m_enemyRefs.GetSpawnRef(item.Type);
             var instance = GameUtil.SpawnObject(spawnRef,
                 item.State.Position, m_spawnParent);
             m_activeEnemies.Add(instance);
             instance.OnDefeated += OnEnemyDefeated;
         }
-    }
-    protected Enemy GetSpawnRef(EnemyState state) 
-    {
-        Enemy ret = null;
-        switch (state.Type)
-        {
-            case EnemyType.Scout:
-                ret = m_scoutRef;
-                break;
-            case EnemyType.Agent:
-                ret = m_agentRef;
-                break;
-            case EnemyType.Command:
-                break;
-            default:
-                ret = m_scoutRef;
-                break;
-        }
-        return ret;
     }
     public void OnEnemyDefeated(Enemy spawned) 
     {
