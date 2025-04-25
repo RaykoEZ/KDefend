@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74c7893b3acfc4b468eb850ca567285e, type: 3}
-  m_Name: EnemyPool_0
+  m_Script: {fileID: 11500000, guid: 48b60f6d58c085e49959926aed02e753, type: 3}
+  m_Name: EList_0
   m_EditorClassIdentifier: 
-  m_enemyAssets:
+  m_enemyRefs:
   - {fileID: 2273697011688774770, guid: 7f155d21df903a04bacc50e3a541ab5d, type: 3}
   - {fileID: 4430035897266289553, guid: d4d76bc2492f8384ca1dd53bfe330f13, type: 3}
   - {fileID: 9163418665096585045, guid: d45be5fbf88f22f42a068d3a833764a2, type: 3}

@@ -15,18 +15,13 @@ public class KDefenderStateManager : MonoBehaviour
     [SerializeField] GameTimer m_timer = default;
     [SerializeField] UnityEvent<KDefenderGameState> m_onStateUpdate = default;
     [SerializeField] UnityEvent m_onGameOver = default;
-    int m_currentLevel = 0;
-    int m_killCount = 0;
     // As an alternate game mode
     // Will implement with the KeepQuiet saves system
     public void TryLoadSaveState(KDefenderGameState newState)
     {
-        m_currentLevel = newState.CurrentThreatLevel;
-        m_killCount = newState.EnemiesKilled;
         // set player state
-        m_currentLevel = newState.CurrentThreatLevel;
         m_player?.Init(newState.PlayerValue);
-        m_enemy?.Init(newState.HostileStates);
+        m_enemy?.Init(newState.CurrentThreatLevel, newState.HostileStates);
         m_objectives.Init(newState.Completed, newState.Active);
         m_onStateUpdate?.Invoke(newState);
     }
@@ -35,8 +30,7 @@ public class KDefenderStateManager : MonoBehaviour
     {
         var newState = new KDefenderGameState
         {
-            CurrentThreatLevel = m_currentLevel,
-            EnemiesKilled = m_killCount,
+            CurrentThreatLevel = m_enemy.CurrentThreatLevel,
             PlayerValue = m_player.CurrentStats,
             Inventory = m_inventory.GetState(),
             HostileStates = m_enemy.GetEnemyStates(),

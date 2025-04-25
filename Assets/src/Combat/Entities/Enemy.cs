@@ -18,11 +18,11 @@ public enum EnemyType
 [Serializable]
 public struct EnemyState : IEquatable<EnemyState>
 {
-    public EnemyType Type;
+    public int EnemyIndex;
     public EntityState State;
     public bool Equals(EnemyState other)
     {
-        return Type == other.Type && State.Equals(other.State);
+        return EnemyIndex == other.EnemyIndex && State.Equals(other.State);
     }
 }
 [Serializable]
@@ -43,7 +43,7 @@ public delegate void OnEnemyUpdate(Enemy toUpdate);
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : BaseCharacter, IHitsEntity
 {
-    [SerializeField] EnemyType m_type = default;
+    [SerializeField] int m_type = default;
     [SerializeField] int m_contactDamage = default;
     [SerializeField] protected RangeDetector m_targeting = default;
     protected float m_speedVariant;
@@ -56,7 +56,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
     public EnemyState State => 
         new EnemyState { 
-            Type = m_type, 
+            EnemyIndex = m_type, 
             State = CurrentStats };
 
     public event OnEnemyUpdate OnDefeated;

@@ -4,11 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEditor.Progress;
-
 public delegate void OnWaveStart(int waveNumber);
 public class EnemyWaveManager : MonoBehaviour
 {
+    [SerializeField] ThreatHandler m_threeat = default;
+    [SerializeField] EnemyAssetList m_enemyRefs = default;
     // waves triggered by game event
     [SerializeField] List<SpawnWave> m_staticSpawns = default;
     // frequent spawns bound by timer, depending on threat level and game state trigger
@@ -63,8 +63,9 @@ public class EnemyWaveManager : MonoBehaviour
                 newGroup.SpawnLocationIndex : 0;
         foreach (var spawn in newGroup.GroupsToSpawn.Items)
         {
+            var enemyRef = m_enemyRefs.GetEnemyRef(spawn.SpawnRef);
             // spawn the group
-            m_spawners[i].Spawn(spawn.SpawnRef, spawn.NumToSpawn, 0.1f, PrepareEnenmy);
+            m_spawners[i].Spawn(enemyRef, spawn.NumToSpawn, 0.1f, PrepareEnenmy);
         }
     }
     protected void SpawnWave(SpawnWave wave) 

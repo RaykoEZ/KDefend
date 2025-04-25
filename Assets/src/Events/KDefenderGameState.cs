@@ -7,7 +7,6 @@ using System.Collections.Generic;
 public struct KDefenderGameState
 {
     public int CurrentThreatLevel;
-    public int EnemiesKilled;
     // State of player entities
     public EntityState PlayerValue;
     public InventoryState Inventory;

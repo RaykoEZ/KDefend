@@ -7,13 +7,13 @@ public struct EnemySpawn
 {
     [SerializeField] int m_numToSpawn;
     // if < 0, pick random spawn location from list
-    [SerializeField] Enemy m_spawnRef;
+    [SerializeField] int m_enemyRefIndex;
     public int NumToSpawn => m_numToSpawn;
-    public Enemy SpawnRef => m_spawnRef;
+    public int SpawnRef => m_enemyRefIndex;
 }
+[Serializable]
 //Contains all enemies in a group of spawn location
-[CreateAssetMenu(fileName = "Spwn_", menuName = "Jams/EnemySpawning/Create a new enemy wave detail", order = 1)]
-public class SpawnGroup : ScriptableObject 
+public class SpawnGroup 
 {
     // time to wait before next wave, start counting down after we spawned all enemies in this wave 
     [SerializeField] int m_spawnLocationIndex;
