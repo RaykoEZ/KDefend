@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Curry.Game;
 using System.Collections.Generic;
+
 // updates delivery objective container
 public class DeliveryManager : ObjectiveManager<DeliveryDetail>
 {

@@ -8,6 +8,7 @@ public class KDefenderStateManager : MonoBehaviour
     [SerializeField] KDefenderGameState m_defaultState = default;
     [SerializeField] KDefenderDataSource m_dataSource = default;
 
+    [SerializeField] ThreatHandler m_threat = default;
     [SerializeField] EnemyManager m_enemy = default;
     [SerializeField] DeliveryManager m_objectives = default;
     [SerializeField] InventoryManager m_inventory = default;
@@ -30,7 +31,7 @@ public class KDefenderStateManager : MonoBehaviour
     {
         var newState = new KDefenderGameState
         {
-            CurrentThreatLevel = m_enemy.CurrentThreatLevel,
+            CurrentThreatLevel = m_threat.CurrentThreat,
             PlayerValue = m_player.CurrentStats,
             Inventory = m_inventory.GetState(),
             HostileStates = m_enemy.GetEnemyStates(),
@@ -44,8 +45,10 @@ public class KDefenderStateManager : MonoBehaviour
     }
     void Start()
     {
+#if UNITY_EDITOR
         m_dataSource?.Init(m_defaultState);
         TryLoadSaveState(m_defaultState);
+#endif
         m_timer.StartTimer();
     }
     public void OnGameOver() 

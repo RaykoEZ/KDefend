@@ -4,10 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "spwnWave_", menuName = "Jams/EnemySpawning/SpawnWave", order = 0)]
 public class SpawnWave : ScriptableObject
 {
-    [SerializeField] float m_secondsBeforeNextWave = default;
     [SerializeField] List<SpawnGroup> m_enemyGroups = default;
     // < 0f for stop spawning
-    public float SecondsBeforeSpawn => m_secondsBeforeNextWave;
     public IReadOnlyList<SpawnGroup> EnemyGroups { get => m_enemyGroups; }
     public static Dictionary<int, SpawnContainer> CreateDictionary(IReadOnlyList<SpawnGroup> enemyGroup)
     {

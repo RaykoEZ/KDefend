@@ -24,34 +24,26 @@ public class DeliveryPrompter : MonoBehaviour
     [SerializeField] LocationHandler m_locations = default;
     int m_numActive = 0;
     Predicate<DeliveryIcon> GetIcon(DeliveryDetail obj) => (i) => i.CurrentDelivery.Title == obj.Title;
-    public void NewDelivery(IObjective newDelivery) 
+    public void NewDelivery(DeliveryDetail newDelivery) 
     {
-        if (newDelivery == null || m_numActive >= m_currentIcons.Count) return;
-        if (newDelivery is DeliveryDetail obj) 
-        {
-            m_pointer.gameObject.SetActive(true);
-            m_currentIcons[m_numActive].StartIcon(obj);
-            var loc = m_locations.GetLocation(obj.DestinationIndex);
-            m_pointer?.UpdatePointingTarget(loc);
-            m_numActive++;
-        }
+        if (m_numActive >= m_currentIcons.Count) return;
+        m_pointer.gameObject.SetActive(true);
+        m_currentIcons[m_numActive].StartIcon(newDelivery);
+        var loc = m_locations.GetLocation(newDelivery.DestinationIndex);
+        m_pointer?.UpdatePointingTarget(loc);
+        m_numActive++;
+        
     }
-    public void OnDeliverySuccess(IObjective obj) 
+    public void OnDeliverySuccess(DeliveryDetail obj) 
     {
-        if (obj is DeliveryDetail succ)
-        {
-            DeliveryIcon icon = m_currentIcons.Find(GetIcon(succ));
-            icon?.ResetIcon();
-            m_pointer.gameObject.SetActive(false);
-        }
+        DeliveryIcon icon = m_currentIcons.Find(GetIcon(obj));
+        icon?.ResetIcon();
+        m_pointer.gameObject.SetActive(false);
     }
-    public void OnDeliveryFail(IObjective obj) 
+    public void OnDeliveryFail(DeliveryDetail obj) 
     {
-        if (obj is DeliveryDetail fail)
-        {
-            DeliveryIcon icon = m_currentIcons.Find(GetIcon(fail));
-            icon?.ResetIcon();
-            m_pointer.gameObject.SetActive(false);
-        }
+        DeliveryIcon icon = m_currentIcons.Find(GetIcon(obj));
+        icon?.ResetIcon();
+        m_pointer.gameObject.SetActive(false);
     }  
 }

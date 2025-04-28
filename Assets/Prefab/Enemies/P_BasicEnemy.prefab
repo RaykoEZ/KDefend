@@ -290,9 +290,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2110309080789467998}
   - component: {fileID: 8700358132795902488}
-  - component: {fileID: 8405887945171300126}
   - component: {fileID: 8648738531902545254}
   - component: {fileID: 2273697011688774770}
+  - component: {fileID: 1817311363580228822}
   - component: {fileID: 329814037991214225}
   - component: {fileID: 1902514370079539247}
   m_Layer: 7
@@ -335,33 +335,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5266097158630861302}
   m_CullTransparentMesh: 1
---- !u!50 &8405887945171300126
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5266097158630861302}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.05
-  m_LinearDrag: 5
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!95 &8648738531902545254
 Animator:
   serializedVersion: 5
@@ -417,8 +390,36 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_weapons: []
+  m_type: 0
   m_contactDamage: 2
   m_targeting: {fileID: 3399095250520629921}
+--- !u!50 &1817311363580228822
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5266097158630861302}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.05
+  m_LinearDrag: 5
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!225 &329814037991214225
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -438,14 +439,14 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5266097158630861302}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 1000
-  m_Acceleration: 50
+  m_Radius: 5
+  m_Speed: 500
+  m_Acceleration: 350
   avoidancePriority: 0
   m_AngularSpeed: 0
-  m_StoppingDistance: 5
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1

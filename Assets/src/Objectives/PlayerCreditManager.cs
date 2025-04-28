@@ -1,9 +1,25 @@
 ﻿using Curry.Events;
 using UnityEngine;
+using TMPro;
 // Handles player reward and payment
 public class PlayerCreditManager : MonoBehaviour
 {
     [SerializeField] Player m_player = default;
+    [SerializeField] TextMeshProUGUI m_display = default;
+    void OnEnable()
+    {
+        m_player.OnHeal += RefreshDisplay;
+        m_player.OnTakeDamage += RefreshDisplay;
+    }
+    void OnDisable()
+    {
+        m_player.OnHeal -= RefreshDisplay;
+        m_player.OnTakeDamage -= RefreshDisplay;
+    }
+    void RefreshDisplay(int newVal) 
+    {
+        m_display.text = newVal.ToString();
+    }
     public void RewardPoints(int add) 
     {
         m_player.Heal(Mathf.Abs(add));

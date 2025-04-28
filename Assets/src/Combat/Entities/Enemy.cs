@@ -9,12 +9,6 @@ public struct EnemySpawnPattern
     public int KillsForEarlySpawn;
     public float SecondsElapsed;
 }
-public enum EnemyType 
-{ 
-    Scout,
-    Agent,
-    Command
-}
 [Serializable]
 public struct EnemyState : IEquatable<EnemyState>
 {
@@ -60,10 +54,7 @@ public class Enemy : BaseCharacter, IHitsEntity
             State = CurrentStats };
 
     public event OnEnemyUpdate OnDefeated;
-    void Start() 
-    {
-        Init();
-    }
+
     protected override Vector2 GetAimDirection()
     {
         return m_target == null? Vector2.zero : (m_target.transform.position - transform.position).normalized;
@@ -73,16 +64,14 @@ public class Enemy : BaseCharacter, IHitsEntity
         var nav = Navigator;
         nav.updateRotation = false;
         nav.updateUpAxis = false;
-        NavMeshHit hit;
-        bool isNear = NavMesh.SamplePosition(transform.position,
-            out hit, 1.0f, NavMesh.AllAreas);
-        if (isNear) 
-        {
-            transform.position = hit.position;
-        }
+       // NavMeshHit hit;
+        //NavMesh.SamplePosition(transform.position, out hit, 1.0f, NavMesh.AllAreas);
+        nav.enabled = true;
+        //nav.Warp(hit.position);
     }
     public void Init(BaseEntity defaultTarget = null)
     {
+        base.Init(BaseStats);
         EnemyAggroHandler.Add(this);
         m_defaultTarget = defaultTarget == null? transform.position : defaultTarget.transform.position;
         m_target = defaultTarget;
@@ -105,6 +94,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     {
         if (m_movement == null)
         {
+            Navigator.enabled = true;
             Navigator.isStopped = false;
             m_movement = StartCoroutine(Movement());
         }
@@ -117,6 +107,7 @@ public class Enemy : BaseCharacter, IHitsEntity
             Navigator.velocity = Vector3.zero;
             Navigator.isStopped = true;
             m_movement = null;
+            Navigator.enabled = false;
         }
     }
     public void StopAttack() 
@@ -142,12 +133,13 @@ public class Enemy : BaseCharacter, IHitsEntity
     public override void TakeDamage(int baseDamage)
     {
         // the lower the enemy hp, the greater the stun duration
-        float stunDuration = UnityEngine.Random.Range(0.3f, 0.75f);
+        float stunDuration = UnityEngine.Random.Range(0.3f, 0.5f);
         StartCoroutine(HitStun(stunDuration));
         base.TakeDamage(baseDamage);
     }
     protected override void OnDefeat()
     {
+        StopMoving();
         base.OnDefeat();
         OnDefeated?.Invoke(this);
         Despawn();

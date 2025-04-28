@@ -10,10 +10,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] ThreatHandler m_threat = default;
     [SerializeField] EnemyAssetList m_enemyRefs = default;
     [SerializeField] UnityEvent<Enemy> m_onDefeated = default;
-    List<Enemy> m_activeEnemies = default;
-    public int CurrentThreatLevel => m_threat.CurrentThreat;
+    List<Enemy> m_activeEnemies = new List<Enemy>();
     public IReadOnlyList<Enemy> ActiveEnemies { get => m_activeEnemies; }
-
     public List<EnemyState> GetEnemyStates() 
     {
         var ret = new List<EnemyState>();
