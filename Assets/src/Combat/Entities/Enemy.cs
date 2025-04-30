@@ -1,37 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-
-[Serializable]
-public struct EnemySpawnPattern
-{
-    public int KillsForEarlySpawn;
-    public float SecondsElapsed;
-}
-[Serializable]
-public struct EnemyState : IEquatable<EnemyState>
-{
-    public int EnemyIndex;
-    public EntityState State;
-    public bool Equals(EnemyState other)
-    {
-        return EnemyIndex == other.EnemyIndex && State.Equals(other.State);
-    }
-}
-[Serializable]
-public struct EntityState : IEquatable<EntityState>
-{
-    public EntityProperty Property;
-    public Vector2 Position;
-
-    public bool Equals(EntityState other)
-    {
-        return Position == other.Position &&
-            Property.Health == other.Property.Health &&
-            Property.MoveSpeed == other.Property.MoveSpeed;
-    }
-}
 // base enemy behaviour
 public delegate void OnEnemyUpdate(Enemy toUpdate);
 [RequireComponent(typeof(NavMeshAgent))]
@@ -64,10 +33,7 @@ public class Enemy : BaseCharacter, IHitsEntity
         var nav = Navigator;
         nav.updateRotation = false;
         nav.updateUpAxis = false;
-       // NavMeshHit hit;
-        //NavMesh.SamplePosition(transform.position, out hit, 1.0f, NavMesh.AllAreas);
         nav.enabled = true;
-        //nav.Warp(hit.position);
     }
     public void Init(BaseEntity defaultTarget = null)
     {
@@ -75,7 +41,7 @@ public class Enemy : BaseCharacter, IHitsEntity
         EnemyAggroHandler.Add(this);
         m_defaultTarget = defaultTarget == null? transform.position : defaultTarget.transform.position;
         m_target = defaultTarget;
-        m_speedVariant = UnityEngine.Random.Range(0.8f, 1.1f);
+        m_speedVariant = Random.Range(0.75f, 1.25f);
         SetupNavigation();
         StartMoving();
     }
@@ -150,7 +116,6 @@ public class Enemy : BaseCharacter, IHitsEntity
         EnemyAggroHandler.Remove(this);
         Destroy(gameObject);
     }
-
     protected virtual IEnumerator HitStun(float duration) 
     {
         StopMoving();
