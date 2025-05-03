@@ -16,6 +16,10 @@ public class PlayerCreditManager : MonoBehaviour
         m_player.OnHeal -= RefreshDisplay;
         m_player.OnTakeDamage -= RefreshDisplay;
     }
+    public void Init()
+    {
+        RefreshDisplay(m_player.CurrentStats.Property.Health);
+    }
     void RefreshDisplay(int newVal) 
     {
         m_display.text = newVal.ToString();

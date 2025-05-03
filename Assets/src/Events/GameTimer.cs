@@ -9,9 +9,12 @@ public class GameTimer : MonoBehaviour
     [SerializeField] TextMeshProUGUI m_secondDisplay = default;
     [SerializeField] UnityEvent m_onTimeOut = default;
     [SerializeField] UnityEvent<KDefenderEventContext> m_onTimeElapsed = default;
-    [SerializeField] KDefenderDataSource m_gameState = default;
+    [SerializeField] GameSaveSource m_gameState = default;
     int m_secondsElapsed = 1;   
     Coroutine m_timer;
+
+    public int SecondsElapsed => m_secondsElapsed;
+
     // start timer from beginning
     public void StartTimer(int initTime = 1) 
     {
@@ -48,6 +51,7 @@ public class GameTimer : MonoBehaviour
             // counting down/up
             m_secondsElapsed++;
             m_secondDisplay.text = m_secondsElapsed.ToString();
+            m_gameState.Current.KDGameState.Timer = m_secondsElapsed;
             if (m_secondsElapsed == 0) 
             {
                 m_onTimeOut?.Invoke();
@@ -59,7 +63,7 @@ public class GameTimer : MonoBehaviour
                 {
                     {GameEventTriggerType.Time, m_secondsElapsed}
                 };
-                KDefenderEventContext e = new KDefenderEventContext(m_gameState.Current, p);
+                KDefenderEventContext e = new KDefenderEventContext(m_gameState.Current.KDGameState, p);
                 m_onTimeElapsed?.Invoke(e);
             }
         }

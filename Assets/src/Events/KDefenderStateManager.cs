@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 public class KDefenderStateManager : MonoBehaviour 
 {
-    [SerializeField] KDefenderGameState m_defaultState = default;
-    [SerializeField] KDefenderDataSource m_dataSource = default;
+    [SerializeField] GameSaveSource m_save = default;
 
     [SerializeField] ThreatHandler m_threat = default;
     [SerializeField] EnemyManager m_enemy = default;
@@ -14,23 +13,23 @@ public class KDefenderStateManager : MonoBehaviour
     [SerializeField] InventoryManager m_inventory = default;
     [SerializeField] Player m_player = default;
     [SerializeField] GameTimer m_timer = default;
-    [SerializeField] UnityEvent<KDefenderGameState> m_onStateUpdate = default;
     [SerializeField] UnityEvent m_onGameOver = default;
     // As an alternate game mode
     // Will implement with the KeepQuiet saves system
-    public void TryLoadSaveState(KDefenderGameState newState)
+    public void GameSetup(SaveData newState)
     {
         // set player state
-        m_player?.Init(newState.PlayerValue);
-        m_enemy?.Init(newState.CurrentThreatLevel, newState.HostileStates);
-        m_objectives.Init(newState.Completed, newState.Active);
-        m_onStateUpdate?.Invoke(newState);
+        m_player?.Init(newState.KDGameState.PlayerValue);
+        m_enemy?.Init(newState.KDGameState.CurrentThreatLevel, newState.KDGameState.HostileStates);
+        m_objectives.Init(newState.KDGameState.Completed, newState.KDGameState.Active);
+        m_timer.StartTimer();
     }
     // get current states from managers
-    public void SyncSave() 
+    public void UpdateSave()
     {
         var newState = new KDefenderGameState
         {
+            Timer = m_timer.SecondsElapsed,
             CurrentThreatLevel = m_threat.CurrentThreat,
             PlayerValue = m_player.CurrentStats,
             Inventory = m_inventory.GetState(),
@@ -41,15 +40,7 @@ public class KDefenderStateManager : MonoBehaviour
             Active = m_objectives.GetDetailsOf(
                 ObjectiveManager<DeliveryDetail>.ObjectiveState.Active)
         };
-        m_dataSource.Init(newState);
-    }
-    void Start()
-    {
-#if UNITY_EDITOR
-        m_dataSource?.Init(m_defaultState);
-        TryLoadSaveState(m_defaultState);
-#endif
-        m_timer.StartTimer();
+        m_save.Current.KDGameState = newState;
     }
     public void OnGameOver() 
     {
