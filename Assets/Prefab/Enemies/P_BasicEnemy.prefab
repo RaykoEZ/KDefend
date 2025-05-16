@@ -466,7 +466,7 @@ GameObject:
   - component: {fileID: 2100439032905026316}
   - component: {fileID: 2809997561916802366}
   - component: {fileID: 3376547670856185291}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: hpTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}

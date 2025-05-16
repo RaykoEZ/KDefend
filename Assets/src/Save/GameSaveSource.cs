@@ -13,8 +13,4 @@ public class GameSaveSource : BaseSaveSource<SaveData>
         m_onSaveGame?.Invoke();
         m_saveState?.UpdateSave(m_currentGameState, saveToFile);
     }
-    public void NewGame() 
-    {
-        m_saveState?.SetupNewGame();
-    }
 }

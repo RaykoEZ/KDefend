@@ -24,7 +24,6 @@ public class EnemySpawner : EntitySpawner<Enemy>
             Enemy instance = m_spawner.Spawn(spawnRef, parent);
             onSpawnAction?.Invoke(instance);
             numSpawned++;
-        }
-            
+        }        
     }
 }

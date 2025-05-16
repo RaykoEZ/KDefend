@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using Curry.Events;
-using Curry.Game;
+﻿using Curry.Game;
 using UnityEngine;
 using UnityEngine.Events;
 public class KDefenderStateManager : MonoBehaviour 
 {
     [SerializeField] GameSaveSource m_save = default;
-
+    [SerializeField] StaticFlagEventHandler m_staticEvents = default;
     [SerializeField] ThreatHandler m_threat = default;
     [SerializeField] EnemyManager m_enemy = default;
     [SerializeField] DeliveryManager m_objectives = default;
@@ -22,6 +20,7 @@ public class KDefenderStateManager : MonoBehaviour
         m_player?.Init(newState.KDGameState.PlayerValue);
         m_enemy?.Init(newState.KDGameState.CurrentThreatLevel, newState.KDGameState.HostileStates);
         m_objectives.Init(newState.KDGameState.Completed, newState.KDGameState.Active);
+        m_staticEvents.SetFlags(newState.KDGameState.StaticFlags);
         m_timer.StartTimer();
     }
     // get current states from managers
@@ -30,7 +29,8 @@ public class KDefenderStateManager : MonoBehaviour
         var newState = new KDefenderGameState
         {
             Timer = m_timer.SecondsElapsed,
-            CurrentThreatLevel = m_threat.CurrentThreat,
+            StaticFlags = m_staticEvents.CurrentFlags,
+            CurrentThreatLevel = m_threat.CurrentThreat,     
             PlayerValue = m_player.CurrentStats,
             Inventory = m_inventory.GetState(),
             HostileStates = m_enemy.GetEnemyStates(),

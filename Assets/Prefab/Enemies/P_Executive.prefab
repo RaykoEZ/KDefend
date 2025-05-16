@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 714601488097234648}
   - component: {fileID: 3112424218954451000}
   - component: {fileID: 7358162407891899692}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: hpTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}

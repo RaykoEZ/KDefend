@@ -16,7 +16,7 @@ MonoBehaviour:
     Persistent:
       AriaGone: 0
       ContinueCount: 0
-      PlayerID: 05127899
+      PlayerID: 23690368
       CurrentEnding: 3
     FreedomRoute: 0
     CheckedSubjectProfile: 0
@@ -33,6 +33,8 @@ MonoBehaviour:
         m_EditorAssetChanged: 0
     SimulationTime: 0
     KDGameState:
+      Timer: 1
+      StaticFlags: 64
       CurrentThreatLevel: 0
       PlayerValue:
         Property:

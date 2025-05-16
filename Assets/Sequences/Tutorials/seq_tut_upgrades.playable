@@ -92,29 +92,6 @@ MonoBehaviour:
     m_DisplayName: CanvasGroupClip
   m_Markers:
     m_Objects: []
---- !u!114 &-1164968240064462566
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b46e36075dd1c124a8422c228e75e1fb, type: 3}
-  m_Name: Signal Track
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_AnimClip: {fileID: 0}
-  m_Locked: 0
-  m_Muted: 0
-  m_CustomPlayableFullTypename: 
-  m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
-  m_Children: []
-  m_Clips: []
-  m_Markers:
-    m_Objects: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +107,6 @@ MonoBehaviour:
   m_Version: 0
   m_Tracks:
   - {fileID: 2529372193440977827}
-  - {fileID: -1164968240064462566}
   - {fileID: -6765730823325128489}
   m_FixedDuration: 0
   m_EditorSettings:
@@ -258,5 +234,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb3072db73c83e488539734ca9e8bd6, type: 3}
   m_Name: SubtitleClip
   m_EditorClassIdentifier: 
-  TextColour: {r: 1, g: 0.86508846, b: 0, a: 0}
-  SubtitleText: New Upgrade Unlocked
+  TextColour: {r: 1, g: 1, b: 1, a: 0}
+  SubtitleText: Upgrade Feature Unlocked

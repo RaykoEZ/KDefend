@@ -33,8 +33,7 @@ public class EnemyWaveManager : MonoBehaviour
     IEnumerator OnStartGame() 
     {
         yield return new WaitForSeconds(0.5f);
-        // stop bgm until we start next wave
-        RoutineWave();
+        //RoutineWave();
         yield return new WaitForSeconds(0.8f);
     }
 #endif

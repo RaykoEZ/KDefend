@@ -90,7 +90,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1818725071
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -429,6 +429,7 @@ GameObject:
   - component: {fileID: 2548229185736225515}
   - component: {fileID: 538256302526330434}
   - component: {fileID: 1486909007743776712}
+  - component: {fileID: 90611368486528249}
   m_Layer: 7
   m_Name: hpTest
   m_TagString: Untagged
@@ -566,6 +567,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_testDisplay: {fileID: 538256302526330434}
   m_toTest: {fileID: 4097968068867644644}
+--- !u!223 &90611368486528249
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3479046696822669680}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 1893958443
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &5730841169875127470
 GameObject:
   m_ObjectHideFlags: 0

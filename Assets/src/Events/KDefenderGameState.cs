@@ -1,12 +1,12 @@
 ﻿using Curry.Events;
 using System;
 using System.Collections.Generic;
-
 // snapshot of the game state
 [Serializable]
 public struct KDefenderGameState
 {
     public int Timer;
+    public KD_StaticEventFlags StaticFlags;
     public int CurrentThreatLevel;
     // State of player entities
     public EntityState PlayerValue;
@@ -17,6 +17,7 @@ public struct KDefenderGameState
     public KDefenderGameState(KDefenderGameState copy) 
     {
         Timer = copy.Timer;
+        StaticFlags = copy.StaticFlags;
         CurrentThreatLevel = copy.CurrentThreatLevel;
         PlayerValue = copy.PlayerValue;
         Inventory = copy.Inventory;
