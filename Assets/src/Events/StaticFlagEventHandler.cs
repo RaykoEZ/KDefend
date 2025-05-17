@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
 public class StaticFlagEventHandler: MonoBehaviour 
 {
     [Serializable]
@@ -15,6 +14,10 @@ public class StaticFlagEventHandler: MonoBehaviour
     [SerializeField] List<FlagEventItem> m_toTrigger = default;
     KD_StaticEventFlags m_currentFlags = KD_StaticEventFlags.None;
     public KD_StaticEventFlags CurrentFlags => m_currentFlags;
+    public void AppendFlag(KD_StaticEventFlags newFlags) 
+    {
+        SetFlags(m_currentFlags | newFlags);
+    }
     public void SetFlags(KD_StaticEventFlags newFlags) 
     {
         bool conditionMatches;

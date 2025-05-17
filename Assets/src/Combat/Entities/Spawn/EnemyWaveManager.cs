@@ -33,7 +33,7 @@ public class EnemyWaveManager : MonoBehaviour
     IEnumerator OnStartGame() 
     {
         yield return new WaitForSeconds(0.5f);
-        //RoutineWave();
+        RoutineWave();
         yield return new WaitForSeconds(0.8f);
     }
 #endif
