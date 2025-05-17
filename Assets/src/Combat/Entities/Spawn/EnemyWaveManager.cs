@@ -32,7 +32,7 @@ public class EnemyWaveManager : MonoBehaviour
 #if UNITY_EDITOR
     IEnumerator OnStartGame() 
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(10f);
         RoutineWave();
         yield return new WaitForSeconds(0.8f);
     }
@@ -87,10 +87,11 @@ public class EnemyWaveManager : MonoBehaviour
             ThreatScalings threat = m_threat.GetCurrentThreatMultiplier();
             float delay = threat.TimeBetweenRoutineWave < 0f ? 60f : 
                 threat.TimeBetweenRoutineWave;
-            // spawn a wave of enemies
-            SpawnWave(wave);
             // after spawning, wait for a set duration
             yield return new WaitForSeconds(delay);
+            // spawn a wave of enemies
+            SpawnWave(wave);
+            yield return null;
         }             
     }
     void PrepareEnenmy(Enemy spawned) 

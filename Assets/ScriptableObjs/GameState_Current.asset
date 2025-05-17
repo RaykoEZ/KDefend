@@ -16,7 +16,7 @@ MonoBehaviour:
     Persistent:
       AriaGone: 0
       ContinueCount: 0
-      PlayerID: 23690368
+      PlayerID: 31162395
       CurrentEnding: 3
     FreedomRoute: 0
     CheckedSubjectProfile: 0
@@ -34,13 +34,13 @@ MonoBehaviour:
     SimulationTime: 0
     KDGameState:
       Timer: 1
-      StaticFlags: 64
+      StaticFlags: 65
       CurrentThreatLevel: 0
       PlayerValue:
         Property:
-          Health: 100
+          Health: -58
           MoveSpeed: 120
-        Position: {x: 383, y: 2112}
+        Position: {x: 607.92413, y: 1637.197}
       Inventory:
         ItemProperties: []
         ItemStackCount: 

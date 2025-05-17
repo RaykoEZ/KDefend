@@ -408,7 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_base:
     Health: 816
-    MoveSpeed: 64.5
+    MoveSpeed: 50
   m_onDefeat:
     m_PersistentCalls:
       m_Calls: []
