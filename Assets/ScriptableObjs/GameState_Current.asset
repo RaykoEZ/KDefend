@@ -16,7 +16,7 @@ MonoBehaviour:
     Persistent:
       AriaGone: 0
       ContinueCount: 0
-      PlayerID: 31162395
+      PlayerID: 16795941
       CurrentEnding: 3
     FreedomRoute: 0
     CheckedSubjectProfile: 0
@@ -38,9 +38,9 @@ MonoBehaviour:
       CurrentThreatLevel: 0
       PlayerValue:
         Property:
-          Health: -58
+          Health: 100
           MoveSpeed: 120
-        Position: {x: 607.92413, y: 1637.197}
+        Position: {x: -1880.435, y: 1634.2148}
       Inventory:
         ItemProperties: []
         ItemStackCount: 

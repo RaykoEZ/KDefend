@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-public delegate void OnWaveStart(int waveNumber);
 public class EnemyWaveManager : MonoBehaviour
 {
     [SerializeField] Transform m_spawnParent = default;
@@ -21,7 +20,6 @@ public class EnemyWaveManager : MonoBehaviour
     [SerializeField] BaseEntity m_defaultAggroTarget = default;
     [SerializeField] CoroutineManager m_waveSpawn = default;
     bool m_waveInProgress = false;
-    public event OnWaveStart OnStart;
     // Start is called before the first frame update
     void Start()
     {
