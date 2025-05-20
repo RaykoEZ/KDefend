@@ -19,14 +19,14 @@ MonoBehaviour:
   m_RendererDataList:
   - {fileID: 11400000, guid: 8a4babef5b6c1334289cc94b53ad12ea, type: 2}
   - {fileID: 11400000, guid: 046eb9fb4c01d18408211c54beb5661f, type: 2}
-  - {fileID: 11400000, guid: ba6f66df0c5fbfc43964899d696db591, type: 2}
+  - {fileID: 11400000, guid: a7301707250a37b47b48d0349f18560a, type: 2}
   m_DefaultRendererIndex: 0
-  m_RequireDepthTexture: 0
+  m_RequireDepthTexture: 1
   m_RequireOpaqueTexture: 0
-  m_OpaqueDownsampling: 1
+  m_OpaqueDownsampling: 0
   m_SupportsTerrainHoles: 1
   m_SupportsHDR: 1
-  m_HDRColorBufferPrecision: 0
+  m_HDRColorBufferPrecision: 1
   m_MSAA: 1
   m_RenderScale: 1
   m_UpscalingFilter: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_SupportProbeVolumeScenarioBlending: 0
   m_ProbeVolumeSHBands: 1
   m_MainLightRenderingMode: 1
-  m_MainLightShadowsSupported: 1
+  m_MainLightShadowsSupported: 0
   m_MainLightShadowmapResolution: 2048
   m_AdditionalLightsRenderingMode: 1
   m_AdditionalLightsPerObjectLimit: 4
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_AdditionalLightsShadowResolutionTierHigh: 1024
   m_ReflectionProbeBlending: 0
   m_ReflectionProbeBoxProjection: 0
-  m_ReflectionProbeAtlas: 1
+  m_ReflectionProbeAtlas: 0
   m_ShadowDistance: 50
   m_ShadowCascadeCount: 1
   m_Cascade2Split: 0.25
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_UseAdaptivePerformance: 1
   m_ColorGradingMode: 0
   m_ColorGradingLutSize: 32
-  m_AllowPostProcessAlphaOutput: 0
+  m_AllowPostProcessAlphaOutput: 1
   m_UseFastSRGBLinearConversion: 0
   m_SupportDataDrivenLensFlare: 1
   m_SupportScreenSpaceLensFlare: 1

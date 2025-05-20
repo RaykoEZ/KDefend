@@ -1,22 +1,31 @@
 ﻿using UnityEngine;
+using System;
+
 // points to an object of interest
 public class DirectionPointer : MonoBehaviour 
 {
     [SerializeField] Bounds m_displayOffsets = default;
-    [SerializeField] Transform m_defaultTarget = default;
     [SerializeField] Transform m_player = default;
     Transform m_currentTraget;
-    void Start()
-    {
-        UpdatePointingTarget(m_defaultTarget);
-    }
+    bool m_isPointing = false;
+
+    public bool IsPointing { get => m_isPointing; }
+
     void FixedUpdate()
     {
-        UpdateDirection();
+        if (m_isPointing) 
+        {
+            UpdateDirection();
+        }
     }
-    public void UpdatePointingTarget(Transform newTarget) 
+    public void PointToward(Transform newTarget) 
     {
         m_currentTraget = newTarget;
+        m_isPointing = true;
+    }
+    public void StopPointing() 
+    {
+        m_isPointing = false;
     }
     void UpdateDirection() 
     {

@@ -15,13 +15,13 @@ MonoBehaviour:
   active: 1
   lift:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.54846466, z: 0.9123247, w: 0}
+    m_Value: {x: 0.88614106, y: 0.33330512, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0.74501747, y: 0.94671345, z: 1, w: 0}
+    m_Value: {x: 0.7150885, y: 0.8805087, z: 1, w: 0}
   gain:
-    m_OverrideState: 0
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_OverrideState: 1
+    m_Value: {x: 0.6529942, y: 0.7781977, z: 1, w: 0}
 --- !u!114 &-7111069539299800352
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -72,19 +72,19 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.61
+    m_Value: 0.6
   intensity:
     m_OverrideState: 1
-    m_Value: 1.03
+    m_Value: 1.8
   scatter:
     m_OverrideState: 1
     m_Value: 0.229
   clamp:
     m_OverrideState: 0
-    m_Value: 65474.39
+    m_Value: 19
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.23021172, g: 0.20136172, b: 0.23584908, a: 1}
+    m_Value: {r: 0.9622642, g: 0.6227483, b: 0.88921255, a: 1}
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
     m_Value: 0
   maxIterations:
     m_OverrideState: 0
-    m_Value: 6
+    m_Value: 7
   dirtTexture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
