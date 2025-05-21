@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class EntitySpawner<T> : MonoBehaviour where T : BaseEntity
+public abstract class EntitySpawner<T> : MonoBehaviour where T : MonoBehaviour
 {
     public abstract void Spawn(T spawnRef,
         Transform parent,
