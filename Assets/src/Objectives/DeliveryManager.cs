@@ -5,38 +5,43 @@ using System.Collections.Generic;
 // updates delivery objective container
 public class DeliveryManager : ObjectiveManager<DeliveryDetail>
 {
-    [SerializeField] List<DeliveryDropTable> m_levelDeliverList = default;
-    public void AddDelivery(List<DeliveryDetail> details) 
-    {
-        foreach (var item in details)
-        {
-            DeliveryObjective newObj = new DeliveryObjective();
-            newObj.Setup(item);
-            NewActiveObjective(newObj);
-        }
-    }
-    public void AddFromLevel(int levelIndex) 
-    {
-        if (levelIndex >= m_levelDeliverList.Count) return;
-        AddDelivery(m_levelDeliverList[levelIndex].DropList);
-    }
-
+    [SerializeField] DeliveryDropTable m_deliveryList = default;
+    [SerializeField] DeliveryPrompter m_prompt = default;
     public override void Init(List<DeliveryDetail> completedObjectives, List<DeliveryDetail> newObjectives)
     {
+        DeliveryObjective comp;
+        m_prompt.DeliveryReceive -= OnDeliveryComplete;
+        m_prompt.DeliveryReceive += OnDeliveryComplete;
+        foreach (var objectiveTitle in completedObjectives)
+        {
+            comp = NewObjective(objectiveTitle);
+            m_completed.Add(comp);
+        }
         // instantiate objectives from detail provided
-        foreach (DeliveryDetail objective in newObjectives)
+        foreach (var objective in newObjectives)
         {
-            DeliveryObjective newObj = new DeliveryObjective();
-            newObj.Init();
-            newObj.Setup(objective);
-            NewActiveObjective(newObj);
+            // prompt active tasks
+            ActivateDelivery(objective);
         }
-        foreach (DeliveryDetail objective in completedObjectives)
-        {
-            DeliveryObjective comp = new DeliveryObjective();
-            comp.Init();
-            comp.Setup(objective);
-            OnObjectiveComplete(comp);
-        }
+    }
+    public void ActivateDelivery(DeliveryDetail objective) 
+    {
+        var result = NewObjective(objective);
+        NewActiveObjective(result);
+        m_prompt?.NewDelivery(objective);
+    }
+    // find objective the player finished, log the update
+    void OnDeliveryComplete(DeliveryDetail detail)
+    {
+        var objective = GetByTitle(detail.Title);
+        if (objective == null) return;
+        OnObjectiveComplete(objective);
+    }
+    DeliveryObjective NewObjective(DeliveryDetail objective) 
+    {
+        DeliveryObjective ret = new DeliveryObjective();
+        ret?.Init();
+        ret.Setup(objective);
+        return ret;
     }
 }

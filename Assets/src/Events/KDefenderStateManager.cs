@@ -1,4 +1,5 @@
-﻿using Curry.Game;
+﻿using System.Collections.Generic;
+using Curry.Game;
 using UnityEngine;
 using UnityEngine.Events;
 public class KDefenderStateManager : MonoBehaviour 
@@ -7,7 +8,10 @@ public class KDefenderStateManager : MonoBehaviour
     [SerializeField] StaticFlagEventHandler m_staticEvents = default;
     [SerializeField] ThreatHandler m_threat = default;
     [SerializeField] EnemyManager m_enemy = default;
+
+    [SerializeField] DeliveryDropTable m_deliveryList = default;
     [SerializeField] DeliveryManager m_objectives = default;
+
     [SerializeField] InventoryManager m_inventory = default;
     [SerializeField] Player m_player = default;
     [SerializeField] GameTimer m_timer = default;
@@ -19,13 +23,22 @@ public class KDefenderStateManager : MonoBehaviour
         // set player state
         m_player?.Init(newState.KDGameState.PlayerValue);
         m_enemy?.Init(newState.KDGameState.CurrentThreatLevel, newState.KDGameState.HostileStates);
-        m_objectives.Init(newState.KDGameState.Completed, newState.KDGameState.Active);
+        
+        List<DeliveryDetail> completed = m_deliveryList.Find(newState.KDGameState.CompletedDeliveries);
+        List<DeliveryDetail> active = m_deliveryList.Find(newState.KDGameState.ActiveDeliveries);
+        m_objectives.Init(completed, active);
         m_staticEvents.SetFlags(newState.KDGameState.StaticFlags);
         m_timer.StartTimer();
     }
     // get current states from managers
     public void UpdateSave()
     {
+        List<string> completed = DeliveryDetail.GetTitleList(
+            m_objectives.GetDetailsOf(
+                ObjectiveManager<DeliveryDetail>.ObjectiveState.Complete));
+        List<string> active = DeliveryDetail.GetTitleList(
+            m_objectives.GetDetailsOf(
+                ObjectiveManager<DeliveryDetail>.ObjectiveState.Active));
         var newState = new KDefenderGameState
         {
             Timer = m_timer.SecondsElapsed,
@@ -35,13 +48,18 @@ public class KDefenderStateManager : MonoBehaviour
             Inventory = m_inventory.GetState(),
             HostileStates = m_enemy.GetEnemyStates(),
             // Objectives here
-            Completed = m_objectives.GetDetailsOf(
-                ObjectiveManager<DeliveryDetail>.ObjectiveState.Complete),
-            Active = m_objectives.GetDetailsOf(
-                ObjectiveManager<DeliveryDetail>.ObjectiveState.Active)
+            CompletedDeliveries = completed,
+            ActiveDeliveries = active
         };
         m_save.Current.KDGameState = newState;
     }
+    // New delivery active, spawn box in origin
+    public void ActivateNewDelivery(string title)
+    {
+        DeliveryDetail detail = m_deliveryList.Find(title);
+        m_objectives.ActivateDelivery(detail);
+    }
+
     public void OnGameOver() 
     {
         m_onGameOver?.Invoke();

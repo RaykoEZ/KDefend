@@ -12,8 +12,8 @@ public struct KDefenderGameState
     public EntityState PlayerValue;
     public InventoryState Inventory;
     public List<EnemyState> HostileStates;
-    public List<DeliveryDetail> Completed;
-    public List<DeliveryDetail> Active;
+    public List<string> CompletedDeliveries;
+    public List<string> ActiveDeliveries;
     public KDefenderGameState(KDefenderGameState copy) 
     {
         Timer = copy.Timer;
@@ -22,8 +22,8 @@ public struct KDefenderGameState
         PlayerValue = copy.PlayerValue;
         Inventory = copy.Inventory;
         HostileStates = copy.HostileStates;
-        Completed = copy.Completed;
-        Active = copy.Active;
+        CompletedDeliveries = copy.CompletedDeliveries;
+        ActiveDeliveries = copy.ActiveDeliveries;
     }
 }
 [Serializable]

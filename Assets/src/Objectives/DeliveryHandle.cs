@@ -12,10 +12,13 @@ public class DeliveryHandle : HideableUI
     [SerializeField] DirectionPointer m_pointer = default;
     [SerializeField] LocationHandler m_origins = default;
     [SerializeField] LocationHandler m_destinations = default;
+    bool m_isActive = false;
     DeliveryDetail m_currentRef;
     public DeliveryDetail CurrentDelivery => m_currentRef;
-    public void SpawnPackage(DeliveryDetail obj)
+    public bool IsActive { get => m_isActive; }
+    public void InitDeliveryPickup(DeliveryDetail obj)
     {
+        m_isActive = true;
         m_currentRef = obj;
         Sprite deliType;
         // Setup visual
@@ -46,8 +49,9 @@ public class DeliveryHandle : HideableUI
         var loc = m_destinations.GetLocation(m_currentRef.OriginIndex);
         PointTo(loc);
     }
-    public void ResetIcon()
+    public void ResetHandle()
     {
+        m_isActive = false;
         SetSize(0);
         StopPointing();
         // reset to empty
@@ -62,8 +66,7 @@ public class DeliveryHandle : HideableUI
     public void OnDeliverySuccess(DeliveryDetail obj)
     {
         // get rewards and animation here
-
-        ResetIcon();
+        ResetHandle();
     }
     void PointTo(Transform newTarget) 
     {

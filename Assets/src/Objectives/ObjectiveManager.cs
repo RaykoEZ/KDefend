@@ -18,9 +18,9 @@ namespace Curry.Game
         [SerializeField] protected UnityEvent<T> m_objectiveFail = default;
         /// Preloaded objectives for test
         [SerializeField] protected List<T> m_TEST_initObjectives = default;
-        private List<GameObjective<T>> m_active = new List<GameObjective<T>>();
-        private List<GameObjective<T>> m_completed = new List<GameObjective<T>>();
-        private List<GameObjective<T>> m_failed = new List<GameObjective<T>>();
+        protected List<GameObjective<T>> m_active = new List<GameObjective<T>>();
+        protected List<GameObjective<T>> m_completed = new List<GameObjective<T>>();
+        protected List<GameObjective<T>> m_failed = new List<GameObjective<T>>();
 
         public event OnObjectiveUpdate<T> OnNewObjective;
         public event OnObjectiveUpdate<T> ObjectiveCompleted;
@@ -77,9 +77,9 @@ namespace Curry.Game
                 ShutdownObjective(objective);
             }
         }
-        public abstract void Init(
+        public virtual void Init(
             List<T> completedObjectives,
-            List<T> newObjectives);
+            List<T> newObjectives) { }
         public GameObjective<T> GetByTitle(string title) 
         {
             return m_active.Find((x) => x.Detail.Title == title);
