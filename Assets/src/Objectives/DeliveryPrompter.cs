@@ -14,6 +14,7 @@ public struct DeliveryDetail : IObjective
     public string Description;
     string IObjective.Title => Title;
     string IObjective.Description => Description;
+    public static DeliveryDetail None => new DeliveryDetail { };
     public static List<string> GetTitleList(List<DeliveryDetail> toGet) 
     {
         List<string> ret = new List<string>();
@@ -25,7 +26,7 @@ public struct DeliveryDetail : IObjective
     }
 }
 
-public delegate void OnDeliveryUpdate(DeliveryBox detail);
+public delegate void OnDeliveryUpdate(DeliveryDetail detail);
 // handler UI for delivery objective
 public class DeliveryPrompter : MonoBehaviour 
 {
@@ -40,28 +41,25 @@ public class DeliveryPrompter : MonoBehaviour
         var instance = m_spawnBox?.SpawnDeliveryBox(newDelivery);
         instance.OnDeliveryBegin += OnDeliveryBegin;
     }
-    public void OnDeliveryBegin(DeliveryBox obj) 
+    public void OnDeliveryBegin(DeliveryDetail obj) 
     {
         foreach (var item in m_currentHandles)
         {
             if (item.IsActive)
             {
-                item.InitDeliveryPickup(obj.Detail);
-                DeliveryHandle icon = m_currentHandles.Find(GetIcon(obj.Detail));
+                item.InitDeliveryPickup(obj);
+                DeliveryHandle icon = m_currentHandles.Find(GetIcon(obj));
                 icon?.BeginDelivery();
-                obj.OnDeliveryReceive += OnDeliveryComplete;
                 // Remove box
-                obj?.Hide();
                 break;
             }
         }
     }
-    public void OnDeliveryComplete(DeliveryBox obj)
+    public void OnDeliveryComplete(DeliveryDetail obj)
     {
-        DeliveryHandle icon = m_currentHandles.Find(GetIcon(obj.Detail));
+        DeliveryHandle icon = m_currentHandles.Find(GetIcon(obj));
         icon?.ResetHandle();
-        DeliveryReceive?.Invoke(obj.Detail);
-        // despawn box
-        Destroy(obj.gameObject);
+        Debug.Log("Destination reached");
+        DeliveryReceive?.Invoke(obj);
     }
 }

@@ -28,13 +28,11 @@ public class PlayerCreditManager : MonoBehaviour
     {
         m_player.Heal(Mathf.Abs(add));
     }
-    public void OnObjectiveReward(IObjective obj)
+    public void OnObjectiveReward(DeliveryDetail obj)
     {
-        if (obj is DeliveryObjective succ)
-        {
-            RewardPoints(succ.Detail.PointReward);
-            // Additonal rewards
-        }
+        RewardPoints(obj.PointReward);
+        // Additonal rewards
+        Debug.Log("Reward: Credit + " + obj.PointReward);
     }
     public void OnPayment(int pay) 
     {

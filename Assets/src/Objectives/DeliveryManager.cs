@@ -24,10 +24,17 @@ public class DeliveryManager : ObjectiveManager<DeliveryDetail>
             ActivateDelivery(objective);
         }
     }
+    // New delivery active, spawn box in origin
+    public void ActivateNewDelivery(string title)
+    {
+        DeliveryDetail detail = m_deliveryList.Find(title);
+        ActivateDelivery(detail);
+    }
     public void ActivateDelivery(DeliveryDetail objective) 
     {
         var result = NewObjective(objective);
         NewActiveObjective(result);
+        Debug.Log($"Activate new delivery: {objective.Title}");
         m_prompt?.NewDelivery(objective);
     }
     // find objective the player finished, log the update

@@ -12,16 +12,17 @@ public class DeliveryBox : HideableUI
         m_currentRef = detail;
         Show();
     }
-    public void DeliveryPackage() 
-    {
-        OnDeliveryReceive?.Invoke(this);
-    }
     void OnTriggerEnter2D(Collider2D collision)
     {
         bool playerCheck = (collision.attachedRigidbody.TryGetComponent(out Player entering));
         if (playerCheck) 
         {
-            OnDeliveryBegin?.Invoke(this);
+            Debug.Log("Delivery pack obtained");
+            // set player delivery state
+            entering.CurrentlyDelivering = Detail;
+            OnDeliveryBegin?.Invoke(Detail);
+            Hide();
+            Destroy(gameObject);
         }
     }
 }

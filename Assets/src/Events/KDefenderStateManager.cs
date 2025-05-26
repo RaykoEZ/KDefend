@@ -53,13 +53,6 @@ public class KDefenderStateManager : MonoBehaviour
         };
         m_save.Current.KDGameState = newState;
     }
-    // New delivery active, spawn box in origin
-    public void ActivateNewDelivery(string title)
-    {
-        DeliveryDetail detail = m_deliveryList.Find(title);
-        m_objectives.ActivateDelivery(detail);
-    }
-
     public void OnGameOver() 
     {
         m_onGameOver?.Invoke();

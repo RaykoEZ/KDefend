@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.InputSystem;
 public class Player : BaseCharacter 
 {
+    DeliveryDetail currentlyDelivering;
+    public DeliveryDetail CurrentlyDelivering { get => currentlyDelivering; set => currentlyDelivering = value; }
+
     // turn off firing
     void Update()
     {

@@ -5,7 +5,6 @@ using UnityEngine.Timeline;
 
 public class GameOverUI : MonoBehaviour 
 {
-    [SerializeField] PlayerBase m_base = default;
     [SerializeField] AudioSource m_gameplayBgm = default;
     [SerializeField] TimelineAsset m_gameOverSequence = default;
     [SerializeField] TimelineAsset m_victorySequence = default;
