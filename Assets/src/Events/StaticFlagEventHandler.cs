@@ -18,7 +18,7 @@ public class StaticFlagEventHandler: MonoBehaviour
     {
         SetFlags(m_currentFlags | newFlags);
     }
-    public void SetFlags(KD_StaticEventFlags newFlags) 
+    public void SetFlags(KD_StaticEventFlags newFlags)
     {
         bool conditionMatches;
         bool alreadyTriggered;

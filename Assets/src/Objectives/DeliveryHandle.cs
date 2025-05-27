@@ -10,7 +10,6 @@ public class DeliveryHandle : HideableUI
     [SerializeField] Image m_deliverType = default;
 
     [SerializeField] DirectionPointer m_pointer = default;
-    [SerializeField] LocationHandler m_origins = default;
     [SerializeField] LocationHandler m_destinations = default;
     bool m_isActive = false;
     DeliveryDetail m_currentRef;
@@ -38,30 +37,21 @@ public class DeliveryHandle : HideableUI
                 break;
         }
         m_deliverType.sprite = deliType;
-        SetSize(0);
-        var loc = m_origins.GetLocation(obj.OriginIndex);
-        PointTo(loc);
         Show();
     }
     // Call this after player gets delivery package, begin delivery
     public void BeginDelivery() 
     {
-        var loc = m_destinations.GetLocation(m_currentRef.OriginIndex);
+        var loc = m_destinations.GetLocation(m_currentRef.DestinationIndex);
         PointTo(loc);
     }
     public void ResetHandle()
     {
         m_isActive = false;
-        SetSize(0);
         StopPointing();
         // reset to empty
         m_currentRef = new DeliveryDetail { };
         Hide();
-    }
-    public void SetSize(int size = 0)
-    {
-        var anim = GetAnim;
-        anim?.SetInteger("size", size);
     }
     public void OnDeliverySuccess(DeliveryDetail obj)
     {

@@ -10,7 +10,14 @@ public class DeliveryBox : HideableUI
     public void Init(DeliveryDetail detail)
     {
         m_currentRef = detail;
+    }
+    void OnEnable()
+    {
         Show();
+    }
+    void OnDisable()
+    {
+        Hide();
     }
     void OnTriggerEnter2D(Collider2D collision)
     {

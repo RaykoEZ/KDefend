@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter
   m_EditorClassIdentifier: 
-  m_Time: 2.033333333333333
+  m_Time: 1.0166666666666666
   m_Retroactive: 0
   m_EmitOnce: 1
   m_Asset: {fileID: 11400000, guid: 0f77fe4123c76ff4badf580f95a7edd1, type: 2}
@@ -101,14 +101,14 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 1.05
+    m_Start: 1.0166666666666666
     m_ClipIn: 0
     m_Asset: {fileID: 7720461056823850287}
     m_Duration: 4.033333333333333
     m_TimeScale: 1
     m_ParentTrack: {fileID: 1036270540383454891}
     m_EaseInDuration: 0.3
-    m_EaseOutDuration: 0
+    m_EaseOutDuration: 0.5
     m_BlendInDuration: -1
     m_BlendOutDuration: -1
     m_MixInCurve:
@@ -193,14 +193,14 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 1.05
+    m_Start: 1.0166666666666666
     m_ClipIn: 0
     m_Asset: {fileID: -458677501341288150}
     m_Duration: 4.033333333333333
     m_TimeScale: 1
     m_ParentTrack: {fileID: 6890517390193166262}
     m_EaseInDuration: 0.3
-    m_EaseOutDuration: 0
+    m_EaseOutDuration: 0.5
     m_BlendInDuration: -1
     m_BlendOutDuration: -1
     m_MixInCurve:
@@ -276,4 +276,4 @@ MonoBehaviour:
   m_Name: SubtitleClip
   m_EditorClassIdentifier: 
   TextColour: {r: 1, g: 1, b: 1, a: 0}
-  SubtitleText: Delivery Unlocked
+  SubtitleText: New Delivery!
