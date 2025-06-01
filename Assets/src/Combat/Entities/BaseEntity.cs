@@ -10,16 +10,17 @@ public struct EntityProperty
     [Range(0f, 200f)]
     public float MoveSpeed;
 }
-public delegate void OnHpChange(int newHp);
-//[RequireComponent(typeof(Rigidbody2D))]
+// negative for damage
+// positive for healing
+public delegate void OnHpUpdate(int change);
 public class BaseEntity : MonoBehaviour 
 {
     [SerializeField] protected EntityProperty m_base;
     [SerializeField] protected UnityEvent<BaseEntity> m_onDefeat = default;
     [SerializeField] protected UnityEvent<int> m_onTakeDamage = default;
     protected EntityProperty m_current;
-    public event OnHpChange OnTakeDamage;
-    public event OnHpChange OnHeal;
+    public event OnHpUpdate OnTakeDamage;
+    public event OnHpUpdate OnHeal;
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
     public EntityState BaseStats => new EntityState
     {
@@ -61,14 +62,15 @@ public class BaseEntity : MonoBehaviour
     }
     public void Heal(int heal) 
     {
-        m_current.Health += Mathf.Abs(heal);
-        OnHeal?.Invoke(m_current.Health);
+        heal = Mathf.Abs(heal);
+        m_current.Health += heal;
+        OnHeal?.Invoke(heal);
     }
     public virtual void TakeDamage(int baseDamage) 
     {
         m_current.Health -= baseDamage;
-        m_onTakeDamage?.Invoke(baseDamage);
-        OnTakeDamage?.Invoke(m_current.Health);
+        m_onTakeDamage?.Invoke(-baseDamage);
+        OnTakeDamage?.Invoke(-baseDamage);
         if (CurrentStats.Property.Health <= 0f) 
         {
             OnDefeat();

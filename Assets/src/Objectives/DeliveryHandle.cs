@@ -2,13 +2,8 @@
 using UnityEngine.UI;
 using Curry.Explore;
 
-public class DeliveryHandle : HideableUI
+public class DeliveryHandle : MonoBehaviour
 {
-    [SerializeField] Sprite m_deliTypeFood = default;
-    [SerializeField] Sprite m_deliTypeIntel = default;
-    [SerializeField] Sprite m_deliTypeSmuggle = default;
-    [SerializeField] Image m_deliverType = default;
-
     [SerializeField] DirectionPointer m_pointer = default;
     [SerializeField] LocationHandler m_destinations = default;
     bool m_isActive = false;
@@ -19,39 +14,21 @@ public class DeliveryHandle : HideableUI
     {
         m_isActive = true;
         m_currentRef = obj;
-        Sprite deliType;
-        // Setup visual
-        switch (m_currentRef.DeliverType)
-        {
-            case DeliveryType.Food:
-                deliType = m_deliTypeFood;
-                break;
-            case DeliveryType.Intel:
-                deliType = m_deliTypeIntel;
-                break;
-            case DeliveryType.Smuggle:
-                deliType = m_deliTypeSmuggle;
-                break;
-            default:
-                deliType = m_deliTypeFood;
-                break;
-        }
-        m_deliverType.sprite = deliType;
-        Show();
     }
     // Call this after player gets delivery package, begin delivery
     public void BeginDelivery() 
     {
-        var loc = m_destinations.GetLocation(m_currentRef.DestinationIndex);
+        Transform loc = m_destinations.GetLocation(m_currentRef.DestinationIndex);
+        loc?.GetComponent<DeliveryDestination>()?.ExpectPackage(m_currentRef);
         PointTo(loc);
     }
     public void ResetHandle()
     {
+        Transform loc = m_destinations.GetLocation(m_currentRef.DestinationIndex);
         m_isActive = false;
         StopPointing();
         // reset to empty
         m_currentRef = new DeliveryDetail { };
-        Hide();
     }
     public void OnDeliverySuccess(DeliveryDetail obj)
     {

@@ -65,7 +65,8 @@ Assets/Imported*
 *.aab
 *.unitypackage
 *.app
-
+# Media files
+*.mp3
 # Crashlytics generated file
 crashlytics-build.properties
 

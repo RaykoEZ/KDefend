@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 // points to an object of interest
@@ -6,6 +7,7 @@ public class DirectionPointer : MonoBehaviour
 {
     [SerializeField] Bounds m_displayOffsets = default;
     [SerializeField] Transform m_player = default;
+    [SerializeField] Image m_arrow = default;
     Transform m_currentTraget;
     bool m_isPointing = false;
 
@@ -22,10 +24,12 @@ public class DirectionPointer : MonoBehaviour
     {
         m_currentTraget = newTarget;
         m_isPointing = true;
+        m_arrow.enabled = true;
     }
     public void StopPointing() 
     {
         m_isPointing = false;
+        m_arrow.enabled = false;
     }
     void UpdateDirection() 
     {
@@ -40,5 +44,14 @@ public class DirectionPointer : MonoBehaviour
         transform.position = iconPos;
         Vector3 dir = (m_currentTraget.position - origin).normalized;
         GameUtil.AimTowards2D(transform, dir);
+    }
+    // Detect destination nearby
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        m_arrow.enabled = false;
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        m_arrow.enabled = true;
     }
 }

@@ -63,7 +63,6 @@ public class DeliveryPrompter : MonoBehaviour
     {
         DeliveryHandle icon = m_currentHandles.Find(GetIcon(obj));
         icon?.ResetHandle();
-        m_sfx?.Play("Objective_Complete");
         Debug.Log("Destination reached");
         DeliveryReceive?.Invoke(obj);
     }

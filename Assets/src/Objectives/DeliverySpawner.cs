@@ -10,7 +10,6 @@ public class DeliverySpawner : MonoBehaviour
         var loc = m_origins.GetLocation(detail.OriginIndex);
         DeliveryBox ret = GameUtil.SpawnObject(m_boxRef, loc.position, m_parent);
         ret?.Init(detail);
-        ret.gameObject.SetActive(true);
         return ret;
     }
 }

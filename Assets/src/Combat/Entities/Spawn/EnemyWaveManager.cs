@@ -19,21 +19,10 @@ public class EnemyWaveManager : MonoBehaviour
     [SerializeField] BaseEntity m_defaultAggroTarget = default;
     [SerializeField] CoroutineManager m_waveSpawn = default;
     bool m_waveInProgress = false;
-    // Start is called before the first frame update
     void Start()
     {
-#if UNITY_EDITOR
-        StartCoroutine(OnStartGame());
-#endif   
-    }
-#if UNITY_EDITOR
-    IEnumerator OnStartGame() 
-    {
-        yield return new WaitForSeconds(10f);
         RoutineWave();
-        yield return new WaitForSeconds(0.8f);
     }
-#endif
     public void RoutineWave() 
     {
         if (m_waveInProgress) return;

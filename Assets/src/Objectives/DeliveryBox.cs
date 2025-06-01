@@ -3,7 +3,6 @@ using Curry.Explore;
 public class DeliveryBox : HideableUI
 {
     public event OnDeliveryUpdate OnDeliveryBegin;
-    public event OnDeliveryUpdate OnDeliveryReceive;
     DeliveryDetail m_currentRef;
     public DeliveryDetail Detail => m_currentRef;
 
