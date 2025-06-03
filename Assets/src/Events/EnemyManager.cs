@@ -6,12 +6,14 @@ using UnityEngine.Events;
 // spawns all pre-existing enemies from save data
 public class EnemyManager : MonoBehaviour 
 {
+    [SerializeField] int m_maxEnemies = default;
     [SerializeField] Transform m_spawnParent = default;
     [SerializeField] ThreatHandler m_threat = default;
     [SerializeField] EnemyAssetList m_enemyRefs = default;
     [SerializeField] UnityEvent<Enemy> m_onDefeated = default;
     List<Enemy> m_activeEnemies = new List<Enemy>();
     public IReadOnlyList<Enemy> ActiveEnemies { get => m_activeEnemies; }
+    public bool SpawnLimitReached => m_activeEnemies.Count >= (int)(m_threat.GetCurrentThreatMultiplier().RewardMultiplier * m_maxEnemies);
     public List<EnemyState> GetEnemyStates() 
     {
         var ret = new List<EnemyState>();

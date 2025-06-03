@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
 {
     [SerializeField] protected WeaponProperty m_weaponProperty = default;
+    [SerializeField] AudioClip m_onHitSfx = default;
     protected Coroutine m_attack;
     // For bullets we instantiate bullets on attack, for melee, don't instantiate
     protected bool firing = false;
@@ -38,6 +39,7 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
     public virtual void OnHit<T>(T hit) where T : BaseEntity
     {
         hit?.TakeDamage(WeaponProperty.Damage);
+        GetComponent<AudioSource>()?.PlayOneShot(m_onHitSfx);
         if (hit is IPushable push)
         {
             push.Push(m_currentDirection, WeaponProperty.PushPower);

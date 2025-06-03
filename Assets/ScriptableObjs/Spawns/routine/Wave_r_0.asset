@@ -21,7 +21,3 @@ MonoBehaviour:
     m_groupsToSpawn:
     - m_numToSpawn: 2
       m_enemyRefIndex: 0
-  - m_spawnLocationIndex: 3
-    m_groupsToSpawn:
-    - m_numToSpawn: 2
-      m_enemyRefIndex: 0

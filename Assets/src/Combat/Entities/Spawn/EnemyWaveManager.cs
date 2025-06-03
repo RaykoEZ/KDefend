@@ -1,11 +1,13 @@
 using Curry.Util;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
 public class EnemyWaveManager : MonoBehaviour
 {
     [SerializeField] Transform m_spawnParent = default;
+    [SerializeField] EnemyManager m_enemyManager = default;
     [SerializeField] ThreatHandler m_threat = default;
     [SerializeField] EnemyAssetList m_enemyRefs = default;
     // waves triggered by game event
@@ -69,14 +71,17 @@ public class EnemyWaveManager : MonoBehaviour
     {
         while (m_waveInProgress) 
         {
-            SpawnWave wave = m_routineSpawnStages[m_threat.CurrentThreat];
             ThreatScalings threat = m_threat.GetCurrentThreatMultiplier();
-            float delay = threat.TimeBetweenRoutineWave < 0f ? 60f : 
-                threat.TimeBetweenRoutineWave;
+            float delay = threat.TimeBetweenRoutineWave <= 0f ? 60f :
+                        threat.TimeBetweenRoutineWave;
             // after spawning, wait for a set duration
             yield return new WaitForSeconds(delay);
-            // spawn a wave of enemies
-            SpawnWave(wave);
+            if (!m_enemyManager.SpawnLimitReached)
+            {
+                // spawn a wave of enemies
+                SpawnWave wave = m_routineSpawnStages[m_threat.CurrentThreat];
+                SpawnWave(wave);
+            }
             yield return null;
         }             
     }
