@@ -62,6 +62,7 @@ public class DeliveryPrompter : MonoBehaviour
     public void OnDeliveryComplete(DeliveryDetail obj)
     {
         DeliveryHandle icon = m_currentHandles.Find(GetIcon(obj));
+        m_sfx?.Play("JobsDone");
         icon?.ResetHandle();
         Debug.Log("Destination reached");
         DeliveryReceive?.Invoke(obj);
