@@ -613,6 +613,7 @@ GameObject:
   - component: {fileID: 4097968068867644644}
   - component: {fileID: 3890917468139254870}
   - component: {fileID: 2660165688563348568}
+  - component: {fileID: 6526854709257675596}
   m_Layer: 6
   m_Name: P_Player
   m_TagString: Untagged
@@ -775,6 +776,22 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &6526854709257675596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5730841169875127470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c92d65ba23be947a25a6e08f7c8721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_seeThroughMaterial: {fileID: 2100000, guid: 451a0e894cfdf414a8f55369e52ef8a2, type: 2}
+  m_raycastChecks:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &6989560070430007101
 GameObject:
   m_ObjectHideFlags: 0
