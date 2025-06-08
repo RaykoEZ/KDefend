@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 [Serializable]
 public struct ThreatScalings 
 {
@@ -12,8 +13,11 @@ public class ThreatHandler : MonoBehaviour
 {
     // threat level is the index of this list
     [SerializeField] List<ThreatScalings> m_threatMultipliers = default;
+    [SerializeField] UnityEvent m_onThreatStageUpdate = default;
     // current wave number
     int m_currentThreatStage = 0;
+    // If this value reaches above 100, increase threat stage
+    int m_currentThreatValue = 0;
     public int CurrentThreat => m_currentThreatStage;
     public ThreatScalings GetCurrentThreatMultiplier()
     {
@@ -21,19 +25,20 @@ public class ThreatHandler : MonoBehaviour
             return ThreatScalings.Default;
         return m_threatMultipliers[m_currentThreatStage];
     }
-    public void SetThreat(int threat) 
+    public void SetThreatStage(int threat) 
     {
         m_currentThreatStage = threat;
     }
     // increase threat level
-    public void IncreaseThreat()
+    public void UpdateThreat(int increase)
     {
-        // Increment to spawn next wave
-        m_currentThreatStage++;
-    }
-    public void DecreseThreat()
-    {
-        // Increment to spawn next wave
-        m_currentThreatStage = Mathf.Max(m_currentThreatStage - 1, 0);
+        m_currentThreatValue += increase;
+        // Increment stage if threat exceeds 100
+        if (m_currentThreatValue >= 100) 
+        {
+            m_currentThreatStage++;
+            m_currentThreatValue = 0;
+            m_onThreatStageUpdate?.Invoke();
+        }
     }
 }

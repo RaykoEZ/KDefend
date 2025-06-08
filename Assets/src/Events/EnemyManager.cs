@@ -23,7 +23,7 @@ public class EnemyManager : MonoBehaviour
     }
     public void Init(int threat, List<EnemyState> newState) 
     {
-        m_threat.SetThreat(threat);
+        m_threat.SetThreatStage(threat);
         // clear all previous enemies and respawn according to new state
         foreach (var item in m_activeEnemies)
         {
@@ -47,6 +47,8 @@ public class EnemyManager : MonoBehaviour
     public void OnEnemyDefeated(Enemy spawned) 
     {
         if (spawned == null) return;
+        // increase threat value on kill, trigger defeat events
+        m_threat?.UpdateThreat(spawned.ThreatIncrease);
         m_onDefeated?.Invoke(spawned);
         m_activeEnemies.Remove(spawned);
     }

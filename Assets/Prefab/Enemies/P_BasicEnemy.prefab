@@ -394,8 +394,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_weapons: []
-  m_type: 0
+  m_type: 1
   m_contactDamage: 2
+  m_threatIncrease: 1
   m_targeting: {fileID: 3399095250520629921}
 --- !u!50 &1817311363580228822
 Rigidbody2D:
@@ -446,7 +447,7 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 5
-  m_Speed: 400
+  m_Speed: 200
   m_Acceleration: 350
   avoidancePriority: 0
   m_AngularSpeed: 0

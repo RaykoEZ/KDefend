@@ -1,4 +1,5 @@
 using Curry.Util;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,21 +19,29 @@ public class EnemyWaveManager : MonoBehaviour
     [SerializeField] UnityEvent<Enemy> m_onEnemySpawn = default;
     [SerializeField] UnityEvent<Enemy> m_onEnemyDefeat= default;
     [SerializeField] BaseEntity m_defaultAggroTarget = default;
-    [SerializeField] CoroutineManager m_waveSpawn = default;
+    [SerializeField] RoutineCaller m_routineSpawn = default;
     bool m_waveInProgress = false;
     // spawn counter for spawner cooldown
     int m_spawnCounter = 0;
     void Start()
     {
+        m_routineSpawn.OnNewInterval += OnSpawnWaveInterval;
         RoutineWave();
     }
+    void OnSpawnWaveInterval()
+    {
+        ThreatScalings threat = m_threat.GetCurrentThreatMultiplier();
+        float delay = threat.TimeBetweenRoutineWave <= 0f ? 30f :
+                    threat.TimeBetweenRoutineWave;
+        m_routineSpawn.TimeInterval = delay;
+    }
+
     public void RoutineWave() 
     {
         if (m_waveInProgress) return;
-
         m_waveInProgress = true;
         //make coroutine handle regular spawns
-        m_waveSpawn.ScheduleCoroutine(RoutineSpawn_Internal(), true);
+        m_routineSpawn.StartRoutine(RoutineSpawn_Internal());
     }
     // trigger static spawn with scene/script events
     // return spawn groups
@@ -74,25 +83,17 @@ public class EnemyWaveManager : MonoBehaviour
     public void StopRoutineWave()
     {
         if (!m_waveInProgress) return;
-        m_waveSpawn.StopCurrentCoroutine();
+        m_routineSpawn.StopRoutine();
         m_waveInProgress = false;
     }
     // spawn one wave of enemies
     IEnumerator RoutineSpawn_Internal() 
     {
-        while (m_waveInProgress) 
-        {
-            ThreatScalings threat = m_threat.GetCurrentThreatMultiplier();
-            float delay = threat.TimeBetweenRoutineWave <= 0f ? 60f :
-                        threat.TimeBetweenRoutineWave;
-            // after spawning, wait for a set duration
-            yield return new WaitForSeconds(delay);
-            yield return SpawnCooldown();
-            // spawn a wave of enemies
-            SpawnWave wave = m_routineSpawnStages[m_threat.CurrentThreat];
-            SpawnWave(wave);
-            yield return null;
-        }             
+        // wait for a set duration if spawn count exceeded
+        yield return SpawnCooldown();
+        // spawn a wave of enemies
+        SpawnWave wave = m_routineSpawnStages[m_threat.CurrentThreat];
+        SpawnWave(wave);
     }
     IEnumerator SpawnCooldown()
     {

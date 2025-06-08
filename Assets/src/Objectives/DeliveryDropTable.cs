@@ -19,4 +19,9 @@ public class DeliveryDropTable : ScriptableObject
         }
         return ret;
     }
+    public DeliveryDetail Random() 
+    {
+        int rand = UnityEngine.Random.Range(0, m_dropList.Count);
+        return DropList[rand];
+    }
 }

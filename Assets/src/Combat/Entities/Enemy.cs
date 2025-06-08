@@ -8,6 +8,8 @@ public class Enemy : BaseCharacter, IHitsEntity
 {
     [SerializeField] int m_type = default;
     [SerializeField] int m_contactDamage = default;
+    [Range(-100, 100)]
+    [SerializeField] protected int m_threatIncrease = default;
     [SerializeField] protected RangeDetector m_targeting = default;
     protected float m_speedVariant;
     private Vector2 m_defaultTarget;
@@ -15,6 +17,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     protected BaseEntity m_target;
     Coroutine m_movement;
     Coroutine m_attack;
+    public int ThreatIncrease => m_threatIncrease;
     public BaseEntity CurrentTarget { get => m_target; }
     public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
     public EnemyState State => 
@@ -53,6 +56,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     {
         if (newTarget == null) return;
         m_target = newTarget;
+        SetupNavigation();
         // if not moving, start chasing
         StartMoving();
     }

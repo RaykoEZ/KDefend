@@ -31,6 +31,7 @@ public class BaseEntity : MonoBehaviour
         get => new EntityState { 
             Property = m_current,
             Position = transform.position};}
+    public float HpRatio => CurrentStats.Property.Health / m_base.Health;
     protected virtual void Awake()
     {
     }

@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using Curry.Game;
 using System.Collections.Generic;
+using System.Collections;
 
 // updates delivery objective container
 public class DeliveryManager : ObjectiveManager<DeliveryDetail>
 {
     [SerializeField] DeliveryDropTable m_deliveryList = default;
     [SerializeField] DeliveryPrompter m_prompt = default;
+    Coroutine m_deliveryRespawn;
     public override void Init(List<DeliveryDetail> completedObjectives, List<DeliveryDetail> newObjectives)
     {
         DeliveryObjective comp;
@@ -43,6 +45,19 @@ public class DeliveryManager : ObjectiveManager<DeliveryDetail>
         var objective = GetByTitle(detail.Title);
         if (objective == null) return;
         OnObjectiveComplete(objective);
+        if (m_deliveryRespawn != null && m_prompt.IsFull) 
+        {
+            m_deliveryRespawn = StartCoroutine(RespawnDelivery());
+        }
+    }
+    IEnumerator RespawnDelivery() 
+    {
+        float rand = Random.Range(180f, 300f);
+        yield return new WaitForSeconds(rand);
+        // get a delivery detail and spawn item
+        DeliveryDetail randomDrop = m_deliveryList.Random();
+        ActivateDelivery(randomDrop);
+        m_deliveryRespawn = null;
     }
     DeliveryObjective NewObjective(DeliveryDetail objective) 
     {

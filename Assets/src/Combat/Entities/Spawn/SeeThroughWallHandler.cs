@@ -14,7 +14,6 @@ public class SeeThroughWallHandler : MonoBehaviour
         var hit = Physics2D.OverlapPoint(transform.position, m_raycastChecks);
         if (hit != null) 
         {
-            Debug.Log(hit.transform.gameObject.name);
             // activate & set player position in camera object, and assign see through position
             m_seeThroughMaterial.SetFloat(s_sizeId, 1f);
             var view = Camera.main.WorldToViewportPoint(transform.position);

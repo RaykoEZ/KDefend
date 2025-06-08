@@ -33,13 +33,18 @@ public class DeliveryPrompter : MonoBehaviour
     [SerializeField] DeliverySpawner m_spawnBox = default;
     [SerializeField] List<DeliveryHandle> m_currentHandles = default;
     [SerializeField] AudioManager m_sfx = default;
-
+    int m_numDeliveries = 0;
+    public bool IsFull => m_numDeliveries == m_currentHandles.Count;
     public event OnObjectiveUpdate<DeliveryDetail> DeliveryReceive;
     // Find the correct Delvery Title
     Predicate<DeliveryHandle> GetIcon(DeliveryDetail obj) => (i) => i.CurrentDelivery.Title == obj.Title;
     // When new delivery lands, point to origin first
-    public void NewDelivery(DeliveryDetail newDelivery) 
+    public void NewDelivery(DeliveryDetail newDelivery)
     {
+        if (IsFull) 
+        {
+            return;
+        }
         m_sfx?.Play("Alert");
         var instance = m_spawnBox?.SpawnDeliveryBox(newDelivery);
         instance.OnDeliveryBegin += OnDeliveryBegin;
@@ -54,6 +59,7 @@ public class DeliveryPrompter : MonoBehaviour
                 item.InitDeliveryPickup(obj);
                 DeliveryHandle icon = m_currentHandles.Find(GetIcon(obj));
                 icon?.BeginDelivery();
+                m_numDeliveries++;
                 // Remove box
                 break;
             }
@@ -66,5 +72,6 @@ public class DeliveryPrompter : MonoBehaviour
         icon?.ResetHandle();
         Debug.Log("Destination reached");
         DeliveryReceive?.Invoke(obj);
+        m_numDeliveries--;
     }
 }
