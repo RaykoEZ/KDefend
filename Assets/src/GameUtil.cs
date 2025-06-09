@@ -75,8 +75,7 @@ public static class GameUtil
         // rotate to new direction
         target.rotation = Quaternion.RotateTowards(target.rotation, rotateTo, 360f);
     }
-
-public static void AimTowards2D(Transform toAim, Vector2 directionNormalized)
+    public static void AimTowards2D(Transform toAim, Vector2 directionNormalized)
     {
         float angle = Mathf.Atan2(directionNormalized.y, directionNormalized.x) * Mathf.Rad2Deg;
         toAim.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);

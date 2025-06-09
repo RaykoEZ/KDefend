@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 //enemy agent behaviour
-[RequireComponent(typeof(Enemy))]
+[RequireComponent(typeof(BaseEntity))]
 public class Agent : MonoBehaviour
 {
     [SerializeField] BackstepStrike m_backStep = default;
     [SerializeField] Stealth m_stealth = default;
     [SerializeField] Reinforcement m_callHelp = default;
-    Enemy Self => GetComponent<Enemy>();
+    BaseEntity Self => GetComponent<BaseEntity>();
     // hits taken
     int m_hitsTaken = 0;
     public void OnTakeHit() 
@@ -43,34 +42,5 @@ public class Agent : MonoBehaviour
     void Reinforce() 
     {
         m_callHelp?.TryUse();
-    }
-}
-
-public class Reinforcement : ActiveAbility
-{
-    [SerializeField] List<SpawnWave> m_reinforce = default;
-    protected override void Effect_Internal()
-    {
-        throw new System.NotImplementedException();
-    }
-}
-// dashes back and attacks with an attack
-public class BackstepStrike : ActiveAbility 
-{
-    [SerializeField] float m_distance = default;
-
-    protected override void Effect_Internal()
-    {
-        throw new System.NotImplementedException();
-    }
-}
-// Hides self for some time
-public class Stealth : ActiveAbility
-{
-    [SerializeField] float m_duration = default;
-
-    protected override void Effect_Internal()
-    {
-        throw new System.NotImplementedException();
     }
 }
