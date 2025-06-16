@@ -6,6 +6,8 @@ public class SeeThroughWallHandler : MonoBehaviour
     protected static int s_sizeId = Shader.PropertyToID("_size");
     protected static int s_opacityId = Shader.PropertyToID("_opacity");
     protected static int s_smoothId = Shader.PropertyToID("_smoothing");
+    [Range(0f, 2f)]
+    [SerializeField] float m_seeThroughSize = default;
     [SerializeField] Material m_seeThroughMaterial = default;
     [SerializeField] LayerMask m_raycastChecks = default;
     void Update()
@@ -15,7 +17,7 @@ public class SeeThroughWallHandler : MonoBehaviour
         if (hit != null) 
         {
             // activate & set player position in camera object, and assign see through position
-            m_seeThroughMaterial.SetFloat(s_sizeId, 1f);
+            m_seeThroughMaterial.SetFloat(s_sizeId, m_seeThroughSize);
             var view = Camera.main.WorldToViewportPoint(transform.position);
             m_seeThroughMaterial.SetVector(s_playerPosId, view);
         }

@@ -4,6 +4,7 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
 {
     [SerializeField] protected WeaponProperty m_weaponProperty = default;
     [SerializeField] AudioClip m_onHitSfx = default;
+    [SerializeField] AudioClip m_onLaunchSfx = default;
     protected Coroutine m_attack;
     // For bullets we instantiate bullets on attack, for melee, don't instantiate
     protected bool firing = false;
@@ -11,6 +12,7 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
     public bool Firing => firing;
     public virtual WeaponProperty WeaponProperty => m_weaponProperty;
     protected Vector2 m_currentDirection = Vector2.zero;
+    // create a new weapon object, for projectiles & summons
     protected static T NewAttackInstance<T>(T prefabRef, Transform user) where T : BaseWeapon
     {
         T ret = Instantiate(prefabRef, user.parent);
@@ -27,6 +29,10 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
             T instance = instantiate ? NewAttackInstance(weaponRef, user) : weaponRef;
             m_currentDirection = directionNormalized;
             instance?.LaunchAttack(directionNormalized);
+            if (m_onLaunchSfx != null) 
+            {
+                instance?.GetComponent<AudioSource>()?.PlayOneShot(m_onLaunchSfx);
+            }
             yield return new WaitForSeconds(WeaponProperty.DelayPerAttack);
         }
     }
@@ -39,7 +45,7 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
     public virtual void OnHit<T>(T hit) where T : BaseEntity
     {
         hit?.TakeDamage(WeaponProperty.Damage);
-        GetComponent<AudioSource>()?.PlayOneShot(m_onHitSfx);
+        hit?.GetComponent<AudioSource>()?.PlayOneShot(m_onHitSfx);
         if (hit is IPushable push)
         {
             push.Push(m_currentDirection, WeaponProperty.PushPower);

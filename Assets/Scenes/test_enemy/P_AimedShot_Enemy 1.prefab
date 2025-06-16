@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 792987912367956665}
   - component: {fileID: 906978621635688639}
   m_Layer: 11
-  m_Name: P_BaseShot_Enemy
+  m_Name: P_AimedShot_Enemy 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,13 +155,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_weaponProperty:
-    Damage: 2
+    Damage: 5
     AttackPerCycle: 1
     Speed: 800
     Life: 3
-    DelayPerAttack: 0.2
-    DelayPerCycle: 1
-    PushPower: 2.5
+    DelayPerAttack: 0
+    DelayPerCycle: 2
+    PushPower: 3
   m_onHitSfx: {fileID: 8300000, guid: 881e3f52c86c94f26a60718d35627cd8, type: 3}
   m_onLaunchSfx: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
 --- !u!58 &792987912367956665

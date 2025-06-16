@@ -17,19 +17,4 @@ public class InventoryManager : MonoBehaviour
         m_heldItems.Add(obtained);
         m_onObtainItem?.Invoke(obtained);
     }
-    public IEnumerator OnTriggerItemEffects(KDefenderEventContext e) 
-    {
-        foreach (var item in HeldItems)
-        {
-            TryUdateCollectible(e, item);
-            yield return new WaitForEndOfFrame();
-        }
-    }
-    protected void TryUdateCollectible(KDefenderEventContext e, Item toUse)
-    {
-        if (m_heldItems.TryGetValue(toUse, out Item result))
-        {
-            result?.UpdateState(e);
-        }
-    }
 }

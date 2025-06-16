@@ -27,7 +27,7 @@ public class Player : BaseCharacter
     }
     public void AddWeapon(BaseWeapon toAdd) 
     {
-        m_weapons?.Add(toAdd);
+        m_currentWeapons?.Add(toAdd);
     }
     // get current aiming direction
     protected override Vector2 GetAimDirection()

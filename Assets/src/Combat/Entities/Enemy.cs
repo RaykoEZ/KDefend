@@ -109,9 +109,14 @@ public class Enemy : BaseCharacter, IHitsEntity
     }
     protected override void OnDefeat()
     {
+        StartCoroutine(Defeat_Internal());
+    }
+    protected virtual IEnumerator Defeat_Internal() 
+    {
         StopMoving();
         base.OnDefeat();
         OnDefeated?.Invoke(this);
+        yield return new WaitForSeconds(0.5f);
         Despawn();
     }
     public void Despawn() 
@@ -123,8 +128,10 @@ public class Enemy : BaseCharacter, IHitsEntity
     protected virtual IEnumerator HitStun(float duration) 
     {
         StopMoving();
+        StopAttack();
         yield return new WaitForSeconds(duration);
         StartMoving();
+        UseWeapon();
     }
     protected virtual IEnumerator Movement()
     {
@@ -142,6 +149,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     }
     public override void UseWeapon()
     {
+        if (m_currentWeapons.Count == 0) return;
         if (m_attack == null)
         {
             m_keepFiring = true;
@@ -153,9 +161,9 @@ public class Enemy : BaseCharacter, IHitsEntity
     {
         while (m_keepFiring)
         {
-            for (int i = 0; i < m_weapons.Count; i++)
+            for (int i = 0; i < m_currentWeapons.Count; i++)
             {
-                yield return Attack_Internal(m_weapons[i]);
+                yield return Attack_Internal(m_currentWeapons[i]);
             }
         }
     }

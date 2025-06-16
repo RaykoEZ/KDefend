@@ -1,4 +1,4 @@
-using Curry.Util;
+using Curry.Events;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,8 +54,18 @@ public class EnemyWaveManager : MonoBehaviour
         }
         return numEnemies;
     }
+    // catches spawn events from miscellaneous entities
+    public void SpawnCustomWave(EventInfo eventInfo) 
+    {
+        if (eventInfo == null || eventInfo.Payload == null) return;
+        if (eventInfo.Payload.TryGetValue("wave", out object result) 
+            && result is SpawnWave wave) 
+        {
+            SpawnWave(wave);
+        }
+    }
     // return number of enemies spawned in a group
-    public virtual int SpawnGroup(SpawnGroup newGroup) 
+    protected virtual int SpawnGroup(SpawnGroup newGroup) 
     {
         int numEnemies = 0;
         int i = newGroup.SpawnLocationIndex > 0 &&

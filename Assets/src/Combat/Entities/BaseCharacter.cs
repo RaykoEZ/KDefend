@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 // Anything that can be pushed away by a force
 public interface IPushable
 {
@@ -8,17 +9,33 @@ public interface IPushable
 }
 public class BaseCharacter : BaseEntity , IPushable
 {
-    [SerializeField] protected List<BaseWeapon> m_weapons = default;
+    [SerializeField] List<BaseWeapon> m_defaultWeapons = default;
+    [SerializeField] protected UnityEvent m_onAttack = default;
     protected List<bool> m_attackingWeapons;
     protected bool m_keepFiring = false;
-    protected override void Awake()
+    protected List<BaseWeapon> m_currentWeapons = new List<BaseWeapon>();
+    public List<BaseWeapon> GetWeapons()
     {
-        base.Awake();
-        m_attackingWeapons = new List<bool>(m_weapons.Count);
-        for (int i = 0; i < m_weapons.Count; i++)
+        return m_currentWeapons;
+    }
+    public void SetWeapons(List<BaseWeapon> value)
+    {
+        if (value == null) return;
+        m_currentWeapons = value;
+        m_attackingWeapons = new List<bool>(m_currentWeapons.Count);
+        for (int i = 0; i < m_currentWeapons.Count; i++)
         {
             m_attackingWeapons.Add(false);
         }
+    }
+    public void ResetWeapons()
+    {
+        SetWeapons(m_defaultWeapons);
+    }
+    protected override void Awake()
+    {
+        base.Awake();
+        ResetWeapons();
     }
     protected virtual Vector2 GetAimDirection()
     {
@@ -27,15 +44,16 @@ public class BaseCharacter : BaseEntity , IPushable
     public virtual void UseWeapon() 
     {
         if (m_keepFiring) return;
-        for (int i = 0; i < m_weapons.Count; i++)
+        for (int i = 0; i < m_currentWeapons.Count; i++)
         {
             if (m_attackingWeapons[i]) continue;
             StartCoroutine(AttackCycle_Internal(i));
         }
     }
+
     protected virtual IEnumerator AttackCycle_Internal(int weaponIndex) 
     {
-        BaseWeapon weapon = m_weapons[weaponIndex];
+        BaseWeapon weapon = m_currentWeapons[weaponIndex];
         if (weapon == null) yield break;
         m_attackingWeapons[weaponIndex] = true;
         while (m_attackingWeapons[weaponIndex])
@@ -49,9 +67,11 @@ public class BaseCharacter : BaseEntity , IPushable
     protected IEnumerator Attack_Internal(BaseWeapon weapon)
     {
         //fire cycle
+        m_onAttack?.Invoke();
         yield return weapon?.Attack(weapon, transform, GetAimDirection(), weapon.InstantiateWeapon);
         // next firing cycle
         yield return new WaitForSeconds(weapon.WeaponProperty.DelayPerCycle);
+
     }
     public void Push(Vector2 dir, float power)
     {

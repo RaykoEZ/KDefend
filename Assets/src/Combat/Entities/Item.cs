@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using static Cinemachine.CinemachineOrbitalTransposer;
 
 [Serializable]
 public struct ItemProperty
@@ -23,22 +22,21 @@ public enum GameEventTriggerType
     StartOfMove,
     OnMoving
 }
-public interface IItem
+public interface IItem<T>
 {
     ItemProperty Property { get; }
     // Use as counter from item amount/level
     int StackCount { get; set; }
-    public void Activate();
-    public void Deactivate();
-    public void OnPickup();
+    public void UseItem(T user);
+    public void OnPickup(T user);
 }
 [RequireComponent(typeof(Collider2D))]
 // class to contain item property and interaction triggers
-public class Item : MonoBehaviour , IItem
+public class Item : MonoBehaviour , IItem<Player>
 {
     [SerializeField] protected ItemProperty m_property = default;
-    [SerializeField] protected UnityEvent<Item> m_onUse = default;
-    [SerializeField] protected UnityEvent<Item> m_onPickup = default;
+    [SerializeField] protected UnityEvent<Player> m_onUse = default;
+    [SerializeField] protected UnityEvent<Player> m_onPickup = default;
     [SerializeField] List<EffectModule> m_effects = default;
     protected int m_stackCount = 1;
     protected bool m_isEffectActive = false;
@@ -53,61 +51,16 @@ public class Item : MonoBehaviour , IItem
         if (col.attachedRigidbody.TryGetComponent(out Player result))
         {
             m_user = result;
-            OnPickup();
+            OnPickup(result);
         }
     }  
-    public virtual void UpdateState(KDefenderEventContext e) 
+    public virtual void OnPickup(Player player)
     {
+        m_onPickup?.Invoke(player);
     }
-    public virtual void OnPickup()
-    {
-        m_onPickup?.Invoke(this);
-    }
-    public virtual void Activate()
+    public virtual void UseItem(Player player)
     {
         m_isEffectActive = true;
-        m_onUse?.Invoke(this);
-    }
-
-    public virtual void Deactivate()
-    {
-        m_isEffectActive = false;
-    }
-}
-
-public class Consumable : Item 
-{
-    public override void OnPickup()
-    {
-        Activate();
-        base.OnPickup();
-    }
-}
-public class WeaponDrop : Item 
-{
-    [SerializeField] BaseWeapon m_weaponRef = default;
-    public override void OnPickup()
-    {
-        m_user?.AddWeapon(m_weaponRef);
-        base.OnPickup();
-    }
-}
-public class Collectible : Item 
-{
-    public override void UpdateState(KDefenderEventContext e)
-    {
-        bool check = MatchActivationCondition(e);
-        if (check) 
-        {
-            Activate();
-        }
-        else 
-        {
-            Deactivate();
-        }
-    }
-    protected virtual bool MatchActivationCondition(KDefenderEventContext e) 
-    {
-        return true;
+        m_onUse?.Invoke(player);
     }
 }

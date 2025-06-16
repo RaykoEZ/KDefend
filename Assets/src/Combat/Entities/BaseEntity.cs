@@ -13,6 +13,7 @@ public struct EntityProperty
 // negative for damage
 // positive for healing
 public delegate void OnHpUpdate(int change);
+[RequireComponent(typeof(AudioSource))]
 public class BaseEntity : MonoBehaviour 
 {
     [SerializeField] protected EntityProperty m_base;
@@ -31,7 +32,7 @@ public class BaseEntity : MonoBehaviour
         get => new EntityState { 
             Property = m_current,
             Position = transform.position};}
-    public float HpRatio => CurrentStats.Property.Health / m_base.Health;
+    public float HpRatio => (float)CurrentStats.Property.Health / (float)m_base.Health;
     protected virtual void Awake()
     {
     }

@@ -7,11 +7,13 @@ public class Stealth : ActiveAbility
     protected override void Effect_Internal()
     {
         if (m_isChanneling) return;
+        OnChannelInterrupt += DisableStealth;
         m_anim?.SetBool("hide", true);
         StartCoroutine(Channeling(m_duration, DisableStealth));
     }
-    public void DisableStealth() 
+    void DisableStealth() 
     {
+        OnChannelInterrupt -= DisableStealth;
         m_isChanneling = false;
         m_anim?.SetBool("hide", false);
     }

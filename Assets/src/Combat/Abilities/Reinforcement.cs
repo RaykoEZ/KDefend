@@ -1,14 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-
+using Curry.Events;
 public class Reinforcement : ActiveAbility
 {
     [SerializeField] SpawnWave m_reinforcement = default;
+    [SerializeField] CurryGameEventTrigger m_spawnHelp = default;
     // require time to charge
     [SerializeField] int m_channellingTime = default;
-    bool m_inProgress = false;
     protected override void Effect_Internal()
     {
-        throw new System.NotImplementedException();
+        if (m_isChanneling) return;
+        StartCoroutine(Channeling(m_channellingTime, SpawnHelp));
+    }
+    void SpawnHelp() 
+    {
+        var payload = new Dictionary<string, object> { {"wave", m_reinforcement } };
+        EventInfo info = new EventInfo(payload);
+        m_spawnHelp?.TriggerEvent(info);
     }
 }
