@@ -37,12 +37,12 @@ public class DeliveryHandle : MonoBehaviour
     }
     void PointTo(Transform newTarget) 
     {
-        m_pointer.gameObject.SetActive(true);
+        gameObject.SetActive(true);
         m_pointer.PointToward(newTarget);
     }
     void StopPointing()
     {
         m_pointer.StopPointing();
-        m_pointer.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

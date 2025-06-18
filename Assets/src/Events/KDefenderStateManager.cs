@@ -12,7 +12,6 @@ public class KDefenderStateManager : MonoBehaviour
     [SerializeField] DeliveryDropTable m_deliveryList = default;
     [SerializeField] DeliveryManager m_objectives = default;
 
-    [SerializeField] InventoryManager m_inventory = default;
     [SerializeField] Player m_player = default;
     [SerializeField] GameTimer m_timer = default;
     [SerializeField] UnityEvent m_onGameOver = default;
@@ -45,7 +44,6 @@ public class KDefenderStateManager : MonoBehaviour
             StaticFlags = m_staticEvents.CurrentFlags,
             CurrentThreatLevel = m_threat.CurrentThreat,     
             PlayerValue = m_player.CurrentStats,
-            Inventory = m_inventory.GetState(),
             HostileStates = m_enemy.GetEnemyStates(),
             // Objectives here
             CompletedDeliveries = completed,

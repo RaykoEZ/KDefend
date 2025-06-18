@@ -2,6 +2,7 @@
 using UnityEngine;
 public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
 {
+    [SerializeField] int m_weaponIndex = default;
     [SerializeField] protected WeaponProperty m_weaponProperty = default;
     [SerializeField] AudioClip m_onHitSfx = default;
     [SerializeField] AudioClip m_onLaunchSfx = default;
@@ -11,6 +12,7 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
     public abstract bool InstantiateWeapon { get; }
     public bool Firing => firing;
     public virtual WeaponProperty WeaponProperty => m_weaponProperty;
+    public int WeaponIndex => m_weaponIndex;
     protected Vector2 m_currentDirection = Vector2.zero;
     // create a new weapon object, for projectiles & summons
     protected static T NewAttackInstance<T>(T prefabRef, Transform user) where T : BaseWeapon

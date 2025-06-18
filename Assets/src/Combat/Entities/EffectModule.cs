@@ -11,7 +11,7 @@ public abstract class EffectModule : MonoBehaviour
 {
     public abstract void Activate(BaseEntity target);
     // for reversing/shutting down effects if needed
-    public virtual void Deactivate(BaseEntity target) { } 
+    public virtual void Deactivate(BaseEntity target) { }
 }
 
 

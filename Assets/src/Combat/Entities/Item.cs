@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
 [Serializable]
@@ -9,18 +11,14 @@ public struct ItemProperty
     public string Name;
     public string Description;
     public int ItemCost;
-    public GameEventTriggerType TriggerType;
 }
 [Serializable]
 public enum GameEventTriggerType
 {
     Time,
-    TakeDamage,
+    Item,
     Attack,
-    ObtainItem,
-    DiscardItem,
-    StartOfMove,
-    OnMoving
+    Movement
 }
 public interface IItem<T>
 {
@@ -34,10 +32,11 @@ public interface IItem<T>
 // class to contain item property and interaction triggers
 public class Item : MonoBehaviour , IItem<Player>
 {
+    [SerializeField] protected bool m_pickupImmediately = default;
     [SerializeField] protected ItemProperty m_property = default;
     [SerializeField] protected UnityEvent<Player> m_onUse = default;
     [SerializeField] protected UnityEvent<Player> m_onPickup = default;
-    [SerializeField] List<EffectModule> m_effects = default;
+    [SerializeField] protected TemporaryInputAction m_pickUpCommand = default;
     protected int m_stackCount = 1;
     protected bool m_isEffectActive = false;
     protected Player m_user;
@@ -47,16 +46,31 @@ public class Item : MonoBehaviour , IItem<Player>
     void OnTriggerEnter2D(Collider2D col) 
     {
         if (col.attachedRigidbody == null) return;
+        bool compExist = col.attachedRigidbody.TryGetComponent(out Player result);
+        m_user = result;
         // when projectile hit this body, trigger on hit effects from projectile
-        if (col.attachedRigidbody.TryGetComponent(out Player result))
+        if (m_pickupImmediately && compExist)
         {
-            m_user = result;
             OnPickup(result);
         }
+        else if (!m_pickupImmediately && compExist)
+        {
+            m_pickUpCommand?.Enable();
+        }
     }  
+    // when player presses pickup for weapons
+    public void PickupEquipment(InputAction.CallbackContext c) 
+    {
+        OnPickup(m_user);
+    }
     public virtual void OnPickup(Player player)
     {
         m_onPickup?.Invoke(player);
+        // despawn on pickup
+        if (m_pickupImmediately) 
+        {
+            Destroy(gameObject);
+        }
     }
     public virtual void UseItem(Player player)
     {

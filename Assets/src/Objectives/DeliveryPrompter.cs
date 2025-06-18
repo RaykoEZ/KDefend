@@ -60,8 +60,7 @@ public class DeliveryPrompter : MonoBehaviour
                 DeliveryHandle icon = m_currentHandles.Find(GetIcon(obj));
                 icon?.BeginDelivery();
                 m_numDeliveries++;
-                // Remove box
-                break;
+                return;
             }
         }
     }

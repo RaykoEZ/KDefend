@@ -27,6 +27,7 @@ public class DeliveryBox : HideableUI
             // set player delivery state
             entering.CurrentlyDelivering = Detail;
             OnDeliveryBegin?.Invoke(Detail);
+            OnDeliveryBegin = null;
             Hide();
             Destroy(gameObject);
         }

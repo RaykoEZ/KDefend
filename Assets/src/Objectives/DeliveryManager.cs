@@ -37,7 +37,6 @@ public class DeliveryManager : ObjectiveManager<DeliveryDetail>
         var result = NewObjective(objective);
         NewActiveObjective(result);
         Debug.Log($"Activate new delivery: {objective.Title}");
-        m_prompt?.NewDelivery(objective);
     }
     // find objective the player finished, log the update
     void OnDeliveryComplete(DeliveryDetail detail)

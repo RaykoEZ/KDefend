@@ -15,7 +15,7 @@ MonoBehaviour:
   m_dropList:
   - m_toDrop: {fileID: 0}
     m_dropWeight: 5
-  - m_toDrop: {fileID: 0}
+  - m_toDrop: {fileID: 6385640104035231319, guid: f476fc4126117a146b84382e1fa26a10, type: 3}
     m_dropWeight: 20
-  - m_toDrop: {fileID: 0}
+  - m_toDrop: {fileID: 6385640104035231319, guid: 8aac90a0d4c6ebe4a9712843070638c7, type: 3}
     m_dropWeight: 75
