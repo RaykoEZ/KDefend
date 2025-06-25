@@ -12,5 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cbb4ff6d642b614ba2f0429ba341ac6, type: 3}
   m_Name: Wave_r_1
   m_EditorClassIdentifier: 
-  m_secondsBeforeNextWave: 0
-  m_enemyGroups: []
+  m_enemyGroups:
+  - m_spawnLocationIndex: 0
+    m_groupsToSpawn:
+    - m_numToSpawn: 4
+      m_enemyRefIndex: 0
+  - m_spawnLocationIndex: 3
+    m_groupsToSpawn:
+    - m_numToSpawn: 3
+      m_enemyRefIndex: 0
+  - m_spawnLocationIndex: 5
+    m_groupsToSpawn:
+    - m_numToSpawn: 5
+      m_enemyRefIndex: 0
+    - m_numToSpawn: 1
+      m_enemyRefIndex: 1

@@ -44,14 +44,14 @@ public class DeliveryManager : ObjectiveManager<DeliveryDetail>
         var objective = GetByTitle(detail.Title);
         if (objective == null) return;
         OnObjectiveComplete(objective);
-        if (m_deliveryRespawn != null && m_prompt.IsFull) 
+        if (m_deliveryRespawn != null && !m_prompt.IsFull) 
         {
             m_deliveryRespawn = StartCoroutine(RespawnDelivery());
         }
     }
     IEnumerator RespawnDelivery() 
     {
-        float rand = Random.Range(180f, 300f);
+        float rand = Random.Range(100f, 120f);
         yield return new WaitForSeconds(rand);
         // get a delivery detail and spawn item
         DeliveryDetail randomDrop = m_deliveryList.Random();

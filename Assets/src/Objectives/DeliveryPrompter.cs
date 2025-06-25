@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 [Serializable]
-public struct DeliveryDetail : IObjective
+public struct DeliveryDetail : IObjective, IEquatable<DeliveryDetail>
 {
     public int OriginIndex;
     public int DestinationIndex;  
@@ -14,7 +14,13 @@ public struct DeliveryDetail : IObjective
     public string Description;
     string IObjective.Title => Title;
     string IObjective.Description => Description;
-    public static DeliveryDetail None => new DeliveryDetail { };
+    public static DeliveryDetail None => new DeliveryDetail 
+    {
+        OriginIndex = -1,
+        DestinationIndex = -1,
+        Title = "None",
+        Description = "None"
+    };
     public static List<string> GetTitleList(List<DeliveryDetail> toGet) 
     {
         List<string> ret = new List<string>();
@@ -23,6 +29,14 @@ public struct DeliveryDetail : IObjective
             ret.Add(item.Title);
         }
         return ret;
+    }
+
+    public bool Equals(DeliveryDetail other)
+    {
+        return OriginIndex == other.OriginIndex &&
+            DestinationIndex == other.DestinationIndex &&
+            Title == other.Title &&
+            Description == other.Description;
     }
 }
 

@@ -42,7 +42,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _opacity: 1
-    - _size: 1.25
+    - _size: 0
     - _smoothing: 0.5
     m_Colors:
     - _playerPos: {r: 0.5, g: 0.5, b: 0, a: 0}

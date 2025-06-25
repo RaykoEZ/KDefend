@@ -189,7 +189,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 329814037991214225}
   - component: {fileID: 1902514370079539247}
   - component: {fileID: 3605618064992875526}
+  - component: {fileID: 1526858461598899063}
   m_Layer: 7
   m_Name: P_BasicEnemy
   m_TagString: Untagged
@@ -391,6 +392,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1526858461598899063}
+        m_TargetAssemblyTypeName: DropItemOnDefeat, Assembly-CSharp
+        m_MethodName: TryDropItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_onTakeDamage:
     m_PersistentCalls:
       m_Calls:
@@ -406,7 +419,10 @@ MonoBehaviour:
           m_StringArgument: takeHit
           m_BoolArgument: 0
         m_CallState: 2
-  m_weapons: []
+  m_defaultWeapons: []
+  m_onAttack:
+    m_PersistentCalls:
+      m_Calls: []
   m_type: 0
   m_contactDamage: 2
   m_threatIncrease: 1
@@ -459,8 +475,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 5266097158630861302}
   m_Enabled: 0
   m_AgentTypeID: 0
-  m_Radius: 5
-  m_Speed: 200
+  m_Radius: 3
+  m_Speed: 300
   m_Acceleration: 350
   avoidancePriority: 0
   m_AngularSpeed: 0
@@ -569,6 +585,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1526858461598899063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5266097158630861302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd96b0c2b3bc5443b3038673514d60f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dropRate: 0.2
+  m_dropList: {fileID: 11400000, guid: 297f7acff236c984f96a64c0bdac92d5, type: 2}
 --- !u!1 &5281512484494855909
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,7 +714,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1

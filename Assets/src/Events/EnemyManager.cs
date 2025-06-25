@@ -11,7 +11,9 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] EnemyAssetList m_enemyRefs = default;
     [SerializeField] UnityEvent<Enemy> m_onDefeated = default;
     List<Enemy> m_activeEnemies = new List<Enemy>();
+    static int s_activeEnemyCount;
     public IReadOnlyList<Enemy> ActiveEnemies { get => m_activeEnemies; }
+    public static int ActiveEnemyCount => s_activeEnemyCount;
     public List<EnemyState> GetEnemyStates() 
     {
         var ret = new List<EnemyState>();
@@ -51,10 +53,12 @@ public class EnemyManager : MonoBehaviour
         m_threat?.UpdateThreat(spawned.ThreatIncrease);
         m_onDefeated?.Invoke(spawned);
         m_activeEnemies.Remove(spawned);
+        s_activeEnemyCount--;
     }
     public void OnEnemySpawned(Enemy spawned) 
     {
         if (spawned == null) return;
+        s_activeEnemyCount++;
         m_activeEnemies.Add(spawned);
     }
 }

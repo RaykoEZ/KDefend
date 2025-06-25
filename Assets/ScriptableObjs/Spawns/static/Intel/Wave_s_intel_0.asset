@@ -10,20 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cbb4ff6d642b614ba2f0429ba341ac6, type: 3}
-  m_Name: Wave_s_agent0
+  m_Name: Wave_s_intel_0
   m_EditorClassIdentifier: 
   m_enemyGroups:
   - m_spawnLocationIndex: 0
     m_groupsToSpawn:
-    - m_numToSpawn: 3
+    - m_numToSpawn: 5
       m_enemyRefIndex: 0
-  - m_spawnLocationIndex: 1
-    m_groupsToSpawn:
     - m_numToSpawn: 2
-      m_enemyRefIndex: 0
-  - m_spawnLocationIndex: 6
+      m_enemyRefIndex: 1
+  - m_spawnLocationIndex: 2
     m_groupsToSpawn:
-    - m_numToSpawn: 3
+    - m_numToSpawn: 7
       m_enemyRefIndex: 0
-    - m_numToSpawn: 1
+    - m_numToSpawn: 3
       m_enemyRefIndex: 1

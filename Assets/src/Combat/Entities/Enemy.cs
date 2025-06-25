@@ -26,7 +26,17 @@ public class Enemy : BaseCharacter, IHitsEntity
             State = CurrentStats };
 
     public event OnEnemyUpdate OnDefeated;
-
+    protected virtual void Update() 
+    {
+        if (m_attack == null && m_targeting.IsInRange(m_target)) 
+        {
+            UseWeapon();
+        }
+        else 
+        {
+            m_keepFiring = false;
+        }
+    }
     protected override Vector2 GetAimDirection()
     {
         return m_target == null? Vector2.zero : (m_target.transform.position - transform.position).normalized;
@@ -80,15 +90,6 @@ public class Enemy : BaseCharacter, IHitsEntity
             Navigator.enabled = false;
         }
     }
-    public void StopAttack() 
-    {
-        if (m_attack != null)
-        {
-            m_keepFiring = false;
-            StopCoroutine(m_attack);
-            m_attack = null;
-        }
-    }
     public virtual void ResetTarget()
     {
         float duration = UnityEngine.Random.Range(1f, 5f);
@@ -128,9 +129,10 @@ public class Enemy : BaseCharacter, IHitsEntity
     protected virtual IEnumerator HitStun(float duration) 
     {
         StopMoving();
-        StopAttack();
+        m_keepFiring = false;
         yield return new WaitForSeconds(duration);
         StartMoving();
+        yield return new WaitForSeconds(duration);
         UseWeapon();
     }
     protected virtual IEnumerator Movement()
@@ -139,11 +141,17 @@ public class Enemy : BaseCharacter, IHitsEntity
         m_currentDestination = m_target == null ? m_defaultTarget : m_target.transform.position;
         nav?.SetDestination(m_currentDestination);
         float dist = Vector2.Distance(transform.position, m_currentDestination);
+        float randInterval = Random.Range(0.1f, 0.3f);
+        float waitTime;
         while (dist > nav.stoppingDistance)
         {
+            // the farther we are from target, the longer our path refresh interval
+            waitTime = randInterval * Mathf.Clamp(dist / 250f, 1f, 100f);
             nav?.SetDestination(m_currentDestination);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(waitTime);
             m_currentDestination = m_target == null? m_defaultTarget : m_target.transform.position;
+            dist = Vector2.Distance(transform.position, m_currentDestination);
+            Debug.Log(dist);
         }
         m_movement = null;
     }
@@ -163,9 +171,11 @@ public class Enemy : BaseCharacter, IHitsEntity
         {
             for (int i = 0; i < m_currentWeapons.Count; i++)
             {
+                // unleash one instance of a weapon's attack, include its recovery frames
                 yield return Attack_Internal(m_currentWeapons[i]);
             }
         }
+        m_attack = null;
     }
     // contact damage
     public virtual void OnHit<T>(T hit) where T : BaseEntity
@@ -179,7 +189,8 @@ public class Enemy : BaseCharacter, IHitsEntity
         {
             push.Push(dir.normalized, 0.25f);
             Push(-dir.normalized, 0.25f);
-            StartCoroutine(HitStun(0.25f));
+            float stunDuration = Random.Range(0.5f, 1f);
+            StartCoroutine(HitStun(stunDuration));
         }
     }
 }

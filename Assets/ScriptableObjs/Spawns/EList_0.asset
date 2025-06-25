@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EList_0
   m_EditorClassIdentifier: 
   m_enemyRefs:
-  - {fileID: 2273697011688774770, guid: 7f155d21df903a04bacc50e3a541ab5d, type: 3}
-  - {fileID: 4430035897266289553, guid: d4d76bc2492f8384ca1dd53bfe330f13, type: 3}
+  - {fileID: 2273697011688774770, guid: 69e1d706f98444d4aa45798ea296ac00, type: 3}
+  - {fileID: 4430035897266289553, guid: 1f9bb526a312a224b8039cfff4437e48, type: 3}
   - {fileID: 9163418665096585045, guid: d45be5fbf88f22f42a068d3a833764a2, type: 3}
