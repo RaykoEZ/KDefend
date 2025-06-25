@@ -66,6 +66,8 @@ Assets/Imported*
 *.unitypackage
 *.app
 # Media files
+/[Aa]ssets/[Aa]udio/*
+*.wav
 *.mp3
 # Crashlytics generated file
 crashlytics-build.properties
