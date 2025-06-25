@@ -154,14 +154,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd741a8c1adeba42bad9b57fca2f559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_weaponIndex: 0
   m_weaponProperty:
-    Damage: 5
+    Damage: 10
     AttackPerCycle: 1
     Speed: 800
     Life: 3
     DelayPerAttack: 0
-    DelayPerCycle: 2
-    PushPower: 3
+    DelayPerCycle: 5
+    PushPower: 5
   m_onHitSfx: {fileID: 8300000, guid: 881e3f52c86c94f26a60718d35627cd8, type: 3}
   m_onLaunchSfx: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
 --- !u!58 &792987912367956665

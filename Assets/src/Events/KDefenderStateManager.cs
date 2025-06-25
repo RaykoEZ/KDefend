@@ -1,13 +1,17 @@
 ﻿using System.Collections.Generic;
 using Curry.Game;
+using Curry.Events;
 using UnityEngine;
 using UnityEngine.Events;
+// initialises and saves game state
 public class KDefenderStateManager : MonoBehaviour 
 {
     [SerializeField] GameSaveSource m_save = default;
     [SerializeField] StaticFlagEventHandler m_staticEvents = default;
     [SerializeField] ThreatHandler m_threat = default;
+
     [SerializeField] EnemyManager m_enemy = default;
+    [SerializeField] EnemyWaveManager m_wave = default;
 
     [SerializeField] DeliveryDropTable m_deliveryList = default;
     [SerializeField] DeliveryManager m_objectives = default;
@@ -54,5 +58,23 @@ public class KDefenderStateManager : MonoBehaviour
     public void OnGameOver() 
     {
         m_onGameOver?.Invoke();
+    }
+    // trigger intel recovery protocol on enemy side
+    public void OnIntelPickup(EventInfo info)
+    {
+        if (info == null || info.Payload == null) return;
+        bool threat = info.Payload.TryGetValue("threatGain", out object t0) &&
+            t0 is int;
+        bool spawn = info.Payload.TryGetValue("wave", out object t1) &&
+            t1 is SpawnWave;
+        if (threat && spawn)
+        {
+            // increase threat value
+            m_threat?.UpdateThreat((int)t0);
+            // spawn elite/boss wave
+            m_wave?.SpawnWave(t1 as SpawnWave);
+            // Spawn intel decrypter
+
+        }
     }
 }

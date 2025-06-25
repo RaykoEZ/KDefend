@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
@@ -20,17 +18,17 @@ public enum GameEventTriggerType
     Attack,
     Movement
 }
-public interface IItem<T>
+public interface IItem
 {
     ItemProperty Property { get; }
     // Use as counter from item amount/level
     int StackCount { get; set; }
-    public void UseItem(T user);
-    public void OnPickup(T user);
+    public void UseItem();
+    public void OnPickup();
 }
 [RequireComponent(typeof(Collider2D))]
 // class to contain item property and interaction triggers
-public class Item : MonoBehaviour , IItem<Player>
+public class Item : MonoBehaviour , IItem
 {
     [SerializeField] protected bool m_pickupImmediately = default;
     [SerializeField] protected ItemProperty m_property = default;
@@ -51,30 +49,32 @@ public class Item : MonoBehaviour , IItem<Player>
         // when projectile hit this body, trigger on hit effects from projectile
         if (m_pickupImmediately && compExist)
         {
-            OnPickup(result);
+            OnPickup();
         }
         else if (!m_pickupImmediately && compExist)
         {
             m_pickUpCommand?.Enable();
         }
-    }  
+    }
+    void OnTriggerExit2D() 
+    {
+        m_pickUpCommand?.Disable();
+    }
     // when player presses pickup for weapons
-    public void PickupEquipment(InputAction.CallbackContext c) 
+    public virtual void PickupDrop(InputAction.CallbackContext _) 
     {
-        OnPickup(m_user);
+        OnPickup();
     }
-    public virtual void OnPickup(Player player)
+    public virtual void OnPickup()
     {
-        m_onPickup?.Invoke(player);
-        // despawn on pickup
-        if (m_pickupImmediately) 
-        {
-            Destroy(gameObject);
-        }
+        if (m_user == null) return;
+        m_onPickup?.Invoke(m_user);
+        m_pickUpCommand?.Disable();
+        Destroy(gameObject);
     }
-    public virtual void UseItem(Player player)
+    public virtual void UseItem()
     {
         m_isEffectActive = true;
-        m_onUse?.Invoke(player);
+        m_onUse?.Invoke(m_user);
     }
 }

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 706c97cc3e57a4c4ab8c53642ae4f149, type: 3}
-  m_Name: ItemDrop_Agent
+  m_Name: ItemDrop_Agent_0
   m_EditorClassIdentifier: 
   m_dropList:
   - m_toDrop: {fileID: 8254972481268005437, guid: 5ba990d83247e2c468b7574b7136fc3b, type: 3}
-    m_dropWeight: 5
+    m_dropWeight: 2
   - m_toDrop: {fileID: 6385640104035231319, guid: f476fc4126117a146b84382e1fa26a10, type: 3}
-    m_dropWeight: 20
+    m_dropWeight: 23
   - m_toDrop: {fileID: 6385640104035231319, guid: 8aac90a0d4c6ebe4a9712843070638c7, type: 3}
     m_dropWeight: 75

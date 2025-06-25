@@ -3,8 +3,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class Player : BaseCharacter 
 {
-    DeliveryDetail currentlyDelivering;
-    public DeliveryDetail CurrentlyDelivering { get => currentlyDelivering; set => currentlyDelivering = value; }
+
+    DeliveryDetail m_currentlyDelivering;
+    public DeliveryDetail CurrentlyDelivering { get => m_currentlyDelivering; set => m_currentlyDelivering = value; }
 
     // turn off firing
     void Update()

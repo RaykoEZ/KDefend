@@ -189,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pickupImmediately: 1
   m_property:
-    Name: 
+    Name: Small Credit
     Description: 
     ItemCost: 0
   m_onUse:
@@ -216,6 +216,12 @@ MonoBehaviour:
     m_triggerOnAction:
       m_PersistentCalls:
         m_Calls: []
+    m_onInputEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    m_onInputDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &3751437366143518469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_minGain: 10
-  m_maxGain: 100
+  m_maxGain: 50
 --- !u!61 &4352206704140033461
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -274,7 +280,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 125, y: 90}
   m_EdgeRadius: 0
 --- !u!1 &8633927149684214703
 GameObject:

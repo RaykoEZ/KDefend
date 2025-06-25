@@ -4,7 +4,6 @@ using Curry.Events;
 public enum DeliveryType 
 { 
     Food,
-    Intel,
     Smuggle
 }
 [Serializable]
