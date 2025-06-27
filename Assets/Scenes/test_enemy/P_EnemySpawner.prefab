@@ -58,6 +58,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d75b7661f9172438dbf3b392116b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_instanceManager:
+    m_pool:
+      m_numToPool: 64
+      m_defaultParent: {fileID: 3611409090488573964}
   m_spawner: {fileID: 751627042369397462}
 --- !u!1001 &6586828598464056324
 PrefabInstance:

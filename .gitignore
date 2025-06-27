@@ -66,12 +66,7 @@ Assets/Imported*
 *.unitypackage
 *.app
 # Media files
-<<<<<<< HEAD
-/[Aa]ssets/[Aa]udio/*
-*.wav
-=======
 /[Aa]ssets/Audio/*
->>>>>>> battle_test_removeWav
 *.mp3
 *.wav
 # Crashlytics generated file

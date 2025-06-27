@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 2444590754923397719}
   - component: {fileID: 8923827811630182868}
   - component: {fileID: 8804315456932034602}
+  - component: {fileID: 8146757341521713300}
   m_Layer: 6
   m_Name: P_Blaster_1
   m_TagString: Untagged
@@ -394,6 +395,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_weaponRef: {fileID: 5641416596222669894, guid: c6ec8db9dcff0a146a8e41d15e8c90b5, type: 3}
+--- !u!114 &8146757341521713300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2382562744662916160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79c7e82981104bd479769d098659033c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5853163925501879359
 GameObject:
   m_ObjectHideFlags: 0

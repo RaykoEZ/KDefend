@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using Curry.Game;
 // base enemy behaviour
 public delegate void OnEnemyUpdate(Enemy toUpdate);
 [RequireComponent(typeof(NavMeshAgent))]
@@ -66,12 +67,17 @@ public class Enemy : BaseCharacter, IHitsEntity
     {
         if (newTarget == null) return;
         m_target = newTarget;
-        SetupNavigation();
         // if not moving, start chasing
         StartMoving();
     }
     public void StartMoving()
     {
+        if (m_current.Health <= 0) return;
+        SetupNavigation();
+        var nav = Navigator;
+        m_currentDestination = m_target == null ? m_defaultTarget : m_target.transform.position;
+        // if enemy sees player, immediately reroute path to pusue player
+        nav?.SetDestination(m_currentDestination);
         if (m_movement == null)
         {
             Navigator.enabled = true;
@@ -81,14 +87,12 @@ public class Enemy : BaseCharacter, IHitsEntity
     }
     public void StopMoving()
     {
-        if (m_movement != null)
-        {
-            StopCoroutine(m_movement);
-            Navigator.velocity = Vector3.zero;
-            Navigator.isStopped = true;
-            m_movement = null;
-            Navigator.enabled = false;
-        }
+        if (m_movement == null) return;
+        StopCoroutine(m_movement);
+        Navigator.velocity = Vector3.zero;
+        Navigator.isStopped = true;
+        m_movement = null;
+        Navigator.enabled = false;      
     }
     public virtual void ResetTarget()
     {
@@ -124,34 +128,30 @@ public class Enemy : BaseCharacter, IHitsEntity
     {
         StopMoving();
         EnemyAggroHandler.Remove(this);
-        Destroy(gameObject);
+        GetComponent<PoolableBehaviour>()?.ReturnToPool();
     }
     protected virtual IEnumerator HitStun(float duration) 
     {
         StopMoving();
         m_keepFiring = false;
         yield return new WaitForSeconds(duration);
+        if (m_current.Health <= 0) yield break;
         StartMoving();
-        yield return new WaitForSeconds(duration);
         UseWeapon();
     }
     protected virtual IEnumerator Movement()
     {
         var nav = Navigator;
-        m_currentDestination = m_target == null ? m_defaultTarget : m_target.transform.position;
-        nav?.SetDestination(m_currentDestination);
         float dist = Vector2.Distance(transform.position, m_currentDestination);
-        float randInterval = Random.Range(0.1f, 0.3f);
         float waitTime;
         while (dist > nav.stoppingDistance)
         {
             // the farther we are from target, the longer our path refresh interval
-            waitTime = randInterval * Mathf.Clamp(dist / 250f, 1f, 100f);
+            waitTime = 0.1f * Mathf.Clamp(dist / 2000f, 0.5f, 5f);
             nav?.SetDestination(m_currentDestination);
             yield return new WaitForSeconds(waitTime);
             m_currentDestination = m_target == null? m_defaultTarget : m_target.transform.position;
             dist = Vector2.Distance(transform.position, m_currentDestination);
-            Debug.Log(dist);
         }
         m_movement = null;
     }
@@ -189,8 +189,7 @@ public class Enemy : BaseCharacter, IHitsEntity
         {
             push.Push(dir.normalized, 0.25f);
             Push(-dir.normalized, 0.25f);
-            float stunDuration = Random.Range(0.5f, 1f);
-            StartCoroutine(HitStun(stunDuration));
+            StartCoroutine(HitStun(0.5f));
         }
     }
 }

@@ -15,7 +15,7 @@ public class EnemyWaveManager : MonoBehaviour
     // Spawner in locations
     [SerializeField] List<EnemySpawner> m_spawners = default;
     [SerializeField] UnityEvent<Enemy> m_onEnemySpawn = default;
-    [SerializeField] UnityEvent<Enemy> m_onEnemyDefeat= default;
+    [SerializeField] UnityEvent<Enemy> m_onEnemyDefeat = default;
     [SerializeField] BaseEntity m_defaultAggroTarget = default;
     [SerializeField] RoutineCaller m_routineSpawn = default;
     bool m_waveInProgress = false;
@@ -59,30 +59,34 @@ public class EnemyWaveManager : MonoBehaviour
     protected virtual int SpawnGroup(SpawnGroup newGroup) 
     {
         int numEnemies = 0;
+        // random spawn location if location index is -1 or over max index
         int i = newGroup.SpawnLocationIndex > 0 &&
                 newGroup.SpawnLocationIndex < m_spawners.Count ?
-                newGroup.SpawnLocationIndex : 0;
+                newGroup.SpawnLocationIndex : UnityEngine.Random.Range(0, m_spawners.Count);
         foreach (var spawn in newGroup.GroupsToSpawn.Items)
         {
             var enemyRef = m_enemyRefs.GetEnemyRef(spawn.SpawnRef);
             // spawn the group
-            m_spawners[i].Spawn(enemyRef, m_spawnParent, spawn.NumToSpawn, 0.1f, PrepareEnenmy);
+            m_spawners[i].Spawn(enemyRef, m_spawnParent, spawn.NumToSpawn, 3f, PrepareEnenmy);
             numEnemies++;
         }
         return numEnemies;
     }
     // returns number of enemies spawned from all spawned groups
-    public int SpawnWave(SpawnWave wave) 
+    public void SpawnWave(SpawnWave wave) 
     {
         // check for number of enemies already on field beofre spawning more
-        if (EnemyManager.ActiveEnemyCount > m_stopRoutineSpawnOnSpawnCount) return 0;
+        if (EnemyManager.ActiveEnemyCount > m_stopRoutineSpawnOnSpawnCount) return;
 
-        int numEnemies = 0;
+        StartCoroutine(SpawnWave_Internal(wave));       
+    }
+    IEnumerator SpawnWave_Internal(SpawnWave wave) 
+    {
         foreach (var group in wave.EnemyGroups)
         {
-            numEnemies += SpawnGroup(group);
+            SpawnGroup(group);
+            yield return SpawnCooldown();
         }
-        return numEnemies;
     }
     public void StopRoutineWave()
     {
@@ -110,7 +114,7 @@ public class EnemyWaveManager : MonoBehaviour
     }
     IEnumerator SpawnCooldown()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
     }
     void PrepareEnenmy(Enemy spawned) 
     {

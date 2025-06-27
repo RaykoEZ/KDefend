@@ -39,7 +39,7 @@ namespace Curry.UI
             {
                 t += Time.deltaTime;
                 m_bgmSource.volume = m_fadeOutCurve.Evaluate(t / m_fadeOutDuration);
-                yield return null;
+                yield return new WaitForEndOfFrame();
             }
         }
         IEnumerator FadeIn() 
@@ -49,7 +49,7 @@ namespace Curry.UI
             {
                 t += Time.deltaTime;
                 m_bgmSource.volume = m_fadeInCurve.Evaluate(t/m_fadeInDuration);
-                yield return null;
+                yield return new WaitForEndOfFrame();
             }
         }
     }

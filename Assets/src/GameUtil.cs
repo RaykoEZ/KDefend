@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using Curry.Game;
 public struct FloatRange
 {
     private float m_min;

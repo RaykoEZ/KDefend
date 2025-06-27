@@ -212,7 +212,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_pickUpCommand:
-    m_autoDisable: 0
+    m_autoDisable: 1
     m_inputTarget: {fileID: -5413808958148811922, guid: 30eaa1422e2aefb4c88373f47f9bcca5, type: 3}
     m_triggerOnAction:
       m_PersistentCalls:

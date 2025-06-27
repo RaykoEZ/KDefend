@@ -62,6 +62,7 @@ public class KDefenderStateManager : MonoBehaviour
     // trigger intel recovery protocol on enemy side
     public void OnIntelPickup(EventInfo info)
     {
+        
         if (info == null || info.Payload == null) return;
         bool threat = info.Payload.TryGetValue("threatGain", out object t0) &&
             t0 is int;
@@ -74,7 +75,6 @@ public class KDefenderStateManager : MonoBehaviour
             // spawn elite/boss wave
             m_wave?.SpawnWave(t1 as SpawnWave);
             // Spawn intel decrypter
-
         }
     }
 }
