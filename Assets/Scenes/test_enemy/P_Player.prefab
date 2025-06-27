@@ -792,10 +792,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c92d65ba23be947a25a6e08f7c8721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_seeThroughSize: 1.25
   m_seeThroughMaterial: {fileID: 2100000, guid: 3083e89ebd113344f99d251f96486219, type: 2}
   m_raycastChecks:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 16384
 --- !u!82 &7722315165179465397
 AudioSource:
   m_ObjectHideFlags: 0

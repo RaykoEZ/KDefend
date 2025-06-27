@@ -6,6 +6,7 @@ using UnityEngine;
 [Serializable]
 public struct WeaponProperty 
 {
+    public bool PassWalls;
     public int Damage;
     public int AttackPerCycle;
     public float Speed;
@@ -25,6 +26,16 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
     protected float m_lifeTimer = 0f;
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
     public override bool InstantiateWeapon => true;
+    protected virtual void OnTriggerEnter2D(Collider2D c) 
+    {
+        string layerName = LayerMask.LayerToName(c.gameObject.layer);
+        if (!WeaponProperty.PassWalls && layerName == "Building") 
+        {
+            // end flying loop and cleanup
+            StopAllCoroutines();
+            EndProjectile();
+        }
+    }
     IEnumerator Flying()
     {
         while (m_isFlying)
@@ -37,9 +48,9 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
             if (m_lifeTimer >= WeaponProperty.Life)
             {
                 m_isFlying = false;
-                EndProjectile();
             }
         }
+        // stop flying loop and cleanup
         EndProjectile();
     }
     public override void OnHit<T>(T hit)
@@ -58,6 +69,7 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
     }
     protected virtual void EndProjectile() 
     {
+        m_isFlying = false;
         Destroy(gameObject);
     }
 }
