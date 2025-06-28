@@ -156,8 +156,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_weaponIndex: 0
   m_weaponProperty:
+    PassWalls: 0
     Damage: 2
-    AttackPerCycle: 1
+    AttackPerCycle: 2
     Speed: 800
     Life: 3
     DelayPerAttack: 0.2
@@ -165,6 +166,7 @@ MonoBehaviour:
     PushPower: 2.5
   m_onHitSfx: {fileID: 8300000, guid: 881e3f52c86c94f26a60718d35627cd8, type: 3}
   m_onLaunchSfx: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  m_spreadAngleRange: 5
 --- !u!58 &792987912367956665
 CircleCollider2D:
   m_ObjectHideFlags: 0

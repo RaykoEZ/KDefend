@@ -22,6 +22,8 @@ public interface IHitsEntity
 [RequireComponent(typeof(Rigidbody2D))]
 public class BaseProjectile : BaseWeapon, IHitsEntity
 {
+    [Range(0, 60)]
+    [SerializeField] int m_spreadAngleRange = default;
     protected bool m_isFlying = true;
     protected float m_lifeTimer = 0f;
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
@@ -52,6 +54,12 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
         }
         // stop flying loop and cleanup
         EndProjectile();
+    }
+    protected override Vector2 ModifyAttackDirection(Vector2 directionNormalized)
+    {
+        if (m_spreadAngleRange == 0) return directionNormalized;
+        float rot = UnityEngine.Random.Range(-m_spreadAngleRange, m_spreadAngleRange);
+        return (Quaternion.AngleAxis(rot, Vector3.forward) * directionNormalized);
     }
     public override void OnHit<T>(T hit)
     {

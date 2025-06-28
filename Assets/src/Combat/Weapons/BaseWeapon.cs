@@ -29,14 +29,19 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
         {
             // play behaviour for each attack instance (e.g. a swing of a bat/a bullet flying)
             T instance = instantiate ? NewAttackInstance(weaponRef, user) : weaponRef;
-            m_currentDirection = directionNormalized;
-            instance?.LaunchAttack(directionNormalized);
+            m_currentDirection = ModifyAttackDirection(directionNormalized);
+            instance?.LaunchAttack(m_currentDirection);
             if (m_onLaunchSfx != null) 
             {
                 instance?.GetComponent<AudioSource>()?.PlayOneShot(m_onLaunchSfx);
             }
             yield return new WaitForSeconds(WeaponProperty.DelayPerAttack);
         }
+    }
+    // used for changing firing/attacking direction
+    protected virtual Vector2 ModifyAttackDirection(Vector2 directionNormalized) 
+    {
+        return directionNormalized;
     }
     // call to fire off a projectile
     public IEnumerator Attack<T>(T weaponRef, Transform user, Vector2 directionNormalized, bool instantiate = true) 

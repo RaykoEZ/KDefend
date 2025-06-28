@@ -87,7 +87,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     }
     public void StopMoving()
     {
-        if (m_movement == null) return;
+      if (m_movement == null) return;
         StopCoroutine(m_movement);
         Navigator.velocity = Vector3.zero;
         Navigator.isStopped = true;
@@ -104,11 +104,13 @@ public class Enemy : BaseCharacter, IHitsEntity
         StopMoving();
         yield return new WaitForSeconds(duration);
         m_target = null;
+        Navigator?.SetDestination(m_defaultTarget);
+
     }
     public override void TakeDamage(int baseDamage)
     {
         // the lower the enemy hp, the greater the stun duration
-        float stunDuration = UnityEngine.Random.Range(0.3f, 0.5f);
+        float stunDuration = UnityEngine.Random.Range(0.2f, 0.5f);
         StartCoroutine(HitStun(stunDuration));
         base.TakeDamage(baseDamage);
     }
@@ -146,11 +148,11 @@ public class Enemy : BaseCharacter, IHitsEntity
         float waitTime;
         while (dist > nav.stoppingDistance)
         {
+            m_currentDestination = m_target == null ? m_defaultTarget : m_target.transform.position;
             // the farther we are from target, the longer our path refresh interval
-            waitTime = 0.1f * Mathf.Clamp(dist / 2000f, 0.5f, 5f);
+            waitTime =  Mathf.Clamp(0.1f * (dist / 100f), 0.1f, 5f);
             nav?.SetDestination(m_currentDestination);
             yield return new WaitForSeconds(waitTime);
-            m_currentDestination = m_target == null? m_defaultTarget : m_target.transform.position;
             dist = Vector2.Distance(transform.position, m_currentDestination);
         }
         m_movement = null;
@@ -189,7 +191,7 @@ public class Enemy : BaseCharacter, IHitsEntity
         {
             push.Push(dir.normalized, 0.25f);
             Push(-dir.normalized, 0.25f);
-            StartCoroutine(HitStun(0.5f));
+            StartCoroutine(HitStun(0.25f));
         }
     }
 }

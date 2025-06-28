@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 public class Player : BaseCharacter 
 {
-
     DeliveryDetail m_currentlyDelivering;
     public DeliveryDetail CurrentlyDelivering { get => m_currentlyDelivering; set => m_currentlyDelivering = value; }
 

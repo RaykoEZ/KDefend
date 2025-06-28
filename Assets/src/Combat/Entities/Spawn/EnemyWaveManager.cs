@@ -67,7 +67,7 @@ public class EnemyWaveManager : MonoBehaviour
         {
             var enemyRef = m_enemyRefs.GetEnemyRef(spawn.SpawnRef);
             // spawn the group
-            m_spawners[i].Spawn(enemyRef, m_spawnParent, spawn.NumToSpawn, 3f, PrepareEnenmy);
+            m_spawners[i].Spawn(enemyRef, m_spawnParent, spawn.NumToSpawn, 0.5f, PrepareEnenmy);
             numEnemies++;
         }
         return numEnemies;
