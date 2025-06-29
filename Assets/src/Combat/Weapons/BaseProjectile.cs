@@ -67,6 +67,11 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
         // kill object when hitting a target, unless we pierce
         m_isFlying = false;
     }
+    public void Reflect() 
+    {
+        if (!m_isFlying) return;
+        m_currentDirection = -m_currentDirection;
+    }
     // call to fire off a projectile
     protected override void LaunchAttack(Vector2 directionNormalized) 
     {
