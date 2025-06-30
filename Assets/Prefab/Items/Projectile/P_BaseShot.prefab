@@ -153,16 +153,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd741a8c1adeba42bad9b57fca2f559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_weaponIndex: 0
   m_weaponProperty:
+    PassWalls: 0
     Damage: 5
     AttackPerCycle: 1
-    Speed: 950
+    Speed: 1000
     Life: 3.52
     DelayPerAttack: 0.1
-    DelayPerCycle: 1.01
+    DelayPerCycle: 0.5
     PushPower: 2.5
   m_onHitSfx: {fileID: 0}
   m_onLaunchSfx: {fileID: 0}
+  m_spreadAngleRange: 2
 --- !u!58 &792987912367956665
 CircleCollider2D:
   m_ObjectHideFlags: 0

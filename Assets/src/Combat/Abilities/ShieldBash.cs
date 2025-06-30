@@ -4,21 +4,21 @@ public class ShieldBash : ActiveAbility
 {
     [SerializeField] float m_pushPower = default;
     [SerializeField] int m_damage = default;
-    Enemy Self => GetComponent<Enemy>();
+    private BaseEntity m_target;
+    public BaseEntity Target { get => m_target; set => m_target = value; }
     protected override void Effect_Internal()
     {
-        BaseCharacter target = Self?.CurrentTarget as BaseCharacter;
-        if (target == null)
-        {
-            return;
-        }
-        Bash(target);
+        Bash(Target);
     }
     // Knockback player
-    void Bash(BaseCharacter target)
+    void Bash(BaseEntity target)
     {
+        if (Target == null) return;
         Vector2 pushDir = target.transform.position - transform.position;
         target.TakeDamage(m_damage);
-        target.Push(pushDir.normalized, m_pushPower);
+        if (target is IPushable push) 
+        {
+            push.Push(pushDir.normalized, m_pushPower);
+        }
     }
 }

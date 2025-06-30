@@ -4,7 +4,6 @@ public class Player : BaseCharacter
 {
     DeliveryDetail m_currentlyDelivering;
     public DeliveryDetail CurrentlyDelivering { get => m_currentlyDelivering; set => m_currentlyDelivering = value; }
-
     // turn off firing
     void Update()
     {

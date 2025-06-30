@@ -5,7 +5,7 @@ public abstract class ActiveAbility : MonoBehaviour
 {
     [Range(0, 999)]
     [SerializeField] protected int m_cooldownTime = default;
-    [SerializeField] protected int m_hitsToInterrupt = default;
+    [SerializeField] protected int m_hitsToEnd = default;
     bool m_onCooldown = false;
     protected int m_disruptCounter = 0;
     protected bool m_isChanneling = false;
@@ -13,12 +13,11 @@ public abstract class ActiveAbility : MonoBehaviour
     // listen to change animation for each skill charge update
     protected event AbilityUpdate OnChannelInterrupt;
     protected event AbilityUpdate OnChannelInterval;
-    public bool TryUse() 
+    public void TryUse() 
     {
-        if (m_onCooldown) return false;
+        if (m_onCooldown) return;
         StartCoroutine(Cooldown(m_cooldownTime));
         Effect_Internal();
-        return true;
     }
     protected abstract void Effect_Internal();
     protected IEnumerator Cooldown(float duration) 
@@ -31,7 +30,7 @@ public abstract class ActiveAbility : MonoBehaviour
     {
         if (!m_isChanneling) return;
         m_disruptCounter++;
-        if (m_disruptCounter > m_hitsToInterrupt) 
+        if (m_disruptCounter > m_hitsToEnd) 
         {
             m_disruptCounter = 0;
             m_isChanneling = false;

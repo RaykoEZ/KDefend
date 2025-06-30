@@ -58,5 +58,5 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
             push.Push(m_currentDirection, WeaponProperty.PushPower);
         }
     }
-    protected abstract void LaunchAttack(Vector2 directionNormalized);
+    public abstract void LaunchAttack(Vector2 directionNormalized);
 }

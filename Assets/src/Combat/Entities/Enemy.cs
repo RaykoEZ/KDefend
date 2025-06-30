@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.AI;
 using Curry.Game;
 // base enemy behaviour
@@ -12,6 +13,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     [Range(-100, 100)]
     [SerializeField] protected int m_threatIncrease = default;
     [SerializeField] protected RangeDetector m_targeting = default;
+    [SerializeField] protected UnityEvent<BaseEntity> m_onWeaponLockon = default;
     protected float m_speedVariant;
     private Vector2 m_defaultTarget;
     protected Vector2 m_currentDestination;
@@ -49,7 +51,7 @@ public class Enemy : BaseCharacter, IHitsEntity
         nav.updateUpAxis = false;
         nav.enabled = true;
     }
-    public void Init(BaseEntity defaultTarget = null)
+    public virtual void Init(BaseEntity defaultTarget = null)
     {
         base.Init(BaseStats);
         EnemyAggroHandler.Add(this);
@@ -67,6 +69,8 @@ public class Enemy : BaseCharacter, IHitsEntity
     {
         if (newTarget == null) return;
         m_target = newTarget;
+        // tell all separate weapons/skills to update target
+        m_onWeaponLockon?.Invoke(m_target);
         // if not moving, start chasing
         StartMoving();
     }

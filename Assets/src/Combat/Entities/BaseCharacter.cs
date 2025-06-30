@@ -76,7 +76,7 @@ public class BaseCharacter : BaseEntity , IPushable
     public void Push(Vector2 dir, float power)
     {
         float rand = UnityEngine.Random.Range(0.5f, 5f);
-        StartCoroutine(Push_Internal(dir, power * rand));
+        StartCoroutine(Push_Internal(dir, CurrentStats.Property.KnockbackModifier * power * rand));
     }
     protected virtual IEnumerator Push_Internal(Vector2 dirNormalize, float power)
     {

@@ -221,6 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6562350153211482232}
   - component: {fileID: 3200636755181533980}
+  - component: {fileID: 3697315569957694749}
   m_Layer: 7
   m_Name: hitBox
   m_TagString: Untagged
@@ -283,6 +284,36 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 50
+--- !u!114 &3697315569957694749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5160217118368490008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d34f47e0e60494ab5395c8732784d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_onEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2273697011688774770}
+        m_TargetAssemblyTypeName: BaseEntity, Assembly-CSharp
+        m_MethodName: OnHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_onExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5266097158630861302
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,6 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_base:
     Health: 100
+    KnockbackModifier: 1
     MoveSpeed: 50
   m_onDefeat:
     m_PersistentCalls:

@@ -11,6 +11,7 @@ public struct EntityState : IEquatable<EntityState>
     {
         return Position == other.Position &&
             Property.Health == other.Property.Health &&
+            Property.KnockbackModifier == other.Property.KnockbackModifier &&
             Property.MoveSpeed == other.Property.MoveSpeed;
     }
 }

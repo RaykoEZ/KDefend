@@ -1,12 +1,13 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem.LowLevel;
 
 [Serializable]
 public struct EntityProperty
 {
     public int Health;
+    [Range(0.1f, 2f)]
+    public float KnockbackModifier;
     [Range(0f, 200f)]
     public float MoveSpeed;
 }
@@ -32,11 +33,11 @@ public class BaseEntity : MonoBehaviour
         get => new EntityState { 
             Property = m_current,
             Position = transform.position};}
-    public float HpRatio => (float)CurrentStats.Property.Health / (float)m_base.Health;
+    public float HpRatio => CurrentStats.Property.Health / (float)m_base.Health;
     protected virtual void Awake()
     {
     }
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnHit(Collider2D collision)
     {
         if (collision.attachedRigidbody == null) return;
         // when projectile hit this body, trigger on hit effects from projectile

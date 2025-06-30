@@ -15,7 +15,7 @@ public class Guard : AbilityHandler
     public override void OnTakeHit()
     {
         base.OnTakeHit();
-        GuardSkillCheck();     
+        GuardSkillCheck();
     }
     // Reflects colliding projectiles for X seconds, affects both enemy & player
     void GuardSkillCheck()

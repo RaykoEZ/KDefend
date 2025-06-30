@@ -12,7 +12,7 @@ public class MeleeAttack : BaseWeapon
     public override bool InstantiateWeapon => false;
     public virtual bool ComboFrame { protected get => comboFrame; set => comboFrame = value; }
     public virtual bool InProgress { protected get => inProgress; set => inProgress = value; }
-    protected override void LaunchAttack(Vector2 directionNormalized)
+    public override void LaunchAttack(Vector2 directionNormalized)
     {
         if (InProgress && !ComboFrame)
         {

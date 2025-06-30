@@ -1,25 +1,25 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
 public class ReflectProjectile : ActiveAbility
 {
     [SerializeField] float m_duration = default;
+    [SerializeField] Transform m_reflectParent = default;
     protected override void Effect_Internal()
     {
-        GetComponent<Collider2D>().enabled = true;
+        m_reflectParent.gameObject.SetActive(true);
         StartCoroutine(Channeling(m_duration, StopReflect));
     }
-    void OnTriggerEnter2D(Collider2D collision)
+    public void OnReflect(Collider2D collision)
     {
         if (collision.attachedRigidbody == null) return;
         // when projectile hit this body, trigger on hit effects from projectile
         if (collision.attachedRigidbody.TryGetComponent(out BaseProjectile projectile))
         {
-            projectile?.Reflect();
+            projectile?.Reflect(gameObject.layer);
         }
     }
     void StopReflect() 
     {
-        GetComponent<Collider2D>().enabled = false;
+        m_reflectParent.gameObject.SetActive(false);
     }
 }
