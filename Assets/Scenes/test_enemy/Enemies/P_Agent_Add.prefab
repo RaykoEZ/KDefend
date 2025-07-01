@@ -146,7 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5893912823647865358}
   - component: {fileID: 1346194620474554490}
-  - component: {fileID: 7802310386206845098}
+  - component: {fileID: 5767844043762907196}
   m_Layer: 7
   m_Name: hitBox
   m_TagString: Untagged
@@ -209,7 +209,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 50
---- !u!114 &7802310386206845098
+--- !u!114 &5767844043762907196
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -258,8 +258,9 @@ GameObject:
   - component: {fileID: 2182813093502410010}
   - component: {fileID: 3755754206439444329}
   - component: {fileID: 1844722118509606399}
+  - component: {fileID: 1742133721172013432}
   m_Layer: 7
-  m_Name: P_Agent
+  m_Name: P_Agent_Add
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,7 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_stealth: {fileID: 293262353951969813}
-  m_callHelp: {fileID: 7606457756912245807}
+  m_callHelp: {fileID: 0}
   m_onLowHealth:
   - {fileID: 5641416596222669894, guid: 31c3a0596f3477c49812b0c5fb023f53, type: 3}
 --- !u!114 &3847191369092980020
@@ -466,10 +467,26 @@ MonoBehaviour:
           m_StringArgument: attack
           m_BoolArgument: 0
         m_CallState: 2
-  m_type: 1
+  m_type: 2
   m_contactDamage: 5
   m_threatIncrease: 20
+  m_movementHandler: {fileID: 1742133721172013432}
   m_targeting: {fileID: 586710463100209767}
+  m_onTargetLockon:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1742133721172013432}
+        m_TargetAssemblyTypeName: EnemyMovement, Assembly-CSharp
+        m_MethodName: UpdateTarget
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!225 &9166003067599549407
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -613,6 +630,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c7e82981104bd479769d098659033c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1742133721172013432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5336679601280130381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c4da5f21bda83248be3636dadcb2df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6330907610716409922
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,7 +700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.10868071, b: 0.7660377, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -873,7 +902,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6118799502581074343}
   - component: {fileID: 293262353951969813}
-  - component: {fileID: 7606457756912245807}
   m_Layer: 7
   m_Name: Abilities
   m_TagString: Untagged
@@ -912,28 +940,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1267c32b120564840ab25953fe45eb65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_cooldownTime: 30
-  m_hitsToEnd: 5
+  m_cooldownTime: 35
+  m_hitsToEnd: 0
   m_anim: {fileID: 3115157289695613641}
-  m_duration: 30
---- !u!114 &7606457756912245807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8874223858635883786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffa5214a8acab9644868812f34221fcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_cooldownTime: 999
-  m_hitsToEnd: 3
-  m_reinforcement: {fileID: 11400000, guid: fc52fe0d80a0b2e44a420c90faf28cb1, type: 2}
-  m_spawnHelp:
-    m_eventToTrigger: {fileID: 11400000, guid: e617e716cd29a2f49aff9c8f7ba069b0, type: 2}
-  m_channellingTime: 7
+  m_duration: 40
 --- !u!1 &9061027466069622586
 GameObject:
   m_ObjectHideFlags: 0

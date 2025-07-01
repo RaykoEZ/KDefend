@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
 using Curry.Game;
+using System;
 // base enemy behaviour
 public delegate void OnEnemyUpdate(Enemy toUpdate);
 [RequireComponent(typeof(NavMeshAgent))]
@@ -12,13 +13,10 @@ public class Enemy : BaseCharacter, IHitsEntity
     [SerializeField] int m_contactDamage = default;
     [Range(-100, 100)]
     [SerializeField] protected int m_threatIncrease = default;
+    [SerializeField] protected EnemyMovement m_movementHandler = default;
     [SerializeField] protected RangeDetector m_targeting = default;
-    [SerializeField] protected UnityEvent<BaseEntity> m_onWeaponLockon = default;
-    protected float m_speedVariant;
-    private Vector2 m_defaultTarget;
-    protected Vector2 m_currentDestination;
+    [SerializeField] protected UnityEvent<BaseEntity> m_onTargetLockon = default;
     protected BaseEntity m_target;
-    Coroutine m_movement;
     Coroutine m_attack;
     public int ThreatIncrease => m_threatIncrease;
     public BaseEntity CurrentTarget { get => m_target; }
@@ -44,22 +42,13 @@ public class Enemy : BaseCharacter, IHitsEntity
     {
         return m_target == null? Vector2.zero : (m_target.transform.position - transform.position).normalized;
     }
-    void SetupNavigation() 
-    {
-        var nav = Navigator;
-        nav.updateRotation = false;
-        nav.updateUpAxis = false;
-        nav.enabled = true;
-    }
     public virtual void Init(BaseEntity defaultTarget = null)
     {
         base.Init(BaseStats);
         EnemyAggroHandler.Add(this);
-        m_defaultTarget = defaultTarget == null? transform.position : defaultTarget.transform.position;
         m_target = defaultTarget;
-        m_speedVariant = Random.Range(0.75f, 1.25f);
-        SetupNavigation();
-        StartMoving();
+        m_movementHandler?.Init(defaultTarget);
+        m_movementHandler?.StartMoving();
     }
     public void SetAggro(bool enable = true) 
     {
@@ -70,46 +59,7 @@ public class Enemy : BaseCharacter, IHitsEntity
         if (newTarget == null) return;
         m_target = newTarget;
         // tell all separate weapons/skills to update target
-        m_onWeaponLockon?.Invoke(m_target);
-        // if not moving, start chasing
-        StartMoving();
-    }
-    public void StartMoving()
-    {
-        if (m_current.Health <= 0) return;
-        SetupNavigation();
-        var nav = Navigator;
-        m_currentDestination = m_target == null ? m_defaultTarget : m_target.transform.position;
-        // if enemy sees player, immediately reroute path to pusue player
-        nav?.SetDestination(m_currentDestination);
-        if (m_movement == null)
-        {
-            Navigator.enabled = true;
-            Navigator.isStopped = false;
-            m_movement = StartCoroutine(Movement());
-        }
-    }
-    public void StopMoving()
-    {
-      if (m_movement == null) return;
-        StopCoroutine(m_movement);
-        Navigator.velocity = Vector3.zero;
-        Navigator.isStopped = true;
-        m_movement = null;
-        Navigator.enabled = false;      
-    }
-    public virtual void ResetTarget()
-    {
-        float duration = UnityEngine.Random.Range(1f, 5f);
-        StartCoroutine(Standby(duration));
-    }
-    protected virtual IEnumerator Standby(float duration) 
-    {
-        StopMoving();
-        yield return new WaitForSeconds(duration);
-        m_target = null;
-        Navigator?.SetDestination(m_defaultTarget);
-
+        m_onTargetLockon?.Invoke(m_target);
     }
     public override void TakeDamage(int baseDamage)
     {
@@ -124,7 +74,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     }
     protected virtual IEnumerator Defeat_Internal() 
     {
-        StopMoving();
+        m_movementHandler?.StopMoving();
         base.OnDefeat();
         OnDefeated?.Invoke(this);
         yield return new WaitForSeconds(0.5f);
@@ -132,34 +82,18 @@ public class Enemy : BaseCharacter, IHitsEntity
     }
     public void Despawn() 
     {
-        StopMoving();
+        m_movementHandler?.StopMoving();
         EnemyAggroHandler.Remove(this);
         GetComponent<PoolableBehaviour>()?.ReturnToPool();
     }
     protected virtual IEnumerator HitStun(float duration) 
     {
-        StopMoving();
+        m_movementHandler?.StopMoving();
         m_keepFiring = false;
         yield return new WaitForSeconds(duration);
         if (m_current.Health <= 0) yield break;
-        StartMoving();
+        m_movementHandler?.StartMoving();
         UseWeapon();
-    }
-    protected virtual IEnumerator Movement()
-    {
-        var nav = Navigator;
-        float dist = Vector2.Distance(transform.position, m_currentDestination);
-        float waitTime;
-        while (dist > nav.stoppingDistance)
-        {
-            m_currentDestination = m_target == null ? m_defaultTarget : m_target.transform.position;
-            // the farther we are from target, the longer our path refresh interval
-            waitTime =  Mathf.Clamp(0.1f * (dist / 100f), 0.1f, 5f);
-            nav?.SetDestination(m_currentDestination);
-            yield return new WaitForSeconds(waitTime);
-            dist = Vector2.Distance(transform.position, m_currentDestination);
-        }
-        m_movement = null;
     }
     public override void UseWeapon()
     {
@@ -197,5 +131,10 @@ public class Enemy : BaseCharacter, IHitsEntity
             Push(-dir.normalized, 0.25f);
             StartCoroutine(HitStun(0.25f));
         }
+    }
+    internal void ResetTarget()
+    {
+        m_target = null;
+        m_movementHandler?.ResetTarget();
     }
 }
