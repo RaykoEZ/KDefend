@@ -6,15 +6,14 @@ public class Stealth : ActiveAbility
     [SerializeField] float m_duration = default;
     protected override void Effect_Internal()
     {
-        if (m_isChanneling) return;
+        if (m_channeling != null) return;
         OnChannelInterrupt += DisableStealth;
         m_anim?.SetBool("hide", true);
-        StartCoroutine(Channeling(m_duration, DisableStealth));
+        StartChanneling(m_duration, DisableStealth);
     }
     void DisableStealth() 
     {
         OnChannelInterrupt -= DisableStealth;
-        m_isChanneling = false;
         m_anim?.SetBool("hide", false);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Enemy))]
 public class EnemyMovement : MonoBehaviour 
 {
+    [SerializeField] bool m_moveOnsight = default;
     protected float m_speedVariant;
     protected Vector2 m_currentDestination;
     protected Vector2 m_defaultTarget;
@@ -51,8 +52,11 @@ public class EnemyMovement : MonoBehaviour
     {
         if (newTarget == null) return;
         m_target = newTarget;
-        // if not moving, start chasing
-        StartMoving();
+        if (m_moveOnsight)
+        {
+            // if not moving, start chasing
+            StartMoving();
+        }
     }
     public virtual void ResetTarget()
     {

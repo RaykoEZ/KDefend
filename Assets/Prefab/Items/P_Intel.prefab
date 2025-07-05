@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 954722020943534138}
   - component: {fileID: 8313643495510947454}
   - component: {fileID: 6391296918578521419}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 8254972481268005437}
   - component: {fileID: 5917014744700529356}
   - component: {fileID: 753004448712048047}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: P_Intel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 2607893346634920002}
   - component: {fileID: 6365393838434476221}
   - component: {fileID: 3390191896755749202}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}

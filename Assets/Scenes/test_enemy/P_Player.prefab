@@ -744,7 +744,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 0, b: 0.21552944, a: 0}
-      key1: {r: 1, g: 0, b: 0.029105797, a: 0}
+      key1: {r: 1, g: 0, b: 0.029105797, a: 0.5882353}
       key2: {r: 0.26981127, g: 1, b: 0.9869838, a: 0.59607846}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -760,7 +760,7 @@ LineRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 62754
+      atime1: 65535
       atime2: 65535
       atime3: 0
       atime4: 0
@@ -770,7 +770,7 @@ LineRenderer:
       m_Mode: 1
       m_ColorSpace: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 3
+      m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
@@ -797,7 +797,6 @@ MonoBehaviour:
   m_blockingLayers:
     serializedVersion: 2
     m_Bits: 640
-  m_cam: {fileID: 0}
   m_origin: {fileID: 272584676624859889}
   m_lineRender: {fileID: 3226409504644024737}
   m_lengthScale: 1500

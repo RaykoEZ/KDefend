@@ -7,7 +7,7 @@ public class ReflectProjectile : ActiveAbility
     protected override void Effect_Internal()
     {
         m_reflectParent.gameObject.SetActive(true);
-        StartCoroutine(Channeling(m_duration, StopReflect));
+        StartChanneling(m_duration, StopReflect);
     }
     public void OnReflect(Collider2D collision)
     {

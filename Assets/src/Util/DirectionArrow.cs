@@ -14,13 +14,11 @@ namespace Curry.Game
         [SerializeField] protected LineRenderer m_lineRender = default;
         [SerializeField] protected float m_lengthScale = default;
         Vector2 m_mousePos = Vector2.zero;
-        Vector3[] m_linePosition = {Vector3.zero, Vector3.zero};
         // Update is called once per frame
         protected virtual void Update()
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            if (m_linePosition[0] != m_origin.position ||
-                m_mousePos != mousePos) 
+            if (m_mousePos != mousePos) 
             {
                 m_mousePos = mousePos;
                 Vector2 origin = m_origin.position;
@@ -28,7 +26,7 @@ namespace Curry.Game
                 RenderLine(m_lineRender, origin, dir.normalized, m_lengthScale, m_blockingLayers);
             }
         }
-        internal static void RenderLine(LineRenderer renderer, Vector3 origin, Vector3 directionNormalized, float distance, LayerMask collideWith) 
+        internal static RaycastHit2D RenderLine(LineRenderer renderer, Vector3 origin, Vector3 directionNormalized, float distance, LayerMask collideWith) 
         {
             Vector3[] line = { Vector3.zero, Vector3.zero };
             line[0] = origin;
@@ -37,7 +35,8 @@ namespace Curry.Game
             RaycastHit2D hit = Physics2D.Linecast(origin, dest, collideWith);
             // stop at destination or collision position
             line[1] = hit ? hit.point : dest;
-            renderer?.SetPositions(line);            
+            renderer?.SetPositions(line);
+            return hit;
         }
     }
 }

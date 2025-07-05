@@ -3,15 +3,10 @@ using UnityEngine;
 
 public class Sniper : AbilityHandler
 {
-    [SerializeField] Aiming m_aim = default;
-    [SerializeField] SnipeShot m_snipe = default;
-    public override List<ActiveAbility> Abilities => new List<ActiveAbility> { m_aim, m_snipe };
-    void Aim() 
+    [SerializeField] Deadeye m_aim = default;
+    public override List<ActiveAbility> Abilities => new List<ActiveAbility> { m_aim };   
+    public void Aim() 
     {
         m_aim?.TryUse();
-    }
-    void Snipe() 
-    {
-        m_snipe?.TryUse();
     }
 }

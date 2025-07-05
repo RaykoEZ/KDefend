@@ -9,8 +9,8 @@ public class Reinforcement : ActiveAbility
     [SerializeField] int m_channellingTime = default;
     protected override void Effect_Internal()
     {
-        if (m_isChanneling) return;
-        StartCoroutine(Channeling(m_channellingTime, SpawnHelp));
+        if (m_channeling != null) return;
+        StartChanneling(m_channellingTime, SpawnHelp);
     }
     void SpawnHelp() 
     {

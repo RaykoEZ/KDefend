@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2925742886745813455}
   - component: {fileID: 6381064528859422291}
   - component: {fileID: 720502202576201302}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 3751437366143518469}
   - component: {fileID: 4352206704140033461}
   - component: {fileID: -4140014619175612817}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: P_CreditCard_S
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 597780607261782082}
   - component: {fileID: 8370961582666962476}
   - component: {fileID: 2207327764711495134}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}

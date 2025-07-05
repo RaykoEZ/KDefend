@@ -6,13 +6,12 @@ public abstract class ActiveAbility : MonoBehaviour
     [Range(0, 999)]
     [SerializeField] protected int m_cooldownTime = default;
     [SerializeField] protected int m_hitsToEnd = default;
-    bool m_onCooldown = false;
+    protected bool m_onCooldown = false;
     protected int m_disruptCounter = 0;
-    protected bool m_isChanneling = false;
+    protected Coroutine m_channeling;
     protected delegate void AbilityUpdate();
     // listen to change animation for each skill charge update
     protected event AbilityUpdate OnChannelInterrupt;
-    protected event AbilityUpdate OnChannelInterval;
     public void TryUse() 
     {
         if (m_onCooldown) return;
@@ -28,28 +27,37 @@ public abstract class ActiveAbility : MonoBehaviour
     }
     public virtual void InterruptChanneling()
     {
-        if (!m_isChanneling) return;
+        if (m_channeling == null) return;
         m_disruptCounter++;
         if (m_disruptCounter > m_hitsToEnd) 
         {
-            m_disruptCounter = 0;
-            m_isChanneling = false;
-            StartCoroutine(Cooldown(m_cooldownTime));
-            OnChannelInterrupt?.Invoke();
+            OnInterrupted();
         }
     }
-    protected IEnumerator Channeling(float duration, Action onChannelingFinish) 
+    protected virtual void StartChanneling(float duration, Action onChannelingFinish, Action<float, float> onInterval = null) 
     {
-        int channelTime = 0;
+        m_channeling = StartCoroutine(Channeling(duration, onChannelingFinish, onInterval));
+    }
+    protected virtual void OnInterrupted() 
+    {
+        StopCoroutine(m_channeling);
+        m_channeling = null;
+        m_disruptCounter = 0;
+        StartCoroutine(Cooldown(m_cooldownTime));
+        OnChannelInterrupt?.Invoke();
+    }
+    // onInterval <float, float> : deltatime, totalTimeElasped
+    IEnumerator Channeling(float duration, Action onChannelingFinish, Action<float, float> onInterval = null) 
+    {
+        float channelTime = 0;
         while (channelTime < duration)
         {
-            channelTime++;
-            yield return new WaitForSeconds(1f);
-            OnChannelInterval?.Invoke();
-            m_isChanneling = true;
+            yield return new WaitForEndOfFrame();
+            channelTime += Time.deltaTime;
+            onInterval?.Invoke(Time.deltaTime, channelTime);
             // upon charge complete, incoke effect
         }
         onChannelingFinish?.Invoke();
-        m_isChanneling = false;
+        m_channeling = null;
     }
 }

@@ -9,13 +9,13 @@ public delegate void OnEnemyUpdate(Enemy toUpdate);
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : BaseCharacter, IHitsEntity
 {
+    [SerializeField] bool m_autoAttack = default;
     [SerializeField] int m_type = default;
     [SerializeField] int m_contactDamage = default;
     [Range(-100, 100)]
     [SerializeField] protected int m_threatIncrease = default;
     [SerializeField] protected EnemyMovement m_movementHandler = default;
     [SerializeField] protected RangeDetector m_targeting = default;
-    [SerializeField] protected UnityEvent<BaseEntity> m_onTargetLockon = default;
     protected BaseEntity m_target;
     Coroutine m_attack;
     public int ThreatIncrease => m_threatIncrease;
@@ -29,7 +29,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     public event OnEnemyUpdate OnDefeated;
     protected virtual void Update() 
     {
-        if (m_attack == null && m_targeting.IsInRange(m_target)) 
+        if (m_autoAttack && m_attack == null && m_targeting.IsInRange(m_target)) 
         {
             UseWeapon();
         }
@@ -58,8 +58,6 @@ public class Enemy : BaseCharacter, IHitsEntity
     {
         if (newTarget == null) return;
         m_target = newTarget;
-        // tell all separate weapons/skills to update target
-        m_onTargetLockon?.Invoke(m_target);
     }
     public override void TakeDamage(int baseDamage)
     {
@@ -93,7 +91,10 @@ public class Enemy : BaseCharacter, IHitsEntity
         yield return new WaitForSeconds(duration);
         if (m_current.Health <= 0) yield break;
         m_movementHandler?.StartMoving();
-        UseWeapon();
+        if (m_autoAttack) 
+        {
+            UseWeapon();
+        }
     }
     public override void UseWeapon()
     {
@@ -113,6 +114,11 @@ public class Enemy : BaseCharacter, IHitsEntity
             {
                 // unleash one instance of a weapon's attack, include its recovery frames
                 yield return Attack_Internal(m_currentWeapons[i]);
+            }
+            // atop attacking loop if we don't auto fire
+            if (!m_autoAttack) 
+            {
+                m_keepFiring = false;
             }
         }
         m_attack = null;
