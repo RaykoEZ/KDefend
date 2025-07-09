@@ -42,7 +42,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     {
         return m_target == null? Vector2.zero : (m_target.transform.position - transform.position).normalized;
     }
-    public virtual void Init(BaseEntity defaultTarget = null)
+    public virtual void InitTarget(BaseEntity defaultTarget = null)
     {
         base.Init(BaseStats);
         EnemyAggroHandler.Add(this);

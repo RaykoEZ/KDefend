@@ -1,6 +1,7 @@
 ﻿using UnityEngine.Playables;
 using UnityEngine;
 using System.Collections;
+// Enter Aim Mode to attack, enemy does not auto attack 
 public class Deadeye : ActiveAbility
 {
     [SerializeField] float m_aimTime = default;
@@ -14,8 +15,13 @@ public class Deadeye : ActiveAbility
     public BaseEntity Target { get => m_target; }
     void FixedUpdate()
     {
-        if (Target != null && m_channeling == null) 
+        if (m_channeling != null) 
         {
+            OnAimingUpdate();
+        }
+        else if (Target != null) 
+        {
+            // start aiming
             TryUse();
         }
     }
@@ -29,10 +35,10 @@ public class Deadeye : ActiveAbility
     }
     protected override void Effect_Internal()
     {
-        StartChanneling(m_aimTime, OnShoot, OnAimingUpdate);
+        StartChanneling(m_aimTime, OnShoot);
     }
     // during aiming mode...
-    void OnAimingUpdate(float dt, float timeElapsed)
+    void OnAimingUpdate()
     {
         if (m_target == null) 
         {
@@ -49,10 +55,6 @@ public class Deadeye : ActiveAbility
             m_targetAcquired = hit.rigidbody.TryGetComponent(out BaseEntity result) && result == m_target;
         }
     }
-    protected override void OnInterrupted() 
-    {
-        base.OnInterrupted();
-    }
     void OnShoot()
     {
         StartCoroutine(Cooldown(m_cooldownTime));
@@ -60,15 +62,31 @@ public class Deadeye : ActiveAbility
             // (ray blinking with sfx)
             // delay
             // sniper shot releases to target position
-        StartChanneling(0.15f,
-            () =>
-            {
-                if (m_targetAcquired) 
-                {
-                    m_user?.UseWeapon();
-                }
-                m_aimLaser?.Clear();
-            });       
+        StartChanneling(0.15f, ShootOrWait);       
+    }
+    void ShootOrWait() 
+    {
+        if (m_targetAcquired)
+        {
+            m_user?.UseWeapon();
+            m_aimLaser?.Clear();
+        }
+        else
+        {
+            // start aiming again for awhile
+            StartCoroutine(StayOnTarget());
+        }
+    }
+    IEnumerator StayOnTarget() 
+    {
+        // start aiming again
+        TryUse();
+        yield return new WaitForSeconds(7f);
+        // if no target visual after awhile, stop aiming
+        if (!m_targetAcquired) 
+        {
+            OnInterrupted();
+        }
     }
 }
 

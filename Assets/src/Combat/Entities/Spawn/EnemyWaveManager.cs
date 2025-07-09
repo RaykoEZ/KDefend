@@ -118,7 +118,7 @@ public class EnemyWaveManager : MonoBehaviour
     }
     void PrepareEnenmy(Enemy spawned) 
     {
-        spawned.Init(m_defaultAggroTarget);
+        spawned.InitTarget(m_defaultAggroTarget);
         spawned.OnDefeated += (a) => { m_onEnemyDefeat?.Invoke(a); }; 
         m_onEnemySpawn?.Invoke(spawned);
     }

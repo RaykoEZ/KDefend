@@ -3,6 +3,8 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using Curry.Game;
+using Unity.Mathematics;
+
 public struct FloatRange
 {
     private float m_min;
@@ -15,6 +17,26 @@ public struct FloatRange
     public float Min => m_min;
     public float Max => m_max;
 }
+
+public static class SDFUtil 
+{
+    public static Vector2 Translate(Vector2 pos, Vector2 offset)
+    {
+        return pos - offset;
+    }
+    public static float Rectangle(Vector2 pos, Vector2 halfSize)
+    {
+        Vector2 componentWiseEdgeDistance = (pos) - halfSize;
+        float outsideDistance = Vector2.Max(componentWiseEdgeDistance, Vector2.zero).magnitude;
+        float insideDistance = Mathf.Min(Mathf.Max(componentWiseEdgeDistance.x, componentWiseEdgeDistance.y), 0);
+        return outsideDistance + insideDistance;
+    }
+    public static float Circle(Vector2 pos, float radius)
+    {
+        return pos.magnitude - radius;
+    }
+}
+
 public static class GameUtil 
 {
     static Regex s_regexNoAlphaNumeric = new Regex(@"^[^a-zA-Z0-9]*$");

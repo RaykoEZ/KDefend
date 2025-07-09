@@ -600,7 +600,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.24533996
+        value: 0.4023167
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -902,8 +902,9 @@ MonoBehaviour:
     Health: 800
     KnockbackModifier: 0.1
     MoveSpeed: 80
-  m_location: {fileID: 0}
+  m_location: {fileID: 4325537609493398499}
   m_initTarget: {fileID: 4179399253197192141}
+  m_movement: {fileID: 7676090910518166961}
 --- !u!195 &6545345323558430204
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -914,11 +915,11 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 3
-  m_Speed: 350
+  m_Speed: 500
   m_Acceleration: 350
   avoidancePriority: 0
   m_AngularSpeed: 0
-  m_StoppingDistance: 0
+  m_StoppingDistance: 700
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1099,7 +1100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dac757fbb9d5bb449f7e01c557d1773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_cooldownTime: 10
+  m_cooldownTime: 5
   m_hitsToEnd: 0
   m_aimTime: 3
   m_aimLaser: {fileID: 8508872652672489954}

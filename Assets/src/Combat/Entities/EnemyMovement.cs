@@ -48,6 +48,12 @@ public class EnemyMovement : MonoBehaviour
         m_movement = null;
         Navigator.enabled = false;
     }
+    // move to a position, reset to not chase player
+    public void RetreatToPosition(Vector2 newTarget) 
+    {
+        m_defaultTarget = newTarget;
+        ResetTarget();
+    }
     public void UpdateTarget(BaseEntity newTarget)
     {
         if (newTarget == null) return;
@@ -60,7 +66,7 @@ public class EnemyMovement : MonoBehaviour
     }
     public virtual void ResetTarget()
     {
-        float duration = UnityEngine.Random.Range(1f, 5f);
+        float duration = UnityEngine.Random.Range(0.5f, 2f);
         StartCoroutine(Standby(duration));
     }
     protected virtual IEnumerator Movement()
