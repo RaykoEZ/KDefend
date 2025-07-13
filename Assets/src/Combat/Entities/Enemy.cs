@@ -20,7 +20,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     Coroutine m_attack;
     public int ThreatIncrease => m_threatIncrease;
     public BaseEntity CurrentTarget { get => m_target; }
-    public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
+    public EnemyMovement Navigator => m_movementHandler;
     public EnemyState State => 
         new EnemyState { 
             EnemyIndex = m_type, 
@@ -82,7 +82,10 @@ public class Enemy : BaseCharacter, IHitsEntity
     {
         m_movementHandler?.StopMoving();
         EnemyAggroHandler.Remove(this);
-        GetComponent<PoolableBehaviour>()?.ReturnToPool();
+        if (TryGetComponent(out IPoolable poolable)) 
+        {
+            poolable?.ReturnToPool();
+        }
     }
     protected virtual IEnumerator HitStun(float duration) 
     {

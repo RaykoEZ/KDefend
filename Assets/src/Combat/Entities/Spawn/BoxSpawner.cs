@@ -32,16 +32,20 @@ public class BoxSpawner : MonoBehaviour
     }
     // despawns all active instances
     public void Clear() 
-    { 
-    
-    }
-    void OnDefeat(Enemy spawned) 
     {
-    
+        // redirect collection and clear old list for despawning enemies in list
+        List<Enemy> enemies = new(m_spawnRefs);
+        m_spawnRefs?.Clear();
+        foreach (var item in enemies)
+        {
+            // kill it
+            item?.TakeDamage(99999);
+        }
     }
-    void OnSpawn(Enemy spawned) 
+    void OnDefeat(Enemy defeated) 
     {
-    
+        defeated.OnDefeated -= OnDefeat;
+        m_spawnRefs.Remove(defeated);
     }
     public void Spawn(Enemy spawnRef, Transform parent, float spawnDelayInterval = 0.1F, Action<Enemy> onSpawnAction = null)
     {
@@ -63,6 +67,10 @@ public class BoxSpawner : MonoBehaviour
             // spawn for both sides
             Enemy instanceTop = m_spawnerTop.Spawn(spawnRef, parent);
             Enemy instanceBottom = m_spawnerBottom.Spawn(spawnRef, parent);
+            // listen to defeat callback
+            instanceTop.OnDefeated += OnDefeat;
+            instanceBottom.OnDefeated += OnDefeat;
+            // add to local enemy list
             m_spawnRefs.Add(instanceTop);
             m_spawnRefs.Add(instanceBottom);
             onSpawnAction?.Invoke(instanceTop);
@@ -90,6 +98,8 @@ public class BoxSpawner : MonoBehaviour
             // spawn for both sides
             Enemy instanceLeft = m_spawnerLeft.Spawn(spawnRef, parent);
             Enemy instanceRight = m_spawnerRight.Spawn(spawnRef, parent);
+            instanceLeft.OnDefeated += OnDefeat;
+            instanceRight.OnDefeated += OnDefeat;
             m_spawnRefs.Add(instanceLeft);
             m_spawnRefs.Add(instanceRight);
 

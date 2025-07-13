@@ -28,7 +28,7 @@ public class RangeDetector : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.attachedRigidbody.TryGetComponent(out BaseEntity exiting)) 
+        if (collision.attachedRigidbody.TryGetComponent(out Player exiting)) 
         {
             m_targetLost?.Invoke();
             m_targetsInView.Remove(exiting);

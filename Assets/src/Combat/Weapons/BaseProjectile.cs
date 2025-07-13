@@ -38,7 +38,7 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
             EndProjectile();
         }
     }
-    IEnumerator Flying()
+    protected virtual IEnumerator InProgress()
     {
         while (m_isFlying)
         {
@@ -83,7 +83,7 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
         // start update
         m_currentDirection = directionNormalized;
         m_isFlying = true;
-        StartCoroutine(Flying());
+        StartCoroutine(InProgress());
     }
     protected virtual void EndProjectile() 
     {

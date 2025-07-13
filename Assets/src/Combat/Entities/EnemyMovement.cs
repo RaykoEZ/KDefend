@@ -12,6 +12,8 @@ public class EnemyMovement : MonoBehaviour
     Coroutine m_movement;
     protected BaseEntity m_target;
     public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
+    public bool MoveOnsight { get => m_moveOnsight; set => m_moveOnsight = value; }
+
     void SetupNavigation()
     {
         var nav = Navigator;
@@ -49,7 +51,7 @@ public class EnemyMovement : MonoBehaviour
         Navigator.enabled = false;
     }
     // move to a position, reset to not chase player
-    public void RetreatToPosition(Vector2 newTarget) 
+    public void MoveToPosition(Vector2 newTarget) 
     {
         m_defaultTarget = newTarget;
         ResetTarget();

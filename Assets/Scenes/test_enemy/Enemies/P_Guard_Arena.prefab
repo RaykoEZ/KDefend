@@ -231,8 +231,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_cooldownTime: 3
   m_hitsToEnd: 0
-  m_pushPower: 50
-  m_damage: 30
+  m_pushPower: 10
+  m_damage: 5
 --- !u!114 &733211321763935980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,9 +245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cea0260f02904d45b1812812f2560a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_cooldownTime: 10
-  m_hitsToEnd: 1
-  m_duration: 5
+  m_cooldownTime: 5
+  m_hitsToEnd: 3
+  m_duration: 3
   m_reflectParent: {fileID: 1330538954460921173}
 --- !u!1 &3354420935418514204
 GameObject:
@@ -439,14 +439,13 @@ GameObject:
   - component: {fileID: 5368002754296368741}
   - component: {fileID: 3244473579710765152}
   - component: {fileID: 6692085382757624235}
-  - component: {fileID: 1529188677596479519}
   - component: {fileID: 3912173363950331105}
   - component: {fileID: 4126137717926966187}
   - component: {fileID: 5435017303985491153}
   - component: {fileID: 479479895378125560}
   - component: {fileID: 847211165139811645}
   m_Layer: 7
-  m_Name: P_Guard
+  m_Name: P_Guard_Arena
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -563,8 +562,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_base:
-    Health: 500
-    KnockbackModifier: 0.1
+    Health: 800
+    KnockbackModifier: 0.5
     MoveSpeed: 80
   m_onDefeat:
     m_PersistentCalls:
@@ -642,25 +641,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &1529188677596479519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6254325673093278995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f59df5cd20978a40981078601c98a7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_initStats:
-    Health: 800
-    KnockbackModifier: 0.1
-    MoveSpeed: 80
-  m_location: {fileID: 0}
-  m_initTarget: {fileID: 3244473579710765152}
-  m_movement: {fileID: 0}
 --- !u!114 &3912173363950331105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,11 +666,11 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 3
-  m_Speed: 350
-  m_Acceleration: 350
+  m_Speed: 25
+  m_Acceleration: 50
   avoidancePriority: 0
   m_AngularSpeed: 0
-  m_StoppingDistance: 0
+  m_StoppingDistance: 800
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -819,7 +799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4da5f21bda83248be3636dadcb2df7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_moveOnsight: 0
+  m_moveOnsight: 1
 --- !u!1 &6697527675712265461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,7 +1345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1394,11 +1374,11 @@ PrefabInstance:
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 847211165139811645}
+      objectReference: {fileID: 5563079737983619187}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 5563079737983619187}
+      objectReference: {fileID: 847211165139811645}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartMoving
@@ -1417,11 +1397,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: UpdateTarget
+      value: set_Target
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: set_Target
+      value: UpdateTarget
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1429,11 +1409,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: EnemyMovement, Assembly-CSharp
+      value: ShieldBash, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: ShieldBash, Assembly-CSharp
+      value: EnemyMovement, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

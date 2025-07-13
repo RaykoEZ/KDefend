@@ -47,7 +47,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5838720543059406538}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2110592df5e8cd64e8eff81e2c0caba1, type: 3}
   m_Name: 
@@ -72,6 +72,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: accba29da2352284ca15aedbc81a1e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_instanceManager:
+    m_pool:
+      m_numToPool: 0
+      m_defaultParent: {fileID: 0}
   m_spawnRange: {fileID: 5838720543059406542}
 --- !u!60 &5838720543059406542
 PolygonCollider2D:

@@ -67,7 +67,7 @@ public class EnemyWaveManager : MonoBehaviour
         {
             var enemyRef = m_enemyRefs.GetEnemyRef(spawn.SpawnRef);
             // spawn the group
-            m_spawners[i].Spawn(enemyRef, m_spawnParent, spawn.NumToSpawn, 0.5f, PrepareEnenmy);
+            m_spawners[i].Spawn(enemyRef, m_spawnParent, spawn.NumToSpawn, 0.5f, PrepareEnemy);
             numEnemies++;
         }
         return numEnemies;
@@ -116,7 +116,7 @@ public class EnemyWaveManager : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
     }
-    void PrepareEnenmy(Enemy spawned) 
+    void PrepareEnemy(Enemy spawned) 
     {
         spawned.InitTarget(m_defaultAggroTarget);
         spawned.OnDefeated += (a) => { m_onEnemyDefeat?.Invoke(a); }; 

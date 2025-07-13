@@ -6,9 +6,8 @@ public class Deadeye : ActiveAbility
 {
     [SerializeField] float m_aimTime = default;
     // for aiming
-    [SerializeField] SniperLaser m_aimLaser = default;
+    [SerializeField] Laser m_aimLaser = default;
     [SerializeField] Enemy m_user = default;
-    [SerializeField] PlayableDirector m_aimSequence = default;
     // target when aiming
     BaseEntity m_target;
     bool m_targetAcquired = false;
@@ -19,7 +18,7 @@ public class Deadeye : ActiveAbility
         {
             OnAimingUpdate();
         }
-        else if (Target != null) 
+        else if (Target != null)
         {
             // start aiming
             TryUse();
@@ -45,7 +44,8 @@ public class Deadeye : ActiveAbility
             m_targetAcquired = false;
             return;
         }
-        var hit = m_aimLaser.PointTowards(m_target.transform.position);
+        Vector3 dir = m_target.transform.position - transform.position;
+        var hit = m_aimLaser.PointTowardsDirection(dir.normalized);
         if (hit.rigidbody == null) 
         {
             m_targetAcquired = false;
@@ -83,7 +83,7 @@ public class Deadeye : ActiveAbility
         TryUse();
         yield return new WaitForSeconds(7f);
         // if no target visual after awhile, stop aiming
-        if (!m_targetAcquired) 
+        if (!m_targetAcquired && m_channeling != null) 
         {
             OnInterrupted();
         }

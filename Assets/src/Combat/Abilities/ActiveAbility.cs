@@ -29,7 +29,7 @@ public abstract class ActiveAbility : MonoBehaviour
     {
         if (m_channeling == null) return;
         m_disruptCounter++;
-        if (m_disruptCounter > m_hitsToEnd) 
+        if (m_disruptCounter > m_hitsToEnd && m_channeling != null) 
         {
             OnInterrupted();
         }

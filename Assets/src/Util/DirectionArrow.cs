@@ -38,5 +38,17 @@ namespace Curry.Game
             renderer?.SetPositions(line);
             return hit;
         }
+        internal static RaycastHit2D RenderLine(LineRenderer renderer, Vector3 origin, Vector3 target, LayerMask collideWith)
+        {
+            Vector3[] line = { Vector3.zero, Vector3.zero };
+            line[0] = origin;
+            Vector2 dest = target;
+            // collision test
+            RaycastHit2D hit = Physics2D.Linecast(origin, dest, collideWith);
+            // stop at destination or collision position
+            line[1] = hit ? hit.point : dest;
+            renderer?.SetPositions(line);
+            return hit;
+        }
     }
 }
