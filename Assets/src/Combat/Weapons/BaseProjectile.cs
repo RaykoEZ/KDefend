@@ -26,6 +26,7 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
     [SerializeField] int m_spreadAngleRange = default;
     protected bool m_isFlying = true;
     protected float m_lifeTimer = 0f;
+    protected Coroutine m_inProgress;
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
     public override bool InstantiateWeapon => true;
     protected virtual void OnTriggerEnter2D(Collider2D c) 
@@ -63,9 +64,9 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
     }
     public override void OnHit<T>(T hit)
     {
-        base.OnHit(hit);
+        Hit_Internal(hit);
         // kill object when hitting a target, unless we pierce
-        m_isFlying = false;
+        EndProjectile();
     }
     public void Reflect(LayerMask newAttackMask) 
     {
@@ -83,11 +84,14 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
         // start update
         m_currentDirection = directionNormalized;
         m_isFlying = true;
-        StartCoroutine(InProgress());
+        m_inProgress = StartCoroutine(InProgress());
     }
     protected virtual void EndProjectile() 
     {
+        StopCoroutine(m_inProgress);
+        m_inProgress = null;
         m_isFlying = false;
+        m_lifeTimer = 0f;
         Destroy(gameObject);
     }
 }

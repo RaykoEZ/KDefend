@@ -19,6 +19,7 @@ public class RangeDetector : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.attachedRigidbody == null) return;
         bool check = (collision.attachedRigidbody.TryGetComponent(out Player entering));
         if (m_detectAnyEntity || check)
         {
@@ -28,6 +29,7 @@ public class RangeDetector : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.attachedRigidbody == null) return;
         if (collision.attachedRigidbody.TryGetComponent(out Player exiting)) 
         {
             m_targetLost?.Invoke();

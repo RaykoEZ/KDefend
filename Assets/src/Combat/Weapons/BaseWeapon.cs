@@ -49,6 +49,10 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
     }
     public virtual void OnHit<T>(T hit) where T : BaseEntity
     {
+        Hit_Internal(hit);
+    }
+    protected void Hit_Internal<T>(T hit) where T : BaseEntity
+    {
         hit?.TakeDamage(WeaponProperty.Damage);
         hit?.GetComponent<AudioSource>()?.PlayOneShot(m_onHitSfx);
         if (hit is IPushable push)

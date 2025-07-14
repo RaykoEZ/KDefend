@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using Curry.Game;
-
 public class Laser : DirectionArrow 
-{    
+{
     // point line towards a target position
     public RaycastHit2D PointTowards(Vector3 target) 
     {
         RaycastHit2D visual;
+
         visual = RenderLine(m_lineRender, m_origin.position, target, m_blockingLayers);
         return visual;
     }

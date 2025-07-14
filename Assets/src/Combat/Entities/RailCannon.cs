@@ -5,65 +5,60 @@ using UnityEngine;
 public class RailCannon : BaseProjectile 
 {
     Laser m_laserRef;
-    BaseEntity m_targetRef;
     Coroutine m_hit;
-    void Start()
+    RaycastHit2D m_hitResult;
+    void OnEnable()
     {
         m_laserRef = GetComponent<Laser>();
     }
     void FixedUpdate()
     {
-        if (m_hit == null && m_targetRef != null) 
-        {
-            m_hit = StartCoroutine(HitTarget(m_targetRef));
-        }
     }
-    IEnumerator HitTarget(BaseEntity target)
+    IEnumerator HitCheck()
     {
-        int numAttackPerTick = WeaponProperty.AttackPerCycle;
-        // trigger hit sequence
-        while (target != null) 
+        while (m_isFlying) 
         {
-            for (int i = 0; i < numAttackPerTick; i++)
+            // trigger hit sequence
+            if (m_hitResult && m_hitResult.rigidbody != null &&
+                m_hitResult.rigidbody.TryGetComponent(out BaseEntity result)) 
             {
-                OnHit(target);
-                yield return new WaitForSeconds(0.2f);
+                OnHit(result);
             }
             yield return new WaitForSeconds(WeaponProperty.DelayPerAttack);
         }
         m_hit = null;
     }
-    protected override void OnTriggerEnter2D(Collider2D c)
+    public override void OnHit<T>(T hit)
     {
+        Hit_Internal(hit);
     }
     protected override IEnumerator InProgress()
     {
-        RaycastHit2D hit;
+        // setup hit detection
+        m_hit = StartCoroutine(HitCheck());
         while (m_isFlying) 
         {
             // detect hit target in this direction
-            hit = m_laserRef.PointTowardsDirection(m_currentDirection);
-            // deal with hit target if it hits a player
-            if (hit.rigidbody != null && 
-                hit.rigidbody.transform.TryGetComponent(out BaseEntity result)) 
-            {
-                m_targetRef = result;
-            }
-            else 
-            {
-                m_targetRef = null;
-            }
+            m_hitResult = m_laserRef.PointTowardsDirection(m_currentDirection);
             yield return new WaitForSeconds(0.1f);
-            m_lifeTimer += Time.fixedDeltaTime;
+            m_lifeTimer += Time.deltaTime;
             if (m_lifeTimer >= WeaponProperty.Life)
             {
+                // stop laser loop & dealing damage
                 m_isFlying = false;
             }
         }
         // stop laser loop & dealing damage
         EndProjectile();
+    }
+    protected override void EndProjectile()
+    {
+        StopCoroutine(m_inProgress);
+        m_inProgress = null;
+        m_isFlying = false;
+        m_lifeTimer = 0f;
+        m_laserRef?.Clear();
         StopCoroutine(m_hit);
         m_hit = null;
-        m_targetRef = null;
     }
 }

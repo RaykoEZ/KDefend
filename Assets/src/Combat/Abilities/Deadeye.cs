@@ -14,7 +14,7 @@ public class Deadeye : ActiveAbility
     public BaseEntity Target { get => m_target; }
     void FixedUpdate()
     {
-        if (m_channeling != null) 
+        if (m_channeling != null)
         {
             OnAimingUpdate();
         }
@@ -41,6 +41,8 @@ public class Deadeye : ActiveAbility
     {
         if (m_target == null) 
         {
+            m_aimLaser?.Clear();
+            OnInterrupted();
             m_targetAcquired = false;
             return;
         }
@@ -62,7 +64,7 @@ public class Deadeye : ActiveAbility
             // (ray blinking with sfx)
             // delay
             // sniper shot releases to target position
-        StartChanneling(0.15f, ShootOrWait);       
+        StartChanneling(0.2f, ShootOrWait);       
     }
     void ShootOrWait() 
     {
@@ -70,22 +72,6 @@ public class Deadeye : ActiveAbility
         {
             m_user?.UseWeapon();
             m_aimLaser?.Clear();
-        }
-        else
-        {
-            // start aiming again for awhile
-            StartCoroutine(StayOnTarget());
-        }
-    }
-    IEnumerator StayOnTarget() 
-    {
-        // start aiming again
-        TryUse();
-        yield return new WaitForSeconds(7f);
-        // if no target visual after awhile, stop aiming
-        if (!m_targetAcquired && m_channeling != null) 
-        {
-            OnInterrupted();
         }
     }
 }
