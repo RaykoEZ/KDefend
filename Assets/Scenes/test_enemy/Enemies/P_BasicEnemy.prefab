@@ -333,6 +333,7 @@ GameObject:
   - component: {fileID: 1526858461598899063}
   - component: {fileID: 1549148453402818636}
   - component: {fileID: 3419066620989487351}
+  - component: {fileID: 7931186853949798028}
   m_Layer: 7
   m_Name: P_BasicEnemy
   m_TagString: Untagged
@@ -453,18 +454,11 @@ MonoBehaviour:
           m_StringArgument: takeHit
           m_BoolArgument: 0
         m_CallState: 2
-  m_defaultWeapons: []
-  m_onAttack:
-    m_PersistentCalls:
-      m_Calls: []
+  m_attackHandler: {fileID: 7931186853949798028}
   m_type: 0
   m_contactDamage: 2
   m_threatIncrease: 1
   m_movementHandler: {fileID: 3419066620989487351}
-  m_targeting: {fileID: 3399095250520629921}
-  m_onTargetLockon:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!50 &1817311363580228822
 Rigidbody2D:
   serializedVersion: 5
@@ -662,6 +656,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveOnsight: 1
+--- !u!114 &7931186853949798028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5266097158630861302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee972c9a22da90468e38a63bc4a8427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_defaultWeapons: []
+  m_onAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  m_autoAttack: 0
+  m_targeting: {fileID: 3399095250520629921}
 --- !u!1 &5281512484494855909
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,7 +915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -940,11 +952,11 @@ PrefabInstance:
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2273697011688774770}
+      objectReference: {fileID: 3419066620989487351}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 3419066620989487351}
+      objectReference: {fileID: 2273697011688774770}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartMoving
@@ -979,11 +991,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Enemy, Assembly-CSharp
+      value: EnemyMovement, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: EnemyMovement, Assembly-CSharp
+      value: Enemy, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetLost.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

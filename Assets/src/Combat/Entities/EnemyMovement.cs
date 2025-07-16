@@ -68,7 +68,7 @@ public class EnemyMovement : MonoBehaviour
     }
     public virtual void ResetTarget()
     {
-        float duration = UnityEngine.Random.Range(0.5f, 2f);
+        float duration = UnityEngine.Random.Range(0.5f, 1f);
         StartCoroutine(Standby(duration));
     }
     protected virtual IEnumerator Movement()

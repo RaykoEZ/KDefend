@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public struct EntityProperty
 {
     public int Health;
-    [Range(0.1f, 2f)]
+    [Range(0f, 2f)]
     public float KnockbackModifier;
     [Range(0f, 200f)]
     public float MoveSpeed;
@@ -23,7 +23,6 @@ public class BaseEntity : MonoBehaviour
     protected EntityProperty m_current;
     public event OnHpUpdate OnTakeDamage;
     public event OnHpUpdate OnHeal;
-    protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
     public EntityState BaseStats => new EntityState
     {
         Property = m_base,

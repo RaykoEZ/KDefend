@@ -43,6 +43,8 @@ public class EnemyManager : MonoBehaviour
             var instance = GameUtil.SpawnObject(spawnRef,
                 item.State.Position, m_spawnParent);
             m_activeEnemies.Add(instance);
+            // set up enemy type index
+            instance?.SetEnemyType(item.EnemyIndex);
             instance.OnDefeated += OnEnemyDefeated;
         }
     }

@@ -15,7 +15,7 @@ public class RangeDetector : MonoBehaviour
     }
     public bool IsInRange(BaseEntity target) 
     {
-        return m_targetsInView.Contains(target);
+        return target != null && m_targetsInView.Contains(target);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -7,7 +7,7 @@ public class Deadeye : ActiveAbility
     [SerializeField] float m_aimTime = default;
     // for aiming
     [SerializeField] Laser m_aimLaser = default;
-    [SerializeField] Enemy m_user = default;
+    [SerializeField] AttackHandler m_user = default;
     // target when aiming
     BaseEntity m_target;
     bool m_targetAcquired = false;

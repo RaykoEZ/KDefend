@@ -5,9 +5,9 @@ public class Guard : AbilityHandler
 {
     [SerializeField] ReflectProjectile m_reflect = default;
     [SerializeField] ShieldBash m_bash = default;
+    [SerializeField] NpcAttackHandler m_attackHandler = default;
     [SerializeField] RangeDetector m_attackRadius = default;
     public override List<ActiveAbility> Abilities => new List<ActiveAbility> { m_reflect, m_bash };
-    protected BaseEntity Target => (Self as Enemy).CurrentTarget;
     void FixedUpdate()
     {
         GuardSkillCheck();
@@ -20,7 +20,7 @@ public class Guard : AbilityHandler
     // Reflects colliding projectiles for X seconds, affects both enemy & player
     void GuardSkillCheck()
     {
-        if (m_attackRadius.IsInRange(Target))
+        if (m_attackRadius.IsInRange(m_attackHandler?.Target))
         {
             m_bash?.TryUse();
         }

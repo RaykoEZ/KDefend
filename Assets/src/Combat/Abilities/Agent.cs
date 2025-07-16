@@ -5,6 +5,7 @@ public class Agent : AbilityHandler
 {
     [SerializeField] Stealth m_stealth = default;
     [SerializeField] Reinforcement m_callHelp = default;
+    [SerializeField] AttackHandler m_attack = default;
     [SerializeField] List<BaseWeapon> m_onLowHealth = default;
     public override List<ActiveAbility> Abilities => new List<ActiveAbility> { m_stealth, m_callHelp };
     public override void OnTakeHit() 
@@ -26,7 +27,7 @@ public class Agent : AbilityHandler
     void OnLowHp(bool reinforcement = false) 
     {
         Stealth();
-        Self.SetWeapons(m_onLowHealth);
+        m_attack.SetWeapons(m_onLowHealth);
         if (reinforcement)
         {
             Reinforce();

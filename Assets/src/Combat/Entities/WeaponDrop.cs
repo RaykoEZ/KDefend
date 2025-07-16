@@ -5,6 +5,6 @@ public class WeaponDrop : MonoBehaviour
     [SerializeField] BaseWeapon m_weaponRef = default;
     public void PickupWeapon(Player player)
     {
-        player?.AddWeapon(m_weaponRef);
+        player?.GetComponent<AttackHandler>()?.AddWeapon(m_weaponRef);
     }
 }

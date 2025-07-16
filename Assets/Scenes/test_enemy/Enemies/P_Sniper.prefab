@@ -689,6 +689,7 @@ GameObject:
   - component: {fileID: 1352278719641674224}
   - component: {fileID: 5100988183067925913}
   - component: {fileID: 7676090910518166961}
+  - component: {fileID: 3191618185914313528}
   m_Layer: 7
   m_Name: P_Sniper
   m_TagString: Untagged
@@ -807,7 +808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_base:
     Health: 150
-    KnockbackModifier: 0.1
+    KnockbackModifier: 1.2
     MoveSpeed: 70
   m_onDefeat:
     m_PersistentCalls:
@@ -1049,6 +1050,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveOnsight: 0
+--- !u!114 &3191618185914313528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4643613453801234778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee972c9a22da90468e38a63bc4a8427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_defaultWeapons:
+  - {fileID: 5641416596222669894, guid: 3b640f676c0fa6a47bef2b28535862c6, type: 3}
+  m_onAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5770393976807477240}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: attack
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_autoAttack: 0
+  m_targeting: {fileID: 7795125854938825839}
 --- !u!1 &5560274180112906838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,7 +1137,6 @@ MonoBehaviour:
   m_aimTime: 3
   m_aimLaser: {fileID: 8508872652672489954}
   m_user: {fileID: 4179399253197192141}
-  m_aimSequence: {fileID: 8226433591564878348}
 --- !u!320 &8226433591564878348
 PlayableDirector:
   m_ObjectHideFlags: 0

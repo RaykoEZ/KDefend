@@ -210,7 +210,7 @@ MonoBehaviour:
     AttackPerCycle: 1
     Speed: 0
     Life: 1
-    DelayPerAttack: 0.2
+    DelayPerAttack: 0.25
     DelayPerCycle: 5
     PushPower: 0.5
   m_onHitSfx: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}

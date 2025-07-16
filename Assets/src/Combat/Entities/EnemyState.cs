@@ -3,7 +3,7 @@
 [Serializable]
 public struct EnemyState : IEquatable<EnemyState>
 {
-    public int EnemyIndex;
+    [NonSerialized] public int EnemyIndex;
     public EntityState State;
     public bool Equals(EnemyState other)
     {

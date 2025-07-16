@@ -4,11 +4,6 @@ public class Player : BaseCharacter
 {
     DeliveryDetail m_currentlyDelivering;
     public DeliveryDetail CurrentlyDelivering { get => m_currentlyDelivering; set => m_currentlyDelivering = value; }
-    // turn off firing
-    void Update()
-    {
-        m_keepFiring = Mouse.current.leftButton.isPressed;
-    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.otherRigidbody == null) return;
@@ -17,22 +12,5 @@ public class Player : BaseCharacter
         {
             result?.OnHit(this);
         }
-    }
-    // Trigger this when player clicks to fire weapon
-    public void OnFire() 
-    {
-        UseWeapon();
-    }
-    public void AddWeapon(BaseWeapon toAdd) 
-    {
-        m_currentWeapons?.Add(toAdd);
-        m_attackingWeapons.Add(false);
-    }
-    // get current aiming direction
-    protected override Vector2 GetAimDirection()
-    {
-        Vector2 world = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        Vector2 pos = new Vector2(rb.position.x, rb.position.y);
-        return (world - pos).normalized;
     }
 }
