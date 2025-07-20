@@ -453,8 +453,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_attackHandler: {fileID: 0}
-  m_type: 2
   m_contactDamage: 5
+  m_hitStunMod: 1
   m_threatIncrease: 20
   m_movementHandler: {fileID: 1742133721172013432}
 --- !u!225 &9166003067599549407

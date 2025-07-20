@@ -11,9 +11,6 @@ public class RailCannon : BaseProjectile
     {
         m_laserRef = GetComponent<Laser>();
     }
-    void FixedUpdate()
-    {
-    }
     IEnumerator HitCheck()
     {
         while (m_isFlying) 
@@ -34,13 +31,16 @@ public class RailCannon : BaseProjectile
     }
     protected override IEnumerator InProgress()
     {
+        // delay before firing, play animation cue for lockon before shooting
+        m_beforeAttack?.Invoke();
+        yield return new WaitForSeconds(m_delayBeforeAttack);
         // setup hit detection
         m_hit = StartCoroutine(HitCheck());
         while (m_isFlying) 
         {
             // detect hit target in this direction
-            m_hitResult = m_laserRef.PointTowardsDirection(m_currentDirection);
-            yield return new WaitForSeconds(0.1f);
+            m_hitResult = m_laserRef.PointTowardsDirection(transform.parent.position, m_currentDirection);
+            yield return new WaitForEndOfFrame();
             m_lifeTimer += Time.deltaTime;
             if (m_lifeTimer >= WeaponProperty.Life)
             {
@@ -60,5 +60,6 @@ public class RailCannon : BaseProjectile
         m_laserRef?.Clear();
         StopCoroutine(m_hit);
         m_hit = null;
+        Destroy(gameObject);
     }
 }

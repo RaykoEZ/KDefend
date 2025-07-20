@@ -852,29 +852,11 @@ MonoBehaviour:
           m_StringArgument: takeHit
           m_BoolArgument: 0
         m_CallState: 2
-  m_defaultWeapons:
-  - {fileID: 5641416596222669894, guid: 3b640f676c0fa6a47bef2b28535862c6, type: 3}
-  m_onAttack:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5770393976807477240}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: attack
-          m_BoolArgument: 0
-        m_CallState: 2
-  m_autoAttack: 0
-  m_type: 2
+  m_attackHandler: {fileID: 0}
   m_contactDamage: 10
+  m_hitStunMod: 0
   m_threatIncrease: 20
   m_movementHandler: {fileID: 7676090910518166961}
-  m_targeting: {fileID: 7795125854938825839}
 --- !u!225 &200601358416564420
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1136,7 +1118,7 @@ MonoBehaviour:
   m_hitsToEnd: 0
   m_aimTime: 3
   m_aimLaser: {fileID: 8508872652672489954}
-  m_user: {fileID: 4179399253197192141}
+  m_user: {fileID: 0}
 --- !u!320 &8226433591564878348
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -1304,11 +1286,11 @@ PrefabInstance:
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4179399253197192141}
+      objectReference: {fileID: 2162601534020118044}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 2162601534020118044}
+      objectReference: {fileID: 3191618185914313528}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -1335,11 +1317,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdateTarget
+      value: LockOn
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: LockOn
+      value: UpdateTarget
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -1355,11 +1337,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Enemy, Assembly-CSharp
+      value: Deadeye, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Deadeye, Assembly-CSharp
+      value: NpcAttackHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 391461059907262489, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName

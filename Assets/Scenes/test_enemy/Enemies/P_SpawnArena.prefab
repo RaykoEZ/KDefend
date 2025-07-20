@@ -50,10 +50,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -250,8 +250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba867953b5017394d93446987e7210fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_numToSpawnVerticalSide: 12
-  m_numToSpawnHorizontalSide: 20
+  m_numToSpawnVerticalSide: 10
+  m_numToSpawnHorizontalSide: 15
   m_spawnerTop: {fileID: 7701304229683570134}
   m_spawnerBottom: {fileID: 6273613134109353322}
   m_spawnerLeft: {fileID: 9165368841913384827}

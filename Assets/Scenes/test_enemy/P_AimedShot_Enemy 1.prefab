@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd741a8c1adeba42bad9b57fca2f559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_weaponIndex: 0
+  m_detachFromUser: 1
   m_weaponProperty:
     PassWalls: 0
     Damage: 10
@@ -167,6 +167,10 @@ MonoBehaviour:
   m_onHitSfx: {fileID: 8300000, guid: 881e3f52c86c94f26a60718d35627cd8, type: 3}
   m_onLaunchSfx: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
   m_spreadAngleRange: 0
+  m_delayBeforeAttack: 0
+  m_beforeAttack:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!58 &792987912367956665
 CircleCollider2D:
   m_ObjectHideFlags: 0

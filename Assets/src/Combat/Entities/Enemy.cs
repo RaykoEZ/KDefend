@@ -11,6 +11,8 @@ public class Enemy : BaseCharacter, IHitsEntity
 {
     [NonSerialized] int m_type = default;
     [SerializeField] int m_contactDamage = default;
+    [Range(0f, 1f)]
+    [SerializeField] float m_hitStunMod = default;
     [Range(-100, 100)]
     [SerializeField] protected int m_threatIncrease = default;
     [SerializeField] protected EnemyMovement m_movementHandler = default;
@@ -29,6 +31,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     public virtual void InitTarget(BaseEntity defaultTarget = null)
     {
         base.Init(BaseStats);
+
         EnemyAggroHandler.Add(this);
         m_movementHandler?.Init(defaultTarget);
         m_movementHandler?.StartMoving();
@@ -41,8 +44,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     public override void TakeDamage(int baseDamage)
     {
         // the lower the enemy hp, the greater the stun duration
-        float stunDuration = UnityEngine.Random.Range(0.2f, 0.5f);
-        StartCoroutine(HitStun(stunDuration));
+        StartCoroutine(HitStun());
         base.TakeDamage(baseDamage);
     }
     protected override void OnDefeat()
@@ -66,11 +68,13 @@ public class Enemy : BaseCharacter, IHitsEntity
             poolable?.ReturnToPool();
         }
     }
-    protected virtual IEnumerator HitStun(float duration) 
+    protected virtual IEnumerator HitStun() 
     {
+        if (Mathf.Approximately(m_hitStunMod, 0f)) yield break;
+        float stunDuration = UnityEngine.Random.Range(0.1f, 1f);
         m_movementHandler?.StopMoving();
         m_attackHandler.KeepFiring = false;
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(stunDuration * m_hitStunMod);
         if (m_current.Health <= 0) yield break;
         m_movementHandler?.StartMoving();
         NpcAttackHandler attack = m_attackHandler as NpcAttackHandler;
@@ -91,7 +95,7 @@ public class Enemy : BaseCharacter, IHitsEntity
         {
             push.Push(dir.normalized, 0.25f);
             Push(-dir.normalized, 0.25f);
-            StartCoroutine(HitStun(0.25f));
+            StartCoroutine(HitStun());
         }
     }
     internal void ResetTarget()

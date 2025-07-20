@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 // Object shot from weapon
 // has speed, direction, life, and on-hit effect
 [Serializable]
@@ -23,7 +24,10 @@ public interface IHitsEntity
 public class BaseProjectile : BaseWeapon, IHitsEntity
 {
     [Range(0, 60)]
-    [SerializeField] int m_spreadAngleRange = default;
+    [SerializeField] protected int m_spreadAngleRange = default;
+    [Range(0f, 10f)]
+    [SerializeField] protected float m_delayBeforeAttack = default;
+    [SerializeField] protected UnityEvent m_beforeAttack = default;
     protected bool m_isFlying = true;
     protected float m_lifeTimer = 0f;
     protected Coroutine m_inProgress;
@@ -41,6 +45,9 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
     }
     protected virtual IEnumerator InProgress()
     {
+        // delay before firing, play animation cue for lockon before shooting
+        m_beforeAttack?.Invoke();
+        yield return new WaitForSeconds(m_delayBeforeAttack);
         while (m_isFlying)
         {
             // move projectile
@@ -88,8 +95,11 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
     }
     protected virtual void EndProjectile() 
     {
-        StopCoroutine(m_inProgress);
-        m_inProgress = null;
+        if (m_inProgress != null) 
+        {
+            StopCoroutine(m_inProgress);
+            m_inProgress = null;
+        }
         m_isFlying = false;
         m_lifeTimer = 0f;
         Destroy(gameObject);

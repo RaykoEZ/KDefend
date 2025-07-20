@@ -25,16 +25,16 @@ public class EnemyMovement : MonoBehaviour
     {
         m_speedVariant = Random.Range(0.75f, 1.25f);
         m_defaultTarget = defaultTarget == null ? transform.position : defaultTarget.transform.position;
+        m_target = defaultTarget;
     }
     public void StartMoving()
     {
-        if (!gameObject.activeSelf) return;
         SetupNavigation();
         var nav = Navigator;
         m_currentDestination = m_target == null ? m_defaultTarget : m_target.transform.position;
         nav?.SetDestination(m_currentDestination);
         // if enemy sees player, immediately reroute path to pusue player
-        if (m_movement == null)
+        if (m_movement == null && gameObject.activeSelf)
         {
             Navigator.enabled = true;
             Navigator.isStopped = false;
@@ -93,5 +93,6 @@ public class EnemyMovement : MonoBehaviour
         yield return new WaitForSeconds(duration);
         m_target = null;
         Navigator?.SetDestination(m_defaultTarget);
+        StartMoving();
     }
 }

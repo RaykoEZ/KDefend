@@ -11,10 +11,9 @@ public abstract class AttackHandler : MonoBehaviour
     protected List<bool> m_attackingWeapons;
     protected bool m_keepFiring = false;
     protected List<BaseWeapon> m_currentWeapons = new List<BaseWeapon>();
-
     public bool KeepFiring { get => m_keepFiring; set => m_keepFiring = value; }
 
-    public abstract Vector2 GetAimDirection();
+    public abstract Vector2 GetAimDirectionNormalized();
     protected virtual void OnEnable()
     {
         ResetWeapons();
@@ -38,6 +37,11 @@ public abstract class AttackHandler : MonoBehaviour
             StartCoroutine(AttackCycle_Internal(i));
         }
     }
+    // attack with a given weapon once
+    public void UseWeaponOneShot(BaseWeapon toUse, Vector2 direction) 
+    {
+        StartCoroutine(Attack_Internal(toUse, direction));
+    }
     protected virtual IEnumerator AttackCycle_Internal(int weaponIndex)
     {
         BaseWeapon weapon = m_currentWeapons[weaponIndex];
@@ -46,17 +50,17 @@ public abstract class AttackHandler : MonoBehaviour
         while (m_attackingWeapons[weaponIndex])
         {
             //fire cycle
-            yield return Attack_Internal(weapon);
+            yield return Attack_Internal(weapon, GetAimDirectionNormalized());
             // hold fire >> continue cycle
             m_attackingWeapons[weaponIndex] = m_keepFiring;
         }
     }
-    protected IEnumerator Attack_Internal(BaseWeapon weapon)
+    protected IEnumerator Attack_Internal(BaseWeapon weapon, Vector2 direction)
     {
         //fire cycle
         m_onAttack?.Invoke();
         // get attack direction
-        yield return weapon?.Attack(weapon, transform, GetAimDirection(), weapon.InstantiateWeapon);
+        yield return weapon?.Attack(weapon, transform, direction, weapon.InstantiateWeapon);
         // next firing cycle
         yield return new WaitForSeconds(weapon.WeaponProperty.DelayPerCycle);
 

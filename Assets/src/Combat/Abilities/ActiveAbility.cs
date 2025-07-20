@@ -3,10 +3,10 @@ using System;
 using UnityEngine;
 public abstract class ActiveAbility : MonoBehaviour 
 {
-    [Range(0, 999)]
-    [SerializeField] protected int m_cooldownTime = default;
+    [Range(0f, 999f)]
+    [SerializeField] protected float m_cooldownTime = default;
     [SerializeField] protected int m_hitsToEnd = default;
-    protected bool m_onCooldown = false;
+    protected Coroutine m_onCooldown;
     protected int m_disruptCounter = 0;
     protected Coroutine m_channeling;
     protected delegate void AbilityUpdate();
@@ -14,20 +14,24 @@ public abstract class ActiveAbility : MonoBehaviour
     protected event AbilityUpdate OnChannelInterrupt;
     public void TryUse() 
     {
-        if (m_onCooldown) return;
-        StartCoroutine(Cooldown(m_cooldownTime));
+        if (m_onCooldown != null) return;
+        m_onCooldown = StartCoroutine(Cooldown(m_cooldownTime));
+        if (m_channeling != null) 
+        {
+            StopCoroutine(m_channeling);
+            m_channeling = null;
+        }
         Effect_Internal();
     }
     protected abstract void Effect_Internal();
     protected IEnumerator Cooldown(float duration) 
     {
-        m_onCooldown = true;
         yield return new WaitForSeconds(duration);
-        m_onCooldown = false;
+        m_onCooldown = null;
     }
     public virtual void InterruptChanneling()
     {
-        if (m_channeling == null) return;
+        if (m_channeling == null || m_hitsToEnd < 0) return;
         m_disruptCounter++;
         if (m_disruptCounter > m_hitsToEnd && m_channeling != null) 
         {
@@ -43,7 +47,7 @@ public abstract class ActiveAbility : MonoBehaviour
         StopCoroutine(m_channeling);
         m_channeling = null;
         m_disruptCounter = 0;
-        StartCoroutine(Cooldown(m_cooldownTime));
+        m_onCooldown = StartCoroutine(Cooldown(m_cooldownTime));
         OnChannelInterrupt?.Invoke();
     }
     // onInterval <float, float> : deltatime, totalTimeElasped

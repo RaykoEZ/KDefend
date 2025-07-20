@@ -14,6 +14,7 @@ namespace Curry.Game
         [SerializeField] protected LineRenderer m_lineRender = default;
         [SerializeField] protected float m_lengthScale = default;
         Vector2 m_mousePos = Vector2.zero;
+        protected virtual Vector2 Origin => m_origin.position;
         // Update is called once per frame
         protected virtual void Update()
         {
@@ -21,9 +22,8 @@ namespace Curry.Game
             if (m_mousePos != mousePos) 
             {
                 m_mousePos = mousePos;
-                Vector2 origin = m_origin.position;
-                Vector2 dir = m_mousePos - origin;
-                RenderLine(m_lineRender, origin, dir.normalized, m_lengthScale, m_blockingLayers);
+                Vector2 dir = m_mousePos - Origin;
+                RenderLine(m_lineRender, Origin, dir.normalized, m_lengthScale, m_blockingLayers);
             }
         }
         internal static RaycastHit2D RenderLine(LineRenderer renderer, Vector3 origin, Vector3 directionNormalized, float distance, LayerMask collideWith) 

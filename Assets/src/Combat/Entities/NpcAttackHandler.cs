@@ -7,11 +7,10 @@ public class NpcAttackHandler : AttackHandler
     [SerializeField] protected RangeDetector m_targeting = default;
     private BaseEntity m_target;
     Coroutine m_attack;
-
-    public bool AutoAttack { get => m_autoAttack; }
+    public bool AutoAttack { get => m_autoAttack; set => m_autoAttack = value; }
     public BaseEntity Target { get => m_target;}
 
-    public override Vector2 GetAimDirection()
+    public override Vector2 GetAimDirectionNormalized()
     {
         return m_target == null ? Vector2.zero : (m_target.transform.position - transform.position).normalized;
     }
@@ -52,7 +51,7 @@ public class NpcAttackHandler : AttackHandler
             for (int i = 0; i < m_currentWeapons.Count; i++)
             {
                 // unleash one instance of a weapon's attack, include its recovery frames
-                yield return Attack_Internal(m_currentWeapons[i]);
+                yield return Attack_Internal(m_currentWeapons[i], GetAimDirectionNormalized());
             }
             // atop attacking loop if we don't auto fire
             if (!m_autoAttack)

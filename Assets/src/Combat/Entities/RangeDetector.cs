@@ -17,10 +17,16 @@ public class RangeDetector : MonoBehaviour
     {
         return target != null && m_targetsInView.Contains(target);
     }
+    public bool IsPlayerInRange() 
+    { 
+        return m_targetsInView.Find((i) => i is Player);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.attachedRigidbody == null) return;
-        bool check = (collision.attachedRigidbody.TryGetComponent(out Player entering));
+        // check for duplicate collision reporting and whether it's a player
+        bool check = (collision.attachedRigidbody.TryGetComponent(out Player entering)) &&
+             !IsInRange(entering);
         if (m_detectAnyEntity || check)
         {
             m_targetsInView.Add(entering);

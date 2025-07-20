@@ -20,6 +20,7 @@ public class Deadeye : ActiveAbility
         }
         else if (Target != null)
         {
+            
             // start aiming
             TryUse();
         }
@@ -59,7 +60,7 @@ public class Deadeye : ActiveAbility
     }
     void OnShoot()
     {
-        StartCoroutine(Cooldown(m_cooldownTime));
+        m_onCooldown = StartCoroutine(Cooldown(m_cooldownTime));
             // line dissipates from target position
             // (ray blinking with sfx)
             // delay
@@ -71,8 +72,8 @@ public class Deadeye : ActiveAbility
         if (m_targetAcquired)
         {
             m_user?.UseWeapon();
-            m_aimLaser?.Clear();
         }
+        m_aimLaser?.Clear();
     }
 }
 
