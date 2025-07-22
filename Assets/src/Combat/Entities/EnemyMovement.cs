@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Curry.Util;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
