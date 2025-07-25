@@ -690,6 +690,8 @@ GameObject:
   - component: {fileID: 5100988183067925913}
   - component: {fileID: 7676090910518166961}
   - component: {fileID: 3191618185914313528}
+  - component: {fileID: 7811675568995576632}
+  - component: {fileID: 7678772378991482187}
   m_Layer: 7
   m_Name: P_Sniper
   m_TagString: Untagged
@@ -1032,6 +1034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveOnsight: 0
+  m_tracker: {fileID: 7678772378991482187}
 --- !u!114 &3191618185914313528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,6 +1066,36 @@ MonoBehaviour:
         m_CallState: 2
   m_autoAttack: 0
   m_targeting: {fileID: 7795125854938825839}
+--- !u!114 &7811675568995576632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4643613453801234778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d228e4f04464120459027179d75e5fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_encircleAngleRange: 90
+  m_predictionDistance: 100
+--- !u!114 &7678772378991482187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4643613453801234778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3eaf864b8b2904f96d61df8896d17c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_warpDistanceThreshold: 2000
+  m_teleportCooldownTime: 7
+  m_updateTimeInterval: 3
+  m_formation: {fileID: 7811675568995576632}
 --- !u!1 &5560274180112906838
 GameObject:
   m_ObjectHideFlags: 0

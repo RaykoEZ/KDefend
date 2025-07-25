@@ -1,17 +1,18 @@
 ﻿using Curry.Util;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Enemy))]
+[RequireComponent(typeof(Enemy), typeof(NavMeshAgent))]
 public class EnemyMovement : MonoBehaviour 
 {
     [SerializeField] bool m_moveOnsight = default;
+    [SerializeField] TargetTracker m_tracker = default;
     protected float m_speedVariant;
     protected Vector2 m_currentDestination;
     protected Vector2 m_defaultTarget;
     Coroutine m_movement;
-    protected BaseEntity m_target;
     public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
     public bool MoveOnsight { get => m_moveOnsight; set => m_moveOnsight = value; }
 
@@ -26,13 +27,13 @@ public class EnemyMovement : MonoBehaviour
     {
         m_speedVariant = Random.Range(0.75f, 1.25f);
         m_defaultTarget = defaultTarget == null ? transform.position : defaultTarget.transform.position;
-        m_target = defaultTarget;
+        m_tracker?.UpdateTarget(defaultTarget);
     }
     public void StartMoving()
     {
         SetupNavigation();
         var nav = Navigator;
-        m_currentDestination = m_target == null ? m_defaultTarget : m_target.transform.position;
+        m_currentDestination = m_tracker.IsReady? m_tracker.PrecisePosition : m_defaultTarget;
         nav?.SetDestination(m_currentDestination);
         // if enemy sees player, immediately reroute path to pusue player
         if (m_movement == null && gameObject.activeSelf)
@@ -60,7 +61,7 @@ public class EnemyMovement : MonoBehaviour
     public void UpdateTarget(BaseEntity newTarget)
     {
         if (newTarget == null) return;
-        m_target = newTarget;
+        m_tracker?.UpdateTarget(newTarget);
         if (m_moveOnsight)
         {
             // if not moving, start chasing
@@ -79,12 +80,12 @@ public class EnemyMovement : MonoBehaviour
         float waitTime;
         while (dist > nav.stoppingDistance)
         {
-            m_currentDestination = m_target == null ? m_defaultTarget : m_target.transform.position;
+            m_currentDestination = m_tracker.IsReady? m_tracker.PrecisePosition : m_defaultTarget;
             // the farther we are from target, the longer our path refresh interval
             waitTime = Mathf.Clamp(0.1f * (dist / 100f), 0.1f, 5f);
             nav?.SetDestination(m_currentDestination);
             yield return new WaitForSeconds(waitTime);
-            dist = Vector2.Distance(transform.position, m_currentDestination);
+            dist = Navigator.remainingDistance;
         }
         m_movement = null;
     }
@@ -92,7 +93,7 @@ public class EnemyMovement : MonoBehaviour
     {
         StopMoving();
         yield return new WaitForSeconds(duration);
-        m_target = null;
+        m_tracker?.ResetTarget();
         Navigator?.SetDestination(m_defaultTarget);
         StartMoving();
     }

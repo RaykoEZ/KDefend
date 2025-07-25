@@ -445,6 +445,8 @@ GameObject:
   - component: {fileID: 479479895378125560}
   - component: {fileID: 847211165139811645}
   - component: {fileID: 3849120413031669997}
+  - component: {fileID: 2845755275583024145}
+  - component: {fileID: 483398006813200515}
   m_Layer: 7
   m_Name: P_Guard_Arena
   m_TagString: Untagged
@@ -785,6 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveOnsight: 1
+  m_tracker: {fileID: 2845755275583024145}
 --- !u!114 &3849120413031669997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,6 +818,36 @@ MonoBehaviour:
         m_CallState: 2
   m_autoAttack: 0
   m_targeting: {fileID: 1629278082830876246}
+--- !u!114 &2845755275583024145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6254325673093278995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3eaf864b8b2904f96d61df8896d17c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_warpDistanceThreshold: 2000
+  m_teleportCooldownTime: 7
+  m_updateTimeInterval: 10
+  m_formation: {fileID: 483398006813200515}
+--- !u!114 &483398006813200515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6254325673093278995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d228e4f04464120459027179d75e5fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_encircleAngleRange: 0
+  m_predictionDistance: 100
 --- !u!1 &6697527675712265461
 GameObject:
   m_ObjectHideFlags: 0
