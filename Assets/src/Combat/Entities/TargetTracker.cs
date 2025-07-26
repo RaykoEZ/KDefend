@@ -9,25 +9,30 @@ public class TargetTracker : MonoBehaviour
     [SerializeField] float m_teleportCooldownTime = default;
     [SerializeField] float m_updateTimeInterval = default;
     [SerializeField] FormationHandler m_formation = default;
-    Vector2 m_precisePosition = Vector2.zero;
+    protected Vector2 m_precisePosition;
+    protected Vector2 m_defaultTarget;
     BaseEntity m_target;
     Coroutine m_tracking;
     Coroutine m_teleportCooldown;
     public bool IsReady => m_target != null;
     public Vector2 PrecisePosition => m_precisePosition;
+    public Vector2 DefaultTarget { get => m_defaultTarget; }
     public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
     void OnEnable()
     {
         m_teleportCooldown = StartCoroutine(Cooldown());
+        m_defaultTarget = transform.position;
     }
-    protected IEnumerator TrackTarget() 
+    protected IEnumerator TrackTarget()
     {
         while (m_target != null && Navigator.isActiveAndEnabled) 
         {
             // update current target destination
             m_precisePosition = m_target.transform.position;
+            float directDist = Vector2.Distance(PlayerMovement.PlayerPosition, transform.position);
             // try teleport near player if too far from destimation
-            if (Navigator.remainingDistance > m_warpDistanceThreshold)
+            if (Navigator.remainingDistance > m_warpDistanceThreshold && 
+                directDist > m_warpDistanceThreshold)
             {
                 TryTeleportNearPlayer();
             }
@@ -61,14 +66,5 @@ public class TargetTracker : MonoBehaviour
             StopCoroutine(m_tracking);
         }
         m_tracking = StartCoroutine(TrackTarget());
-    }
-    public virtual void ResetTarget()
-    {
-        if (m_tracking != null)
-        {
-            StopCoroutine(m_tracking);
-            m_tracking = null;
-        }
-        m_target = null;
     }
 }

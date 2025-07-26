@@ -12,6 +12,9 @@ public class SummonArena : ActiveAbility
     void PrepareEnemy(Enemy spawned)
     {
         spawned.InitTarget(spawned);
-        spawned.Navigator.MoveToPosition(transform.position);
+        // set spawned target to move towards arena center
+        spawned.Navigator.IgnorePlayerTracking = true;
+        spawned.Navigator.DirectDestination = transform.position;
+        spawned.Navigator.StartMoving();
     }
 }

@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3eaf864b8b2904f96d61df8896d17c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_warpDistanceThreshold: 3200
+  m_warpDistanceThreshold: 2500
   m_teleportCooldownTime: 5
   m_updateTimeInterval: 0.5
   m_formation: {fileID: 3665723613797936739}
@@ -539,7 +539,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5266097158630861302}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 3
+  m_Radius: 50
   m_Speed: 350
   m_Acceleration: 350
   avoidancePriority: 1
@@ -688,6 +688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveOnsight: 1
+  m_ignorePlayerTracking: 0
   m_tracker: {fileID: 8026254218230414548}
 --- !u!114 &7931186853949798028
 MonoBehaviour:

@@ -650,9 +650,9 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6254325673093278995}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 3
+  m_Radius: 50
   m_Speed: 25
   m_Acceleration: 50
   avoidancePriority: 0
@@ -787,6 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveOnsight: 1
+  m_ignorePlayerTracking: 0
   m_tracker: {fileID: 2845755275583024145}
 --- !u!114 &3849120413031669997
 MonoBehaviour:

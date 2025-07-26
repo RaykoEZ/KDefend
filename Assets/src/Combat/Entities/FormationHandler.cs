@@ -27,7 +27,7 @@ public class FormationHandler : MonoBehaviour
             RandomizeFormationAngle();
         }
         // get a copy of current player moving direction
-        Vector3 playerDir = PlayerMovement.PlayerMovementDirection;
+        Vector3 playerDir = PlayerMovement.PlayerMovementDirection == Vector2.zero? Vector2.up : PlayerMovement.PlayerMovementDirection;
         // get randomized rotated direction from player's movement direction
         Vector3 angledDir = Quaternion.AngleAxis(m_formationAngle, Vector3.forward) * playerDir * m_predictionDistance;
         Vector3 dest = chaseTarget.transform.position + angledDir;
