@@ -8,16 +8,8 @@ public struct ItemProperty
 {
     public string Name;
     public string Description;
-    public int ItemCost;
 }
-[Serializable]
-public enum GameEventTriggerType
-{
-    Time,
-    Item,
-    Attack,
-    Movement
-}
+
 public interface IItem
 {
     ItemProperty Property { get; }

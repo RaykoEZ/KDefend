@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
-using Curry.Game;
-using Unity.Mathematics;
 
 public struct FloatRange
 {
@@ -40,10 +40,25 @@ public static class SDFUtil
 public static class GameUtil 
 {
     static Regex s_regexNoAlphaNumeric = new Regex(@"^[^a-zA-Z0-9]*$");
+
     // Check if text has no pronouncing needed for npc anim
     public static bool TextHasNoAlphaNumeric(string toCheck)
     {
         return s_regexNoAlphaNumeric.IsMatch(toCheck);
+    }
+    // *if both lists are null, return true
+    public static bool ListEqual<T>(List<T> a, List<T> b) 
+    {
+        if (a == null) return b == null;
+        if (b == null || a.Count != b.Count) return false;
+        for (int i = 0; i < a.Count; i++)
+        {
+            if (!Equals(a[i], b[i]))
+            {
+                return false;
+            }
+        }
+        return true;
     }
     // Coountdown in seconds
     public static IEnumerator Countdown(float secondsLeft, Action onFinish = null)

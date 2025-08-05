@@ -61,7 +61,7 @@ public class GameTimer : MonoBehaviour
             {
                 Dictionary<GameEventTriggerType, object> p = new Dictionary<GameEventTriggerType, object>
                 {
-                    {GameEventTriggerType.Time, m_secondsElapsed}
+                    {GameEventTriggerType.TimeElapsed, m_secondsElapsed}
                 };
                 KDefenderEventContext e = new KDefenderEventContext(m_gameState.Current.KDGameState, p);
                 m_onTimeElapsed?.Invoke(e);

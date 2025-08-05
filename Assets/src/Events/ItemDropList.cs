@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemDropList : ScriptableObject 
 {
     [SerializeField] List<ItemDrop_Internal> m_dropList = default;
+
     [Serializable]
     public struct ItemDrop_Internal : IWeightedItem
     {
@@ -13,6 +14,16 @@ public class ItemDropList : ScriptableObject
         [SerializeField] int m_dropWeight;
         public int Weight => m_dropWeight;
         public Item ToDrop => m_toDrop;
+    }
+    // get all item assets in collection
+    public List<Item> GetDropListItemAsset()
+    {
+        List<Item> ret = new List<Item>();
+        foreach (ItemDrop_Internal item in m_dropList)
+        {
+            ret.Add(item.ToDrop);
+        }
+        return ret;
     }
     public List<Item> GetWeightedDrops(int numToGet = 1) 
     {

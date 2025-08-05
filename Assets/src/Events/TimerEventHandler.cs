@@ -38,8 +38,8 @@ public class TimerEventHandler<T0> where T0 : ITimerEvent<KDefenderEventContext>
     // Listen to timer with this
     public void OnTimeElapsed(KDefenderEventContext e) 
     {
-        if (e.EventPayload == null || !e.EventPayload.ContainsKey(GameEventTriggerType.Time)) return;
-        int secondsElapsed = (int)e.EventPayload[GameEventTriggerType.Time];
+        if (e.EventPayload == null || !e.EventPayload.ContainsKey(GameEventTriggerType.TimeElapsed)) return;
+        int secondsElapsed = (int)e.EventPayload[GameEventTriggerType.TimeElapsed];
         if (m_eventSet.TryGetValue(secondsElapsed, out var events))
         {
             var removeList = new List<T0>();

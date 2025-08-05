@@ -4,7 +4,7 @@ using UnityEngine;
 // Listens to a collection of game events to execute set scene events
 public class GameEventHandler : MonoBehaviour 
 {
-    [SerializeField] List<CurryGameEventListener> m_toListen = default;
+    [SerializeField] protected List<CurryGameEventListener> m_toListen = default;
     void OnEnable()
     {
         foreach (var item in m_toListen)
@@ -17,6 +17,28 @@ public class GameEventHandler : MonoBehaviour
         foreach (var item in m_toListen)
         {
             item?.Shutdown();
+        }
+    }
+}
+public class NpcEventHandler : GameEventHandler 
+{
+    [SerializeField] List<KDefenderNpcHandler> m_npcHandles = default;
+    public virtual void Init(SaveData saveData) 
+    {
+        foreach (var item in m_npcHandles) 
+        {
+            item?.Init(saveData);
+        }
+    }
+    public void HandleEvent(EventInfo eventInfo) 
+    {
+        if (eventInfo == null) return;
+        if (eventInfo is KDNpcEventInfo npcEvent) 
+        {
+            foreach (var item in m_npcHandles) 
+            { 
+                item?.HandleEvent(npcEvent);
+            }
         }
     }
 }

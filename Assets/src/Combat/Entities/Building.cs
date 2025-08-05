@@ -1,18 +1,6 @@
-﻿public abstract class Building : BaseEntity 
+﻿using UnityEngine;
+
+public abstract class Building : MonoBehaviour 
 {
     public abstract void Interact();
-}
-public class Shop : Building 
-{
-    public override void Interact()
-    {
-
-    }
-}
-public class EnemyBase : Building 
-{
-    public override void Interact()
-    {
-
-    }
 }

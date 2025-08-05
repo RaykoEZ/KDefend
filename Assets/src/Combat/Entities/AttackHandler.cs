@@ -12,7 +12,6 @@ public abstract class AttackHandler : MonoBehaviour
     protected bool m_keepFiring = false;
     protected List<BaseWeapon> m_currentWeapons = new List<BaseWeapon>();
     public bool KeepFiring { get => m_keepFiring; set => m_keepFiring = value; }
-
     public abstract Vector2 GetAimDirectionNormalized();
     protected virtual void OnEnable()
     {
