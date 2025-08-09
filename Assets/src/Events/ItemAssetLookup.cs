@@ -5,24 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ItemLookup_", menuName = "Jams/Item/New Lookup list")]
 public class ItemAssetLookup : ScriptableObject
 {
-    [SerializeField] List<ItemAsset> m_items = default;
-    
-    public List<ItemAsset> GetUniqueRandomItems(int numToGet = 3) 
-    {
-        List<ItemAsset> ret = new List<ItemAsset>();
-        if (numToGet < 0 || m_items.Count == 0) return ret;
-        // fit all into list if we don't have enough to get from list
-        if (m_items.Count <= numToGet) 
-        {
-            ret.AddRange(m_items);
-        }
-        else 
-        {
-            // random uniqu results
-            ret.AddRange(SamplingUtil.SampleFromList(m_items, numToGet, uniqueResults: true));
-        }
-        return ret;
-    } 
+    [SerializeField] List<ItemAsset> m_items = default;   
+    public List<ItemAsset> Assets => m_items;
     public int GetIdOf(ItemAsset item) 
     {
         if (item == null) return -1;

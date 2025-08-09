@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 
 public interface IWeightedItem
@@ -39,9 +40,13 @@ public static class SamplingUtil
     {
         // Redirect to random index selection
         if (!uniqueResults) return RandomSelectFromList(pool, numToSample);
-
+        if (numToSample < 1 || pool.Count == 0) return new List<T>();
+        // return whole pool if we don't have enough to sample
+        if (pool.Count <= numToSample)
+        {
+            return new List<T>(pool);
+        }
         List<T> ret = new List<T>();
-        if (numToSample < 1) { return ret; }
         //Sample probability variables
         float p;
         float sample;

@@ -86,7 +86,7 @@ public class Enemy : BaseCharacter, IHitsEntity
     // contact damage
     public virtual void OnHit<T>(T hit) where T : BaseEntity
     {
-        if ( hit is Player || hit is PlayerBase)
+        if ( hit is Player)
         {
             hit?.TakeDamage(m_contactDamage);
         }

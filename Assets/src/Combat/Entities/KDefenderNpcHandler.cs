@@ -10,7 +10,7 @@ public abstract class KDefenderNpcHandler : MonoBehaviour
 public class Npc_Tutorial : KDefenderNpcHandler
 {
     // unlock hidden tutorial
-    public void UnlockTutorial()
+    public void Unlock()
     {
 
     }
@@ -30,7 +30,6 @@ public class Npc_Tutorial : KDefenderNpcHandler
 }
 public class Npc_SaveLoad : KDefenderNpcHandler
 {
-    int m_numSave = 0;
     public override void HandleEvent(KDNpcEventInfo info)
     {
         throw new System.NotImplementedException();

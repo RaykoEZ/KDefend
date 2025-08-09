@@ -14,11 +14,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_items:
   - m_asset: {fileID: 0}
-    m_cardArt: {fileID: 0}
-    m_cardBack: {fileID: 0}
+    m_cardArt: {fileID: -4087377375887406748, guid: e7e35ddae154bc745b87f588cfdfd8cf, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
   - m_asset: {fileID: 0}
-    m_cardArt: {fileID: 0}
-    m_cardBack: {fileID: 0}
+    m_cardArt: {fileID: 2292526792846232288, guid: 11487e4e1b1a58144aaf4343e0d972a1, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
   - m_asset: {fileID: 0}
-    m_cardArt: {fileID: 0}
-    m_cardBack: {fileID: 0}
+    m_cardArt: {fileID: 8829389298851968010, guid: 6bb463738cfd2c245b4e86ed4efd83c4, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_asset: {fileID: 0}
+    m_cardArt: {fileID: 6691621495592777689, guid: 4e619763c24793f47aec0b721df7c347, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_asset: {fileID: 0}
+    m_cardArt: {fileID: -8743693460105315321, guid: 8d5bfc07aec3a4a44bcd29a868aea151, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_asset: {fileID: 0}
+    m_cardArt: {fileID: -236715956741943315, guid: b29a4e51fc855a44b87f9f8cc2ae92d2, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_asset: {fileID: 0}
+    m_cardArt: {fileID: 6125129076602327018, guid: 91c951b331236ab489a7f54e61700d8b, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_asset: {fileID: 0}
+    m_cardArt: {fileID: -4646528732169566195, guid: 8b1441145e80560419956010269bc7aa, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_asset: {fileID: 0}
+    m_cardArt: {fileID: -5537924790283755242, guid: 25c01669b8f00784281217c7772dc2c9, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
