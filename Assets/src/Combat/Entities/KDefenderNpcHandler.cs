@@ -4,7 +4,7 @@ public abstract class KDefenderNpcHandler : MonoBehaviour
 {
     public abstract void Init(SaveData saveData);
     // handle game events with event flags
-    public abstract void HandleEvent(KDNpcEventInfo info);
+    public abstract void HandleEvent(KDEventInfo info);
 }
 // Triggers dialogue/actions for tutorial Npc - OriaL2
 public class Npc_Tutorial : KDefenderNpcHandler
@@ -18,7 +18,7 @@ public class Npc_Tutorial : KDefenderNpcHandler
     { 
      
     }
-    public override void HandleEvent(KDNpcEventInfo info)
+    public override void HandleEvent(KDEventInfo info)
     {
         throw new System.NotImplementedException();
     }
@@ -30,7 +30,7 @@ public class Npc_Tutorial : KDefenderNpcHandler
 }
 public class Npc_SaveLoad : KDefenderNpcHandler
 {
-    public override void HandleEvent(KDNpcEventInfo info)
+    public override void HandleEvent(KDEventInfo info)
     {
         throw new System.NotImplementedException();
     }
@@ -58,7 +58,7 @@ public class Npc_Notify : KDefenderNpcHandler
     {
 
     }
-    public override void HandleEvent(KDNpcEventInfo info)
+    public override void HandleEvent(KDEventInfo info)
     {
         throw new System.NotImplementedException();
     }

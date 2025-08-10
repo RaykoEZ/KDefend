@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 // a list of item assets, access them with index
 [CreateAssetMenu(fileName = "ItemLookup_", menuName = "Jams/Item/New Lookup list")]
 public class ItemAssetLookup : ScriptableObject
@@ -19,7 +21,7 @@ public class ItemAssetLookup : ScriptableObject
     }
 }
 [Serializable]
-public class ItemAsset 
+public class ItemAsset : IEquatable<ItemAsset>
 {
     [SerializeField] Item m_asset;
     [SerializeField] Sprite m_cardArt;
@@ -27,4 +29,17 @@ public class ItemAsset
     public Item Asset => m_asset;
     public Sprite CardArt => m_cardArt;
     public Sprite CardBack => m_cardBack;
+    public bool Equals(ItemAsset other)
+    {
+        return (other.Asset == null && Asset == null) ||
+            other.Asset.Property.Name == Asset.Property.Name;
+    }
+    public override bool Equals(object obj)
+    {
+        return Equals(obj as ItemAsset);
+    }
+    public override int GetHashCode()
+    {
+        return Asset == null? -1 : ($"{Asset.Property.Name}").GetHashCode();
+    }
 }

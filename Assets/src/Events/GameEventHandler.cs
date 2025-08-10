@@ -33,7 +33,7 @@ public class NpcEventHandler : GameEventHandler
     public void HandleEvent(EventInfo eventInfo) 
     {
         if (eventInfo == null) return;
-        if (eventInfo is KDNpcEventInfo npcEvent) 
+        if (eventInfo is KDEventInfo npcEvent) 
         {
             foreach (var item in m_npcHandles) 
             { 

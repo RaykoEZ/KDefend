@@ -17,8 +17,7 @@ public class ShopUI : HideableUI
         m_description.text = item.Asset.Property.Description;
         m_bg.sprite = item.CardBack;
         m_itemArt.sprite = item.CardArt;
-    }
-    
+    }  
     public void OnItemSelect()
     {
         // player obtains perk or item

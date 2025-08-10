@@ -3,7 +3,6 @@ using UnityEngine.Events;
 
 public abstract class Building : MonoBehaviour 
 {
-    [SerializeField] TemporaryInputAction m_interact = default;
     [SerializeField] UnityEvent m_onInteract = default;
     public virtual void OnPlayerInteract() 
     {

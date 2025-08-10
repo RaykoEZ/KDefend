@@ -2,26 +2,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-// changes shop item pool when player obtains/triggers a game event
-public class ItemPoolUpdater : MonoBehaviour
-{
-    [SerializeField] Shop m_shop = default;
-    InternalEventHandler m_event = new InternalEventHandler();
-    void OnEnable()
-    {
-        // Listen to events for specific effects
-    }
-}
 // handles specific item selections to trade Pts for every boss cycle
 public class Shop : Building 
 {
+    [SerializeField] ShopPoolUpdater m_updater = default;
     [SerializeField] ItemAssetLookup m_default = default;
     [SerializeField] List<ShopUI> m_optionUI = default;
     List<ItemAsset> m_currentList = new List<ItemAsset>();
     void OnEnable()
     {
         HideAllOptons();
+    }
+    void OnDisable()
+    {
+        HideAllOptons();
+    }
+    void UpdatePool() 
+    {
+        // set to default, add bonus pools from updater
+        m_currentList = m_default.Assets;
+        m_currentList.AddRange(m_updater.AddedPool);
     }
     // on interact, look at player inventory, change drop list depending on 
     // all obtained items
@@ -30,10 +30,7 @@ public class Shop : Building
     {
         // get 3 random items to choose from
         // set to default if we have nothing
-        if (m_currentList == null) 
-        {
-            m_currentList.AddRange(m_default.Assets);
-        }
+        UpdatePool();
         List<ItemAsset> options = SamplingUtil.SampleFromList(m_currentList, 3, uniqueResults: true);
         for (int i = 0; i < m_optionUI.Count; ++ i) 
         {
@@ -42,13 +39,16 @@ public class Shop : Building
         StartCoroutine(ShowOptions());
     }
     public void OnPlayerChosen(ItemAsset chosen) 
-    { 
-    
+    {
+        HideAllOptons();
+        // update player inventory, setup item effects & trigger events for obtaining the item
+
     }
     public void HideAllOptons() 
     {
         foreach (var item in m_optionUI) 
         {
+            item.OnChosen -= OnPlayerChosen;
             item.Hide();
         }
     }
@@ -57,6 +57,7 @@ public class Shop : Building
         foreach(var item in m_optionUI) 
         {
             item.Show();
+            item.OnChosen += OnPlayerChosen;
             yield return new WaitForSeconds(0.1f);
         }
     }
