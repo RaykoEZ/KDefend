@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewShopPoolEvent", menuName = "Jam/Event/Shop Pool Update", order = 1)]
+[CreateAssetMenu(fileName = "NewShopPoolEvent", menuName = "Jams/Event/Shop Pool Update", order = 1)]
 public class ShopPoolEventList : ScriptableObject 
 {
     [SerializeField] List<UpdateShopPool> m_events = default;

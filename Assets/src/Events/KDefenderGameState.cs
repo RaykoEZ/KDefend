@@ -11,7 +11,7 @@ public struct KDefenderGameState
     // State of player entities
     public EntityState PlayerValue;
     public List<EnemyState> HostileStates;
-    public List<string> CompletedDeliveries;
+    public List<ItemProperty> HeldItems;
     public List<string> ActiveDeliveries;
     public KDefenderGameState(KDefenderGameState copy) 
     {
@@ -20,7 +20,7 @@ public struct KDefenderGameState
         CurrentThreatLevel = copy.CurrentThreatLevel;
         PlayerValue = copy.PlayerValue;
         HostileStates = copy.HostileStates;
-        CompletedDeliveries = copy.CompletedDeliveries;
+        HeldItems = copy.HeldItems;
         ActiveDeliveries = copy.ActiveDeliveries;
     }
 }
@@ -28,5 +28,4 @@ public struct KDefenderGameState
 public struct InventoryState 
 {
     public List<ItemProperty> ItemProperties;
-    public List<int> ItemStackCount;
 }

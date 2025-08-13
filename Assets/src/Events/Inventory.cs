@@ -28,12 +28,10 @@ public class Inventory<T> where T : IItem
         foreach (var item in m_itemSet)
         {
             prop.Add(item.Property);
-            stacks.Add(item.StackCount);
         }
         var ret = new InventoryState
         {
             ItemProperties = prop,
-            ItemStackCount = stacks
         };
         return ret;
     }
@@ -43,11 +41,7 @@ public class Inventory<T> where T : IItem
     }
     public void Add(T toAdd) 
     {
-        if (m_itemSet.TryGetValue(toAdd, out T result)) 
-        {
-            result.StackCount += toAdd.StackCount;
-        }
-        else 
+        if (!m_itemSet.Contains(toAdd)) 
         {
             m_itemSet.Add(toAdd);
         }

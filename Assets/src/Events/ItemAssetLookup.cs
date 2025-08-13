@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.AddressableAssets;
 // a list of item assets, access them with index
 [CreateAssetMenu(fileName = "ItemLookup_", menuName = "Jams/Item/New Lookup list")]
 public class ItemAssetLookup : ScriptableObject
@@ -14,7 +13,11 @@ public class ItemAssetLookup : ScriptableObject
         if (item == null) return -1;
         return m_items.FindIndex((i) => i == item);
     }
-    public ItemAsset GetItemAsset(int id) 
+    public ItemAsset GetItemByProperty(ItemProperty prop) 
+    {
+        return m_items.Find((i) => i.Asset.Property.Equals(prop));
+    }
+    public ItemAsset GetItemAssetByIndex(int id) 
     {
         if (id < 0 || id >= m_items.Count) return null;
         return m_items[id];
@@ -23,7 +26,7 @@ public class ItemAssetLookup : ScriptableObject
 [Serializable]
 public class ItemAsset : IEquatable<ItemAsset>
 {
-    [SerializeField] Item m_asset;
+    [SerializeField] Item m_asset = default;
     [SerializeField] Sprite m_cardArt;
     [SerializeField] Sprite m_cardBack;
     public Item Asset => m_asset;
@@ -32,7 +35,8 @@ public class ItemAsset : IEquatable<ItemAsset>
     public bool Equals(ItemAsset other)
     {
         return (other.Asset == null && Asset == null) ||
-            other.Asset.Property.Name == Asset.Property.Name;
+            other.Asset.Property.Name == Asset.Property.Name &&
+            other.Asset.Property.Description == Asset.Property.Description;
     }
     public override bool Equals(object obj)
     {

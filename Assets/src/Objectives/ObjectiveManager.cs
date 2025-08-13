@@ -19,8 +19,10 @@ namespace Curry.Game
         /// Preloaded objectives for test
         [SerializeField] protected List<T> m_TEST_initObjectives = default;
         protected List<GameObjective<T>> m_active = new List<GameObjective<T>>();
-        protected List<GameObjective<T>> m_completed = new List<GameObjective<T>>();
+        private List<GameObjective<T>> m_completed = new List<GameObjective<T>>();
         protected List<GameObjective<T>> m_failed = new List<GameObjective<T>>();
+        // completed deliveries in this session, does not save on save game
+        protected IReadOnlyList<GameObjective<T>> Completed { get => m_completed; }
 
         public event OnObjectiveUpdate<T> OnNewObjective;
         public event OnObjectiveUpdate<T> ObjectiveCompleted;
@@ -63,7 +65,7 @@ namespace Curry.Game
         protected void Start()
         {
 #if UNITY_EDITOR
-            Init(new List<T>(), m_TEST_initObjectives);
+            Init(m_TEST_initObjectives);
 #endif
         }
         protected void OnDestroy()
@@ -78,7 +80,6 @@ namespace Curry.Game
             }
         }
         public virtual void Init(
-            List<T> completedObjectives,
             List<T> newObjectives) { }
         public GameObjective<T> GetByTitle(string title) 
         {

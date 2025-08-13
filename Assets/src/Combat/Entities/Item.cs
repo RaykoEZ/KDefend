@@ -1,22 +1,48 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 [Serializable]
-public struct ItemProperty
+public struct ItemProperty : IEquatable<ItemProperty>
 {
     public string Name;
     public string Description;
+
+    public bool Equals(ItemProperty other)
+    {
+        return other.Name == Name && other.Description == Description;
+    }
+    public override int GetHashCode()
+    {
+        return ($"{Name}/{Description}").GetHashCode();
+    }
 }
 
 public interface IItem
 {
     ItemProperty Property { get; }
-    // Use as counter from item amount/level
-    int StackCount { get; set; }
-    public void UseItem();
     public void OnPickup();
+}
+// Items that stays in inventory, with trigger effects
+public class Collectible : Item 
+{
+    [SerializeField] List<KDEvent> m_effectTriggers = default;
+    public void Init(Player user) 
+    { 
+        m_user = user;
+        foreach (var trigger in m_effectTriggers) 
+        {
+            trigger?.InitGlobalListeners();
+        }
+    }
+    public override void OnPickup()
+    {
+        GetComponent<Collider2D>().enabled = false;
+        m_onPickup?.Invoke(m_user);
+        m_pickUpCommand?.Disable();
+    }
 }
 [RequireComponent(typeof(Collider2D))]
 // class to contain item property and interaction triggers
@@ -27,11 +53,9 @@ public class Item : MonoBehaviour , IItem
     [SerializeField] protected UnityEvent<Player> m_onUse = default;
     [SerializeField] protected UnityEvent<Player> m_onPickup = default;
     [SerializeField] protected TemporaryInputAction m_pickUpCommand = default;
-    protected int m_stackCount = 1;
     protected bool m_isEffectActive = false;
     protected Player m_user;
     public ItemProperty Property => m_property;
-    public int StackCount { get => m_stackCount; set => m_stackCount = value; }
     // Pickup trigger
     void OnTriggerEnter2D(Collider2D col) 
     {
@@ -59,10 +83,15 @@ public class Item : MonoBehaviour , IItem
     }
     public virtual void OnPickup()
     {
-        if (m_user == null) return;
         m_onPickup?.Invoke(m_user);
         m_pickUpCommand?.Disable();
         Destroy(gameObject);
+    }
+    public void OnPickup(Player player) 
+    {
+        if (player == null) return;
+        m_user = player;
+        OnPickup();
     }
     public virtual void UseItem()
     {

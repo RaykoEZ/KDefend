@@ -17,23 +17,25 @@ public class KDefenderStateManager : MonoBehaviour
     [SerializeField] DeliveryManager m_objectives = default;
 
     [SerializeField] Player m_player = default;
+    [SerializeField] InventoryManager m_inventoryManager = default;
     [SerializeField] GameTimer m_timer = default;
     [SerializeField] UnityEvent m_onGameOver = default;
     // As an alternate game mode
     // Will implement with the KeepQuiet saves system
+    // Initialize game state on launch
     public void GameSetup(SaveData newState)
     {
         // set player state
         m_player?.Init(newState.KDGameState.PlayerValue);
         m_enemy?.Init(newState.KDGameState.CurrentThreatLevel, newState.KDGameState.HostileStates);
-        
-        List<DeliveryDetail> completed = m_deliveryList.Find(newState.KDGameState.CompletedDeliveries);
+        m_inventoryManager?.Init(newState.KDGameState.HeldItems);
+
         List<DeliveryDetail> active = m_deliveryList.Find(newState.KDGameState.ActiveDeliveries);
-        m_objectives.Init(completed, active);
+        m_objectives.Init(active);
         m_staticEvents.SetFlags(newState.KDGameState.StaticFlags);
         m_timer.StartTimer();
     }
-    // get current states from managers
+    // get current states from managers to save latest game state
     public void UpdateSave()
     {
         List<string> completed = DeliveryDetail.GetTitleList(
@@ -46,11 +48,10 @@ public class KDefenderStateManager : MonoBehaviour
         {
             Timer = m_timer.SecondsElapsed,
             StaticFlags = m_staticEvents.CurrentFlags,
-            CurrentThreatLevel = m_threat.CurrentThreat,     
+            CurrentThreatLevel = m_threat.CurrentThreat,
             PlayerValue = m_player.CurrentStats,
             HostileStates = m_enemy.GetEnemyStates(),
-            // Objectives here
-            CompletedDeliveries = completed,
+            HeldItems = m_inventoryManager.GetItemPropeties(),
             ActiveDeliveries = active
         };
         m_save.Current.KDGameState = newState;

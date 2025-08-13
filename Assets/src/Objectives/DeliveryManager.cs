@@ -9,16 +9,10 @@ public class DeliveryManager : ObjectiveManager<DeliveryDetail>
     [SerializeField] DeliveryDropTable m_deliveryList = default;
     [SerializeField] DeliveryPrompter m_prompt = default;
     Coroutine m_deliveryRespawn;
-    public override void Init(List<DeliveryDetail> completedObjectives, List<DeliveryDetail> newObjectives)
+    public override void Init(List<DeliveryDetail> newObjectives)
     {
-        DeliveryObjective comp;
         m_prompt.DeliveryReceive -= OnDeliveryComplete;
         m_prompt.DeliveryReceive += OnDeliveryComplete;
-        foreach (var objectiveTitle in completedObjectives)
-        {
-            comp = NewObjective(objectiveTitle);
-            m_completed.Add(comp);
-        }
         // instantiate objectives from detail provided
         foreach (var objective in newObjectives)
         {
