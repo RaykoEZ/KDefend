@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Curry.Events;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,6 @@ public static class SDFUtil
 public static class GameUtil 
 {
     static Regex s_regexNoAlphaNumeric = new Regex(@"^[^a-zA-Z0-9]*$");
-
     // Check if text has no pronouncing needed for npc anim
     public static bool TextHasNoAlphaNumeric(string toCheck)
     {

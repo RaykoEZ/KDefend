@@ -1,12 +1,13 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.PackageManager;
 
 public interface IWeightedItem
 {
     int Weight { get; }
 }
-public static class SamplingUtil 
+public static class SamplingUtil
 {
     public static T SampleWithWeights<T>(List<T> samplePool) where T : IWeightedItem
     {
@@ -15,7 +16,6 @@ public static class SamplingUtil
         {
             return ret;
         }
-
         // get total weight
         int weightSum = 0;
         foreach (var item in samplePool)
@@ -35,6 +35,27 @@ public static class SamplingUtil
             }
         }
         return samplePool.First();
+    }
+    public static List<T> SampleWithWeights<T>(List<T> samplePool,int numToGet = 1, bool uniqueResults = true) where T : IWeightedItem 
+    {
+        // check for pool size and other parameters
+        if (numToGet <= 0 || samplePool == null || samplePool.Count <= 1 || 
+            samplePool.Count <= numToGet) return samplePool;
+        List<T> ret = new List<T>();
+        List<T> pool = new List<T>();
+        pool.AddRange(samplePool);
+        T sample;
+        for (int i = 0; i < numToGet; i++) 
+        {
+            sample = SampleWithWeights(pool);
+            ret.Add(sample);
+            // remove result from pool to sample again
+            if (uniqueResults) 
+            {
+                pool.Remove(sample);
+            }
+        }
+        return ret;
     }
     public static List<T> SampleFromList<T>(List<T> pool, int numToSample, bool uniqueResults = true)
     {

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
@@ -25,25 +25,6 @@ public interface IItem
     ItemProperty Property { get; }
     public void OnPickup();
 }
-// Items that stays in inventory, with trigger effects
-public class Collectible : Item 
-{
-    [SerializeField] List<KDEvent> m_effectTriggers = default;
-    public void Init(Player user) 
-    { 
-        m_user = user;
-        foreach (var trigger in m_effectTriggers) 
-        {
-            trigger?.InitGlobalListeners();
-        }
-    }
-    public override void OnPickup()
-    {
-        GetComponent<Collider2D>().enabled = false;
-        m_onPickup?.Invoke(m_user);
-        m_pickUpCommand?.Disable();
-    }
-}
 [RequireComponent(typeof(Collider2D))]
 // class to contain item property and interaction triggers
 public class Item : MonoBehaviour , IItem
@@ -53,9 +34,12 @@ public class Item : MonoBehaviour , IItem
     [SerializeField] protected UnityEvent<Player> m_onUse = default;
     [SerializeField] protected UnityEvent<Player> m_onPickup = default;
     [SerializeField] protected TemporaryInputAction m_pickUpCommand = default;
+    [SerializeField] private Image m_cardArt = default;
     protected bool m_isEffectActive = false;
     protected Player m_user;
     public ItemProperty Property => m_property;
+    public Image CardArt { get => m_cardArt; }
+
     // Pickup trigger
     void OnTriggerEnter2D(Collider2D col) 
     {

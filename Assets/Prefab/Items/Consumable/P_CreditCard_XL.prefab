@@ -190,9 +190,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pickupImmediately: 1
   m_property:
-    Name: 
-    Description: 
-    ItemCost: 0
+    Name: Credit (XL)
+    Description: Gain a very large amount of credit.
   m_onUse:
     m_PersistentCalls:
       m_Calls: []
@@ -223,6 +222,7 @@ MonoBehaviour:
     m_onInputDisable:
       m_PersistentCalls:
         m_Calls: []
+  m_cardArt: {fileID: 2207327764711495134}
 --- !u!114 &3751437366143518469
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -46,9 +46,12 @@ public class InventoryManager : MonoBehaviour
     }
     public void ObtainItem(Item obtained) 
     {
-        m_heldItems.Add(obtained);
+        if (!(obtained is Collectible))
+        {
+            m_heldItems.Add(obtained);
+            m_onObtainItem?.Invoke(obtained);
+        }
         obtained?.OnPickup(m_player);
-        m_onObtainItem?.Invoke(obtained);
     }
     protected void OnObtainItem(object sender, KDEventInfo args) 
     {

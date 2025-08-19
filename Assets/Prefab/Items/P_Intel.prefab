@@ -192,7 +192,6 @@ MonoBehaviour:
   m_property:
     Name: Intel
     Description: Secrets kept safe, no more
-    ItemCost: 0
   m_onUse:
     m_PersistentCalls:
       m_Calls: []
@@ -259,6 +258,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  m_cardArt: {fileID: 3390191896755749202}
 --- !u!61 &5917014744700529356
 BoxCollider2D:
   m_ObjectHideFlags: 0

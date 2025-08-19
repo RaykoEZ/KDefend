@@ -78,4 +78,20 @@ public class KDefenderStateManager : MonoBehaviour
             // Spawn intel decrypter
         }
     }
+    #region Global Game Events
+    // trigger to set game as paused/ not paused
+    public static void TriggerPauseEvent(object sender, bool isOn)
+    {
+        Dictionary<string, object> args = new Dictionary<string, object> { { "isOn", isOn } };
+        InternalEventHandler.TriggerGlobalEvent(sender,
+                new KDEventInfo(KD_StaticEventFlags.None, GameEventTriggerType.PauseGame, args));
+    }
+    public static void ItemDropEvent(object sender, ItemDropList dropList)
+    {
+        List<Item> options = dropList?.GetWeightedDrops(3);
+        KDEventInfo args = new KDEventInfo(KD_StaticEventFlags.None,
+            GameEventTriggerType.ItemOption, new Dictionary<string, object> { { "options", options } });
+        InternalEventHandler.TriggerGlobalEvent(sender, args);
+    }
+    #endregion
 }

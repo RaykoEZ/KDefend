@@ -16,6 +16,7 @@ public enum GameEventTriggerType
 {
     TimeElapsed,
     ItemObtained,
+    ItemOption,
     EnemyDefeated,
     AreaReached,
     OnAttackBegin,
@@ -23,4 +24,5 @@ public enum GameEventTriggerType
     OnTakeDamage,
     OnDefeat,
     OnPlayerMovement,
+    PauseGame
 }
