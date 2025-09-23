@@ -3,7 +3,6 @@ using Curry.Explore;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 // handles item option UI displays
 public class ItemOptionHandler : HideableUI
 {
@@ -29,7 +28,7 @@ public class ItemOptionHandler : HideableUI
     }
     protected void OnObtainItem(object sender, KDEventInfo args)
     {
-        if (args == null || args.Payload == null) return;
+        if (args.Payload == null) return;
         if (args.Payload.TryGetValue("options", out object result) && result is List<Item> list)
         {
             ShowOptions(list);
@@ -43,7 +42,7 @@ public class ItemOptionHandler : HideableUI
         {
             m_optionUI[i]?.Init(options[i]);
         }
-        KDefenderStateManager.TriggerPauseEvent(this, false);
+        KDEventUtil.PauseGame(this, false);
         Show();
         StartCoroutine(ShowOptions());
     }
@@ -55,14 +54,14 @@ public class ItemOptionHandler : HideableUI
         {
             m_optionUI[i]?.Init(options[i]);
         }
-        KDefenderStateManager.TriggerPauseEvent(this, false);
+        KDEventUtil.PauseGame(this, false);
         Show();
         StartCoroutine(ShowOptions());
     }
     protected void OnPlayerChosen(Item chosen)
     {
         Hide();
-        KDefenderStateManager.TriggerPauseEvent(this, true);
+        KDEventUtil.PauseGame(this, true);
         // update player inventory, setup item effects & trigger events for obtaining the item
         KDEventInfo args = new KDEventInfo(KD_StaticEventFlags.None, GameEventTriggerType.ItemObtained,
             new Dictionary<string, object> { { "item", chosen } });

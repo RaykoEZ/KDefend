@@ -19,7 +19,6 @@ public struct ItemProperty : IEquatable<ItemProperty>
         return ($"{Name}/{Description}").GetHashCode();
     }
 }
-
 public interface IItem
 {
     ItemProperty Property { get; }

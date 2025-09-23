@@ -7,7 +7,6 @@ public struct KDefenderGameState
 {
     public int Timer;
     public KD_StaticEventFlags StaticFlags;
-    public int CurrentThreatLevel;
     // State of player entities
     public EntityState PlayerValue;
     public List<EnemyState> HostileStates;
@@ -17,7 +16,6 @@ public struct KDefenderGameState
     {
         Timer = copy.Timer;
         StaticFlags = copy.StaticFlags;
-        CurrentThreatLevel = copy.CurrentThreatLevel;
         PlayerValue = copy.PlayerValue;
         HostileStates = copy.HostileStates;
         HeldItems = copy.HeldItems;

@@ -8,7 +8,6 @@ public class EnemyWaveManager : MonoBehaviour
 {
     [SerializeField] int m_stopRoutineSpawnOnSpawnCount = default;
     [SerializeField] Transform m_spawnParent = default;
-    [SerializeField] ThreatHandler m_threat = default;
     [SerializeField] EnemyAssetList m_enemyRefs = default;
     // frequent spawns bound by timer, depending on threat level and game state trigger
     [SerializeField] List<SpawnWave> m_routineSpawnStages = default;
@@ -19,11 +18,27 @@ public class EnemyWaveManager : MonoBehaviour
     [SerializeField] BaseEntity m_defaultAggroTarget = default;
     [SerializeField] RoutineCaller m_routineSpawn = default;
     bool m_waveInProgress = false;
+    void OnEnable()
+    {
+        InternalEventHandler.ListenToGlobal(GameEventTriggerType.Spawn, OnGlobalSpawnEvent);
+    }
+    void OnDisable()
+    {
+        InternalEventHandler.UnlistenFromGlobal(GameEventTriggerType.Spawn, OnGlobalSpawnEvent);
+    }
     void Start()
     {
         // setup routine call
         m_routineSpawn.OnNewInterval += OnSpawnWaveInterval;
         RoutineWave();
+    }
+    void OnGlobalSpawnEvent(object sender, KDEventInfo args) 
+    {
+        if (args.Payload == null) return;
+        if (args.Payload.TryGetValue("wave", out object result) && result is SpawnWave wavw)
+        {
+            SpawnWave(wavw);
+        }
     }
     void OnSpawnWaveInterval()
     {
@@ -32,12 +47,8 @@ public class EnemyWaveManager : MonoBehaviour
             StopRoutineWave();
             StartCoroutine(DelayRoutineWave());
         }
-        ThreatScalings threat = m_threat.GetCurrentThreatMultiplier();
-        float delay = threat.TimeBetweenRoutineWave <= 0f ? 30f :
-                    threat.TimeBetweenRoutineWave;
-        m_routineSpawn.TimeInterval = delay;
+        m_routineSpawn.TimeInterval = UnityEngine.Random.Range(30f, 50f);
     }
-
     public void RoutineWave() 
     {
         if (m_waveInProgress) return;
@@ -75,9 +86,8 @@ public class EnemyWaveManager : MonoBehaviour
     // returns number of enemies spawned from all spawned groups
     public void SpawnWave(SpawnWave wave) 
     {
+        if (wave == null || wave.EnemyGroups.Count == 0) return;
         // check for number of enemies already on field beofre spawning more
-        if (EnemyManager.ActiveEnemyCount > m_stopRoutineSpawnOnSpawnCount) return;
-
         StartCoroutine(SpawnWave_Internal(wave));       
     }
     IEnumerator SpawnWave_Internal(SpawnWave wave) 
@@ -109,7 +119,8 @@ public class EnemyWaveManager : MonoBehaviour
         // wait for a set duration if spawn count exceeded
         yield return SpawnCooldown();
         // spawn a wave of enemies
-        SpawnWave wave = m_routineSpawnStages[m_threat.CurrentThreat];
+        int index = Mathf.Clamp(KDefenderStateManager.CurrentLevel, 0, m_routineSpawnStages.Count);
+        SpawnWave wave = m_routineSpawnStages[index];
         SpawnWave(wave);
     }
     IEnumerator SpawnCooldown()

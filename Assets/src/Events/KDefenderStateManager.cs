@@ -8,7 +8,6 @@ public class KDefenderStateManager : MonoBehaviour
 {
     [SerializeField] GameSaveSource m_save = default;
     [SerializeField] StaticFlagEventHandler m_staticEvents = default;
-    [SerializeField] ThreatHandler m_threat = default;
 
     [SerializeField] EnemyManager m_enemy = default;
     [SerializeField] EnemyWaveManager m_wave = default;
@@ -20,6 +19,9 @@ public class KDefenderStateManager : MonoBehaviour
     [SerializeField] InventoryManager m_inventoryManager = default;
     [SerializeField] GameTimer m_timer = default;
     [SerializeField] UnityEvent m_onGameOver = default;
+    static int s_currentLevel = 0;
+    public static int CurrentLevel { get => s_currentLevel; }
+
     // As an alternate game mode
     // Will implement with the KeepQuiet saves system
     // Initialize game state on launch
@@ -27,7 +29,7 @@ public class KDefenderStateManager : MonoBehaviour
     {
         // set player state
         m_player?.Init(newState.KDGameState.PlayerValue);
-        m_enemy?.Init(newState.KDGameState.CurrentThreatLevel, newState.KDGameState.HostileStates);
+        m_enemy?.Init(newState.KDGameState.HostileStates);
         m_inventoryManager?.Init(newState.KDGameState.HeldItems);
 
         List<DeliveryDetail> active = m_deliveryList.Find(newState.KDGameState.ActiveDeliveries);
@@ -48,7 +50,6 @@ public class KDefenderStateManager : MonoBehaviour
         {
             Timer = m_timer.SecondsElapsed,
             StaticFlags = m_staticEvents.CurrentFlags,
-            CurrentThreatLevel = m_threat.CurrentThreat,
             PlayerValue = m_player.CurrentStats,
             HostileStates = m_enemy.GetEnemyStates(),
             HeldItems = m_inventoryManager.GetItemPropeties(),
@@ -65,33 +66,13 @@ public class KDefenderStateManager : MonoBehaviour
     {
         
         if (info == null || info.Payload == null) return;
-        bool threat = info.Payload.TryGetValue("threatGain", out object t0) &&
-            t0 is int;
         bool spawn = info.Payload.TryGetValue("wave", out object t1) &&
             t1 is SpawnWave;
-        if (threat && spawn)
+        if (spawn)
         {
-            // increase threat value
-            m_threat?.UpdateThreat((int)t0);
             // spawn elite/boss wave
             m_wave?.SpawnWave(t1 as SpawnWave);
             // Spawn intel decrypter
         }
     }
-    #region Global Game Events
-    // trigger to set game as paused/ not paused
-    public static void TriggerPauseEvent(object sender, bool isOn)
-    {
-        Dictionary<string, object> args = new Dictionary<string, object> { { "isOn", isOn } };
-        InternalEventHandler.TriggerGlobalEvent(sender,
-                new KDEventInfo(KD_StaticEventFlags.None, GameEventTriggerType.PauseGame, args));
-    }
-    public static void ItemDropEvent(object sender, ItemDropList dropList)
-    {
-        List<Item> options = dropList?.GetWeightedDrops(3);
-        KDEventInfo args = new KDEventInfo(KD_StaticEventFlags.None,
-            GameEventTriggerType.ItemOption, new Dictionary<string, object> { { "options", options } });
-        InternalEventHandler.TriggerGlobalEvent(sender, args);
-    }
-    #endregion
 }

@@ -17,12 +17,13 @@ public enum GameEventTriggerType
     TimeElapsed,
     ItemObtained,
     ItemOption,
+    Spawn,
     EnemyDefeated,
     AreaReached,
     OnAttackBegin,
     OnAttackFinish,
     OnTakeDamage,
     OnDefeat,
-    OnPlayerMovement,
-    PauseGame
+    PauseGame,
+    PauseTime
 }

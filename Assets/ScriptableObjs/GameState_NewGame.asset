@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_state:
     Persistent:
-      AriaGone: 0
-      ContinueCount: 0
       PlayerID: 23690368
       CurrentEnding: 3
     FreedomRoute: 0
@@ -30,22 +28,20 @@ MonoBehaviour:
         m_AssetGUID: 
         m_SubObjectName: 
         m_SubObjectType: 
+        m_SubObjectGUID: 
         m_EditorAssetChanged: 0
     SimulationTime: 0
     KDGameState:
       Timer: 1
-      StaticFlags: 64
-      CurrentThreatLevel: 0
+      StaticFlags: 0
       PlayerValue:
         Property:
           Health: 100
+          KnockbackModifier: 0.5
           MoveSpeed: 120
-        Position: {x: 383, y: 2112}
-      Inventory:
-        ItemProperties: []
-        ItemStackCount: 
+        Position: {x: -583, y: 1344}
       HostileStates: []
-      Completed: []
-      Active: []
+      HeldItems: []
+      ActiveDeliveries: []
     HeldThoughts: []
     ChatHistories: []

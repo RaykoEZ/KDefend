@@ -26,12 +26,15 @@ public class BaseEntity : MonoBehaviour
     public EntityState BaseStats => new EntityState
     {
         Property = m_base,
-        Position = transform.position
+        Position = transform.position,
+
     };
     public EntityState CurrentStats { 
         get => new EntityState { 
             Property = m_current,
-            Position = transform.position};}
+            Position = transform.position,
+        };
+    }
     public float HpRatio => CurrentStats.Property.Health / (float)m_base.Health;
     protected virtual void Awake()
     {
@@ -47,7 +50,7 @@ public class BaseEntity : MonoBehaviour
     }
     public virtual void Init(EntityState state) 
     {
-        transform.position = state.Position;
+        transform.localPosition = state.Position;
         m_current = state.Property;
     }
     public void ModifySpeed(float mod) 

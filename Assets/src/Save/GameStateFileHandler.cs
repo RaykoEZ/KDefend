@@ -122,7 +122,10 @@ public class GameStateFileHandler : MonoBehaviour
     {
         // if we are saving after finish an ending, increment new gamw counter
         SaveData newSave = new SaveData(save);
-        string json = JsonConvert.SerializeObject(newSave);
+        string json = JsonConvert.SerializeObject(newSave, Formatting.Indented, new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        });
         FileUtil.RawTextTo(FileUtil.s_gamestateSavePath, "saves","gamestate.json", new string[] { json });
     }
 #endregion

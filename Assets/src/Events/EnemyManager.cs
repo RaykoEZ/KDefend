@@ -7,7 +7,6 @@ using UnityEngine.Events;
 public class EnemyManager : MonoBehaviour 
 {
     [SerializeField] Transform m_spawnParent = default;
-    [SerializeField] ThreatHandler m_threat = default;
     [SerializeField] EnemyAssetList m_enemyRefs = default;
     [SerializeField] UnityEvent<Enemy> m_onDefeated = default;
     List<Enemy> m_activeEnemies = new List<Enemy>();
@@ -23,9 +22,8 @@ public class EnemyManager : MonoBehaviour
         }
         return ret;
     }
-    public void Init(int threat, List<EnemyState> newState) 
+    public void Init(List<EnemyState> newState) 
     {
-        m_threat.SetThreatStage(threat);
         // clear all previous enemies and respawn according to new state
         foreach (var item in m_activeEnemies)
         {
@@ -51,8 +49,7 @@ public class EnemyManager : MonoBehaviour
     public void OnEnemyDefeated(Enemy spawned) 
     {
         if (spawned == null) return;
-        // increase threat value on kill, trigger defeat events
-        m_threat?.UpdateThreat(spawned.ThreatIncrease);
+        // increase threat value on kill
         m_onDefeated?.Invoke(spawned);
         m_activeEnemies.Remove(spawned);
         s_activeEnemyCount--;

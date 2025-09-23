@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum ShopPoolOperation
 {
-    Add,
+    Add, // Unlock if locked, add if not in item list
     Remove,
 }
 // event for updating shop item pool, e.g. add/remove items from drop pool

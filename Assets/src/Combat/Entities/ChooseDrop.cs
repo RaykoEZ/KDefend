@@ -7,6 +7,6 @@ public class ChooseDrop : MonoBehaviour
     [SerializeField] ItemDropList m_dropList = default;
     public void PickupDrop()
     {
-        KDefenderStateManager.ItemDropEvent(this, m_dropList);
+        KDEventUtil.ItemDropEvent(this, m_dropList);
     }
 }
