@@ -16,11 +16,4 @@ public class ToggleAnimator : MonoBehaviour
     {
         m_anim?.SetBool("isOn", isOn);
     }
-    public void OnHoverExit() 
-    {
-        if (!m_toggle.isOn) 
-        {
-            m_anim?.SetTrigger("Normal");
-        }
-    }
 }

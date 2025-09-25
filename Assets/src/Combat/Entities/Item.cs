@@ -9,7 +9,8 @@ public struct ItemProperty : IEquatable<ItemProperty>
 {
     public string Name;
     public string Description;
-
+    //value used for shop exchange cost and sorting
+    public int ItemValue;
     public bool Equals(ItemProperty other)
     {
         return other.Name == Name && other.Description == Description;
