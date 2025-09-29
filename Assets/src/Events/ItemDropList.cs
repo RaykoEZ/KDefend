@@ -9,14 +9,14 @@ public class ItemDropList : ScriptableObject
     [Serializable]
     protected struct ItemDrop_Internal : IWeightedItem
     {
-        [SerializeField] Item m_toDrop;
+        [SerializeField] ItemAsset m_toDrop;
         [Range(0, 100)]
         [SerializeField] int m_dropWeight;
         public int Weight => m_dropWeight;
-        public Item ToDrop => m_toDrop;
-        public static List<Item> ToItems(List<ItemDrop_Internal> list) 
+        public ItemAsset ToDrop => m_toDrop;
+        public static List<ItemAsset> ToItems(List<ItemDrop_Internal> list) 
         { 
-            List<Item> ret = new List<Item>();
+            List<ItemAsset> ret = new List<ItemAsset>();
             foreach (var item in list)
             {
                 ret.Add(item.ToDrop);
@@ -25,18 +25,18 @@ public class ItemDropList : ScriptableObject
         }
     }
     // get all item assets in collection
-    public List<Item> GetDropListItemAsset()
+    public List<ItemAsset> GetDropListItemAsset()
     {
         return ItemDrop_Internal.ToItems(m_dropList);
     }
-    public List<Item> GetWeightedDrops(int numToGet = 1, bool uniqueDrops = true) 
+    public List<ItemAsset> GetWeightedDrops(int numToGet = 1, bool uniqueDrops = true) 
     {
-        List<Item> ret = new List<Item>(numToGet);
+        List<ItemAsset> ret = new List<ItemAsset>(numToGet);
         if (numToGet <= 0) return ret;
         List<ItemDrop_Internal> result = SamplingUtil.SampleWithWeights(m_dropList, numToGet, uniqueDrops);
         return ItemDrop_Internal.ToItems(result);
     }
-    public Item GetWeightedDrop() 
+    public ItemAsset GetWeightedDrop() 
     {
         return SamplingUtil.SampleWithWeights(m_dropList).ToDrop;
     }

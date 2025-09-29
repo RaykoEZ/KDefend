@@ -123,7 +123,7 @@ public static class GameUtil
     {
         T ret = UnityEngine.Object.Instantiate(spawnRef);
         ret.transform.SetParent(parent, false);
-        ret.transform.position = position;
+        ret.transform.localPosition = position;
         return ret;
     }
     public static Vector3 RandomPositionInBounds(Bounds bounds) 

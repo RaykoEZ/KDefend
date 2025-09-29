@@ -37,7 +37,7 @@ public class InventoryManager : MonoBehaviour
         Item instance;
         foreach (var property in props)
         {
-            toAdd = m_mainCollection.GetItemByProperty(property).Asset;
+            toAdd = m_mainCollection.GetItemByProperty(property).PrefabRef;
             // instantiate item
             instance = Instantiate(toAdd, m_player.transform);
             (instance as Collectible)?.Init(m_player);

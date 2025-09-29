@@ -30,16 +30,23 @@ public interface IItem
 public class Item : MonoBehaviour , IItem
 {
     [SerializeField] protected bool m_pickupImmediately = default;
-    [SerializeField] protected ItemProperty m_property = default;
     [SerializeField] protected UnityEvent<Player> m_onUse = default;
     [SerializeField] protected UnityEvent<Player> m_onPickup = default;
     [SerializeField] protected TemporaryInputAction m_pickUpCommand = default;
     [SerializeField] private Image m_cardArt = default;
+    protected ItemProperty m_property;
     protected bool m_isEffectActive = false;
     protected Player m_user;
     public ItemProperty Property => m_property;
     public Image CardArt { get => m_cardArt; }
-
+    // instantiate and initialize an item
+    public static Item SpawnItem(ItemAsset asset, Transform parent, Vector2 localposition) 
+    {
+        if (asset == null) return null;
+        Item instance = GameUtil.SpawnObject(asset.PrefabRef, localposition, parent);
+        instance?.Init(asset);
+        return instance;
+    }
     // Pickup trigger
     void OnTriggerEnter2D(Collider2D col) 
     {
@@ -59,6 +66,11 @@ public class Item : MonoBehaviour , IItem
     void OnTriggerExit2D() 
     {
         m_pickUpCommand?.Disable();
+    }
+    public void Init(ItemAsset asset)
+    {
+        m_property = asset.Property;
+        m_cardArt.sprite = asset.CardArt;
     }
     // when player presses pickup for weapons
     public virtual void PickupDrop(InputAction.CallbackContext _) 

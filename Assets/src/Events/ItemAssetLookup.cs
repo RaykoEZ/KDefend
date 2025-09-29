@@ -15,7 +15,7 @@ public class ItemAssetLookup : ScriptableObject
     }
     public ItemAsset GetItemByProperty(ItemProperty prop) 
     {
-        return m_items.Find((i) => i.Asset.Property.Equals(prop));
+        return m_items.Find((i) => i.PrefabRef.Property.Equals(prop));
     }
     public ItemAsset GetItemAssetByIndex(int id) 
     {
@@ -26,17 +26,19 @@ public class ItemAssetLookup : ScriptableObject
 [Serializable]
 public class ItemAsset : IEquatable<ItemAsset>
 {
+    [SerializeField] ItemProperty m_property = default;
     [SerializeField] Item m_asset = default;
-    [SerializeField] Sprite m_cardArt;
-    [SerializeField] Sprite m_cardBack;
-    public Item Asset => m_asset;
+    [SerializeField] Sprite m_cardArt = default;
+    [SerializeField] Sprite m_cardBack = default;
+    public ItemProperty Property => m_property;
+    public Item PrefabRef => m_asset;
     public Sprite CardArt => m_cardArt;
     public Sprite CardBack => m_cardBack;
     public bool Equals(ItemAsset other)
     {
-        return (other.Asset == null && Asset == null) ||
-            other.Asset.Property.Name == Asset.Property.Name &&
-            other.Asset.Property.Description == Asset.Property.Description;
+        return (other.PrefabRef == null && PrefabRef == null) ||
+            other.PrefabRef.Property.Name == PrefabRef.Property.Name &&
+            other.PrefabRef.Property.Description == PrefabRef.Property.Description;
     }
     public override bool Equals(object obj)
     {
@@ -44,6 +46,6 @@ public class ItemAsset : IEquatable<ItemAsset>
     }
     public override int GetHashCode()
     {
-        return Asset == null? -1 : ($"{Asset.Property.Name}").GetHashCode();
+        return PrefabRef == null? -1 : ($"{PrefabRef.Property.Name}").GetHashCode();
     }
 }

@@ -21,7 +21,7 @@ internal static class KDEventUtil
     // Drop an item from a weighted list of item drops
     public static void ItemDropEvent(object sender, ItemDropList dropList, KD_StaticEventFlags raiseFlag = KD_StaticEventFlags.None)
     {
-        List<Item> options = dropList?.GetWeightedDrops(3);
+        List<ItemAsset> options = dropList?.GetWeightedDrops(3);
         KDEventInfo args = new KDEventInfo(raiseFlag,
             GameEventTriggerType.ItemOption, new Dictionary<string, object> { { "options", options } });
         InternalEventHandler.TriggerGlobalEvent(sender, args);

@@ -29,7 +29,7 @@ public class ItemOptionHandler : HideableUI
     protected void OnObtainItem(object sender, KDEventInfo args)
     {
         if (args.Payload == null) return;
-        if (args.Payload.TryGetValue("options", out object result) && result is List<Item> list)
+        if (args.Payload.TryGetValue("options", out object result) && result is List<ItemAsset> list)
         {
             ShowOptions(list);
         }
@@ -38,18 +38,6 @@ public class ItemOptionHandler : HideableUI
     {
         int size = Mathf.Min(options.Count, m_optionUI.Count);
         // setup each option callbacks
-        for (int i = 0; i < size; ++i)
-        {
-            m_optionUI[i]?.Init(options[i]);
-        }
-        KDEventUtil.PauseGame(this, false);
-        Show();
-        StartCoroutine(ShowOptions());
-    }
-    public void ShowOptions(List<Item> options)
-    {
-        int size = Mathf.Min(options.Count, m_optionUI.Count);
-        // setup each option content
         for (int i = 0; i < size; ++i)
         {
             m_optionUI[i]?.Init(options[i]);

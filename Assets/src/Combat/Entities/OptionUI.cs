@@ -15,9 +15,9 @@ public class OptionUI : HideableUI
     public ItemOptionEvent OnChosen;
     public void Init(ItemAsset item)
     {
-        m_currentItemRef = item.Asset;
-        m_name.text = item.Asset.Property.Name;
-        m_description.text = item.Asset.Property.Description;
+        m_currentItemRef = item.PrefabRef;
+        m_name.text = item.PrefabRef.Property.Name;
+        m_description.text = item.PrefabRef.Property.Description;
         m_bg.sprite = item.CardBack;
         m_itemArt.sprite = item.CardArt;
     }

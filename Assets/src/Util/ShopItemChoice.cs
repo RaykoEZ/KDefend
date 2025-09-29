@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Toggle))]
 public class ShopItemChoice : MonoBehaviour 
@@ -8,6 +9,7 @@ public class ShopItemChoice : MonoBehaviour
     [SerializeField] Image m_icon = default;
     [SerializeField] TextMeshProUGUI m_name = default;
     [SerializeField] TextMeshProUGUI m_description = default;
+    [SerializeField] TextMeshProUGUI m_cost = default;
     protected static int s_chosenItemIndex;
     protected int m_itemIndex = default;
     protected bool m_locked = false;
@@ -19,12 +21,13 @@ public class ShopItemChoice : MonoBehaviour
         m_anim = GetComponent<Animator>();
         m_toggle = GetComponent<Toggle>();
     }
-    public void Init(int itemIndex, string name, string description, Sprite icon, bool locked = false)
+    public void Init(int itemIndex, int cost, string name, string description, Sprite icon, bool locked = false)
     {
         // setup states
         m_itemIndex = itemIndex;
         m_name.text = name;
         m_description.text = m_locked ? "Locked" : description;
+        m_cost.text = $"Cost:{cost.ToString()}";
         m_icon.sprite = icon;
         // disable option is locked
         SetLocked(locked);
