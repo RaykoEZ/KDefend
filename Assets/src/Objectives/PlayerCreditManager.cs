@@ -8,6 +8,7 @@ public class PlayerCreditManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI m_display = default;
     [SerializeField] TextMeshProUGUI m_animate = default;
     [SerializeField] UnityEvent m_onCreditUpdate = default;
+    public int CurrentCredit => m_player.CurrentStats.Property.Health;
     void OnEnable()
     {
         m_player.OnHeal += RefreshDisplay;
@@ -20,7 +21,7 @@ public class PlayerCreditManager : MonoBehaviour
     }
     public void Init()
     {
-        RefreshDisplay(m_player.CurrentStats.Property.Health);
+        RefreshDisplay(CurrentCredit);
     }
     void RefreshDisplay(int change) 
     {
@@ -28,7 +29,7 @@ public class PlayerCreditManager : MonoBehaviour
         m_animate.color = change < 0 ? Color.red : Color.green;
         m_animate.text = $"{sign}{change}";
         m_onCreditUpdate?.Invoke();
-        m_display.text = m_player.CurrentStats.Property.Health.ToString();
+        m_display.text = CurrentCredit.ToString();
     }
     public void RewardPoints(int add) 
     {
@@ -42,13 +43,6 @@ public class PlayerCreditManager : MonoBehaviour
     }
     public void OnPayment(int pay) 
     {
-        if (m_player.CurrentStats.Property.Health <= pay) 
-        {
-            // cannot afford, Notify
-        }
-        else 
-        {
-            m_player.TakeDamage(pay);
-        }
+        m_player.TakeDamage(pay);       
     }
 }

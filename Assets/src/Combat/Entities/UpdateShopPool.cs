@@ -11,13 +11,14 @@ public enum ShopPoolOperation
 [Serializable]
 public class UpdateShopPool : KDEvent
 {
+    // Add or remove from shop pool?
     [SerializeField] ShopPoolOperation m_operationType = default;
     [SerializeField] List<int> m_itemIndexList = default;
     protected ShopPoolUpdater m_updaterRef;
     // ctors
-    public UpdateShopPool(KD_StaticEventFlags triggerConditions, KD_StaticEventFlags raiseOnTigger,
-        ShopPoolOperation operationType, GameEventTriggerType triggerType, GameEventTriggerType triggerTypeToRaise,
-        List<int> itemPool, ShopPoolUpdater updaterRef) : 
+    public UpdateShopPool(KD_StaticEventFlags triggerConditions, KD_StaticEventFlags raiseOnTigger, GameEventTriggerType triggerType, GameEventTriggerType triggerTypeToRaise, 
+        // shop pool ctor params
+        ShopPoolOperation operationType, List<int> itemPool, ShopPoolUpdater updaterRef) : 
         base(triggerConditions, raiseOnTigger, triggerType, triggerTypeToRaise)
     {
         m_operationType = operationType;

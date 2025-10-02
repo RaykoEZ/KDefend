@@ -26,6 +26,15 @@ internal static class KDEventUtil
             GameEventTriggerType.ItemOption, new Dictionary<string, object> { { "options", options } });
         InternalEventHandler.TriggerGlobalEvent(sender, args);
     }
+    // When player obtains items outside of pickup from drops
+    public static void ObtainItemEvent(object sender, ItemAsset toObtain, KD_StaticEventFlags raiseFlag = KD_StaticEventFlags.None) 
+    {
+        // update player inventory, setup item effects & trigger events for obtaining the item
+        KDEventInfo args = new KDEventInfo(raiseFlag, GameEventTriggerType.ItemObtained,
+            new Dictionary<string, object> { { "item", toObtain } });
+        InternalEventHandler.TriggerGlobalEvent(sender, args);
+
+    }
     // Spawn a wave of enemies
     public static void SpawnEnemies(object sender, SpawnWave wave, KD_StaticEventFlags raiseFlag = KD_StaticEventFlags.None)
     {

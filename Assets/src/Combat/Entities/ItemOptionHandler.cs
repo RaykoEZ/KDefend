@@ -3,30 +3,40 @@ using Curry.Explore;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 // handles item option UI displays
 public class ItemOptionHandler : HideableUI
 {
-    [SerializeField] List<OptionUI> m_optionUI = default;
+    [SerializeField] protected List<OptionUI> m_optionUI = default;
     void OnEnable()
     {
         Hide();
-        InternalEventHandler.ListenToGlobal(GameEventTriggerType.ItemOption, OnObtainItem);
+        InternalEventHandler.ListenToGlobal(GameEventTriggerType.ItemOption, OnShowOptions);
         // setup callbacks
-        foreach (var option in m_optionUI) 
+        foreach (var option in m_optionUI)
         {
-            option.OnChosen += OnPlayerChosen;
+            InitOption(option);
         }
     }
     void OnDisable()
     {
-        InternalEventHandler.UnlistenFromGlobal(GameEventTriggerType.ItemOption, OnObtainItem);
+        InternalEventHandler.UnlistenFromGlobal(GameEventTriggerType.ItemOption, OnShowOptions);
         foreach (var option in m_optionUI)
         {
-            option.OnChosen -= OnPlayerChosen;
+            ShutdownOption(option);
         }
         Hide();
     }
-    protected void OnObtainItem(object sender, KDEventInfo args)
+    protected virtual void InitOption(OptionUI option) 
+    {
+        // setup callbacks
+        option.OnChosen += OnPlayerChosen;     
+    }
+    protected virtual void ShutdownOption(OptionUI option) 
+    {     
+        option.OnChosen -= OnPlayerChosen;       
+    }
+    protected virtual void OnShowOptions(object sender, KDEventInfo args)
     {
         if (args.Payload == null) return;
         if (args.Payload.TryGetValue("options", out object result) && result is List<ItemAsset> list)
@@ -34,7 +44,7 @@ public class ItemOptionHandler : HideableUI
             ShowOptions(list);
         }
     }
-    public void ShowOptions(List<ItemAsset> options)
+    public virtual void ShowOptions(List<ItemAsset> options)
     {
         int size = Mathf.Min(options.Count, m_optionUI.Count);
         // setup each option callbacks
@@ -44,18 +54,16 @@ public class ItemOptionHandler : HideableUI
         }
         KDEventUtil.PauseGame(this, false);
         Show();
-        StartCoroutine(ShowOptions());
+        StartCoroutine(ShowOptions_Internal());
     }
-    protected void OnPlayerChosen(Item chosen)
+    protected virtual void OnPlayerChosen(OptionUI chosen)
     {
         Hide();
         KDEventUtil.PauseGame(this, true);
         // update player inventory, setup item effects & trigger events for obtaining the item
-        KDEventInfo args = new KDEventInfo(KD_StaticEventFlags.None, GameEventTriggerType.ItemObtained,
-            new Dictionary<string, object> { { "item", chosen } });
-        InternalEventHandler.TriggerGlobalEvent(this, args);
+        KDEventUtil.ObtainItemEvent(this, chosen.CurrentItemRef);
     }
-    IEnumerator ShowOptions()
+    IEnumerator ShowOptions_Internal()
     {
         foreach (var item in m_optionUI)
         {

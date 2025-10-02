@@ -19,8 +19,4 @@ public class Shop : Building
         options = SamplingUtil.SampleFromList(options, 3, uniqueResults: true);
         m_optionHandler?.ShowOptions(options);
     }
-    public void BuyItem(int toBuy) 
-    { 
-        
-    }
 }

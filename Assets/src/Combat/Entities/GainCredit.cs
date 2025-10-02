@@ -8,6 +8,6 @@ public class GainCredit : MonoBehaviour
     public void AddToCredit(Player player) 
     {
         int gain = m_maxGain <= m_minGain ? m_minGain : Random.Range(m_minGain, m_maxGain);
-        player.Heal(gain);
+        player?.Heal(gain);
     }
 }

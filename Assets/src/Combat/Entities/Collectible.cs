@@ -12,6 +12,7 @@ public class Collectible : Item
             trigger?.InitGlobalListeners();
         }
     }
+    // on pickup, activate effect but stays in inventory
     public override void OnPickup()
     {
         GetComponent<Collider2D>().enabled = false;

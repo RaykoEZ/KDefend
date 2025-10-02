@@ -53,12 +53,19 @@ public class InventoryManager : MonoBehaviour
         }
         obtained?.OnPickup(m_player);
     }
+    public void UseItem(int itemIndex) 
+    {
+        if (HeldItems.Count == 0 || 
+            itemIndex < 0 || 
+            itemIndex >= HeldItems.Count) return;
+        HeldItems[itemIndex]?.UseItem();
+    }
     protected void OnObtainItem(object sender, KDEventInfo args) 
     {
         if (args == null || args.Payload == null) return;
-        if (args.Payload.TryGetValue("item", out object result) && result is Item prefab) 
+        if (args.Payload.TryGetValue("item", out object result) && result is ItemAsset prefab) 
         {
-            Item instance = Instantiate(prefab, m_player.transform);
+            Item instance = Item.SpawnItem(prefab, m_player.transform, Vector2.zero);
             ObtainItem(instance);
         }
     }
