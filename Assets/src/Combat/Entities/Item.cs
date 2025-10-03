@@ -9,10 +9,6 @@ public struct ItemProperty : IEquatable<ItemProperty>
 {
     public string Name;
     public string Description;
-    //value used for shop exchange cost and sorting
-    public int ItemValue;
-    // set to 0 if item is not availble in shop
-    public int ShopBuyLimit;
     public bool Equals(ItemProperty other)
     {
         return other.Name == Name && other.Description == Description;

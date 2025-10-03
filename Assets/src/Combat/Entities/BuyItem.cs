@@ -18,7 +18,7 @@ public class BuyItem : MonoBehaviour
         // check for choice reference, valid purchase limit, enough credit to buy
         m_canBuy = m_currentChosenRef != null &&
         m_currentChosenRef.BuyLimit > 0 &&
-        m_currentChosenRef.CurrentItemRef.Property.ItemValue < m_playerCreditManager.CurrentCredit;
+        m_currentChosenRef.CurrentItemRef.ShopState.Price < m_playerCreditManager.CurrentCredit;
         m_buyButton.interactable = m_canBuy;
         m_buyText.text = m_canBuy ? "Buy Item" : "Cannot Buy";
     }
@@ -36,7 +36,7 @@ public class BuyItem : MonoBehaviour
     {
         if (!m_canBuy) return;
         // pay
-        m_playerCreditManager?.OnPayment(m_currentChosenRef.CurrentItemRef.Property.ItemValue);
+        m_playerCreditManager?.OnPayment(m_currentChosenRef.CurrentItemRef.ShopState.Price);
         // get item
         KDEventUtil.ObtainItemEvent(this, m_currentChosenRef.CurrentItemRef);
         // decrement purchase limit

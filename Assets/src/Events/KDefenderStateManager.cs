@@ -14,6 +14,7 @@ public class KDefenderStateManager : MonoBehaviour
 
     [SerializeField] DeliveryDropTable m_deliveryList = default;
     [SerializeField] DeliveryManager m_objectives = default;
+    [SerializeField] ShopPoolUpdater m_shopPoolUpdater = default;
 
     [SerializeField] Player m_player = default;
     [SerializeField] InventoryManager m_inventoryManager = default;
@@ -27,14 +28,16 @@ public class KDefenderStateManager : MonoBehaviour
     // Initialize game state on launch
     public void GameSetup(SaveData newState)
     {
+        KDefenderGameState state = newState.KDGameState;
         // set player state
-        m_player?.Init(newState.KDGameState.PlayerValue);
-        m_enemy?.Init(newState.KDGameState.HostileStates);
-        m_inventoryManager?.Init(newState.KDGameState.HeldItems);
+        m_player?.Init(state.PlayerValue);
+        m_enemy?.Init(state.HostileStates);
+        m_inventoryManager?.Init(state.HeldItems);
+        m_shopPoolUpdater?.InitPool(state.ShopStates);
 
-        List<DeliveryDetail> active = m_deliveryList.Find(newState.KDGameState.ActiveDeliveries);
+        List<DeliveryDetail> active = m_deliveryList.Find(state.ActiveDeliveries);
         m_objectives.Init(active);
-        m_staticEvents.SetFlags(newState.KDGameState.StaticFlags);
+        m_staticEvents.SetFlags(state.StaticFlags);
         m_timer.StartTimer();
     }
     // get current states from managers to save latest game state
@@ -53,7 +56,8 @@ public class KDefenderStateManager : MonoBehaviour
             PlayerValue = m_player.CurrentStats,
             HostileStates = m_enemy.GetEnemyStates(),
             HeldItems = m_inventoryManager.GetItemPropeties(),
-            ActiveDeliveries = active
+            ActiveDeliveries = active,
+            ShopStates = m_shopPoolUpdater.CurrentShopPool
         };
         m_save.Current.KDGameState = newState;
     }

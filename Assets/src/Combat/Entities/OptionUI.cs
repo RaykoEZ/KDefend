@@ -10,7 +10,7 @@ public class OptionUI : HideableUI
     [SerializeField] protected TextMeshProUGUI m_description = default;
     [SerializeField] protected Image m_bg = default;
     [SerializeField] protected Image m_itemArt = default;
-    private ItemAsset m_currentItemRef;
+    protected ItemAsset m_currentItemRef;
     public delegate void ItemOptionEvent(OptionUI itemAsset);
     public ItemOptionEvent OnChosen;
     public ItemAsset CurrentItemRef { get => m_currentItemRef; set => m_currentItemRef = value; }

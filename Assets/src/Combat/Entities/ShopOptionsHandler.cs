@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
-
-public class  ShopOptionsHandler : ItemOptionHandler
+public class ShopOptionsHandler : ItemOptionHandler
 {
     [SerializeField] protected BuyItem m_buyItem = default;
     protected override void OnPlayerChosen(OptionUI chosen)

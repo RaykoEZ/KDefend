@@ -12,6 +12,7 @@ public struct KDefenderGameState
     public List<EnemyState> HostileStates;
     public List<ItemProperty> HeldItems;
     public List<string> ActiveDeliveries;
+    public List<ShopItemState> ShopStates;
     public KDefenderGameState(KDefenderGameState copy) 
     {
         Timer = copy.Timer;
@@ -20,6 +21,7 @@ public struct KDefenderGameState
         HostileStates = copy.HostileStates;
         HeldItems = copy.HeldItems;
         ActiveDeliveries = copy.ActiveDeliveries;
+        ShopStates = copy.ShopStates;
     }
 }
 [Serializable]

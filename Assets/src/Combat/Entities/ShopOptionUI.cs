@@ -22,16 +22,15 @@ public class ShopOptionUI: OptionUI
     }
     public void UpdateBuyLimit(int newLimit)
     {
-        m_buyLimit = newLimit;
+        m_currentItemRef.ShopState.BuyLimit = newLimit;
         m_buyLimitText.text = $"x {m_buyLimit.ToString()} Left";
         SetLocked(newLimit == 0);
     }
     public override void Init(ItemAsset item)
     {
         base.Init(item);
-        m_cost.text = $"Cost:{item.Property.ItemValue.ToString()}";
-        UpdateBuyLimit(item.Property.ShopBuyLimit);
-        // disable option is locked
+        m_cost.text = $"Cost:{item.ShopState.Price.ToString()}";
+        UpdateBuyLimit(item.ShopState.Price);
     }
     public void SetLocked(bool locked)
     {

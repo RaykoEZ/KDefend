@@ -2,33 +2,31 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-public enum ShopPoolOperation
+[Serializable]
+public class ShopItemState
 {
-    Add, // Unlock if locked, add if not in item list
-    Remove,
+    public int Price;
+    public int BuyLimit;
 }
 // event for updating shop item pool, e.g. add/remove items from drop pool
 [Serializable]
 public class UpdateShopPool : KDEvent
 {
     // Add or remove from shop pool?
-    [SerializeField] ShopPoolOperation m_operationType = default;
-    [SerializeField] List<int> m_itemIndexList = default;
+    [SerializeField] List<ShopItemState> m_itemIndexList = default;
     protected ShopPoolUpdater m_updaterRef;
     // ctors
     public UpdateShopPool(KD_StaticEventFlags triggerConditions, KD_StaticEventFlags raiseOnTigger, GameEventTriggerType triggerType, GameEventTriggerType triggerTypeToRaise, 
         // shop pool ctor params
-        ShopPoolOperation operationType, List<int> itemPool, ShopPoolUpdater updaterRef) : 
+        List<ShopItemState> itemPool, ShopPoolUpdater updaterRef) : 
         base(triggerConditions, raiseOnTigger, triggerType, triggerTypeToRaise)
     {
-        m_operationType = operationType;
         m_itemIndexList = itemPool;
         m_updaterRef = updaterRef;
     }
     public UpdateShopPool(UpdateShopPool copy) :
         base(copy.m_triggerConditions, copy.m_raiseOnTrigger, copy.m_triggerType, copy.m_triggerTypeOnRaise)
     {
-        m_operationType = copy.m_operationType;
         m_itemIndexList = copy.m_itemIndexList;
         m_updaterRef = copy.m_updaterRef;
     }
@@ -44,18 +42,6 @@ public class UpdateShopPool : KDEvent
     }
     protected override void Trigger_Internal(object sender, KDEventInfo args)
     {
-        switch (m_operationType)
-        {
-            case ShopPoolOperation.Add:
-                m_updaterRef?.AddToPool(m_itemIndexList);
-                break;
-            case ShopPoolOperation.Remove:
-                m_updaterRef?.RemoveFromPool(m_itemIndexList);
-                break;
-            default:
-                // add to pool by default, might change this
-                m_updaterRef?.AddToPool(m_itemIndexList);
-                break;
-        }
+        m_updaterRef?.UpdatePool(m_itemIndexList);
     }
 }

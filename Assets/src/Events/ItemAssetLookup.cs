@@ -30,10 +30,12 @@ public class ItemAsset : IEquatable<ItemAsset>
     [SerializeField] Item m_asset = default;
     [SerializeField] Sprite m_cardArt = default;
     [SerializeField] Sprite m_cardBack = default;
+    [NonSerialized] ShopItemState m_shopState = default;
     public ItemProperty Property => m_property;
     public Item PrefabRef => m_asset;
     public Sprite CardArt => m_cardArt;
     public Sprite CardBack => m_cardBack;
+    public ShopItemState ShopState { get => m_shopState; set => m_shopState = value; }
     public bool Equals(ItemAsset other)
     {
         return (other.PrefabRef == null && PrefabRef == null) ||
