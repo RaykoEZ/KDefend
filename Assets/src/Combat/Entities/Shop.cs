@@ -14,6 +14,6 @@ public class Shop : Building
     {
         // TODO: DIRTY flag when item added, so we don't call this line every time
         List<ItemAsset> options = m_updater.GetOptionAssetPool();
-        m_optionHandler?.ShowOptions(options);
+        m_optionHandler?.UpdateShopOptions(options);
     }
 }

@@ -45,28 +45,31 @@ public class ShopPoolUpdater : MonoBehaviour
     public void UpdatePool(List<ShopItemState> toUpdate)
     {
         if (toUpdate == null || toUpdate.Count == 0) return;
+        int idx;
         for (int i = 0; i < toUpdate.Count; i++) 
         {
-            if (i < m_currentShopPool.Count)
+            // trye to find existing shop item entry
+            // add new item into the shop pool if no duplicate indexed field
+            // if add failed, apply changes to existing data field
+            if (!TryAddNewItemState(toUpdate[i]))
             {
+                idx = toUpdate[i].ItemIdx;
                 // add price and buy limit
                 // negative allowed for decreasing price/amount left
-                m_currentShopPool[i].Price = Mathf.Max(0, m_currentShopPool[i].Price + toUpdate[i].Price);
-                m_currentShopPool[i].BuyLimit = Mathf.Max(0, m_currentShopPool[i].BuyLimit + toUpdate[i].BuyLimit);
-            }
-            else 
-            {
-                // new a list of new excess items and add them to the current state list
-                List<ShopItemState> toAdd = new List<ShopItemState>(toUpdate);
-                toAdd.RemoveRange(0, i);
-                AddNewItemState(toAdd);
-                return;
+                m_currentShopPool[idx].Price = Mathf.Max(0, m_currentShopPool[idx].Price + toUpdate[i].Price);
+                m_currentShopPool[idx].BuyLimit = Mathf.Max(0, m_currentShopPool[idx].BuyLimit + toUpdate[i].BuyLimit);
             }
         }
     }
-    public void AddNewItemState(List<ShopItemState> toAdd) 
+    public bool TryAddNewItemState(ShopItemState toAdd) 
     {
-        m_currentShopPool.AddRange(toAdd);
+        var findResult = m_currentShopPool.Find((x) => x.ItemIdx == toAdd.ItemIdx);
+        bool duplicateFound = findResult != null;
+        if (!duplicateFound)
+        {
+            m_currentShopPool.Add(toAdd);
+        }
+        return duplicateFound;
     }
     public List<ItemAsset> GetOptionAssetPool()
     {

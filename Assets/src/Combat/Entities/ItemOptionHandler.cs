@@ -11,6 +11,15 @@ public class ItemOptionHandler : HideableUI
     void OnEnable()
     {
         Hide();
+        Init();
+    }
+    void OnDisable()
+    {
+        Shutdown();
+        Hide();
+    }
+    protected void Init()
+    {
         InternalEventHandler.ListenToGlobal(GameEventTriggerType.ItemOption, OnShowOptions);
         // setup callbacks
         foreach (var option in m_optionUI)
@@ -18,14 +27,13 @@ public class ItemOptionHandler : HideableUI
             InitOption(option);
         }
     }
-    void OnDisable()
+    protected void Shutdown() 
     {
         InternalEventHandler.UnlistenFromGlobal(GameEventTriggerType.ItemOption, OnShowOptions);
         foreach (var option in m_optionUI)
         {
             ShutdownOption(option);
         }
-        Hide();
     }
     protected virtual void InitOption(OptionUI option) 
     {
@@ -44,7 +52,7 @@ public class ItemOptionHandler : HideableUI
             ShowOptions(list);
         }
     }
-    public virtual void ShowOptions(List<ItemAsset> options)
+    protected virtual void ShowOptions(List<ItemAsset> options)
     {
         int size = Mathf.Min(options.Count, m_optionUI.Count);
         // setup each option callbacks
@@ -63,7 +71,7 @@ public class ItemOptionHandler : HideableUI
         // update player inventory, setup item effects & trigger events for obtaining the item
         KDEventUtil.ObtainItemEvent(this, chosen.CurrentItemRef);
     }
-    IEnumerator ShowOptions_Internal()
+    protected IEnumerator ShowOptions_Internal()
     {
         foreach (var item in m_optionUI)
         {
