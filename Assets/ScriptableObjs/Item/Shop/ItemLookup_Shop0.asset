@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78550f0b6dbef7f43bd53fb31d6e7a1c, type: 3}
+  m_Name: ItemLookup_Shop0
+  m_EditorClassIdentifier: 
+  m_items:
+  - m_property:
+      Name: T0_StopWatch
+      Description: What is this? This thing shouldn't be here...
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: 11487e4e1b1a58144aaf4343e0d972a1, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_property:
+      Name: Lunch Meal Deal
+      Description: Gain Credit. What a steal!
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: fd9a41302fb509c4c82bf09537a98d26, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_property:
+      Name: Toast of Tardiness
+      Description: Increase movement speed. Increase speed further when workday is
+        nearing its end. Be careful when turning corners.
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: 8d5bfc07aec3a4a44bcd29a868aea151, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_property:
+      Name: Inferno Curry
+      Description: Increase ATK power. Very spicy.
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: e7e35ddae154bc745b87f588cfdfd8cf, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_property:
+      Name: Offbrand_65 Soda
+      Description: This brand is paying for promotion right now, wanna try it out?
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: 6bb463738cfd2c245b4e86ed4efd83c4, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_property:
+      Name: OP Jelly
+      Description: Increase knockback power.
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: 6bb463738cfd2c245b4e86ed4efd83c4, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_property:
+      Name: Std_01 Energy Blaster
+      Description: 'Premium weapon for Permitted Personal Defense. Not many around
+        here can afford projectiles. '
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: 91c951b331236ab489a7f54e61700d8b, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_property:
+      Name: Std_02 Ebergy Shields
+      Description: Standard Issue Defensive Module from G.Op's Field Operations Armory.
+        100% of users survive to work another shift.
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: 54b059486940c3541b1121e34ac6ffe5, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_property:
+      Name: Std_03 Energy Beam
+      Description: Standard Issue Beam Weapon Module from G.Op's Field Operations
+        Armory. High access clearance required for its damage potential.
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: aec4243660834d248a227396074f5872, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_property:
+      Name: Overtime Assignment
+      Description: Slightly increase the time limit of each workday. Please take
+        care of your work-life balance.
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: 8b1441145e80560419956010269bc7aa, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_property:
+      Name: CryptoFit Leg Weights
+      Description: Move slower, gain explosive powers upon taking hit.
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: 91c951b331236ab489a7f54e61700d8b, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_property:
+      Name: Investment 101
+      Description: Increase Credit gain over time.
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: 4e619763c24793f47aec0b721df7c347, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_property:
+      Name: Never IDLE!
+      Description: "Learn the latest trending stars! \nYouth Is Explosion! Idol Is
+        Inspiration!"
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: 6bb463738cfd2c245b4e86ed4efd83c4, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_property:
+      Name: C13_qrigbby
+      Description: ???
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: 6bb463738cfd2c245b4e86ed4efd83c4, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_property:
+      Name: A letter from R.I.
+      Description: A leftover delivery from a while ago. The address is scratched
+        out.
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: 6bb463738cfd2c245b4e86ed4efd83c4, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
+  - m_property:
+      Name: C13_qrigbby
+      Description: ???
+    m_asset: {fileID: 0}
+    m_cardArt: {fileID: 21300000, guid: 6bb463738cfd2c245b4e86ed4efd83c4, type: 3}
+    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}

@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: ShopPool_main
   m_EditorClassIdentifier: 
   m_itemPoolLookup: {fileID: 11400000, guid: a9d1e6b121ea546418d56542d0c2ea0a, type: 2}
-  m_poolStates:
-  - Price: 0
+  m_defaultPoolStates:
+  - ItemIdx: 1
+    Price: 0
     BuyLimit: 0
-  - Price: 0
+  - ItemIdx: 2
+    Price: 0
     BuyLimit: 0
-  - Price: 0
-    BuyLimit: 0
-  - Price: 0
+  - ItemIdx: 3
+    Price: 0
     BuyLimit: 0

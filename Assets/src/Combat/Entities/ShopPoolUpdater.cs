@@ -48,28 +48,23 @@ public class ShopPoolUpdater : MonoBehaviour
         int idx;
         for (int i = 0; i < toUpdate.Count; i++) 
         {
-            // trye to find existing shop item entry
+            // try to find existing shop item entry
             // add new item into the shop pool if no duplicate indexed field
             // if add failed, apply changes to existing data field
-            if (!TryAddNewItemState(toUpdate[i]))
+            idx = toUpdate[i].ItemIdx;
+            var findResult = m_currentShopPool.Find((x) => x.ItemIdx == idx);
+            if (findResult != null)
             {
-                idx = toUpdate[i].ItemIdx;
                 // add price and buy limit
                 // negative allowed for decreasing price/amount left
-                m_currentShopPool[idx].Price = Mathf.Max(0, m_currentShopPool[idx].Price + toUpdate[i].Price);
-                m_currentShopPool[idx].BuyLimit = Mathf.Max(0, m_currentShopPool[idx].BuyLimit + toUpdate[i].BuyLimit);
+                findResult.Price = Mathf.Max(0, findResult.Price + toUpdate[i].Price);
+                findResult.BuyLimit = Mathf.Max(0, findResult.BuyLimit + toUpdate[i].BuyLimit);
+            }
+            else 
+            {
+                m_currentShopPool.Add(toUpdate[i]);
             }
         }
-    }
-    public bool TryAddNewItemState(ShopItemState toAdd) 
-    {
-        var findResult = m_currentShopPool.Find((x) => x.ItemIdx == toAdd.ItemIdx);
-        bool duplicateFound = findResult != null;
-        if (!duplicateFound)
-        {
-            m_currentShopPool.Add(toAdd);
-        }
-        return duplicateFound;
     }
     public List<ItemAsset> GetOptionAssetPool()
     {
