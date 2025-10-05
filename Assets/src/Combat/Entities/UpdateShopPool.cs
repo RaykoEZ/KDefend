@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class ShopItemState
 {
-    public int ItemIdx;
+    public string ItemId;
     public int Price;
     public int BuyLimit;
 }

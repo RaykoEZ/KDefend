@@ -14,12 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_itemPoolLookup: {fileID: 11400000, guid: a9d1e6b121ea546418d56542d0c2ea0a, type: 2}
   m_defaultPoolStates:
-  - ItemIdx: 1
-    Price: 0
-    BuyLimit: 0
-  - ItemIdx: 2
-    Price: 0
-    BuyLimit: 0
-  - ItemIdx: 3
-    Price: 0
-    BuyLimit: 0
+  - ItemId: sh1_hp
+    Price: 50
+    BuyLimit: 1
+  - ItemId: sh2_spd
+    Price: 300
+    BuyLimit: 3
+  - ItemId: sh3_atk
+    Price: 1000
+    BuyLimit: 3
+  - ItemId: sh4_hp
+    Price: 5
+    BuyLimit: 3
+  - ItemId: sh5_kb
+    Price: 1500
+    BuyLimit: 1
+  - ItemId: sh12
+    Price: 2500
+    BuyLimit: 1

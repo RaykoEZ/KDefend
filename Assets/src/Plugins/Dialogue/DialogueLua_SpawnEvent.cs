@@ -12,9 +12,11 @@ public class DialogueLua_SpawnEvent : MonoBehaviour
     [SerializeField] KD_StaticEventFlags m_raiseEventFlag = default;
     [Tooltip("SO Asset file need to be unique for each of this spawn wave event")]
     [SerializeField] SpawnWave m_toSpawn = default;
-    string m_spawnFunctionID => $"{nameof(Spawn)}_{m_toSpawn.name}";
+    string m_spawnFunctionID => $"{nameof(Spawn)}_{m_spawnName}";
+    string m_spawnName = "Default";
     void OnEnable()
     {
+        m_spawnName = m_toSpawn.name;
         // Make spawn function ID bound to each unique spawn wave 
         Lua.RegisterFunction(m_spawnFunctionID, this, SymbolExtensions.GetMethodInfo(() => Spawn()));
     }

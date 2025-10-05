@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 [Serializable]
 public struct ItemProperty : IEquatable<ItemProperty>
 {
+    public string Id;
     public string Name;
     [TextArea(minLines: 1, maxLines: 2)]
     public string Description;

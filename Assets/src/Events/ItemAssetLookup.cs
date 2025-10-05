@@ -17,10 +17,11 @@ public class ItemAssetLookup : ScriptableObject
     {
         return m_items.Find((i) => i.PrefabRef.Property.Equals(prop));
     }
-    public ItemAsset GetItemAssetByIndex(int id) 
+    public ItemAsset GetItemAssetByIndex(string id) 
     {
-        if (id < 0 || id >= m_items.Count) return null;
-        return m_items[id];
+        if (id == null) return null;
+
+        return m_items.Find((i) => i.Property.Id == id);
     }
 }
 [Serializable]

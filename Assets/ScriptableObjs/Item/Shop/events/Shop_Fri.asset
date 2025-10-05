@@ -10,18 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bff39f6002cf8f44b9a0c18048a379f, type: 3}
-  m_Name: PoolUpdate_0
+  m_Name: Shop_Fri
   m_EditorClassIdentifier: 
   m_events:
   - m_triggerConditions: 0
     m_raiseOnTrigger: 0
     m_triggerType: 0
     m_triggerTypeOnRaise: 0
-    m_operationType: 0
-    m_itemIndexList: 06000000
-  - m_triggerConditions: 0
-    m_raiseOnTrigger: 0
-    m_triggerType: 0
-    m_triggerTypeOnRaise: 0
-    m_operationType: 0
-    m_itemIndexList: 07000000
+    m_itemIndexList:
+    - ItemId: 
+      Price: 0
+      BuyLimit: 0

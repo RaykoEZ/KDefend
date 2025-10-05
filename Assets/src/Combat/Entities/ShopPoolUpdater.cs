@@ -45,14 +45,14 @@ public class ShopPoolUpdater : MonoBehaviour
     public void UpdatePool(List<ShopItemState> toUpdate)
     {
         if (toUpdate == null || toUpdate.Count == 0) return;
-        int idx;
+        string idx;
         for (int i = 0; i < toUpdate.Count; i++) 
         {
             // try to find existing shop item entry
             // add new item into the shop pool if no duplicate indexed field
             // if add failed, apply changes to existing data field
-            idx = toUpdate[i].ItemIdx;
-            var findResult = m_currentShopPool.Find((x) => x.ItemIdx == idx);
+            idx = toUpdate[i].ItemId;
+            var findResult = m_currentShopPool.Find((x) => x.ItemId == idx);
             if (findResult != null)
             {
                 // add price and buy limit
@@ -74,7 +74,7 @@ public class ShopPoolUpdater : MonoBehaviour
         // access items pool to get item assets
         for (int i = 0; i < m_currentShopPool.Count; i++)
         {
-            asset = m_defaultPool?.ItemPoolLookup?.GetItemAssetByIndex(i);
+            asset = m_defaultPool?.ItemPoolLookup?.GetItemAssetByIndex(m_currentShopPool[i].ItemId);
             if (asset == null) continue;
             // setup shop state
             asset.ShopState = m_currentShopPool[i];
