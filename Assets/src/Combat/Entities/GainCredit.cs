@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Security.Cryptography;
+using UnityEngine;
 public class GainCredit : MonoBehaviour 
 {
     [Range(1, 1000000)]

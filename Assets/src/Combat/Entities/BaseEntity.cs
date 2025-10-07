@@ -65,6 +65,18 @@ public class BaseEntity : MonoBehaviour
             m_current.MoveSpeed = Mathf.Max(0f, m_current.MoveSpeed - change);
         }
     }
+    public void ModifyKnockback(float mod)
+    {
+        float change = Mathf.Abs(mod) * m_base.KnockbackModifier;
+        if (mod > 0f)
+        {
+            m_current.KnockbackModifier = Mathf.Min(2.5f, m_current.KnockbackModifier + change);
+        }
+        else
+        {
+            m_current.KnockbackModifier = Mathf.Max(0f, m_current.KnockbackModifier - change);
+        }
+    }
     public void Heal(int heal) 
     {
         heal = Mathf.Abs(heal);

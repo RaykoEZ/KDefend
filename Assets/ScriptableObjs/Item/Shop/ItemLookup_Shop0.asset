@@ -38,7 +38,7 @@ MonoBehaviour:
   - m_property:
       Id: sh3_atk
       Name: Inferno Curry
-      Description: Increase ATK power. Very spicy.
+      Description: Very spicy, may cause fire hazards.
     m_asset: {fileID: 0}
     m_cardArt: {fileID: 21300000, guid: e7e35ddae154bc745b87f588cfdfd8cf, type: 3}
     m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
