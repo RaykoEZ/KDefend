@@ -13,5 +13,12 @@ MonoBehaviour:
   m_Name: ItemDrop_BaseEnemy
   m_EditorClassIdentifier: 
   m_dropList:
-  - m_toDrop: {fileID: 6385640104035231319, guid: 8aac90a0d4c6ebe4a9712843070638c7, type: 3}
+  - m_toDrop:
+      m_property:
+        Id: dropCredit0
+        Name: Credit
+        Description: 
+      m_asset: {fileID: 6385640104035231319, guid: 8aac90a0d4c6ebe4a9712843070638c7, type: 3}
+      m_cardArt: {fileID: 0}
+      m_cardBack: {fileID: 0}
     m_dropWeight: 100

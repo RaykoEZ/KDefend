@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_items:
   - m_property:
-      Id: sh0x
+      Id: tool0x
       Name: T0_StopWatch
-      Description: What is this? This thing shouldn't be here...
+      Description: 
     m_asset: {fileID: 0}
     m_cardArt: {fileID: 21300000, guid: 11487e4e1b1a58144aaf4343e0d972a1, type: 3}
     m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
@@ -57,7 +57,7 @@ MonoBehaviour:
     m_cardArt: {fileID: 21300000, guid: 6bb463738cfd2c245b4e86ed4efd83c4, type: 3}
     m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
   - m_property:
-      Id: sh6We
+      Id: sh6
       Name: Std_01 Energy Blaster
       Description: 'Premium weapon for Permitted Personal Defense. Not many around
         here can afford projectiles. '
@@ -66,7 +66,7 @@ MonoBehaviour:
     m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
   - m_property:
       Id: sh7We
-      Name: Std_02 Ebergy Shields
+      Name: Std_02 Energy Shields
       Description: Standard Issue Defensive Module from G.Op's Field Operations Armory.
         100% of users survive to work another shift.
     m_asset: {fileID: 0}
@@ -111,7 +111,7 @@ MonoBehaviour:
     m_cardArt: {fileID: 21300000, guid: 6bb463738cfd2c245b4e86ed4efd83c4, type: 3}
     m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
   - m_property:
-      Id: sh13x
+      Id: tool13x
       Name: C13_qrigbby
       Description: ???
     m_asset: {fileID: 0}

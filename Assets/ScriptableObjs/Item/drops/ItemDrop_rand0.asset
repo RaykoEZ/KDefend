@@ -13,15 +13,48 @@ MonoBehaviour:
   m_Name: ItemDrop_rand0
   m_EditorClassIdentifier: 
   m_dropList:
-  - m_toDrop: {fileID: 0}
+  - m_toDrop:
+      m_property:
+        Id: 
+        Name: 
+        Description: 
+      m_asset: {fileID: 0}
+      m_cardArt: {fileID: 0}
+      m_cardBack: {fileID: 0}
     m_dropWeight: 87
-  - m_toDrop: {fileID: 0}
-    m_dropWeight: 88
-  - m_toDrop: {fileID: 0}
+  - m_toDrop:
+      m_property:
+        Id: 
+        Name: 
+        Description: 
+      m_asset: {fileID: 0}
+      m_cardArt: {fileID: 0}
+      m_cardBack: {fileID: 0}
     m_dropWeight: 52
-  - m_toDrop: {fileID: 0}
+  - m_toDrop:
+      m_property:
+        Id: 
+        Name: 
+        Description: 
+      m_asset: {fileID: 0}
+      m_cardArt: {fileID: 0}
+      m_cardBack: {fileID: 0}
     m_dropWeight: 52
-  - m_toDrop: {fileID: 0}
+  - m_toDrop:
+      m_property:
+        Id: 
+        Name: 
+        Description: 
+      m_asset: {fileID: 0}
+      m_cardArt: {fileID: 0}
+      m_cardBack: {fileID: 0}
     m_dropWeight: 31
-  - m_toDrop: {fileID: 0}
+  - m_toDrop:
+      m_property:
+        Id: 
+        Name: 
+        Description: 
+      m_asset: {fileID: 0}
+      m_cardArt: {fileID: 0}
+      m_cardBack: {fileID: 0}
     m_dropWeight: 14

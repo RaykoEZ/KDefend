@@ -18,13 +18,13 @@ MonoBehaviour:
     Price: 50
     BuyLimit: 1
   - ItemId: sh2_spd
-    Price: 300
+    Price: 250
     BuyLimit: 3
   - ItemId: sh3_atk
-    Price: 1000
+    Price: 500
     BuyLimit: 3
   - ItemId: sh4_hp
-    Price: 5
+    Price: 100
     BuyLimit: 3
   - ItemId: sh5_kb
     Price: 1500

@@ -148,9 +148,9 @@ GameObject:
   - component: {fileID: 6385640104035231319}
   - component: {fileID: 3751437366143518469}
   - component: {fileID: 4352206704140033461}
-  - component: {fileID: 3455370031562363876}
+  - component: {fileID: 1085854325573798438}
   m_Layer: 15
-  m_Name: P_CreditCard_XL
+  m_Name: P_Credit_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,9 +189,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_pickupImmediately: 1
-  m_property:
-    Name: Credit (XL)
-    Description: Gain a very large amount of credit.
   m_onUse:
     m_PersistentCalls:
       m_Calls: []
@@ -235,8 +232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6abe4485c8f1e1747beea2e1beb4e92e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_minGain: 2500
-  m_maxGain: 10000
+  m_minGain: 1000
+  m_maxGain: 2000
 --- !u!61 &4352206704140033461
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -283,7 +280,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 125, y: 90}
   m_EdgeRadius: 0
---- !u!114 &3455370031562363876
+--- !u!114 &1085854325573798438
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
