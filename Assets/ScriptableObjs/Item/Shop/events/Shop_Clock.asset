@@ -18,6 +18,6 @@ MonoBehaviour:
     m_triggerType: 0
     m_triggerTypeOnRaise: 0
     m_itemIndexList:
-    - ItemId: 
-      Price: 0
-      BuyLimit: 0
+    - ItemId: tool0x
+      Price: 999999
+      BuyLimit: 1

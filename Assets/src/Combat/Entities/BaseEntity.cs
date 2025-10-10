@@ -10,6 +10,8 @@ public struct EntityProperty
     public float KnockbackModifier;
     [Range(0f, 200f)]
     public float MoveSpeed;
+    [Range(0f, 99999f)]
+    public float AtkModifier;
 }
 // negative for damage
 // positive for healing

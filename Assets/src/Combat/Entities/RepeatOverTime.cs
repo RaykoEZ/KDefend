@@ -12,7 +12,7 @@ public class RepeatOverTime : EffectModule, IEffectOverTime<BaseEntity>
     {
         StartCoroutine(OnTick(user));
     }
-    public IEnumerator OnTick(BaseEntity user) 
+    public IEnumerator OnTick(BaseEntity user)
     {
         for (int i = 0; i < m_numTicks; i++)
         {

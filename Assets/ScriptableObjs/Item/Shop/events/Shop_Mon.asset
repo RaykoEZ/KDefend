@@ -16,6 +16,14 @@ MonoBehaviour:
   - m_triggerConditions: 0
     m_raiseOnTrigger: 0
     m_triggerType: 0
+    m_triggerTypeOnRaise: 12
+    m_itemIndexList:
+    - ItemId: 
+      Price: 0
+      BuyLimit: 0
+  - m_triggerConditions: 0
+    m_raiseOnTrigger: 0
+    m_triggerType: 0
     m_triggerTypeOnRaise: 0
     m_itemIndexList:
     - ItemId: 
