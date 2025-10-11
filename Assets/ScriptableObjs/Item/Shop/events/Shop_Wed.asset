@@ -13,11 +13,17 @@ MonoBehaviour:
   m_Name: Shop_Wed
   m_EditorClassIdentifier: 
   m_events:
-  - m_triggerConditions: 0
-    m_raiseOnTrigger: 0
-    m_triggerType: 0
+  - m_flagConditionsToTrigger: 8
+    m_triggerTypeToListen: 15
+    m_raiseFlagOnTrigger: 0
     m_triggerTypeOnRaise: 0
     m_itemIndexList:
-    - ItemId: 
-      Price: 0
-      BuyLimit: 0
+    - ItemId: sh7We_shield
+      Price: 3000
+      BuyLimit: 5
+    - ItemId: sh9We_extime
+      Price: 5000
+      BuyLimit: 3
+    - ItemId: sh11We_invest
+      Price: 5000
+      BuyLimit: 3

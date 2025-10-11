@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bff39f6002cf8f44b9a0c18048a379f, type: 3}
-  m_Name: Shop_Letter
+  m_Name: Shop_Dev13_Rewind
   m_EditorClassIdentifier: 
   m_events:
-  - m_triggerConditions: 0
-    m_raiseOnTrigger: 0
-    m_triggerType: 0
+  - m_flagConditionsToTrigger: 1992
+    m_triggerTypeToListen: 13
+    m_raiseFlagOnTrigger: 0
     m_triggerTypeOnRaise: 0
     m_itemIndexList:
-    - ItemId: 
-      Price: 0
-      BuyLimit: 0
+    - ItemId: tool13x_newgame
+      Price: 1
+      BuyLimit: 1

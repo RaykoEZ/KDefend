@@ -18,6 +18,21 @@ internal static class KDEventUtil
         InternalEventHandler.TriggerGlobalEvent(sender,
         new KDEventInfo(raiseFlag, GameEventTriggerType.PauseTime, args));
     }
+    // trigger special pause when using full access stop watch
+    public static void Pause_0x(object sender, bool isStopped, bool fullAccess, KD_StaticEventFlags raiseFlag = KD_StaticEventFlags.None)
+    {
+        Dictionary<string, object> args = new Dictionary<string, object> { { "isOn", isStopped }, { "fullAccess", fullAccess } };
+        InternalEventHandler.TriggerGlobalEvent(sender,
+        new KDEventInfo(raiseFlag, GameEventTriggerType.FullAccess_tool0x, args));
+    }
+    // Rewind time and days with tool13x to unlock Monday
+    // On full access, trigger Special Ending - Goodbye World
+    public static void HelloWorld_13x(object sender, bool fullAccess, KD_StaticEventFlags raiseFlag = KD_StaticEventFlags.None)
+    {
+        Dictionary<string, object> args = new Dictionary<string, object> { { "fullAccess", fullAccess } };
+        InternalEventHandler.TriggerGlobalEvent(sender,
+        new KDEventInfo(raiseFlag, GameEventTriggerType.Access_Tool13x_Rewind, args));
+    }
     // Drop an item from a weighted list of item drops
     public static void ItemDropEvent(object sender, ItemDropList dropList, KD_StaticEventFlags raiseFlag = KD_StaticEventFlags.None)
     {

@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: Shop_Thurs
   m_EditorClassIdentifier: 
   m_events:
-  - m_triggerConditions: 0
-    m_raiseOnTrigger: 0
-    m_triggerType: 0
+  - m_flagConditionsToTrigger: 8
+    m_triggerTypeToListen: 16
+    m_raiseFlagOnTrigger: 0
     m_triggerTypeOnRaise: 0
     m_itemIndexList:
-    - ItemId: 
-      Price: 0
-      BuyLimit: 0
+    - ItemId: sh8Th_beam
+      Price: 5000
+      BuyLimit: 3
+    - ItemId: sh10Th_weight
+      Price: 15000
+      BuyLimit: 1

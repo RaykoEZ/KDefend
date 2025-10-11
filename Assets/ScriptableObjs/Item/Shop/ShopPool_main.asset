@@ -29,6 +29,9 @@ MonoBehaviour:
   - ItemId: sh5_kb
     Price: 1500
     BuyLimit: 1
-  - ItemId: sh12
+  - ItemId: sh6_shoot
+    Price: 2000
+    BuyLimit: 3
+  - ItemId: sh12_idol
     Price: 2500
     BuyLimit: 1

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bff39f6002cf8f44b9a0c18048a379f, type: 3}
-  m_Name: Shop_Clock
+  m_Name: Shop_Dev0_Watch
   m_EditorClassIdentifier: 
   m_events:
-  - m_triggerConditions: 0
-    m_raiseOnTrigger: 0
-    m_triggerType: 0
+  - m_flagConditionsToTrigger: 64
+    m_triggerTypeToListen: 18
+    m_raiseFlagOnTrigger: 0
     m_triggerTypeOnRaise: 0
     m_itemIndexList:
     - ItemId: tool0x

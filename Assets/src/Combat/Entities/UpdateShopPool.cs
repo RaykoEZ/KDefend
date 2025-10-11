@@ -26,7 +26,7 @@ public class UpdateShopPool : KDEvent
         m_updaterRef = updaterRef;
     }
     public UpdateShopPool(UpdateShopPool copy) :
-        base(copy.m_triggerConditions, copy.m_raiseOnTrigger, copy.m_triggerType, copy.m_triggerTypeOnRaise)
+        base(copy.m_flagConditionsToTrigger, copy.m_raiseFlagOnTrigger, copy.m_triggerTypeToListen, copy.m_triggerTypeOnRaise)
     {
         m_itemIndexList = copy.m_itemIndexList;
         m_updaterRef = copy.m_updaterRef;
@@ -34,12 +34,12 @@ public class UpdateShopPool : KDEvent
     public void Init(ShopPoolUpdater updater) 
     {
         m_updaterRef = updater;
-        InternalEventHandler.ListenToGlobal(m_triggerType, ToInvoke);
+        InternalEventHandler.ListenToGlobal(m_triggerTypeToListen, ToInvoke);
     }
     public void Shutdown() 
     {
         m_updaterRef = null;
-        InternalEventHandler.UnlistenFromGlobal(m_triggerType, ToInvoke);
+        InternalEventHandler.UnlistenFromGlobal(m_triggerTypeToListen, ToInvoke);
     }
     protected override void Trigger_Internal(object sender, KDEventInfo args)
     {
