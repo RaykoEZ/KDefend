@@ -2,12 +2,21 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+// We either add (remove via negative) or set item price and quanitity
+public enum ShopPoolOperationType
+{
+    Add,
+    Multiply,
+    Set
+}
 [Serializable]
 public class ShopItemState
 {
+    [SerializeField] ShopPoolOperationType m_shopOperation;
     public string ItemId;
     public int Price;
     public int BuyLimit;
+    public ShopPoolOperationType ShopOperation => m_shopOperation;
 }
 // event for updating shop item pool, e.g. add/remove items from drop pool
 [Serializable]

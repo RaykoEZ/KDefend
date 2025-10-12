@@ -39,6 +39,7 @@ public enum GameEventTriggerType
 {
     None,
     TimeElapsed,
+    CreditOverTime,
     ItemObtained,
     ItemOption,
     Spawn,

@@ -7,8 +7,7 @@ public class Shop : Building
 {
     [SerializeField] ShopPoolUpdater m_updater = default;
     [SerializeField] ShopOptionsHandler m_optionHandler = default;
-    // on interact, look at player inventory, change drop list depending on 
-    // all obtained items
+    // on interact, update item pool
     // activate this when user chooses interact option (e.g. E button)
     protected override void Interact_Internal()
     {

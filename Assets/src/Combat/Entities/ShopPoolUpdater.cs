@@ -45,26 +45,46 @@ public class ShopPoolUpdater : MonoBehaviour
     public void UpdatePool(List<ShopItemState> toUpdate)
     {
         if (toUpdate == null || toUpdate.Count == 0) return;
-        string idx;
+        ShopItemState update;
         for (int i = 0; i < toUpdate.Count; i++) 
         {
             // try to find existing shop item entry
             // add new item into the shop pool if no duplicate indexed field
             // if add failed, apply changes to existing data field
-            idx = toUpdate[i].ItemId;
-            var findResult = m_currentShopPool.Find((x) => x.ItemId == idx);
+            update = toUpdate[i];
+            var findResult = m_currentShopPool.Find((x) => x.ItemId == update.ItemId);
             if (findResult != null)
             {
                 // add price and buy limit
                 // negative allowed for decreasing price/amount left
-                findResult.Price = Mathf.Max(0, findResult.Price + toUpdate[i].Price);
-                findResult.BuyLimit = Mathf.Max(0, findResult.BuyLimit + toUpdate[i].BuyLimit);
+                findResult.Price = UpdateValue(update.ShopOperation, findResult.Price, update.Price);
+                findResult.BuyLimit = UpdateValue(update.ShopOperation, findResult.BuyLimit, update.BuyLimit); ;
             }
             else 
             {
-                m_currentShopPool.Add(toUpdate[i]);
+                m_currentShopPool.Add(update);
             }
         }
+    }
+    // add/multioply/set operation on int values
+    protected static int UpdateValue(ShopPoolOperationType opType, int baseValue, int changeValue) 
+    {
+        int ret = baseValue;
+        switch (opType)
+        {
+            case ShopPoolOperationType.Add:
+                ret = Mathf.Clamp(baseValue + changeValue, 0, 999999);
+                break;
+            case ShopPoolOperationType.Multiply:
+                ret = Mathf.Clamp(baseValue * changeValue, 0, 999999);
+                break;
+            case ShopPoolOperationType.Set:
+                ret = Mathf.Clamp(changeValue, 0, 999999);
+                break;
+            default:
+                break;
+        }
+        return ret;
     }
     public List<ItemAsset> GetOptionAssetPool()
     {

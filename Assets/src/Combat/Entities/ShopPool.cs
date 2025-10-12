@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewShopPool", menuName = "Jams/Item/Shop Pool", order = 1)]

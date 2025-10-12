@@ -18,6 +18,7 @@ MonoBehaviour:
     m_raiseFlagOnTrigger: 0
     m_triggerTypeOnRaise: 0
     m_itemIndexList:
-    - ItemId: tool13x_newgame
+    - m_shopOperation: 2
+      ItemId: tool13x_newgame
       Price: 1
       BuyLimit: 1

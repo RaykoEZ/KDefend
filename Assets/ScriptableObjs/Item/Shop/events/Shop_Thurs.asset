@@ -18,9 +18,11 @@ MonoBehaviour:
     m_raiseFlagOnTrigger: 0
     m_triggerTypeOnRaise: 0
     m_itemIndexList:
-    - ItemId: sh8Th_beam
+    - m_shopOperation: 0
+      ItemId: sh8Th_beam
       Price: 5000
       BuyLimit: 3
-    - ItemId: sh10Th_weight
+    - m_shopOperation: 0
+      ItemId: sh10Th_weight
       Price: 15000
       BuyLimit: 1

@@ -18,6 +18,7 @@ MonoBehaviour:
     m_raiseFlagOnTrigger: 0
     m_triggerTypeOnRaise: 0
     m_itemIndexList:
-    - ItemId: tool0x
+    - m_shopOperation: 2
+      ItemId: tool0x
       Price: 999999
       BuyLimit: 1

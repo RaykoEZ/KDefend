@@ -18,6 +18,7 @@ MonoBehaviour:
     m_raiseFlagOnTrigger: 0
     m_triggerTypeOnRaise: 0
     m_itemIndexList:
-    - ItemId: sh14x_planchange
+    - m_shopOperation: 2
+      ItemId: sh14x_planchange
       Price: 100
       BuyLimit: 1
