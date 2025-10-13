@@ -1,9 +1,9 @@
-﻿using UnityEngine.Events;
-using UnityEngine;
+﻿using Curry.Events;
+using System.Collections.Generic;
 using TMPro;
-using Curry.Events;
-using System.Collections;
-using System;
+using UnityEngine;
+using UnityEngine.Events;
+
 // Handles player reward and payment
 public class PlayerCreditManager : MonoBehaviour
 {
@@ -11,19 +11,19 @@ public class PlayerCreditManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI m_display = default;
     [SerializeField] TextMeshProUGUI m_animate = default;
     [SerializeField] UnityEvent m_onCreditUpdate = default;
-    Coroutine m_drainCredit;
+    Dictionary<string, CreditChangeOverTime> m_changesOverTime = new Dictionary<string, CreditChangeOverTime>();
     public int CurrentCredit => m_player.CurrentStats.Property.Health;
     void OnEnable()
     {
         m_player.OnHeal += RefreshDisplay;
         m_player.OnTakeDamage += RefreshDisplay;
-        InternalEventHandler.ListenToGlobal(GameEventTriggerType.CreditOverTime, OnCreditDrain);
+        InternalEventHandler.ListenToGlobal(GameEventTriggerType.CreditOverTime, CreditOverTime);
     }
     void OnDisable()
     {
         m_player.OnHeal -= RefreshDisplay;
         m_player.OnTakeDamage -= RefreshDisplay;
-        InternalEventHandler.UnlistenFromGlobal(GameEventTriggerType.CreditOverTime, OnCreditDrain);
+        InternalEventHandler.UnlistenFromGlobal(GameEventTriggerType.CreditOverTime, CreditOverTime);
     }
     public void Init()
     {
@@ -51,14 +51,16 @@ public class PlayerCreditManager : MonoBehaviour
     {
         m_player.TakeDamage(pay);       
     }
-    void OnCreditDrain(object sender, KDEventInfo args)
+    // handle credit change over time
+    void CreditOverTime(object sender, KDEventInfo args)
     {
         if (args.Payload == null) return;
         bool activate = false;
         float timeInterval = 0f;
         int changePerTick = 1;
-        // 
-        if (args.Payload.TryGetValue("isOn", out object t) && t is bool isOn)
+        // get params from event args
+        string name = sender is MonoBehaviour mono ? mono.gameObject.name : gameObject.name;
+        if (args.Payload.TryGetValue("isOn", out object i) && i is bool isOn)
         {
             activate = isOn;
         }
@@ -70,23 +72,23 @@ public class PlayerCreditManager : MonoBehaviour
         {
             changePerTick = delta;
         }
-        // Toggle off and restart drain effect
-        StopCoroutine(m_drainCredit);
-        if (activate && timeInterval <= 0f)
+        // find existing credit changes in collection
+        CreditChangeOverTime toChange;        
+        if (m_changesOverTime.TryGetValue(name, out CreditChangeOverTime changer)) 
         {
-            // create tick call depending on taking heal or damage
-            Action tick = changePerTick < 0 ? () => { m_player?.TakeDamage(changePerTick); }
-            :
-                () => { m_player?.Heal(changePerTick); };
-            m_drainCredit = StartCoroutine(CreditActionOverTime(timeInterval, tick));
+            toChange = changer;
         }
-    }
-    IEnumerator CreditActionOverTime(float timeInterval, Action tickAction)
-    {
-        while (CurrentCredit > 0)
+        else 
         {
-            yield return new WaitForSeconds(timeInterval);
-            tickAction?.Invoke();
+            toChange = new CreditChangeOverTime(m_player, changePerTick, timeInterval);
+            m_changesOverTime.Add(name, toChange);
+        }
+        if (activate)
+        {
+            toChange?.Begin();
+        }else 
+        { 
+            toChange?.End();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Curry.Events;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -46,7 +45,7 @@ public class InventoryManager : MonoBehaviour
     }
     public void ObtainItem(Item obtained) 
     {
-        if (!(obtained is Collectible))
+        if (obtained is Collectible)
         {
             m_heldItems.Add(obtained);
             m_onObtainItem?.Invoke(obtained);

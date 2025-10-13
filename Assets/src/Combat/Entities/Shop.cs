@@ -7,6 +7,7 @@ public class Shop : Building
 {
     [SerializeField] ShopPoolUpdater m_updater = default;
     [SerializeField] ShopOptionsHandler m_optionHandler = default;
+    [SerializeField] HideableUI m_display = default;
     // on interact, update item pool
     // activate this when user chooses interact option (e.g. E button)
     protected override void Interact_Internal()
@@ -14,5 +15,6 @@ public class Shop : Building
         // TODO: DIRTY flag when item added, so we don't call this line every time
         List<ItemAsset> options = m_updater.GetOptionAssetPool();
         m_optionHandler?.UpdateShopOptions(options);
+        m_display?.Show();
     }
 }

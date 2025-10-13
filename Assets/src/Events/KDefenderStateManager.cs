@@ -11,9 +11,9 @@ public class KDefenderStateManager : MonoBehaviour
 
     [SerializeField] EnemyManager m_enemy = default;
     [SerializeField] EnemyWaveManager m_wave = default;
-
-    [SerializeField] DeliveryDropTable m_deliveryList = default;
-    [SerializeField] DeliveryManager m_objectives = default;
+    // Delay this feature for now
+    //[SerializeField] DeliveryDropTable m_deliveryList = default;
+    //[SerializeField] DeliveryManager m_objectives = default;
     [SerializeField] ShopPoolUpdater m_shopPoolUpdater = default;
 
     [SerializeField] Player m_player = default;
@@ -35,20 +35,20 @@ public class KDefenderStateManager : MonoBehaviour
         m_inventoryManager?.Init(state.HeldItems);
         m_shopPoolUpdater?.InitPool(state.ShopStates);
 
-        List<DeliveryDetail> active = m_deliveryList.Find(state.ActiveDeliveries);
-        m_objectives.Init(active);
+        //List<DeliveryDetail> active = m_deliveryList.Find(state.ActiveDeliveries);
+        //m_objectives.Init(active);
         m_staticEvents.SetFlags(state.StaticFlags);
         m_timer.StartTimer();
     }
     // get current states from managers to save latest game state
     public void UpdateSave()
     {
-        List<string> completed = DeliveryDetail.GetTitleList(
+        /*List<string> completed = DeliveryDetail.GetTitleList(
             m_objectives.GetDetailsOf(
                 ObjectiveManager<DeliveryDetail>.ObjectiveState.Complete));
         List<string> active = DeliveryDetail.GetTitleList(
             m_objectives.GetDetailsOf(
-                ObjectiveManager<DeliveryDetail>.ObjectiveState.Active));
+                ObjectiveManager<DeliveryDetail>.ObjectiveState.Active));*/
         var newState = new KDefenderGameState
         {
             Timer = m_timer.SecondsElapsed,
@@ -56,7 +56,7 @@ public class KDefenderStateManager : MonoBehaviour
             PlayerValue = m_player.CurrentStats,
             HostileStates = m_enemy.GetEnemyStates(),
             HeldItems = m_inventoryManager.GetItemPropeties(),
-            ActiveDeliveries = active,
+            //ActiveDeliveries = active,
             ShopStates = m_shopPoolUpdater.CurrentShopPool
         };
         m_save.Current.KDGameState = newState;

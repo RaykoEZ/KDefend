@@ -11,7 +11,7 @@ public struct KDefenderGameState
     public EntityState PlayerValue;
     public List<EnemyState> HostileStates;
     public List<ItemProperty> HeldItems;
-    public List<string> ActiveDeliveries;
+    //public List<string> ActiveDeliveries;
     public List<ShopItemState> ShopStates;
     public KDefenderGameState(KDefenderGameState copy) 
     {
@@ -20,7 +20,7 @@ public struct KDefenderGameState
         PlayerValue = copy.PlayerValue;
         HostileStates = copy.HostileStates;
         HeldItems = copy.HeldItems;
-        ActiveDeliveries = copy.ActiveDeliveries;
+        //ActiveDeliveries = copy.ActiveDeliveries;
         ShopStates = copy.ShopStates;
     }
 }
