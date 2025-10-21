@@ -10,12 +10,13 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] UnityEvent<Item> m_onObtainItem = default;
     protected Inventory<Item> m_heldItems = new Inventory<Item>();
     public List<Item> HeldItems => m_heldItems.ItemList;
-    public List<ItemProperty> GetItemPropeties() 
+    public List<ItemState> GetItemPropeties() 
     { 
-        List<ItemProperty> ret = new List<ItemProperty>();
+        List<ItemState> ret = new List<ItemState>();
         foreach (var item in HeldItems)
         {
-            ret.Add(item.Property);
+            ItemState state = new ItemState(item.Property, item.CurrentStack);
+            ret.Add(state);
         }
         return ret;
     }
@@ -30,13 +31,13 @@ public class InventoryManager : MonoBehaviour
         InternalEventHandler.UnlistenFromGlobal(
     GameEventTriggerType.ItemObtained, OnObtainItem);
     }
-    public void Init(List<ItemProperty> props)
+    public void Init(List<ItemState> props)
     {
         Item toAdd;
         Item instance;
-        foreach (var property in props)
+        foreach (var itemState in props)
         {
-            toAdd = m_mainCollection.GetItemByProperty(property).PrefabRef;
+            toAdd = m_mainCollection.GetItemByProperty(itemState.Property).PrefabRef;
             // instantiate item
             instance = Instantiate(toAdd, m_player.transform);
             (instance as Collectible)?.Init(m_player);

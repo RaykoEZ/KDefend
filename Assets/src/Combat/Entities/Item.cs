@@ -3,27 +3,34 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-
-[Serializable]
-public struct ItemProperty : IEquatable<ItemProperty>
-{
-    public string Id;
-    public string Name;
-    [TextArea(minLines: 1, maxLines: 2)]
-    public string Description;
-    public bool Equals(ItemProperty other)
-    {
-        return other.Name == Name && other.Description == Description;
-    }
-    public override int GetHashCode()
-    {
-        return ($"{Name}/{Description}").GetHashCode();
-    }
-}
+using System.Collections.Generic;
 public interface IItem
 {
-    ItemProperty Property { get; }
+    public ItemProperty Property { get; }
     public void OnPickup();
+}
+// for stacking items
+[Serializable]
+public class ItemRankStack
+{
+    // for implementing item ranks when stacking collectibles,
+    // 0: Base Rank effects
+    // n: max rank effects
+    [SerializeField] List<UnityEvent> m_rankEffects = default;
+    protected int m_currentRank = 0;
+    // current rank index
+    public int CurrentStack { get => m_currentRank; protected set => Mathf.Clamp(value, 0, MaxRankStack); }
+    public int MaxRankStack => m_rankEffects.Count - 1;
+    public int UpdateRank(int rankDelta, bool triggerEffect = false)
+    {
+        CurrentStack = CurrentStack + rankDelta;
+        // trigger effect on rank up/down?
+        if (triggerEffect)
+        {
+            m_rankEffects[CurrentStack]?.Invoke();
+        }
+        return CurrentStack;
+    }
 }
 [RequireComponent(typeof(Collider2D))]
 // class to contain item property and interaction triggers
@@ -37,8 +44,12 @@ public class Item : MonoBehaviour , IItem
     protected ItemProperty m_property;
     protected bool m_isEffectActive = false;
     protected Player m_user;
+    // for handling item stacks or ranks
+    protected ItemRankStack m_rank = new ItemRankStack();
     public ItemProperty Property => m_property;
+    public int CurrentStack { get => m_rank.CurrentStack; }
     public Image CardArt { get => m_cardArt; }
+
     // instantiate and initialize an item
     public static Item SpawnItem(ItemAsset asset, Transform parent, Vector2 localposition) 
     {

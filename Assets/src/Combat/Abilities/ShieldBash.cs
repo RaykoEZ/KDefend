@@ -22,3 +22,15 @@ public class ShieldBash : ActiveAbility
         }
     }
 }
+
+public class FieldEffect : EffectModule
+{
+    public override void Activate(BaseEntity target)
+    {
+        throw new System.NotImplementedException();
+    }
+    public override void Deactivate(BaseEntity target) 
+    { 
+        throw new System.NotImplementedException(); 
+    }
+}

@@ -1,9 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 // Items that stays in inventory, with trigger effects
 public class Collectible : Item 
 {
     [SerializeField] List<KDEvent> m_effectTriggers = default;
+    // apply additional effects depending on item level
+    [SerializeField] List<UnityEvent<Player>> m_levelEffects = default;
     public void Init(Player user) 
     { 
         m_user = user;

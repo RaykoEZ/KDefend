@@ -14,4 +14,3 @@ public abstract class EffectModule : MonoBehaviour
     public virtual void Deactivate(BaseEntity target) { }
 }
 
-

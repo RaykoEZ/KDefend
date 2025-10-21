@@ -10,7 +10,7 @@ public struct KDefenderGameState
     // State of player entities
     public EntityState PlayerValue;
     public List<EnemyState> HostileStates;
-    public List<ItemProperty> HeldItems;
+    public List<ItemState> HeldItems;
     //public List<string> ActiveDeliveries;
     public List<ShopItemState> ShopStates;
     public KDefenderGameState(KDefenderGameState copy) 

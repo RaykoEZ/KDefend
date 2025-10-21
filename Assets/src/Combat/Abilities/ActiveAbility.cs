@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System;
 using UnityEngine;
+// effects usable via triggers or commands, has charging/channeling feature
 public abstract class ActiveAbility : MonoBehaviour 
 {
     [Range(0f, 999f)]
