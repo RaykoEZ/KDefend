@@ -22,7 +22,3 @@ MonoBehaviour:
       ItemId: sh8Th_beam
       Price: 5000
       BuyLimit: 3
-    - m_shopOperation: 0
-      ItemId: sh10Th_weight
-      Price: 15000
-      BuyLimit: 1

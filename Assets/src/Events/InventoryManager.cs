@@ -7,7 +7,6 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] Player m_player = default;
     [SerializeField] ItemAssetLookup m_mainCollection = default;
-    [SerializeField] UnityEvent<Item> m_onObtainItem = default;
     protected Inventory<Item> m_heldItems = new Inventory<Item>();
     public List<Item> HeldItems => m_heldItems.ItemList;
     public List<ItemState> GetItemPropeties() 
@@ -49,7 +48,6 @@ public class InventoryManager : MonoBehaviour
         if (obtained is Collectible)
         {
             m_heldItems.Add(obtained);
-            m_onObtainItem?.Invoke(obtained);
         }
         obtained?.OnPickup(m_player);
     }
@@ -59,6 +57,12 @@ public class InventoryManager : MonoBehaviour
             itemIndex < 0 || 
             itemIndex >= HeldItems.Count) return;
         HeldItems[itemIndex]?.UseItem();
+    }
+    public void UseItem(string itemId) 
+    {
+        if (HeldItems.Count == 0 ||
+        string.IsNullOrWhiteSpace(itemId)) return;
+        HeldItems.Find((x)=>x.Property.Id == itemId)?.UseItem();
     }
     protected void OnObtainItem(object sender, KDEventInfo args) 
     {

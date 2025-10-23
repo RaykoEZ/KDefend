@@ -49,10 +49,6 @@ public class RILetter : Collectible
         writer.SendPngToDesktop(filename: "fromRI", foldername: m_folderName, m_photoSent);
     }
 }
-public class TrainingWeights : Collectible
-{
-    [SerializeField] float m_cooldownDuration = default;
-}
 public class Investment101 : Collectible 
 {
     [SerializeField] GainCredit m_gainCredit = default;

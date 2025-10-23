@@ -87,13 +87,6 @@ MonoBehaviour:
     m_cardArt: {fileID: 21300000, guid: 8b1441145e80560419956010269bc7aa, type: 3}
     m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
   - m_property:
-      Id: sh10Th_weight
-      Name: CryptoFit Leg Weights
-      Description: Move slower, gain explosive powers upon taking hit.
-    m_asset: {fileID: 0}
-    m_cardArt: {fileID: 21300000, guid: 91c951b331236ab489a7f54e61700d8b, type: 3}
-    m_cardBack: {fileID: 3598183816509280, guid: 53513603afcb9e248bbbe2cc1a768fb2, type: 3}
-  - m_property:
       Id: sh11We_invest
       Name: Investment 101
       Description: Increase Credit gain over time.

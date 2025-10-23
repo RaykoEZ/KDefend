@@ -59,7 +59,7 @@ public class Item : MonoBehaviour , IItem
         return instance;
     }
     // Pickup trigger
-    void OnTriggerEnter2D(Collider2D col) 
+    void OnTriggerEnter2D(Collider2D col)
     {
         if (col.attachedRigidbody == null) return;
         bool compExist = col.attachedRigidbody.TryGetComponent(out Player result);

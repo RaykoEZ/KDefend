@@ -54,6 +54,22 @@ public class KDefenderStateManager : MonoBehaviour
     {
         m_onGameOver?.Invoke();
     }
+    // for pausing game for menu and item effect
+    public void OnPauseGame(object sender, KDEventInfo args) 
+    { 
+        
+    }
+    // listen to Letter Item use event for its effects
+    public void OnUseLetter(object sender, KDEventInfo args) 
+    { 
+    
+    }
+    // Trigger gam events when a file is dragged into the game window
+    public void OnExternalFileAdded(object sender, KDEventInfo args) 
+    { 
+    
+    }
+
     // trigger intel recovery protocol on enemy side
     public void OnIntelPickup(EventInfo info)
     {
