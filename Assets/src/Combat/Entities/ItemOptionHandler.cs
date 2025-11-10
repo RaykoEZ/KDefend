@@ -20,7 +20,7 @@ public class ItemOptionHandler : HideableUI
     }
     protected void Init()
     {
-        InternalEventHandler.ListenToGlobal(GameEventTriggerType.ItemOption, OnShowOptions);
+        KDEventHandler.ListenToGlobal(GameEventTriggerType.ItemOption, OnShowOptions);
         // setup callbacks
         foreach (var option in m_optionUI)
         {
@@ -29,7 +29,7 @@ public class ItemOptionHandler : HideableUI
     }
     protected void Shutdown() 
     {
-        InternalEventHandler.UnlistenFromGlobal(GameEventTriggerType.ItemOption, OnShowOptions);
+        KDEventHandler.UnlistenFromGlobal(GameEventTriggerType.ItemOption, OnShowOptions);
         foreach (var option in m_optionUI)
         {
             ShutdownOption(option);

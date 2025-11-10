@@ -21,6 +21,7 @@ public class Collectible : Item
     {
         GetComponent<Collider2D>().enabled = false;
         m_onPickup?.Invoke(m_user);
+        m_user?.Inventory?.ObtainItem(this);
         m_pickUpCommand?.Disable();
     }
 }

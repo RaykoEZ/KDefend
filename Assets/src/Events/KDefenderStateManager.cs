@@ -20,7 +20,9 @@ public class KDefenderStateManager : MonoBehaviour
     [SerializeField] GameTimer m_timer = default;
     [SerializeField] UnityEvent m_onGameOver = default;
     static int s_currentLevel = 0;
+    static bool s_isPaused = false;
     public static int CurrentLevel { get => s_currentLevel; }
+    public static bool IsPaused { get => s_isPaused; }
 
     // As an alternate game mode
     // Will implement with the KeepQuiet saves system
@@ -55,21 +57,12 @@ public class KDefenderStateManager : MonoBehaviour
         m_onGameOver?.Invoke();
     }
     // for pausing game for menu and item effect
-    public void OnPauseGame(object sender, KDEventInfo args) 
-    { 
+    public void PauseGame() 
+    {
+        s_isPaused = !s_isPaused;
+        Time.timeScale = s_isPaused? 0f : 1f; 
         
     }
-    // listen to Letter Item use event for its effects
-    public void OnUseLetter(object sender, KDEventInfo args) 
-    { 
-    
-    }
-    // Trigger gam events when a file is dragged into the game window
-    public void OnExternalFileAdded(object sender, KDEventInfo args) 
-    { 
-    
-    }
-
     // trigger intel recovery protocol on enemy side
     public void OnIntelPickup(EventInfo info)
     {

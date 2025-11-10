@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 public class Player : BaseCharacter 
 {
+    [SerializeField] InventoryManager m_inventory = default;
     DeliveryDetail m_currentlyDelivering;
     public DeliveryDetail CurrentlyDelivering { get => m_currentlyDelivering; set => m_currentlyDelivering = value; }
+    public InventoryManager Inventory => m_inventory;
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.otherRigidbody == null) return;

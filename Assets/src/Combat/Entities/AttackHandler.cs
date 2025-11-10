@@ -29,7 +29,7 @@ public abstract class AttackHandler : MonoBehaviour
     }
     public virtual void UseWeapon()
     {
-        if (m_keepFiring || m_currentWeapons.Count == 0) return;
+        if (KDefenderStateManager.IsPaused ||  m_keepFiring || m_currentWeapons.Count == 0) return;
         for (int i = 0; i < m_currentWeapons.Count; i++)
         {
             if (m_attackingWeapons[i]) continue;

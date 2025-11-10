@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
 {
@@ -7,6 +8,7 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
     [SerializeField] protected WeaponProperty m_weaponProperty = default;
     [SerializeField] AudioClip m_onHitSfx = default;
     [SerializeField] AudioClip m_onLaunchSfx = default;
+    [SerializeField] List<EffectModule> m_onHitEffects = default;
     protected Coroutine m_attack;
     // For bullets we instantiate bullets on attack, for melee, don't instantiate
     protected bool firing = false;
@@ -61,6 +63,11 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
     {
         hit?.TakeDamage(WeaponProperty.Damage);
         hit?.GetComponent<AudioSource>()?.PlayOneShot(m_onHitSfx);
+        // trigger on hit effects
+        foreach (var item in m_onHitEffects)
+        {
+            item?.Activate(hit);
+        }
         if (hit is IPushable push)
         {
             push.Push(m_currentDirection, WeaponProperty.PushPower);

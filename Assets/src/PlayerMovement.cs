@@ -2,7 +2,7 @@ using Curry.Events;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IMovement
 {
     [SerializeField] Player m_controlling = default;
     bool m_movable = true;
@@ -14,27 +14,23 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D RB2D => GetComponent<Rigidbody2D>();
     void OnEnable()
     {
-        InternalEventHandler.ListenToGlobal(GameEventTriggerType.PauseGame, SetControlActive);
+        KDEventHandler.ListenToGlobal(GameEventTriggerType.PauseGame, OnPause);
     }
     void OnDisable()
     {
-        InternalEventHandler.UnlistenFromGlobal(GameEventTriggerType.PauseGame, SetControlActive);
+        KDEventHandler.UnlistenFromGlobal(GameEventTriggerType.PauseGame, OnPause);
     }
-    public static void TriggerPauseEvent(object sender, bool isOn) 
-    {
-        Dictionary<string, object> args = new Dictionary<string, object> { {"isOn", isOn } };
-        InternalEventHandler.TriggerGlobalEvent(sender,
-                new KDEventInfo(KD_StaticEventFlags.None, GameEventTriggerType.PauseGame, args));
-    }
-    protected void SetControlActive(object sender, KDEventInfo args) 
+    protected void OnPause(object sender, KDEventInfo args) 
     {
         // check toggle sender, if sender arg  are null, keep control
         if (args == null || args.Payload == null) return;
-        if (args.Payload.TryGetValue("isOn", out object result) && result is bool isOn)
+        if (args.Payload.TryGetValue("isOn", out object result) && result is bool isGameActive)
         {
-            m_movable = isOn;
+            // if we were stopped before, don't allow movement before
+            m_movable = isGameActive;
         }
     }
+    
     public void OnMove(InputAction.CallbackContext value)
     {
         m_movementDirection = value.ReadValue<Vector2>();
@@ -50,5 +46,16 @@ public class PlayerMovement : MonoBehaviour
                 m_movementDirection * Time.fixedDeltaTime, ForceMode2D.Impulse);
         }
 
+    }
+    
+    // for pausing movement
+    public void StartMoving()
+    {
+        m_movable = true;
+    }
+
+    public void StopMoving()
+    {
+        m_movable = false;
     }
 }

@@ -21,7 +21,7 @@ public abstract class KDEvent
     }
     public void InitGlobalListeners() 
     {
-        InternalEventHandler.ListenToGlobal(m_triggerTypeToListen, ToInvoke);
+        KDEventHandler.ListenToGlobal(m_triggerTypeToListen, ToInvoke);
     }
     // frontend call for event trigger 
     protected void OnEventTrigger(object sender, KDEventInfo args) 
@@ -37,7 +37,7 @@ public abstract class KDEvent
         // raise flag & chain events if valid, pass on new flag
         if (m_raiseFlagOnTrigger != KD_StaticEventFlags.None) 
         {
-            InternalEventHandler.TriggerGlobalEvent(this, 
+            KDEventHandler.TriggerGlobalEvent(this, 
                 new KDEventInfo(m_raiseFlagOnTrigger, m_triggerTypeOnRaise, args.Payload));
         }
     }

@@ -43,12 +43,12 @@ public class UpdateShopPool : KDEvent
     public void Init(ShopPoolUpdater updater) 
     {
         m_updaterRef = updater;
-        InternalEventHandler.ListenToGlobal(m_triggerTypeToListen, ToInvoke);
+        KDEventHandler.ListenToGlobal(m_triggerTypeToListen, ToInvoke);
     }
     public void Shutdown() 
     {
         m_updaterRef = null;
-        InternalEventHandler.UnlistenFromGlobal(m_triggerTypeToListen, ToInvoke);
+        KDEventHandler.UnlistenFromGlobal(m_triggerTypeToListen, ToInvoke);
     }
     protected override void Trigger_Internal(object sender, KDEventInfo args)
     {

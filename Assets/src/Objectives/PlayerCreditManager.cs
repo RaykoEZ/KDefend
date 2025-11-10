@@ -7,23 +7,26 @@ using UnityEngine.Events;
 // Handles player reward and payment
 public class PlayerCreditManager : MonoBehaviour
 {
+    [SerializeField] float m_targetCredit = default;
     [SerializeField] Player m_player = default;
     [SerializeField] TextMeshProUGUI m_display = default;
     [SerializeField] TextMeshProUGUI m_animate = default;
     [SerializeField] UnityEvent m_onCreditUpdate = default;
     Dictionary<string, CreditChangeOverTime> m_changesOverTime = new Dictionary<string, CreditChangeOverTime>();
     public int CurrentCredit => m_player.CurrentStats.Property.Health;
+    public float TargetCredit { get => m_targetCredit; set => m_targetCredit = value; }
+
     void OnEnable()
     {
         m_player.OnHeal += RefreshDisplay;
         m_player.OnTakeDamage += RefreshDisplay;
-        InternalEventHandler.ListenToGlobal(GameEventTriggerType.CreditOverTime, CreditOverTime);
+        KDEventHandler.ListenToGlobal(GameEventTriggerType.CreditOverTime, CreditOverTime);
     }
     void OnDisable()
     {
         m_player.OnHeal -= RefreshDisplay;
         m_player.OnTakeDamage -= RefreshDisplay;
-        InternalEventHandler.UnlistenFromGlobal(GameEventTriggerType.CreditOverTime, CreditOverTime);
+        KDEventHandler.UnlistenFromGlobal(GameEventTriggerType.CreditOverTime, CreditOverTime);
     }
     public void Init()
     {
@@ -35,7 +38,11 @@ public class PlayerCreditManager : MonoBehaviour
         m_animate.color = change < 0 ? Color.red : Color.green;
         m_animate.text = $"{sign}{change}";
         m_onCreditUpdate?.Invoke();
-        m_display.text = CurrentCredit.ToString();
+        m_display.text = $"{CurrentCredit.ToString()} / {m_targetCredit}";
+        if (CurrentCredit >= m_targetCredit) 
+        { 
+            
+        }
     }
     public void RewardPoints(int add) 
     {

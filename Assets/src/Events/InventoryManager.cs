@@ -22,12 +22,12 @@ public class InventoryManager : MonoBehaviour
     // listen to obtaining item/perks
     void OnEnable()
     {
-        InternalEventHandler.ListenToGlobal(
+        KDEventHandler.ListenToGlobal(
             GameEventTriggerType.ItemObtained, OnObtainItem);
     }
     void OnDisable()
     {
-        InternalEventHandler.UnlistenFromGlobal(
+        KDEventHandler.UnlistenFromGlobal(
     GameEventTriggerType.ItemObtained, OnObtainItem);
     }
     public void Init(List<ItemState> props)

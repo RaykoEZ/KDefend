@@ -20,11 +20,11 @@ public class EnemyWaveManager : MonoBehaviour
     bool m_waveInProgress = false;
     void OnEnable()
     {
-        InternalEventHandler.ListenToGlobal(GameEventTriggerType.Spawn, OnGlobalSpawnEvent);
+        KDEventHandler.ListenToGlobal(GameEventTriggerType.Spawn, OnGlobalSpawnEvent);
     }
     void OnDisable()
     {
-        InternalEventHandler.UnlistenFromGlobal(GameEventTriggerType.Spawn, OnGlobalSpawnEvent);
+        KDEventHandler.UnlistenFromGlobal(GameEventTriggerType.Spawn, OnGlobalSpawnEvent);
     }
     void Start()
     {

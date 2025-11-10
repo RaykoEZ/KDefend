@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Enemy), typeof(NavMeshAgent))]
-public class EnemyMovement : MonoBehaviour 
+public class EnemyMovement : MonoBehaviour, IMovement
 {
     [SerializeField] protected bool m_moveOnsight = default;
     [SerializeField] protected bool m_ignorePlayerTracking = default;

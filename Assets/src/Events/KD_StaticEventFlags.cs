@@ -38,13 +38,13 @@ public enum KD_StaticEventFlags
 public enum GameEventTriggerType
 {
     None,
-    TimeElapsed,
+    TimeUpdate,
+    CreditUpdate,
     CreditOverTime,
     ItemObtained,
     ItemOption,
     Spawn,
     EnemyDefeated,
-    AreaReached,
     OnAttackBegin,
     OnAttackFinish,
     OnTakeDamage,

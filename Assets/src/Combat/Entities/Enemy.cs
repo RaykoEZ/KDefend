@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.AI;
 using Curry.Game;
 using System;
+public interface IMovement 
+{
+    void StartMoving();
+    void StopMoving();
+}
 // base enemy behaviour
 public delegate void OnEnemyUpdate(Enemy toUpdate);
 [RequireComponent(typeof(NavMeshAgent))]
@@ -13,11 +17,9 @@ public class Enemy : BaseCharacter, IHitsEntity
     [SerializeField] int m_contactDamage = default;
     [Range(0f, 1f)]
     [SerializeField] float m_hitStunMod = default;
-    [Range(-100, 100)]
-    [SerializeField] protected int m_threatIncrease = default;
     [SerializeField] protected EnemyMovement m_movementHandler = default;
-    public int ThreatIncrease => m_threatIncrease;
     public EnemyMovement Navigator => m_movementHandler;
+    public override IMovement Movement => m_movementHandler;
     public EnemyState State => 
         new EnemyState { 
             EnemyIndex = m_type, 
@@ -41,12 +43,6 @@ public class Enemy : BaseCharacter, IHitsEntity
         m_movementHandler?.ResetTarget();
         (m_attackHandler as NpcAttackHandler)?.ResetTarget();
     }
-    public override void TakeDamage(int baseDamage)
-    {
-        // the lower the enemy hp, the greater the stun duration
-        StartCoroutine(HitStun());
-        base.TakeDamage(baseDamage);
-    }
     protected override void OnDefeat()
     {
         StartCoroutine(Defeat_Internal());
@@ -68,26 +64,11 @@ public class Enemy : BaseCharacter, IHitsEntity
             poolable?.ReturnToPool();
         }
     }
-    protected virtual IEnumerator HitStun() 
-    {
-        if (Mathf.Approximately(m_hitStunMod, 0f)) yield break;
-        float stunDuration = UnityEngine.Random.Range(0.1f, 1f);
-        m_movementHandler?.StopMoving();
-        m_attackHandler.KeepFiring = false;
-        yield return new WaitForSeconds(stunDuration * m_hitStunMod);
-        if (m_current.Health <= 0) yield break;
-        m_movementHandler?.StartMoving();
-        NpcAttackHandler attack = m_attackHandler as NpcAttackHandler;
-        if (attack.AutoAttack) 
-        {
-            m_attackHandler?.UseWeapon();
-        }
-    }
-    // contact damage
     public virtual void OnHit<T>(T hit) where T : BaseEntity
     {
-        if ( hit is Player)
+        if (hit is Player)
         {
+            // contact damage
             hit?.TakeDamage(m_contactDamage);
         }
         Vector2 dir = hit.transform.position - transform.position;
@@ -95,7 +76,6 @@ public class Enemy : BaseCharacter, IHitsEntity
         {
             push.Push(dir.normalized, 0.25f);
             Push(-dir.normalized, 0.25f);
-            StartCoroutine(HitStun());
         }
     }
     internal void ResetTarget()

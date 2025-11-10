@@ -25,6 +25,10 @@ public class NpcAttackHandler : AttackHandler
             m_keepFiring = false;
         }
     }
+    public void SetTargetDetectAll(bool detectAll) 
+    {
+        m_targeting.CurrentlyDetectAll = detectAll;
+    }
     public void UpdateTarget(BaseEntity newTarget)
     {
         if (newTarget == null) return;

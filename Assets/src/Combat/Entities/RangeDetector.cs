@@ -10,8 +10,12 @@ public class RangeDetector : MonoBehaviour
     [SerializeField] UnityEvent<BaseEntity> m_targetSighted = default;
     [SerializeField] UnityEvent m_targetLost = default;
     List<BaseEntity> m_targetsInView = new List<BaseEntity>();
-    void Start()
+    bool m_currentlyDetectAll = false;
+    public bool CurrentlyDetectAll { get => m_currentlyDetectAll; set => m_currentlyDetectAll = value; }
+
+    void OnEnable()
     {
+        m_currentlyDetectAll = m_detectAnyEntity;
     }
     public bool IsInRange(BaseEntity target) 
     {
@@ -27,7 +31,7 @@ public class RangeDetector : MonoBehaviour
         // check for duplicate collision reporting and whether it's a player
         bool check = (collision.attachedRigidbody.TryGetComponent(out Player entering)) &&
              !IsInRange(entering);
-        if (m_detectAnyEntity || check)
+        if (m_currentlyDetectAll || check)
         {
             m_targetsInView.Add(entering);
             m_targetSighted?.Invoke(entering);

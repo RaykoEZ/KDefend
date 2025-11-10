@@ -11,6 +11,8 @@ public interface IPushable
 public class BaseCharacter : BaseEntity , IPushable
 {
     [SerializeField] protected AttackHandler m_attackHandler = default;
+    public virtual IMovement Movement { get; }
+    public virtual AttackHandler AttackHandle => m_attackHandler;
     public void Push(Vector2 dir, float power)
     {
         if (Mathf.Approximately(CurrentStats.Property.KnockbackModifier, 0f)) return;

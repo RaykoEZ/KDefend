@@ -2,7 +2,7 @@
 using Curry.Events;
 public delegate void KDGameEventTrigger(object sender, KDEventInfo args);
 // handles game event triggers with code only
-internal class InternalEventHandler
+internal class KDEventHandler
 {
     // gloabl event callbacks
     static Dictionary<GameEventTriggerType, KDGameEventTrigger> s_globalEvents = new Dictionary<GameEventTriggerType, KDGameEventTrigger>();
