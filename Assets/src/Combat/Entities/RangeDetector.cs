@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+public delegate void OnRangeUpdate(BaseEntity target);
 // Detects target entity in sight
 [RequireComponent(typeof(Collider2D))]
 public class RangeDetector : MonoBehaviour
@@ -11,7 +11,10 @@ public class RangeDetector : MonoBehaviour
     [SerializeField] UnityEvent m_targetLost = default;
     List<BaseEntity> m_targetsInView = new List<BaseEntity>();
     bool m_currentlyDetectAll = false;
+    public event OnRangeUpdate OnEnter;
+    public event OnRangeUpdate OnExit;
     public bool CurrentlyDetectAll { get => m_currentlyDetectAll; set => m_currentlyDetectAll = value; }
+    public IReadOnlyList<BaseEntity> TargetsInView => m_targetsInView;
 
     void OnEnable()
     {
@@ -40,7 +43,7 @@ public class RangeDetector : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.attachedRigidbody == null) return;
-        if (collision.attachedRigidbody.TryGetComponent(out Player exiting)) 
+        if (collision.attachedRigidbody.TryGetComponent(out BaseEntity exiting)) 
         {
             m_targetLost?.Invoke();
             m_targetsInView.Remove(exiting);

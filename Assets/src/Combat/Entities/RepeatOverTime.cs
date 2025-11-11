@@ -15,23 +15,30 @@ public class RepeatOverTime : EffectModule, IEffectOverTime<BaseEntity>
     /// </summary>
     [SerializeField] int m_numTicks = default;
     public float TimeInterval => m_waitSecondsPerTick;
-    public override void Activate(BaseEntity user)
+    /// <summary>
+    /// Start Effect cycle
+    /// </summary>
+    /// <param name="target"></param> User of this effect module.
+    public override void Activate(BaseEntity target)
     {
-        base.Activate(user);
-        StartCoroutine(OnTick(user));
+        base.Activate(target);
+        StartCoroutine(OnTick(target));
     }
     public override void Deactivate(BaseEntity target)
     {
         base.Deactivate(target);
         StopAllCoroutines();
     }
-    public IEnumerator OnTick(BaseEntity user)
+    public virtual IEnumerator OnTick(BaseEntity target)
     {
-        for (int i = 0; i < m_numTicks; i++)
+        int i = 0;
+        while (Activated)
         {
-            m_triggerPerTick?.Invoke(user);
+            // check if we repeat, tick limit < 0 means unlimited repeats
+            if (m_numTicks >= 0 && i >= m_numTicks) yield break;
+            m_triggerPerTick?.Invoke(target);
             yield return new WaitForSeconds(m_waitSecondsPerTick);
-            i++;
+            i++;          
         }
     }
 }
