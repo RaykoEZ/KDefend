@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEditor.Rendering.CameraUI;
 public delegate void OnRangeUpdate(BaseEntity target);
 // Detects target entity in sight
 [RequireComponent(typeof(Collider2D))]
@@ -38,6 +39,7 @@ public class RangeDetector : MonoBehaviour
         {
             m_targetsInView.Add(entering);
             m_targetSighted?.Invoke(entering);
+            OnEnter?.Invoke(entering);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -47,6 +49,7 @@ public class RangeDetector : MonoBehaviour
         {
             m_targetLost?.Invoke();
             m_targetsInView.Remove(exiting);
+            OnExit?.Invoke(exiting);
         }
     }
 }

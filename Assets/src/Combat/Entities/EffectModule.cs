@@ -3,9 +3,9 @@ using UnityEngine.Events;
 // Script for generic item/weapon effects
 public abstract class EffectModule : MonoBehaviour 
 {
-    [SerializeField] UnityEvent<BaseEntity> m_onActivate = default;
-    [SerializeField] UnityEvent<BaseEntity> m_onDeactivate = default;
-    bool m_activated = false;
+    [SerializeField] protected UnityEvent<BaseEntity> m_onActivate = default;
+    [SerializeField] protected UnityEvent<BaseEntity> m_onDeactivate = default;
+    protected bool m_activated = false;
     protected bool Activated { get => m_activated; }
     public virtual void Activate(BaseEntity target) 
     {
