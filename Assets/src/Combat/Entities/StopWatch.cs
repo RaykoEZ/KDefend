@@ -33,26 +33,6 @@ public class SniperInsignia : Collectible
         m_currentDamage = m_baseDamage;
     }
 }
-/// <summary>
-/// Lv:
-/// 1. Attract Enemies in range, 10% chance to stun in range.
-/// 2. +10% chance to stun
-/// 3. 10% chance to charm enemies (attack enemies too)
-/// </summary>
-public class NeverIdol : Collectible 
-{
-    [SerializeField] int m_attackInterval = default;
-
-
-    // on obtain: creat field of attraction, damage over time & chance to stun
-    // on rank up, increase chance to stun, damage, field size
-    // on max rank, replace stun to berserk (NPC attack indiscriminately)
-    public override void UseItem()
-    {
-        base.UseItem();
-
-    }
-}
 // Screen-wide wipe effect, gain all credit from killed targets, progress to next day
 // Rewind game day to Monday,
 // Full Access: Target self to Remove self from game

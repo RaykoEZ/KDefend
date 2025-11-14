@@ -1,21 +1,22 @@
-﻿using Curry.Util;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Enemy), typeof(NavMeshAgent))]
-public class EnemyMovement : MonoBehaviour, IMovement
+// for controlling NPC movement with navigation system and position tracking
+[RequireComponent(typeof(NavMeshAgent))]
+public class NpcMovement : MonoBehaviour, IMovement
 {
     [SerializeField] protected bool m_moveOnsight = default;
-    [SerializeField] protected bool m_ignorePlayerTracking = default;
+    [SerializeField] protected bool m_useDirectDestination = default;
     [SerializeField] TargetTracker m_tracker = default;
     protected float m_speedVariant;
+    // target node position of the next destination (not the chase target)
     protected Vector2 m_currentDestination;
     // use this when moving while ignoring player position tracking
     private Vector2 m_directDestination;
     Coroutine m_movement;
     public bool MoveOnsight { get => m_moveOnsight; set => m_moveOnsight = value; }
-    public bool IgnorePlayerTracking { get => m_ignorePlayerTracking; set => m_ignorePlayerTracking = value; }
+    public bool UseDirectDestination { get => m_useDirectDestination; set => m_useDirectDestination = value; }
     public Vector2 DirectDestination { get => m_directDestination; set => m_directDestination = value; }
     public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
     void FixedUpdate()
@@ -68,7 +69,7 @@ public class EnemyMovement : MonoBehaviour, IMovement
     // move to a position, reset to not chase player
     public void MoveToPosition(Vector2 newTarget) 
     {
-        m_ignorePlayerTracking = true;
+        m_useDirectDestination = true;
         m_currentDestination = newTarget;
         if (m_movement == null) 
         {
@@ -110,9 +111,9 @@ public class EnemyMovement : MonoBehaviour, IMovement
     }
     protected Vector2 GetDestination() 
     {
-        if (IgnorePlayerTracking) return DirectDestination;
+        if (UseDirectDestination) return DirectDestination;
 
-        Vector2 ret = m_tracker.IsReady ? m_tracker.PrecisePosition : PlayerMovement.PlayerPosition;
+        Vector2 ret = m_tracker.IsReady ? m_tracker.PrecisePosition : transform.position;
         return ret;
     }
     protected virtual IEnumerator Standby(float duration)

@@ -5,7 +5,7 @@ public class InitTester : MonoBehaviour
     [SerializeField] protected EntityProperty m_initStats = default;
     [SerializeField] protected Transform m_location = default;
     [SerializeField] protected BaseEntity m_initTarget = default;
-    [SerializeField] protected EnemyMovement m_movement = default;
+    [SerializeField] protected NpcMovement m_movement = default;
     void Start()
     {
         EntityState toSet = new EntityState {

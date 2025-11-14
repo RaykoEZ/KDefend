@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+// output position of tracked entity
 [RequireComponent(typeof(NavMeshAgent))]
 public class TargetTracker : MonoBehaviour 
 {
@@ -16,7 +17,7 @@ public class TargetTracker : MonoBehaviour
     Coroutine m_teleportCooldown;
     public bool IsReady => m_target != null;
     public Vector2 PrecisePosition => m_precisePosition;
-    public Vector2 DefaultTarget { get => m_defaultTarget; }
+    public Vector2 DefaultTarget { get => m_defaultTarget; set => m_defaultTarget = value; }
     public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
     void OnEnable()
     {
@@ -29,12 +30,12 @@ public class TargetTracker : MonoBehaviour
         {
             // update current target destination
             m_precisePosition = m_target.transform.position;
-            float directDist = Vector2.Distance(PlayerMovement.PlayerPosition, transform.position);
+            float directDist = Vector2.Distance(m_precisePosition, transform.position);
             // try teleport near player if too far from destimation
             if (Navigator.remainingDistance > m_warpDistanceThreshold && 
                 directDist > m_warpDistanceThreshold)
             {
-                TryTeleportNearPlayer();
+                TryTeleportNearTarget();
             }
             yield return new WaitForSeconds(m_updateTimeInterval);
         }
@@ -44,7 +45,7 @@ public class TargetTracker : MonoBehaviour
         yield return new WaitForSeconds(m_teleportCooldownTime);
         m_teleportCooldown = null;
     }
-    void TryTeleportNearPlayer()
+    void TryTeleportNearTarget()
     {
         if (m_teleportCooldown != null) return;
         if (TryGetWarpPosition(out Vector3 result))

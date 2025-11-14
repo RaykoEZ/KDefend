@@ -13,7 +13,7 @@ public class SummonArena : ActiveAbility
     {
         spawned.InitTarget(spawned);
         // set spawned target to move towards arena center
-        spawned.Navigator.IgnorePlayerTracking = true;
+        spawned.Navigator.UseDirectDestination = true;
         spawned.Navigator.DirectDestination = transform.position;
         spawned.Navigator.StartMoving();
     }

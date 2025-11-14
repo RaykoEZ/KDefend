@@ -15,8 +15,8 @@ public class Enemy : BaseCharacter, IHitsEntity
 {
     [NonSerialized] int m_type = default;
     [SerializeField] int m_contactDamage = default;
-    [SerializeField] protected EnemyMovement m_movementHandler = default;
-    public EnemyMovement Navigator => m_movementHandler;
+    [SerializeField] protected NpcMovement m_movementHandler = default;
+    public NpcMovement Navigator => m_movementHandler;
     public override IMovement Movement => m_movementHandler;
     public EnemyState State => 
         new EnemyState { 

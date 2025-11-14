@@ -38,9 +38,6 @@ public class BaseEntity : MonoBehaviour
         };
     }
     public float HpRatio => CurrentStats.Property.Health / (float)m_base.Health;
-    protected virtual void Awake()
-    {
-    }
     public virtual void OnHit(Collider2D collision)
     {
         if (collision.attachedRigidbody == null) return;
