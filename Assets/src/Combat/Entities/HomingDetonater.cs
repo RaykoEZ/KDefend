@@ -4,16 +4,15 @@ using UnityEngine.Events;
 // Script for a guided object that triggers a detonation effect
 public class HomingDetonater : MonoBehaviour, IHitsEntity
 {
-    [Range(0f, 30f)]
-    [SerializeField] float m_secondsBeforeDetonation = default;
+    [SerializeField] RangeDetector m_targeting = default;
     [SerializeField] RangeDetector m_blastRadius = default;
     [SerializeField] NpcMovement m_movement = default;
     [SerializeField] UnityEvent<BaseEntity> m_onDetonate = default;
     bool m_isActive = false;
     BaseEntity m_targetRef;
-    public void Init()
+    public void InitAttack()
     {
-        var targets = m_blastRadius.TargetsInView;
+        var targets = m_targeting.TargetsInView;
         if (targets.Count > 0) 
         { 
             int i = Random.Range(0, targets.Count - 1);
@@ -25,7 +24,6 @@ public class HomingDetonater : MonoBehaviour, IHitsEntity
         m_isActive = true;
         m_targetRef = target;
         m_movement?.Init(m_targetRef);
-        StartCoroutine(DetonateTimer());
     }
     // Finds targets from blast radius and deal with the effects
     public IEnumerator Detonate() 
@@ -39,11 +37,6 @@ public class HomingDetonater : MonoBehaviour, IHitsEntity
         {
             m_onDetonate?.Invoke(item);
         }
-    }
-    IEnumerator DetonateTimer() 
-    { 
-        yield return new WaitForSeconds(m_secondsBeforeDetonation);
-        yield return Detonate();
     }
     public void OnHit<T>(T hit) where T : BaseEntity
     {

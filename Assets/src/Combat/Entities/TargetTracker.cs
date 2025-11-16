@@ -56,7 +56,8 @@ public class TargetTracker : MonoBehaviour
     }
     bool TryGetWarpPosition(out Vector3 warpPosition) 
     {
-        return m_formation.TryGetFormationPosition(m_target, out warpPosition);
+        warpPosition = m_target.transform.position;
+        return m_formation == null? false : m_formation.TryGetFormationPosition(m_target, out warpPosition);
     }
     public void UpdateTarget(BaseEntity newTarget)
     {
