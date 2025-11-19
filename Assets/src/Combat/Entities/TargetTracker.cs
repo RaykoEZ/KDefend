@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.Rendering.CameraUI;
 // output position of tracked entity
 [RequireComponent(typeof(NavMeshAgent))]
 public class TargetTracker : MonoBehaviour 

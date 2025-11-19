@@ -13,11 +13,11 @@ public class NpcMovement : MonoBehaviour, IMovement
     // target node position of the next destination (not the chase target)
     protected Vector2 m_currentDestination;
     // use this when moving while ignoring player position tracking
-    private Vector2 m_directDestination;
+    private Vector2 m_origin;
     Coroutine m_movement;
     public bool MoveOnsight { get => m_moveOnsight; set => m_moveOnsight = value; }
     public bool UseDirectDestination { get => m_useDirectDestination; set => m_useDirectDestination = value; }
-    public Vector2 DirectDestination { get => m_directDestination; set => m_directDestination = value; }
+    public Vector2 Origin { get => m_origin; set => m_origin = value; }
     public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
     void FixedUpdate()
     {
@@ -28,7 +28,7 @@ public class NpcMovement : MonoBehaviour, IMovement
     }
     void OnEnable()
     {
-        m_directDestination = transform.position;
+        m_origin = transform.position;
         SetupNavigation();
     }
     void SetupNavigation()
@@ -44,6 +44,7 @@ public class NpcMovement : MonoBehaviour, IMovement
     {
         m_speedVariant = Random.Range(0.75f, 1.25f);
         m_tracker?.UpdateTarget(target);
+        UpdateTarget(target);
     }
     public void StartMoving()
     {
@@ -80,6 +81,7 @@ public class NpcMovement : MonoBehaviour, IMovement
     {
         if (newTarget == null) return;
         m_tracker?.UpdateTarget(newTarget);
+        m_currentDestination = newTarget.transform.position;
         if (m_moveOnsight)
         {
             // if not moving, start chasing
@@ -111,7 +113,7 @@ public class NpcMovement : MonoBehaviour, IMovement
     }
     protected Vector2 GetDestination() 
     {
-        if (UseDirectDestination) return DirectDestination;
+        if (UseDirectDestination) return m_currentDestination;
 
         Vector2 ret = m_tracker.IsReady ? m_tracker.PrecisePosition : transform.position;
         return ret;

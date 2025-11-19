@@ -204,8 +204,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2235419855288137392}
+  m_Children: []
   m_Father: {fileID: 7490977115494007394}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -231,7 +230,7 @@ MonoBehaviour:
   m_onDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_damage: 1000
+  m_damage: 100
 --- !u!114 &3284058285656298367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,6 +306,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7133503223552699957}
+  - {fileID: 2235419855288137392}
   - {fileID: 8360598796868870946}
   - {fileID: 7496380718760424567}
   m_Father: {fileID: 0}
@@ -510,7 +510,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8360598796868870946}
+  m_Father: {fileID: 7490977115494007394}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -622,7 +622,19 @@ MonoBehaviour:
   m_detectAnyEntity: 1
   m_targetSighted:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3841265269396710512}
+        m_TargetAssemblyTypeName: HomingDetonater, Assembly-CSharp
+        m_MethodName: Detonate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_targetLost:
     m_PersistentCalls:
       m_Calls: []

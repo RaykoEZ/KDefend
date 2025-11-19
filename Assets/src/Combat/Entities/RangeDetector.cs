@@ -33,9 +33,9 @@ public class RangeDetector : MonoBehaviour
     {
         if (collision.attachedRigidbody == null) return;
         // check for duplicate collision reporting and whether it's a player
-        bool check = (collision.attachedRigidbody.TryGetComponent(out Player entering)) &&
-             !IsInRange(entering);
-        if (m_currentlyDetectAll || check)
+        bool check = (collision.attachedRigidbody.TryGetComponent(out BaseEntity entering)) &&
+            entering is Player;
+        if ((m_currentlyDetectAll || check) && !IsInRange(entering))
         {
             m_targetsInView.Add(entering);
             m_targetSighted?.Invoke(entering);
