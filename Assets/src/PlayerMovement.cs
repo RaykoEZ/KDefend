@@ -1,5 +1,4 @@
 using Curry.Events;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour, IMovement
@@ -11,7 +10,10 @@ public class PlayerMovement : MonoBehaviour, IMovement
     static Vector2 s_playerPosition = Vector2.zero;
     public static Vector2 PlayerMovementDirection => s_moveDirection;
     public static Vector2 PlayerPosition => s_playerPosition;
+    public Vector2 DirectionNormalized => PlayerMovementDirection;
+    public Vector2 Position => PlayerPosition;
     Rigidbody2D RB2D => GetComponent<Rigidbody2D>();
+
     void OnEnable()
     {
         KDEventHandler.ListenToGlobal(GameEventTriggerType.PauseGame, OnPause);

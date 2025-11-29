@@ -5,6 +5,9 @@ using Curry.Game;
 using System;
 public interface IMovement 
 {
+    // normalized direction
+    Vector2 DirectionNormalized { get; }
+    Vector2 Position { get; }
     void StartMoving();
     void StopMoving();
 }

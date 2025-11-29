@@ -19,6 +19,10 @@ public class NpcMovement : MonoBehaviour, IMovement
     public bool UseDirectDestination { get => m_useDirectDestination; set => m_useDirectDestination = value; }
     public Vector2 Origin { get => m_origin; set => m_origin = value; }
     public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
+
+    public Vector2 DirectionNormalized => (Navigator.nextPosition - transform.position).normalized;
+    public Vector2 Position => transform.position;
+
     void FixedUpdate()
     {
         if (m_movement == null && m_moveOnsight) 
