@@ -1,22 +1,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-[RequireComponent(typeof(Rigidbody2D), typeof(IMovement))]
+// Dash action - an impulse towards the direction of travel
+[RequireComponent(typeof(BaseEntity), typeof(Rigidbody2D), typeof(IMovement))]
 public class Dash : ActiveAbility
 {
-    [SerializeField] bool m_isPlayer = default;
     [Range(0.1f, 100f)]
-    [SerializeField] float m_dashStrength = default;
-    Vector2 m_direction = Vector2.zero;
-    protected Rigidbody2D RB2D => GetComponent<Rigidbody2D>();
+    [SerializeField] protected float m_dashStrength = default;
+    protected Vector2 m_direction = Vector2.zero;
+    protected BaseEntity User => GetComponent<BaseEntity>();
+    protected Rigidbody2D RB => GetComponent<Rigidbody2D>();
     protected IMovement MovementHandle => GetComponent<IMovement>();
-    void FixedUpdate()
-    {
-        if (m_isPlayer) 
-        { 
-            TrackPlayerCursor();
-        }
-    }
     public void TrackPlayerCursor() 
     {
         Vector2 world = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
@@ -26,12 +19,8 @@ public class Dash : ActiveAbility
     protected override void Effect_Internal()
     {
         // get NPC direction if they are dashing
-        if (!m_isPlayer) 
-        { 
-            m_direction = MovementHandle.DirectionNormalized;
-        }
-        Debug.Log("dash");
+        m_direction = MovementHandle.DirectionNormalized;
         // * 100f as base multiplier
-        RB2D?.AddForce(m_direction * m_dashStrength * 100f * Time.fixedDeltaTime, ForceMode2D.Impulse);
+        RB?.AddForce(m_direction * m_dashStrength * 100f * Time.fixedDeltaTime, ForceMode2D.Impulse);
     }
 }

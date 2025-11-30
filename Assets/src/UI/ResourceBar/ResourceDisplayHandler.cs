@@ -9,6 +9,9 @@ namespace Curry.UI
     {
         [SerializeField] ResourceBar m_current = default;
         [SerializeField] ResourceBar m_diff = default;
+        public bool IsAtMax => m_current.IsAtMax;
+        public float Current => m_current.Current;
+        public float Max => m_current.Max;
         float m_previousValue;
         bool m_onPreview = false;
         public void SetCurrentValue(float val, bool instant = false) 

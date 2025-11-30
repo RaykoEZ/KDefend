@@ -15,7 +15,7 @@ public abstract class ActiveAbility : MonoBehaviour
     protected event AbilityUpdate OnChannelInterrupt;
     public void TryUse() 
     {
-        if (m_onCooldown != null) return;
+        if (!CanUse()) return;
         m_onCooldown = StartCoroutine(Cooldown(m_cooldownTime));
         if (m_channeling != null) 
         {
@@ -24,6 +24,7 @@ public abstract class ActiveAbility : MonoBehaviour
         }
         Effect_Internal();
     }
+    public virtual bool CanUse() => m_onCooldown == null;
     protected abstract void Effect_Internal();
     protected IEnumerator Cooldown(float duration) 
     {

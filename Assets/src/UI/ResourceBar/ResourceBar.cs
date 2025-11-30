@@ -16,6 +16,7 @@ namespace Curry.UI
         [SerializeField] protected bool m_smoothValueChange = default;
         public event OnChargeFinish OnFinish;
         public float Current => m_result.value;
+        public bool IsAtMax => Mathf.Approximately(m_result.normalizedValue, 1f);
         public float Max => m_result.maxValue;
         bool m_changeInProgress = false;
         protected float m_currentTargetVal = 0f;
@@ -52,6 +53,9 @@ namespace Curry.UI
                 t = elapsedTime / m_transitionDuration;
                 yield return new WaitForEndOfFrame();
             }
+            // set values to target when finished due to value & delta precsion 
+            m_result.value = m_currentTargetVal;
+            m_resultFill.color = m_warningGradient.Evaluate(m_result.normalizedValue);
             m_changeInProgress = false;
             OnFinish?.Invoke();
         }
