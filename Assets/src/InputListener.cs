@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-
 public class InputListener : MonoBehaviour 
 {
     [SerializeField] TemporaryInputAction m_inputToListen = default;

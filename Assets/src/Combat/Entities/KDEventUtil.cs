@@ -14,7 +14,7 @@ internal static class KDEventUtil
             new KDEventInfo(raiseFlag, GameEventTriggerType.PauseGame, args));
     }
     // pause game timer
-    public static void PauseTimer(object sender, bool gameActive, KD_StaticEventFlags raiseFlag = KD_StaticEventFlags.None)
+    public static void Pauseimer(object sender, bool gameActive, KD_StaticEventFlags raiseFlag = KD_StaticEventFlags.None)
     {
         Dictionary<string, object> args = new Dictionary<string, object> { { "isOn", gameActive } };
         KDEventHandler.TriggerGlobalEvent(sender,

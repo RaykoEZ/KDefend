@@ -32,16 +32,45 @@ MonoBehaviour:
         m_EditorAssetChanged: 0
     SimulationTime: 0
     KDGameState:
-      Timer: 1
+      Timer: 600
       StaticFlags: 0
       PlayerValue:
         Property:
           Health: 100
           KnockbackModifier: 0.5
           MoveSpeed: 120
-        Position: {x: -583, y: 1344}
+          AtkModifier: 0
+        Position: {x: 49043, y: -546}
       HostileStates: []
       HeldItems: []
-      ActiveDeliveries: []
+      ShopStates:
+      - m_shopOperation: 0
+        ItemId: sh1_hp
+        Price: 50
+        BuyLimit: 1
+      - m_shopOperation: 0
+        ItemId: sh2_spd
+        Price: 250
+        BuyLimit: 3
+      - m_shopOperation: 2
+        ItemId: sh3_atk
+        Price: 500
+        BuyLimit: 3
+      - m_shopOperation: 2
+        ItemId: sh4_hp
+        Price: 100
+        BuyLimit: 3
+      - m_shopOperation: 2
+        ItemId: sh5_kb
+        Price: 1500
+        BuyLimit: 1
+      - m_shopOperation: 2
+        ItemId: sh6_shoot
+        Price: 2000
+        BuyLimit: 3
+      - m_shopOperation: 2
+        ItemId: sh12_idol
+        Price: 5000
+        BuyLimit: 1
     HeldThoughts: []
     ChatHistories: []

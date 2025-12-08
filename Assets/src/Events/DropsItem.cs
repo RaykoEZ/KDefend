@@ -13,6 +13,8 @@ public class DropsItem : MonoBehaviour
         // get drops from drop list
         ItemAsset drop = m_dropList.GetWeightedDrop();
         // spawn
-        Item.SpawnItem(drop, transform.parent.parent, transform.position);
+        var instance = Item.SpawnItem(drop, transform.parent, transform.localPosition);
+        //set instance child order behind the dropper, to display on top of dropper
+        instance.transform.SetSiblingIndex(transform.GetSiblingIndex() - 1);
     }
 }

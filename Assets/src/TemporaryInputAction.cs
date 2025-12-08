@@ -7,7 +7,7 @@ using System;
 [Serializable]
 public class TemporaryInputAction 
 {
-    [SerializeField] bool m_autoDisable = default;
+    [SerializeField] bool m_disableOnTrigger = default;
     [SerializeField] InputActionReference m_inputTarget = default;
     [SerializeField] UnityEvent<InputAction.CallbackContext> m_triggerOnAction;
     [SerializeField] UnityEvent m_onInputEnable = default;
@@ -29,7 +29,7 @@ public class TemporaryInputAction
     }
     protected virtual void Trigger(InputAction.CallbackContext c) 
     {
-        if (m_autoDisable) 
+        if (m_disableOnTrigger) 
         {
             Disable();
         }
