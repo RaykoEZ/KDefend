@@ -12,6 +12,7 @@ public class PlayerCreditManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI m_display = default;
     [SerializeField] TextMeshProUGUI m_animate = default;
     [SerializeField] UnityEvent m_onCreditUpdate = default;
+    [SerializeField] UnityEvent m_onCreditTargetReached = default;
     Dictionary<string, CreditChangeOverTime> m_changesOverTime = new Dictionary<string, CreditChangeOverTime>();
     public int CurrentCredit => m_player.CurrentStats.Property.Health;
     public float TargetCredit { get => m_targetCredit; set => m_targetCredit = value; }
@@ -39,9 +40,10 @@ public class PlayerCreditManager : MonoBehaviour
         m_animate.text = $"{sign}{change}";
         m_onCreditUpdate?.Invoke();
         m_display.text = $"{CurrentCredit.ToString()} / {m_targetCredit}";
+        // when credit target reached, call level event
         if (CurrentCredit >= m_targetCredit) 
-        { 
-            
+        {
+            m_onCreditTargetReached?.Invoke();
         }
     }
     public void RewardPoints(int add) 

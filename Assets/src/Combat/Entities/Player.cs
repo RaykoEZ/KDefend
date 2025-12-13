@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 public class Player : BaseCharacter 
 {
     [SerializeField] InventoryManager m_inventory = default;

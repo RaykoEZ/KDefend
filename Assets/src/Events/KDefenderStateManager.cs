@@ -1,8 +1,27 @@
-﻿using System.Collections.Generic;
-using Curry.Game;
+﻿using System;
+using System.Collections.Generic;
 using Curry.Events;
+using Curry.Game;
 using UnityEngine;
 using UnityEngine.Events;
+
+public class DayCounter
+{
+    // use this to display short day text with dayOfWeek index
+    public static string[] s_dayOfWeekText_Short = new string[]
+    {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    DayOfWeek m_current;
+    public DayOfWeek Current { get => m_current; }
+    public void SetDay(DayOfWeek current)
+    {
+        m_current = current;
+    }
+    public void NextDay()
+    {
+        int day = (int)m_current % 7;
+        m_current = (DayOfWeek)day;
+    }
+}
 // initialises and saves game state
 //TODO: Delay Delivery features for now
 public class KDefenderStateManager : MonoBehaviour 
@@ -19,9 +38,12 @@ public class KDefenderStateManager : MonoBehaviour
     [SerializeField] InventoryManager m_inventoryManager = default;
     [SerializeField] GameTimer m_timer = default;
     [SerializeField] UnityEvent m_onGameOver = default;
+    [SerializeField] UnityEvent<DayOfWeek> m_onNewDay = default;
     static int s_currentLevel = 0;
     static bool s_isPaused = false;
+    DayCounter m_dayOfWeek = new DayCounter();
     public static int CurrentLevel { get => s_currentLevel; }
+    public DayOfWeek CurrentDayOfWeek => m_dayOfWeek.Current;
     public static bool IsPaused { get => s_isPaused; }
 
     // As an alternate game mode
@@ -33,6 +55,7 @@ public class KDefenderStateManager : MonoBehaviour
         // set player state
         m_player?.Init(state.PlayerValue);
         m_enemy?.Init(state.HostileStates);
+        SetDayOfWeek(state.DayOfWeek);
         m_inventoryManager?.Init(state.HeldItems);
         m_shopPoolUpdater?.InitPool(state.ShopStates);
         m_staticEvents.SetFlags(state.StaticFlags);
@@ -44,6 +67,7 @@ public class KDefenderStateManager : MonoBehaviour
         var newState = new KDefenderGameState
         {
             Timer = m_timer.SecondsElapsed,
+            DayOfWeek = m_dayOfWeek.Current,
             StaticFlags = m_staticEvents.CurrentFlags,
             PlayerValue = m_player.CurrentStats,
             HostileStates = m_enemy.GetEnemyStates(),
@@ -60,21 +84,18 @@ public class KDefenderStateManager : MonoBehaviour
     public void PauseGame() 
     {
         s_isPaused = !s_isPaused;
-        Time.timeScale = s_isPaused? 0f : 1f; 
-        
+        Time.timeScale = s_isPaused? 0f : 1f;    
     }
-    // trigger intel recovery protocol on enemy side
-    public void OnIntelPickup(EventInfo info)
+    public void OnNextDay() 
+    { 
+        m_dayOfWeek?.NextDay();
+        UpdateSave();
+        m_onNewDay?.Invoke(CurrentDayOfWeek);
+    }
+    public void SetDayOfWeek(DayOfWeek newDay) 
     {
-        
-        if (info == null || info.Payload == null) return;
-        bool spawn = info.Payload.TryGetValue("wave", out object t1) &&
-            t1 is SpawnWave;
-        if (spawn)
-        {
-            // spawn elite/boss wave
-            m_wave?.SpawnWave(t1 as SpawnWave);
-            // Spawn intel decrypter
-        }
+        m_dayOfWeek?.SetDay(newDay);
+        UpdateSave();
+        m_onNewDay?.Invoke(CurrentDayOfWeek);
     }
 }

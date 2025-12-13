@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public struct KDefenderGameState
 {
     public int Timer;
+    // Player's current workday
+    public DayOfWeek DayOfWeek;
     public KD_StaticEventFlags StaticFlags;
     // State of player entities
     public EntityState PlayerValue;
@@ -16,6 +18,7 @@ public struct KDefenderGameState
     public KDefenderGameState(KDefenderGameState copy) 
     {
         Timer = copy.Timer;
+        DayOfWeek = copy.DayOfWeek;
         StaticFlags = copy.StaticFlags;
         PlayerValue = copy.PlayerValue;
         HostileStates = copy.HostileStates;
