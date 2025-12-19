@@ -59,6 +59,7 @@ public class KDefenderStateManager : MonoBehaviour
         m_inventoryManager?.Init(state.HeldItems);
         m_shopPoolUpdater?.InitPool(state.ShopStates);
         m_staticEvents.SetFlags(state.StaticFlags);
+        m_timer.SecondsLeft = state.SecondsLeft;
         m_timer.StartTimer();
     }
     // get current states from managers to save latest game state
@@ -66,7 +67,7 @@ public class KDefenderStateManager : MonoBehaviour
     {
         var newState = new KDefenderGameState
         {
-            Timer = m_timer.SecondsElapsed,
+            SecondsLeft = m_timer.SecondsLeft,
             DayOfWeek = m_dayOfWeek.Current,
             StaticFlags = m_staticEvents.CurrentFlags,
             PlayerValue = m_player.CurrentStats,

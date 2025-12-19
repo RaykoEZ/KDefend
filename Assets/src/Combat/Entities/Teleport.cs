@@ -6,5 +6,6 @@ public class Teleport : EffectModule
     public override void Activate(BaseEntity target)
     {
         base.Activate(target);
+        target.transform.position = m_destination.position;
     }
 }

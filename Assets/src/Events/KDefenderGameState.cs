@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [Serializable]
 public struct KDefenderGameState
 {
-    public int Timer;
+    public int SecondsLeft;
     // Player's current workday
     public DayOfWeek DayOfWeek;
     public KD_StaticEventFlags StaticFlags;
@@ -17,7 +17,7 @@ public struct KDefenderGameState
     public List<ShopItemState> ShopStates;
     public KDefenderGameState(KDefenderGameState copy) 
     {
-        Timer = copy.Timer;
+        SecondsLeft = copy.SecondsLeft;
         DayOfWeek = copy.DayOfWeek;
         StaticFlags = copy.StaticFlags;
         PlayerValue = copy.PlayerValue;

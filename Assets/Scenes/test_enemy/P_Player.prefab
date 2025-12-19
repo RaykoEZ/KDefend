@@ -919,7 +919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be1a4c78b7d139640b6426c8897d79d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDash
-  m_cooldownTime: 0.5
+  m_cooldownTime: 0.4
   m_hitsToEnd: 0
   m_dashStrength: 70
   m_dashCounter: {fileID: 0}

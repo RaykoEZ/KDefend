@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd96b0c2b3bc5443b3038673514d60f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dropRate: 0.25
+  m_dropRate: 1
   m_dropList: {fileID: 11400000, guid: 2176c5941e5f52b44b1af0534a57e06a, type: 2}
 --- !u!114 &143691182919910633
 MonoBehaviour:
@@ -334,6 +334,7 @@ MonoBehaviour:
     Health: 150
     KnockbackModifier: 0
     MoveSpeed: 70
+    AtkModifier: 0
   m_onDefeat:
     m_PersistentCalls:
       m_Calls:
@@ -378,8 +379,6 @@ MonoBehaviour:
         m_CallState: 2
   m_attackHandler: {fileID: 1492414745406935436}
   m_contactDamage: 2
-  m_hitStunMod: 0
-  m_threatIncrease: 20
   m_movementHandler: {fileID: 6083768987087643707}
 --- !u!114 &5398323281690144578
 MonoBehaviour:
@@ -424,6 +423,7 @@ MonoBehaviour:
     Health: 800
     KnockbackModifier: 0
     MoveSpeed: 80
+    AtkModifier: 0
   m_location: {fileID: 0}
   m_initTarget: {fileID: 143691182919910633}
   m_movement: {fileID: 6083768987087643707}
@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveOnsight: 1
-  m_ignorePlayerTracking: 0
+  m_useDirectDestination: 0
   m_tracker: {fileID: 9098065366502958512}
 --- !u!114 &1492414745406935436
 MonoBehaviour:
