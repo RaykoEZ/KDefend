@@ -19,7 +19,6 @@ public class NpcMovement : MonoBehaviour, IMovement
     public bool UseDirectDestination { get => m_useDirectDestination; set => m_useDirectDestination = value; }
     public Vector2 Origin { get => m_origin; set => m_origin = value; }
     public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
-
     public Vector2 DirectionNormalized => (Navigator.nextPosition - transform.position).normalized;
     public Vector2 Position => transform.position;
 
@@ -106,7 +105,6 @@ public class NpcMovement : MonoBehaviour, IMovement
         while (dist > nav.stoppingDistance)
         {
             m_currentDestination = GetDestination();
-
             nav?.SetDestination(m_currentDestination);
             // the farther we are from target, the longer our path refresh interval
             waitTime = Mathf.Clamp(0.1f * (dist / 100f), 0.1f, 5f);
@@ -115,18 +113,18 @@ public class NpcMovement : MonoBehaviour, IMovement
         }
         m_movement = null;
     }
+    // get new target position from tracker
     protected Vector2 GetDestination() 
     {
         if (UseDirectDestination) return m_currentDestination;
-
-        Vector2 ret = m_tracker.IsReady ? m_tracker.PrecisePosition : transform.position;
+        Vector2 ret = m_tracker.GetPrecisePosition();
         return ret;
     }
     protected virtual IEnumerator Standby(float duration)
     {
         StopMoving();
         yield return new WaitForSeconds(duration);
-        Navigator?.SetDestination(m_tracker.PrecisePosition);
+        Navigator?.SetDestination(m_tracker.GetPrecisePosition());
         StartMoving();
     }
 }

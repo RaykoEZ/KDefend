@@ -7,7 +7,6 @@ using UnityEngine.Events;
 // simple game timer counting down in seconds
 public class GameTimer : MonoBehaviour 
 {
-    [SerializeField] bool m_countingDown = default;
     [SerializeField] int m_startTimeValue = default;
     [SerializeField] TextMeshProUGUI m_secondDisplay = default;
     [SerializeField] UnityEvent m_onTimeOut = default;

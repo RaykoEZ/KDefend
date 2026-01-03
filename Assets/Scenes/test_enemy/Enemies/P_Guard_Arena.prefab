@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 847211165139811645}
   - component: {fileID: 3849120413031669997}
   - component: {fileID: 2845755275583024145}
-  - component: {fileID: 483398006813200515}
+  - component: {fileID: 5933700760186577202}
   m_Layer: 7
   m_Name: P_Guard_Arena
   m_TagString: Untagged
@@ -568,6 +568,7 @@ MonoBehaviour:
     Health: 800
     KnockbackModifier: 0.5
     MoveSpeed: 80
+    AtkModifier: 0
   m_onDefeat:
     m_PersistentCalls:
       m_Calls:
@@ -612,8 +613,6 @@ MonoBehaviour:
         m_CallState: 2
   m_attackHandler: {fileID: 3849120413031669997}
   m_contactDamage: 10
-  m_hitStunMod: 0.5
-  m_threatIncrease: 20
   m_movementHandler: {fileID: 847211165139811645}
 --- !u!225 &6692085382757624235
 CanvasGroup:
@@ -787,7 +786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveOnsight: 1
-  m_ignorePlayerTracking: 0
+  m_useDirectDestination: 0
   m_tracker: {fileID: 2845755275583024145}
 --- !u!114 &3849120413031669997
 MonoBehaviour:
@@ -834,8 +833,8 @@ MonoBehaviour:
   m_warpDistanceThreshold: 2000
   m_teleportCooldownTime: 7
   m_updateTimeInterval: 10
-  m_formation: {fileID: 483398006813200515}
---- !u!114 &483398006813200515
+  m_formation: {fileID: 5933700760186577202}
+--- !u!114 &5933700760186577202
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -844,11 +843,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6254325673093278995}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d228e4f04464120459027179d75e5fa3, type: 3}
+  m_Script: {fileID: 11500000, guid: 71d8b09441dacf84da036ff03600a725, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::EncircleHandler
   m_encircleAngleRange: 0
-  m_predictionDistance: 100
+  m_predictionDistance: 10
 --- !u!1 &6697527675712265461
 GameObject:
   m_ObjectHideFlags: 0

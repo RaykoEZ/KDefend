@@ -260,8 +260,8 @@ GameObject:
   - component: {fileID: 1844722118509606399}
   - component: {fileID: 5978465183080294391}
   - component: {fileID: 8589331542101946525}
-  - component: {fileID: 5422649152271762270}
   - component: {fileID: 688211411544188958}
+  - component: {fileID: 7339454252143745524}
   m_Layer: 7
   m_Name: P_Agent
   m_TagString: Untagged
@@ -400,6 +400,7 @@ MonoBehaviour:
     Health: 300
     KnockbackModifier: 1
     MoveSpeed: 80
+    AtkModifier: 0
   m_onDefeat:
     m_PersistentCalls:
       m_Calls:
@@ -456,8 +457,6 @@ MonoBehaviour:
         m_CallState: 2
   m_attackHandler: {fileID: 8589331542101946525}
   m_contactDamage: 5
-  m_hitStunMod: 1
-  m_threatIncrease: 20
   m_movementHandler: {fileID: 5978465183080294391}
 --- !u!225 &9166003067599549407
 CanvasGroup:
@@ -615,7 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveOnsight: 1
-  m_ignorePlayerTracking: 0
+  m_useDirectDestination: 0
   m_tracker: {fileID: 688211411544188958}
 --- !u!114 &8589331542101946525
 MonoBehaviour:
@@ -648,20 +647,6 @@ MonoBehaviour:
         m_CallState: 2
   m_autoAttack: 1
   m_targeting: {fileID: 586710463100209767}
---- !u!114 &5422649152271762270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5336679601280130381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d228e4f04464120459027179d75e5fa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_encircleAngleRange: 27.8
-  m_predictionDistance: 1452
 --- !u!114 &688211411544188958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,10 +659,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3eaf864b8b2904f96d61df8896d17c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_autoTeleport: 0
   m_warpDistanceThreshold: 2000
   m_teleportCooldownTime: 7
   m_updateTimeInterval: 1
-  m_formation: {fileID: 5422649152271762270}
+  m_defaultFormation: {fileID: 7339454252143745524}
+--- !u!114 &7339454252143745524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5336679601280130381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71d8b09441dacf84da036ff03600a725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EncircleHandler
+  m_encircleAngleRange: 22.2
+  m_predictionDistance: 1035
 --- !u!1 &6330907610716409922
 GameObject:
   m_ObjectHideFlags: 0

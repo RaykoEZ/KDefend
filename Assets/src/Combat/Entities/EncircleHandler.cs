@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 // attach on npc object for enemies to flank/enter formation in pursuit
-public class FormationHandler : MonoBehaviour
+public class EncircleHandler : Formation
 {
     /// <summary>
     /// Angle range to assign formation position around the chase target. Range: +/- 90 degrees.
@@ -12,17 +12,14 @@ public class FormationHandler : MonoBehaviour
     [SerializeField] float m_predictionDistance = default;
     // current formation angle
     float m_formationAngle = 0f;
-    bool m_randomizeNextPositon = false;
-    public bool RandomizeFormationPosition 
-    { get => m_randomizeNextPositon; set => m_randomizeNextPositon = value; }
     void OnEnable()
     {
         RandomizeFormationAngle();
     }
     // return a destination for npc movement formation to chase after target, teleport to this position
-    public bool TryGetFormationPosition(BaseEntity chaseTarget, out Vector3 warpPosition)
+    public override bool TryGetFormationPosition(BaseEntity chaseTarget, out Vector3 warpPosition)
     {
-        if (m_randomizeNextPositon) 
+        if (RandomizeFormationPosition) 
         {
             RandomizeFormationAngle();
         }

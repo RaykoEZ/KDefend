@@ -30,7 +30,6 @@ public class EnemyWaveManager : MonoBehaviour
     {
         // setup routine call
         m_routineSpawn.OnNewInterval += OnSpawnWaveInterval;
-        RoutineWave();
     }
     void OnGlobalSpawnEvent(object sender, KDEventInfo args) 
     {
@@ -47,7 +46,7 @@ public class EnemyWaveManager : MonoBehaviour
             StopRoutineWave();
             StartCoroutine(DelayRoutineWave());
         }
-        m_routineSpawn.TimeInterval = UnityEngine.Random.Range(30f, 50f);
+        m_routineSpawn.TimeInterval = UnityEngine.Random.Range(30f, 60f);
     }
     public void RoutineWave() 
     {
@@ -119,7 +118,7 @@ public class EnemyWaveManager : MonoBehaviour
         // wait for a set duration if spawn count exceeded
         yield return SpawnCooldown();
         // spawn a wave of enemies
-        int index = Mathf.Clamp(KDefenderStateManager.CurrentLevel, 0, m_routineSpawnStages.Count);
+        int index = Mathf.Clamp((int)DayCounter.Current, 0, m_routineSpawnStages.Count);
         SpawnWave wave = m_routineSpawnStages[index];
         SpawnWave(wave);
     }

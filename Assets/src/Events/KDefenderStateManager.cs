@@ -10,16 +10,16 @@ public class DayCounter
     // use this to display short day text with dayOfWeek index
     public static string[] s_dayOfWeekText_Short = new string[]
     {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
-    DayOfWeek m_current;
-    public DayOfWeek Current { get => m_current; }
+    static DayOfWeek s_current;
+    public static DayOfWeek Current { get => s_current; }
     public void SetDay(DayOfWeek current)
     {
-        m_current = current;
+        s_current = current;
     }
     public void NextDay()
     {
-        int day = (int)m_current % 7;
-        m_current = (DayOfWeek)day;
+        int day = (int)s_current % 7;
+        s_current = (DayOfWeek)day;
     }
 }
 // initialises and saves game state
@@ -30,7 +30,6 @@ public class KDefenderStateManager : MonoBehaviour
     [SerializeField] StaticFlagEventHandler m_staticEvents = default;
 
     [SerializeField] EnemyManager m_enemy = default;
-    [SerializeField] EnemyWaveManager m_wave = default;
 
     [SerializeField] ShopPoolUpdater m_shopPoolUpdater = default;
 
@@ -39,11 +38,9 @@ public class KDefenderStateManager : MonoBehaviour
     [SerializeField] GameTimer m_timer = default;
     [SerializeField] UnityEvent m_onGameOver = default;
     [SerializeField] UnityEvent<DayOfWeek> m_onNewDay = default;
-    static int s_currentLevel = 0;
     static bool s_isPaused = false;
     DayCounter m_dayOfWeek = new DayCounter();
-    public static int CurrentLevel { get => s_currentLevel; }
-    public DayOfWeek CurrentDayOfWeek => m_dayOfWeek.Current;
+    public DayOfWeek CurrentDayOfWeek => DayCounter.Current;
     public static bool IsPaused { get => s_isPaused; }
 
     // As an alternate game mode
@@ -68,7 +65,7 @@ public class KDefenderStateManager : MonoBehaviour
         var newState = new KDefenderGameState
         {
             SecondsLeft = m_timer.SecondsLeft,
-            DayOfWeek = m_dayOfWeek.Current,
+            DayOfWeek = DayCounter.Current,
             StaticFlags = m_staticEvents.CurrentFlags,
             PlayerValue = m_player.CurrentStats,
             HostileStates = m_enemy.GetEnemyStates(),

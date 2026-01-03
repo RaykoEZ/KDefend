@@ -436,8 +436,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278321407
-  m_fontColor: {r: 1, g: 0, b: 0.009601116, a: 1}
+    rgba: 4278255610
+  m_fontColor: {r: 0.97972727, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -556,6 +556,8 @@ LineRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -577,6 +579,7 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 847777625
   m_SortingLayer: 2
   m_SortingOrder: 0
@@ -690,8 +693,8 @@ GameObject:
   - component: {fileID: 5100988183067925913}
   - component: {fileID: 7676090910518166961}
   - component: {fileID: 3191618185914313528}
-  - component: {fileID: 7811675568995576632}
   - component: {fileID: 7678772378991482187}
+  - component: {fileID: 8171478100034962317}
   m_Layer: 7
   m_Name: P_Sniper
   m_TagString: Untagged
@@ -812,6 +815,7 @@ MonoBehaviour:
     Health: 150
     KnockbackModifier: 1.2
     MoveSpeed: 70
+    AtkModifier: 0
   m_onDefeat:
     m_PersistentCalls:
       m_Calls:
@@ -856,8 +860,6 @@ MonoBehaviour:
         m_CallState: 2
   m_attackHandler: {fileID: 0}
   m_contactDamage: 10
-  m_hitStunMod: 0
-  m_threatIncrease: 20
   m_movementHandler: {fileID: 7676090910518166961}
 --- !u!225 &200601358416564420
 CanvasGroup:
@@ -887,6 +889,7 @@ MonoBehaviour:
     Health: 800
     KnockbackModifier: 0.1
     MoveSpeed: 80
+    AtkModifier: 0
   m_location: {fileID: 4325537609493398499}
   m_initTarget: {fileID: 4179399253197192141}
   m_movement: {fileID: 7676090910518166961}
@@ -1034,7 +1037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveOnsight: 0
-  m_ignorePlayerTracking: 0
+  m_useDirectDestination: 0
   m_tracker: {fileID: 7678772378991482187}
 --- !u!114 &3191618185914313528
 MonoBehaviour:
@@ -1067,20 +1070,6 @@ MonoBehaviour:
         m_CallState: 2
   m_autoAttack: 0
   m_targeting: {fileID: 7795125854938825839}
---- !u!114 &7811675568995576632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4643613453801234778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d228e4f04464120459027179d75e5fa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_encircleAngleRange: 90
-  m_predictionDistance: 100
 --- !u!114 &7678772378991482187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,10 +1082,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3eaf864b8b2904f96d61df8896d17c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_autoTeleport: 0
   m_warpDistanceThreshold: 2000
   m_teleportCooldownTime: 7
   m_updateTimeInterval: 3
-  m_formation: {fileID: 7811675568995576632}
+  m_defaultFormation: {fileID: 8171478100034962317}
+--- !u!114 &8171478100034962317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4643613453801234778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71d8b09441dacf84da036ff03600a725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EncircleHandler
+  m_encircleAngleRange: 3.8
+  m_predictionDistance: 2000
 --- !u!1 &5560274180112906838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,7 +1256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.9557307, b: 1, a: 1}
+  m_Color: {r: 0.5302171, g: 0.35826808, b: 0.7830189, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1403,7 +1407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1560107892067076173, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_Radius
-      value: 2500
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 2380271664986165341, guid: beb09ec93bd1912449253cf675f4b509, type: 3}
       propertyPath: m_Name

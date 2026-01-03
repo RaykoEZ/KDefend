@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 1742133721172013432}
   - component: {fileID: 8553919838264944127}
   - component: {fileID: 8645864284248576290}
-  - component: {fileID: 4479027218144453350}
+  - component: {fileID: 2995466180879248310}
   m_Layer: 7
   m_Name: P_Agent_Add
   m_TagString: Untagged
@@ -400,6 +400,7 @@ MonoBehaviour:
     Health: 300
     KnockbackModifier: 1
     MoveSpeed: 80
+    AtkModifier: 0
   m_onDefeat:
     m_PersistentCalls:
       m_Calls:
@@ -456,8 +457,6 @@ MonoBehaviour:
         m_CallState: 2
   m_attackHandler: {fileID: 0}
   m_contactDamage: 5
-  m_hitStunMod: 1
-  m_threatIncrease: 20
   m_movementHandler: {fileID: 1742133721172013432}
 --- !u!225 &9166003067599549407
 CanvasGroup:
@@ -615,7 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_moveOnsight: 0
-  m_ignorePlayerTracking: 0
+  m_useDirectDestination: 0
   m_tracker: {fileID: 8645864284248576290}
 --- !u!114 &8553919838264944127
 MonoBehaviour:
@@ -663,8 +662,8 @@ MonoBehaviour:
   m_warpDistanceThreshold: 2000
   m_teleportCooldownTime: 7
   m_updateTimeInterval: 1
-  m_formation: {fileID: 4479027218144453350}
---- !u!114 &4479027218144453350
+  m_formation: {fileID: 2995466180879248310}
+--- !u!114 &2995466180879248310
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -673,11 +672,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5336679601280130381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d228e4f04464120459027179d75e5fa3, type: 3}
+  m_Script: {fileID: 11500000, guid: 71d8b09441dacf84da036ff03600a725, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  m_encircleAngleRange: 46.5
-  m_predictionDistance: 100
+  m_EditorClassIdentifier: Assembly-CSharp::EncircleHandler
+  m_encircleAngleRange: 10.9
+  m_predictionDistance: 628
 --- !u!1 &6330907610716409922
 GameObject:
   m_ObjectHideFlags: 0
