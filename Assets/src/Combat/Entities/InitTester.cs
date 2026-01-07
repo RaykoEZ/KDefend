@@ -9,7 +9,7 @@ public class InitTester : MonoBehaviour
     void Start()
     {
         EntityState toSet = new EntityState {
-            Position = m_location.localPosition,
+            Position = m_location.position,
             Property = m_initStats };
         m_initTarget.Init(toSet);
         m_movement?.Init(m_initTarget);

@@ -11,6 +11,7 @@ public class RailCannon : BaseProjectile
     {
         m_laserRef = GetComponent<Laser>();
     }
+    // register targets hit by the beam
     IEnumerator HitCheck()
     {
         while (m_isFlying) 
@@ -34,11 +35,11 @@ public class RailCannon : BaseProjectile
         // delay before firing, play animation cue for lockon before shooting
         m_beforeAttack?.Invoke();
         yield return new WaitForSeconds(m_delayBeforeAttack);
-        // setup hit detection
+        // start hit detect frame
         m_hit = StartCoroutine(HitCheck());
         while (m_isFlying) 
         {
-            // detect hit target in this direction
+            // make hit box in this direction
             m_hitResult = m_laserRef.PointTowardsDirection(transform.parent.position, m_currentDirection);
             yield return new WaitForEndOfFrame();
             m_lifeTimer += Time.deltaTime;

@@ -34,6 +34,7 @@ public class TargetTracker : MonoBehaviour
     {
         m_teleportCooldown = StartCoroutine(Cooldown());
         m_defaultTarget = transform.position;
+        m_currentTarget = transform.position;
     }
     public Vector2 GetPrecisePosition()
     {
@@ -63,7 +64,10 @@ public class TargetTracker : MonoBehaviour
     public void SetNewFormation(Formation newFormation) 
     {
         if (newFormation == null) return;
-        m_currentFormationRef.OnFormationEnd -= OnFormationEnd;
+        if (m_currentFormationRef != null) 
+        {
+            m_currentFormationRef.OnFormationEnd -= OnFormationEnd;
+        }
         m_currentFormationRef = newFormation;
         m_currentFormationRef.OnFormationEnd += OnFormationEnd;
     }

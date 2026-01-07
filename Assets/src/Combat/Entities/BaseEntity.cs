@@ -51,7 +51,7 @@ public class BaseEntity : MonoBehaviour
     }
     public virtual void Init(EntityState state) 
     {
-        transform.localPosition = state.Position;
+        transform.position = state.Position;
         m_current = state.Property;
     }
     public void ModifySpeed(float mod) 

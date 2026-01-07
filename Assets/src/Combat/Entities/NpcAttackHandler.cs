@@ -9,14 +9,18 @@ public class NpcAttackHandler : AttackHandler
     Coroutine m_attack;
     public bool AutoAttack { get => m_autoAttack; set => m_autoAttack = value; }
     public BaseEntity Target { get => m_target;}
-
     public override Vector2 GetAimDirectionNormalized()
     {
         return m_target == null ? Vector2.zero : (m_target.transform.position - transform.position).normalized;
     }
+    public void ChangeTarget(BaseEntity newTarget) 
+    { 
+        if (newTarget == null) return;
+        m_target = newTarget;
+    }
     protected virtual void FixedUpdate()
     {
-        if (m_autoAttack && m_attack == null && m_targeting.IsInRange(m_target))
+        if (m_target != null && (m_autoAttack && m_attack == null && m_targeting.IsInRange(m_target)))
         {
             UseWeapon();
         }
@@ -46,7 +50,7 @@ public class NpcAttackHandler : AttackHandler
             m_keepFiring = true;
             m_attack = StartCoroutine(AttackCycle_Sequence());
         }
-    }
+    }   
     // make attack pattern sequential vs silmultaneous
     IEnumerator AttackCycle_Sequence()
     {

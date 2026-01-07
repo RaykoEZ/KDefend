@@ -16,9 +16,9 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
     public abstract bool InstantiateWeapon { get; }
     public bool Firing => firing;
     public virtual WeaponProperty WeaponProperty => m_weaponProperty;
-
-
     protected Vector2 m_currentDirection = Vector2.zero;
+    public Vector2 CurrentDirection { get => m_currentDirection; set => m_currentDirection = value; }
+
     // create a new weapon object, for projectiles & summons
     protected static T NewAttackInstance<T>(T prefabRef, Transform instanceParent) where T : BaseWeapon
     {

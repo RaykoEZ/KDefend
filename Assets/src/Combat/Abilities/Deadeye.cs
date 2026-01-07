@@ -1,6 +1,7 @@
 ﻿using UnityEngine.Playables;
 using UnityEngine;
 using System.Collections;
+
 // Enter Aim Mode to attack, enemy does not auto attack 
 public class Deadeye : ActiveAbility
 {
@@ -11,6 +12,7 @@ public class Deadeye : ActiveAbility
     // target when aiming
     BaseEntity m_target;
     bool m_targetAcquired = false;
+    bool m_aiming = false;
     public BaseEntity Target { get => m_target; }
     void FixedUpdate()
     {
@@ -18,9 +20,8 @@ public class Deadeye : ActiveAbility
         {
             OnAimingUpdate();
         }
-        else if (Target != null)
-        {
-            
+        else if (Target != null && !m_aiming)
+        {          
             // start aiming
             TryUse();
         }
@@ -35,6 +36,7 @@ public class Deadeye : ActiveAbility
     }
     protected override void Effect_Internal()
     {
+        m_aiming = true;
         StartChanneling(m_aimTime, OnShoot);
     }
     // during aiming mode...
@@ -48,7 +50,7 @@ public class Deadeye : ActiveAbility
             return;
         }
         Vector3 dir = m_target.transform.position - transform.position;
-        var hit = m_aimLaser.PointTowardsDirection(dir.normalized);
+        var hit = m_aimLaser.PointTowardsDirection(dir.normalized, passThroughTarget: true);
         if (hit.rigidbody == null) 
         {
             m_targetAcquired = false;
@@ -60,7 +62,6 @@ public class Deadeye : ActiveAbility
     }
     void OnShoot()
     {
-        m_onCooldown = StartCoroutine(Cooldown(m_cooldownTime));
             // line dissipates from target position
             // (ray blinking with sfx)
             // delay
@@ -71,9 +72,12 @@ public class Deadeye : ActiveAbility
     {
         if (m_targetAcquired)
         {
+            (m_user as NpcAttackHandler)?.ChangeTarget(m_target);
             m_user?.UseWeapon();
+            m_onCooldown = StartCoroutine(Cooldown(m_cooldownTime));
         }
         m_aimLaser?.Clear();
+        m_aiming = false;
     }
 }
 

@@ -661,7 +661,7 @@ MonoBehaviour:
     KnockbackModifier: 0.1
     MoveSpeed: 80
     AtkModifier: 0
-  m_location: {fileID: 0}
+  m_location: {fileID: 1818319467318126005}
   m_initTarget: {fileID: 3244473579710765152}
   m_movement: {fileID: 0}
 --- !u!114 &3912173363950331105
@@ -868,11 +868,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3eaf864b8b2904f96d61df8896d17c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_autoTeleport: 0
   m_warpDistanceThreshold: 2000
   m_teleportCooldownTime: 7
   m_updateTimeInterval: 1
   m_defaultFormation: {fileID: 6025653705999404240}
+  m_navMode: 0
 --- !u!114 &6025653705999404240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -885,6 +885,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d8b09441dacf84da036ff03600a725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EncircleHandler
+  m_onFormationInit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_onFormationEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  m_members: []
   m_encircleAngleRange: 8.5
   m_predictionDistance: 33
 --- !u!1 &6697527675712265461

@@ -27,6 +27,6 @@ public class Phalanx : Formation
         {
             warpPosition = chaseTarget.transform.position;
         }
-        return i < 0;
+        return i > 0 && i < m_members.Count;
     }
 }

@@ -1,46 +1,39 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 //enemy agent behaviour
 public class Agent : AbilityHandler
 {
     [SerializeField] Stealth m_stealth = default;
     [SerializeField] Reinforcement m_callHelp = default;
     [SerializeField] AttackHandler m_attack = default;
-    [SerializeField] List<BaseWeapon> m_onLowHealth = default;
+    [SerializeField] UnityEvent m_onLowHealth = default;
     public override List<ActiveAbility> Abilities => new List<ActiveAbility> { m_stealth, m_callHelp };
     public override void OnTakeHit() 
     {
         base.OnTakeHit();
         if (Self.HpRatio < 0.5f)
         {
-            OnLowHp(true);
+            OnLowHp();
         }
     }
     protected override void StartupEffects()
     {
         if (Self.HpRatio < 0.5f)
         {
-            OnLowHp(reinforcement: false);
+            OnLowHp();
         }
     }
     // when low on Hp, hide and call for help
-    void OnLowHp(bool reinforcement = false) 
+    void OnLowHp() 
     {
         Stealth();
-        m_attack.SetWeapons(m_onLowHealth);
-        if (reinforcement)
-        {
-            Reinforce();
-        }
+        m_onLowHealth?.Invoke();
+
     }
     // when < 50% HP, activate stealth & calls help
-    void Stealth() 
+    public void Stealth() 
     {
         m_stealth?.TryUse();
-    }
-    // call help
-    void Reinforce() 
-    {
-        m_callHelp?.TryUse();
     }
 }
