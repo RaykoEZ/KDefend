@@ -1,31 +1,70 @@
-﻿using System.Collections;
-using System;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Playables;
 // effects usable via triggers or commands, has charging/channeling feature
 public abstract class ActiveAbility : MonoBehaviour 
 {
+    [SerializeField] protected bool m_activateOnInit = default;
+    [SerializeField] protected bool m_needTarget = default;
     [Range(0f, 999f)]
     [SerializeField] protected float m_cooldownTime = default;
     [SerializeField] protected int m_hitsToEnd = default;
+    [SerializeField] protected PlayableDirector m_activationSequence = default;
+    [SerializeField] protected UnityEvent<BaseEntity> m_activateEffects = default;
     protected Coroutine m_onCooldown;
     protected int m_disruptCounter = 0;
     protected Coroutine m_channeling;
+    private BaseEntity m_target;
     protected delegate void AbilityUpdate();
     // listen to change animation for each skill charge update
     protected event AbilityUpdate OnChannelInterrupt;
-    public void TryUse() 
+    public BaseEntity Target { get => m_target; set => m_target = value; }
+    public virtual float CooldownTime { get => m_cooldownTime; set => m_cooldownTime = value; }
+    public virtual void Init() 
     {
         if (!CanUse()) return;
+        if(m_activationSequence != null) 
+        {
+            m_activationSequence.Play();
+        }
+        if (m_activateOnInit) 
+        {
+            Activate();
+        }
+    }
+    public virtual bool CanUse() => (m_onCooldown == null && m_channeling == null);
+    protected virtual void Effect_Internal() { }
+    public virtual void Activate(BaseEntity target)
+    {
+        if (Target == null && m_needTarget) return;
+        HandleAbilityStates();
+        Target = target;
+        Effect_Internal();
+        m_activateEffects?.Invoke(Target);
+    }
+    public virtual void ResetTarget()
+    {
+        Target = null;
+    }
+    public virtual void Activate() 
+    {
+        if (Target == null && m_needTarget) return;
+        HandleAbilityStates();
+        Effect_Internal();
+        m_activateEffects?.Invoke(Target);
+    }
+    void HandleAbilityStates() 
+    {
         m_onCooldown = StartCoroutine(Cooldown(m_cooldownTime));
-        if (m_channeling != null) 
+        if (m_channeling != null)
         {
             StopCoroutine(m_channeling);
             m_channeling = null;
         }
-        Effect_Internal();
     }
-    public virtual bool CanUse() => m_onCooldown == null;
-    protected abstract void Effect_Internal();
     protected IEnumerator Cooldown(float duration) 
     {
         yield return new WaitForSeconds(duration);

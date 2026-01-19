@@ -23,7 +23,6 @@ public class TargetTracker : MonoBehaviour
     Coroutine m_teleportCooldown;
     Formation m_currentFormationRef;
     public bool IsReady => m_target != null || m_currentFormationRef != null;
-    public Vector2 DefaultTarget { get => m_defaultTarget; set => m_defaultTarget = value; }
     public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
     public NavigationMode Mode { get => m_navMode; set => m_navMode = value; }
     void Start()
@@ -75,13 +74,17 @@ public class TargetTracker : MonoBehaviour
     { 
         m_navMode = NavigationMode.Seek;
     }
+    public void ResetTarget() 
+    {
+        m_currentTarget = m_defaultTarget;
+    }
     public void ResetFormation() 
     {
         m_currentFormationRef = m_defaultFormation;
     }
     protected IEnumerator TrackTarget()
     {
-        while (m_target != null && Navigator.isActiveAndEnabled) 
+        while (m_target != null && Navigator.isOnNavMesh) 
         {
             // update current target destination
             m_currentTarget = m_target.transform.position;

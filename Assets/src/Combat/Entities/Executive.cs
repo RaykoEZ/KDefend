@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Executive : AbilityHandler
 {
-    [SerializeField] Deadeye m_railCannon = default;
+    [SerializeField] NpcAimingWeapon m_railCannon = default;
     [SerializeField] WaveStrike m_waveStrike = default;
     [SerializeField] RangeDetector m_range = default;
     public override List<ActiveAbility> Abilities => new List<ActiveAbility> { m_railCannon, m_waveStrike };
@@ -13,7 +13,7 @@ public class Executive : AbilityHandler
     {
         if (m_range.IsPlayerInRange())
         {
-            m_waveStrike?.TryUse();
+            m_waveStrike?.Init();
         }
     }
     public override void OnTakeHit()
@@ -27,11 +27,11 @@ public class Executive : AbilityHandler
         // HP threshold to increase strike frequency
         if (hpRatio < 0.75f && hpRatio > 0.5f)
         {
-            m_waveStrike.StrikeTimeInterval = 1.5f;
+            m_waveStrike.CooldownTime = 1.5f;
         }
         else if (hpRatio <= 5f && hpRatio > 0.25f)
         {
-            m_waveStrike.StrikeTimeInterval = 0.75f;
+            m_waveStrike.CooldownTime = 0.75f;
         }
     }
 }

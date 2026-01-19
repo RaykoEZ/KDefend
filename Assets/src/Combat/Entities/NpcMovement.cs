@@ -51,7 +51,7 @@ public class NpcMovement : MonoBehaviour, IMovement
     }
     public void StartMoving()
     {
-        if (!gameObject.activeSelf) return;
+        if (!gameObject.activeInHierarchy) return;
         if (m_movement != null)
         {
             StopCoroutine(m_movement);
@@ -93,6 +93,7 @@ public class NpcMovement : MonoBehaviour, IMovement
     }
     public virtual void ResetTarget()
     {
+        if (!gameObject.activeInHierarchy) return;
         float duration = UnityEngine.Random.Range(0.5f, 1f);
         StartCoroutine(Standby(duration));
     }
@@ -102,12 +103,12 @@ public class NpcMovement : MonoBehaviour, IMovement
         m_currentDestination = GetDestination();
         float dist = Vector2.Distance(transform.position, m_currentDestination);
         float waitTime;
-        while (dist > nav.stoppingDistance)
+        while (dist > nav.stoppingDistance && gameObject.activeInHierarchy)
         {
             m_currentDestination = GetDestination();
             nav?.SetDestination(m_currentDestination);
             // the farther we are from target, the longer our path refresh interval
-            waitTime = Mathf.Clamp(0.1f * (dist / 100f), 0.1f, 5f);
+            waitTime = Mathf.Clamp(0.5f * (dist / 100f), 0.1f, 5f);
             yield return new WaitForSeconds(waitTime);
             dist = Navigator.remainingDistance;
         }
@@ -124,6 +125,11 @@ public class NpcMovement : MonoBehaviour, IMovement
     {
         StopMoving();
         yield return new WaitForSeconds(duration);
+        // if still on standby after waiting, reset destination to origin
+        if (Navigator.isStopped) 
+        {
+            m_tracker?.ResetTarget();
+        }
         Navigator?.SetDestination(m_tracker.GetPrecisePosition());
         StartMoving();
     }

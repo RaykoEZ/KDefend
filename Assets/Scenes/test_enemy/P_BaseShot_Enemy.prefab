@@ -123,11 +123,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4937486622570112720}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDamping: 0
   m_AngularDamping: 0
   m_GravityScale: 0
@@ -172,6 +172,9 @@ MonoBehaviour:
   m_beforeAttack:
     m_PersistentCalls:
       m_Calls: []
+  m_blockedBy:
+    serializedVersion: 2
+    m_Bits: 131584
 --- !u!58 &792987912367956665
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -198,7 +201,7 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 131648
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295

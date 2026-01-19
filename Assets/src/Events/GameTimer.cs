@@ -20,12 +20,11 @@ public class GameTimer : MonoBehaviour
     public int TimeExtension { get => m_timeExtension; set => m_timeExtension = value; }
     void OnEnable()
     {
-        StartTimer();
+        SecondsLeft = StartTimeValue + TimeExtension;
         KDEventHandler.ListenToGlobal(GameEventTriggerType.TimeUpdate, OnExtendTime);
     }
     void OnDisable()
     {
-        Pause();
         KDEventHandler.UnlistenFromGlobal(GameEventTriggerType.TimeUpdate, OnExtendTime);
     }
 
@@ -35,6 +34,7 @@ public class GameTimer : MonoBehaviour
         if (args.Payload.TryGetValue("extend", out object result) && result is int extend)
         {
             TimeExtension += extend;
+            SecondsLeft += extend;
         }
     }
 
@@ -42,8 +42,7 @@ public class GameTimer : MonoBehaviour
     public void StartTimer() 
     {
         if (m_timer != null) return;
-        float timeLeft = StartTimeValue + m_timeExtension - SecondsLeft;
-        m_secondDisplay.text = timeLeft.ToString();
+        m_secondDisplay.text = SecondsLeft.ToString();
         m_timer = StartCoroutine(UpdateTimer());
     }
     // Stop timer but keep current time
@@ -75,7 +74,8 @@ public class GameTimer : MonoBehaviour
             // counting down/up
             timeLeft--;
             m_secondDisplay.text = timeLeft.ToString();
-            m_gameState.Current.KDGameState.SecondsLeft = timeLeft;
+            m_secondsLeft = timeLeft;
+            m_gameState.Current.KDGameState.SecondsLeft = m_secondsLeft;
             if (timeLeft <= 0) 
             {
                 m_onTimeOut?.Invoke();

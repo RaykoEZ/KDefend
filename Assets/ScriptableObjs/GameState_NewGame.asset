@@ -32,7 +32,8 @@ MonoBehaviour:
         m_EditorAssetChanged: 0
     SimulationTime: 0
     KDGameState:
-      Timer: 9999
+      SecondsLeft: 0
+      DayOfWeek: 2
       StaticFlags: 0
       PlayerValue:
         Property:

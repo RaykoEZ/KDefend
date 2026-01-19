@@ -189,9 +189,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_pickupImmediately: 0
-  m_property:
-    Name: Intel
-    Description: Secrets kept safe, no more
   m_onUse:
     m_PersistentCalls:
       m_Calls: []
@@ -211,7 +208,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_pickUpCommand:
-    m_autoDisable: 1
+    m_disableOnTrigger: 0
     m_inputTarget: {fileID: -5413808958148811922, guid: 30eaa1422e2aefb4c88373f47f9bcca5, type: 3}
     m_triggerOnAction:
       m_PersistentCalls:
@@ -320,8 +317,6 @@ MonoBehaviour:
   m_threatValueIncrease: 10
   m_possibleWaves:
   - {fileID: 11400000, guid: d4cfefec9a92db6499c19cf906d6a0b5, type: 2}
-  - {fileID: 11400000, guid: d7bd5b577df2dbe449a15e7ea4ea491d, type: 2}
-  - {fileID: 11400000, guid: 0471ce8b9b6ab2b4f87ec293feec9b02, type: 2}
   m_pickupDelivery:
     m_eventToTrigger: {fileID: 11400000, guid: 0c76cba9bb52663478d07ec33a49fa4e, type: 2}
 --- !u!1 &5642324054095267098

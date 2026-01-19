@@ -11,12 +11,11 @@ public class NpcAttackHandler : AttackHandler
     public BaseEntity Target { get => m_target;}
     public override Vector2 GetAimDirectionNormalized()
     {
-        return m_target == null ? Vector2.zero : (m_target.transform.position - transform.position).normalized;
+        return GetAimDirectionNormalized(m_target);
     }
-    public void ChangeTarget(BaseEntity newTarget) 
-    { 
-        if (newTarget == null) return;
-        m_target = newTarget;
+    Vector2 GetAimDirectionNormalized(BaseEntity target)
+    {
+        return target == null ? Vector2.zero : (target.transform.position - transform.position).normalized;
     }
     protected virtual void FixedUpdate()
     {
@@ -50,7 +49,11 @@ public class NpcAttackHandler : AttackHandler
             m_keepFiring = true;
             m_attack = StartCoroutine(AttackCycle_Sequence());
         }
-    }   
+    }
+    public void UseWeaponOneShot(BaseWeapon toUse, BaseEntity target)
+    {
+        StartCoroutine(Attack_Internal(toUse, GetAimDirectionNormalized(target)));
+    }
     // make attack pattern sequential vs silmultaneous
     IEnumerator AttackCycle_Sequence()
     {

@@ -40,6 +40,13 @@ public class BaseEntity : MonoBehaviour
         };
     }
     public float HpRatio => CurrentStats.Property.Health / (float)m_base.Health;
+    // for testing stats
+#if UNITY_EDITOR
+    void Start() 
+    {
+        m_current = m_base;
+    }
+#endif
     public virtual void OnHit(Collider2D collision)
     {
         if (collision.attachedRigidbody == null) return;

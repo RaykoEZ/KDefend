@@ -17,14 +17,18 @@ public class RegenerateCounter : MonoBehaviour
             m_free.Enqueue(handler);
         }
     }
-    public void TryUseCounter() 
+    public bool TryUseCounter() 
     {
-        if (m_free.TryDequeue(out var item) && item != null)
+        bool ret = m_free.TryDequeue(out var item) && item != null;
+        if (ret)
         {
+            // move free the skill use counter to a cooldown queue,
+            // and set it on cooldown
             item.SetCurrentValue(0f, instant: true);
             m_onUseCounter?.Invoke();
             StartCoroutine(Regenerate(item));
         }
+        return ret;
     }
     protected IEnumerator Regenerate(ResourceDisplayHandler toRegen) 
     {

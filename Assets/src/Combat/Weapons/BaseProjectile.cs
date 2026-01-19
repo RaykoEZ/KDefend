@@ -28,6 +28,7 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
     [Range(0f, 10f)]
     [SerializeField] protected float m_delayBeforeAttack = default;
     [SerializeField] protected UnityEvent m_beforeAttack = default;
+    [SerializeField] protected LayerMask m_blockedBy = default;
     protected bool m_isFlying = true;
     protected float m_lifeTimer = 0f;
     protected Coroutine m_inProgress;
@@ -35,8 +36,8 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
     public override bool InstantiateWeapon => true;
     protected virtual void OnTriggerEnter2D(Collider2D c) 
     {
-        string layerName = LayerMask.LayerToName(c.gameObject.layer);
-        if (!WeaponProperty.PassWalls && layerName == "Building") 
+        LayerMask layerName = 1 << c.gameObject.layer;
+        if (!WeaponProperty.PassWalls && (layerName & m_blockedBy) != 0) 
         {
             // end flying loop and cleanup
             StopAllCoroutines();

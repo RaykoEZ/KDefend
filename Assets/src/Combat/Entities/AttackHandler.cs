@@ -17,16 +17,6 @@ public abstract class AttackHandler : MonoBehaviour
     {
         ResetWeapons();
     }
-    public void SetWeapons(List<BaseWeapon> value)
-    {
-        if (value == null) return;
-        m_currentWeapons = value;
-        m_attackingWeapons = new List<bool>(m_currentWeapons.Count);
-        for (int i = 0; i < m_currentWeapons.Count; i++)
-        {
-            m_attackingWeapons.Add(false);
-        }
-    }
     public virtual void UseWeapon()
     {
         if (KDefenderStateManager.IsPaused ||  m_keepFiring || m_currentWeapons.Count == 0) return;
@@ -41,6 +31,7 @@ public abstract class AttackHandler : MonoBehaviour
     {
         StartCoroutine(Attack_Internal(toUse, direction));
     }
+
     protected virtual IEnumerator AttackCycle_Internal(int weaponIndex)
     {
         BaseWeapon weapon = m_currentWeapons[weaponIndex];
@@ -63,6 +54,16 @@ public abstract class AttackHandler : MonoBehaviour
         // next firing cycle
         yield return new WaitForSeconds(weapon.WeaponProperty.DelayPerCycle);
 
+    }
+    public void SetWeapons(List<BaseWeapon> value)
+    {
+        if (value == null) return;
+        m_currentWeapons = value;
+        m_attackingWeapons = new List<bool>(m_currentWeapons.Count);
+        for (int i = 0; i < m_currentWeapons.Count; i++)
+        {
+            m_attackingWeapons.Add(false);
+        }
     }
     public void AddWeapon(BaseWeapon toAdd)
     {

@@ -18,6 +18,7 @@ public class DayCounter
     }
     public void NextDay()
     {
+        s_current++;
         int day = (int)s_current % 7;
         s_current = (DayOfWeek)day;
     }
@@ -57,7 +58,6 @@ public class KDefenderStateManager : MonoBehaviour
         m_shopPoolUpdater?.InitPool(state.ShopStates);
         m_staticEvents.SetFlags(state.StaticFlags);
         m_timer.SecondsLeft = state.SecondsLeft;
-        m_timer.StartTimer();
     }
     // get current states from managers to save latest game state
     public void UpdateSave()
@@ -81,19 +81,27 @@ public class KDefenderStateManager : MonoBehaviour
     // for pausing game for menu and item effect
     public void PauseGame() 
     {
+        s_isPaused = true;
+        Time.timeScale = 0f;    
+    }
+    public void ResumeGame()
+    {
+        s_isPaused = false;
+        Time.timeScale = 1f;
+    }
+    public void ToggleGamePause()
+    {
         s_isPaused = !s_isPaused;
-        Time.timeScale = s_isPaused? 0f : 1f;    
+        Time.timeScale = s_isPaused? 0f : 1f;
     }
     public void OnNextDay() 
     { 
         m_dayOfWeek?.NextDay();
-        UpdateSave();
         m_onNewDay?.Invoke(CurrentDayOfWeek);
     }
     public void SetDayOfWeek(DayOfWeek newDay) 
     {
         m_dayOfWeek?.SetDay(newDay);
-        UpdateSave();
         m_onNewDay?.Invoke(CurrentDayOfWeek);
     }
 }

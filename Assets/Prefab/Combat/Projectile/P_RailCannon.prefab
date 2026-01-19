@@ -61,6 +61,8 @@ LineRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,6 +84,7 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1818725071
   m_SortingLayer: 3
   m_SortingOrder: 0
@@ -204,6 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fd669649f629364a81171b709348172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_detachFromUser: 0
   m_weaponProperty:
     PassWalls: 0
     Damage: 3
@@ -215,11 +219,15 @@ MonoBehaviour:
     PushPower: 0.5
   m_onHitSfx: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
   m_onLaunchSfx: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
+  m_onHitEffects: []
   m_spreadAngleRange: 0
   m_delayBeforeAttack: 0.1
   m_beforeAttack:
     m_PersistentCalls:
       m_Calls: []
+  m_blockedBy:
+    serializedVersion: 2
+    m_Bits: 131584
 --- !u!82 &3519316906288525762
 AudioSource:
   m_ObjectHideFlags: 0

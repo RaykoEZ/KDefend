@@ -54,7 +54,6 @@ public class PlayerCreditManager : MonoBehaviour
     {
         RewardPoints(obj.PointReward);
         // Additonal rewards
-        Debug.Log("Reward: Credit + " + obj.PointReward);
     }
     public void OnPayment(int pay) 
     {

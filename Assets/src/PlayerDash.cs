@@ -15,8 +15,10 @@ public class PlayerDash : Dash
     protected override void Effect_Internal()
     {
         // decrement dash counter
-        m_dashCounter?.TryUseCounter();
-        // * 100f as base multiplier
-        RB?.AddForce(m_direction * m_dashStrength * 100f * Time.fixedDeltaTime, ForceMode2D.Impulse);
+        if (m_dashCounter.TryUseCounter()) 
+        {
+            // "* 100f" as base multiplier
+            RB?.AddForce(m_direction * m_dashStrength * 100f * Time.fixedDeltaTime, ForceMode2D.Impulse);
+        }      
     }
 }

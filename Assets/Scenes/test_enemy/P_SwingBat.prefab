@@ -124,9 +124,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 6.730646, y: -51.727795}
-      - {x: -6.391773, y: -52.780045}
-      - {x: -47.261433, y: 155.06155}
-      - {x: 12.127687, y: 154.3475}
+      - {x: -30.997698, y: -53.069717}
+      - {x: -122.12232, y: 106.44882}
+      - {x: 12.290409, y: 148.62723}
   m_UseDelaunayMesh: 0
 --- !u!1 &6987028416217158585
 GameObject:
@@ -241,7 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df68ef98cf2894843804e8ab139942d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_detachFromUser: 0
   m_weaponProperty:
+    PassWalls: 0
     Damage: 10
     AttackPerCycle: 1
     Speed: 0
@@ -251,6 +253,7 @@ MonoBehaviour:
     PushPower: 5
   m_onHitSfx: {fileID: 8300000, guid: b43d102aac6b145468dcaa94a5cccae1, type: 3}
   m_onLaunchSfx: {fileID: 0}
+  m_onHitEffects: []
   m_director: {fileID: 3520696863709434456}
   m_attackPattern: {fileID: 11400000, guid: 7cb5abd2e45ea884bbc4f18ad5ca2d96, type: 2}
 --- !u!114 &4196518955656310880
@@ -332,7 +335,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -46474087053656555, guid: a5ea6c6056ba3f649a894720792c9b3d, type: 2}
-  m_audioClip: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

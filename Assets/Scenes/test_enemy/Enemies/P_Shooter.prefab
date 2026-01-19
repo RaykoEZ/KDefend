@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2706899958205440335}
-  - component: {fileID: 469828032046522472}
+  - component: {fileID: 6013436440384760065}
   - component: {fileID: 3192553830712571293}
   - component: {fileID: 5466364164539108265}
   m_Layer: 7
@@ -38,7 +38,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &469828032046522472
+--- !u!114 &6013436440384760065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,14 +47,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 66310610171163452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dac757fbb9d5bb449f7e01c557d1773, type: 3}
+  m_Script: {fileID: 11500000, guid: b0b0258471ca55c4d93282a3ab102f32, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Deadeye
+  m_EditorClassIdentifier: Assembly-CSharp::NpcAimingWeapon
+  m_activateOnInit: 1
+  m_needTarget: 1
   m_cooldownTime: 3
   m_hitsToEnd: 0
+  m_activationSequence: {fileID: 0}
+  m_activateEffects: []
+  m_numAttacksPerCycle: 3
+  m_attackHandler: {fileID: 1797558288656332775}
+  m_weaponRotation: {fileID: 5641416596222669894, guid: 916bc2afb7bcb4341b76822b12598538, type: 3}
   m_aimTime: 1
   m_aimLaser: {fileID: 5466364164539108265}
-  m_user: {fileID: 1797558288656332775}
 --- !u!120 &3192553830712571293
 LineRenderer:
   serializedVersion: 2
@@ -679,7 +685,7 @@ MonoBehaviour:
   m_onFormationInit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 469828032046522472}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Deadeye, Assembly-CSharp
         m_MethodName: LockOn
         m_Mode: 2
