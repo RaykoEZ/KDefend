@@ -33,7 +33,7 @@ MonoBehaviour:
     SimulationTime: 0
     KDGameState:
       SecondsLeft: 0
-      DayOfWeek: 2
+      DayOfWeek: 1
       StaticFlags: 0
       PlayerValue:
         Property:

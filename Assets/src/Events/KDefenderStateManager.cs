@@ -4,7 +4,6 @@ using Curry.Events;
 using Curry.Game;
 using UnityEngine;
 using UnityEngine.Events;
-
 public class DayCounter
 {
     // use this to display short day text with dayOfWeek index
