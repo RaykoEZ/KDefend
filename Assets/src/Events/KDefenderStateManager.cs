@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Curry.Events;
-using Curry.Game;
 using UnityEngine;
 using UnityEngine.Events;
 public class DayCounter

@@ -61,14 +61,20 @@ public static class GameUtil
         return true;
     }
     // Coountdown in seconds
-    public static IEnumerator Countdown(float secondsLeft, Action onFinish = null)
+    public static IEnumerator Countdown(float secondsLeft, Action onFinish = null, Action perSecond = null)
     {
         float t = secondsLeft;
         while (t > 0f)
         {
             yield return new WaitForSeconds(1f);
             t--;
+            perSecond?.Invoke();
         }
+        onFinish?.Invoke();
+    }
+    public static IEnumerator Cooldown(float secondsLeft, Action onFinish = null)
+    {
+        yield return new WaitForSeconds(secondsLeft);
         onFinish?.Invoke();
     }
     public static string RandomNumberID(int length = 8)

@@ -338,6 +338,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2799431001455198039, guid: 5736b749fa5cfd642a5005c9a06fcea8, type: 3}
+      propertyPath: m_spawnTimeInterval
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3192553830712571293, guid: 5736b749fa5cfd642a5005c9a06fcea8, type: 3}
       propertyPath: m_SortingLayer
       value: 3

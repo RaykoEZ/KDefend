@@ -8,7 +8,6 @@ using UnityEngine.Playables;
 public abstract class ActiveAbility : MonoBehaviour 
 {
     [SerializeField] protected bool m_activateOnInit = default;
-    [SerializeField] protected bool m_needTarget = default;
     [Range(0f, 999f)]
     [SerializeField] protected float m_cooldownTime = default;
     [SerializeField] protected int m_hitsToEnd = default;
@@ -39,22 +38,34 @@ public abstract class ActiveAbility : MonoBehaviour
     protected virtual void Effect_Internal() { }
     public virtual void Activate(BaseEntity target)
     {
-        if (Target == null && m_needTarget) return;
-        HandleAbilityStates();
+        if (target == null) return;
         Target = target;
+        HandleAbilityStates();
         Effect_Internal();
         m_activateEffects?.Invoke(Target);
+    }
+    // no need to target
+    public virtual void Activate(Vector2 direction)
+    {
+        HandleAbilityStates();
+        Effect_Internal();
+        if (Target != null) 
+        {
+            m_activateEffects?.Invoke(Target);
+        }
+    }
+    public virtual void Activate()
+    {
+        HandleAbilityStates();
+        Effect_Internal();
+        if (Target != null)
+        {
+            m_activateEffects?.Invoke(Target);
+        }
     }
     public virtual void ResetTarget()
     {
         Target = null;
-    }
-    public virtual void Activate() 
-    {
-        if (Target == null && m_needTarget) return;
-        HandleAbilityStates();
-        Effect_Internal();
-        m_activateEffects?.Invoke(Target);
     }
     void HandleAbilityStates() 
     {

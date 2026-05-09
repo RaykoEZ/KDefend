@@ -25,16 +25,10 @@ public class UseWeapon : ActiveAbility
         }
     }
     protected virtual Vector2 AimDirection()
-    {
-        if (m_needTarget)
-        {
-            return m_attackHandler.GetAimDirectionNormalized();
-        }
-        else
-        {
-            Vector2 dir = Vector2.up;
-            return Vector2.up;
-        }
+    {    
+        return Target != null? 
+            Target.transform.position - transform.position.normalized :
+            m_attackHandler.GetAimDirectionNormalized();
     }
     protected virtual void OnAttack() 
     {
