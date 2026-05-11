@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[4].value
       value: 
       objectReference: {fileID: 3952864751055770758}
+    - target: {fileID: 5396002096139608796, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5733506426119868081, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_Name
       value: P_Subcore_shot
