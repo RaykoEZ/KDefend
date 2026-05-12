@@ -2427,10 +2427,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3947369081315355638, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_weaponProperty.DelayPerAttack
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4255476955915425589, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_Name
       value: P_RailCannon4
@@ -2442,10 +2438,6 @@ PrefabInstance:
     - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_lengthScale
       value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_blockingLayers.m_Bits
-      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2567,10 +2559,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3947369081315355638, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_weaponProperty.DelayPerAttack
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4255476955915425589, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_Name
       value: P_RailCannon2
@@ -2582,10 +2570,6 @@ PrefabInstance:
     - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_lengthScale
       value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_blockingLayers.m_Bits
-      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2707,10 +2691,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3947369081315355638, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_weaponProperty.DelayPerAttack
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4255476955915425589, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_Name
       value: P_RailCannon6
@@ -2722,10 +2702,6 @@ PrefabInstance:
     - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_lengthScale
       value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_blockingLayers.m_Bits
-      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3076,10 +3052,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3947369081315355638, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_weaponProperty.DelayPerAttack
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4255476955915425589, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_Name
       value: P_RailCannon3
@@ -3091,10 +3063,6 @@ PrefabInstance:
     - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_lengthScale
       value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_blockingLayers.m_Bits
-      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3337,10 +3305,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3947369081315355638, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_weaponProperty.DelayPerAttack
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4255476955915425589, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_Name
       value: P_RailCannon7
@@ -3352,10 +3316,6 @@ PrefabInstance:
     - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_lengthScale
       value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_blockingLayers.m_Bits
-      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3477,10 +3437,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3947369081315355638, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_weaponProperty.DelayPerAttack
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4255476955915425589, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_Name
       value: P_RailCannon5
@@ -3492,10 +3448,6 @@ PrefabInstance:
     - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_lengthScale
       value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_blockingLayers.m_Bits
-      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3857,10 +3809,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3947369081315355638, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_weaponProperty.DelayPerAttack
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4255476955915425589, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_Name
       value: P_RailCannon0
@@ -3872,10 +3820,6 @@ PrefabInstance:
     - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_lengthScale
       value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_blockingLayers.m_Bits
-      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3986,10 +3930,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3947369081315355638, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_weaponProperty.DelayPerAttack
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4255476955915425589, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_Name
       value: P_RailCannon1
@@ -4001,10 +3941,6 @@ PrefabInstance:
     - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
       propertyPath: m_lengthScale
       value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261725631287536630, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
-      propertyPath: m_blockingLayers.m_Bits
-      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

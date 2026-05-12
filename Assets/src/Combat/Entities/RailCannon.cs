@@ -16,9 +16,12 @@ public class RailCannon : BaseProjectile
     {
         while (m_isFlying) 
         {
+            // make hit box in this direction
+            m_hitResult = m_laserRef.PointTowardsDirection(transform.parent.position, m_currentDirection);
+            bool hitConnects = m_hitResult && m_hitResult.collider.attachedRigidbody != null;
             // trigger hit sequence
-            if (m_hitResult && m_hitResult.rigidbody != null &&
-                m_hitResult.rigidbody.TryGetComponent(out BaseEntity result)) 
+            if (hitConnects &&
+                m_hitResult.collider.attachedRigidbody.TryGetComponent(out BaseEntity result)) 
             {
                 OnHit(result);
             }
@@ -39,8 +42,6 @@ public class RailCannon : BaseProjectile
         m_hit = StartCoroutine(HitCheck());
         while (m_isFlying) 
         {
-            // make hit box in this direction
-            m_hitResult = m_laserRef.PointTowardsDirection(transform.parent.position, m_currentDirection);
             yield return new WaitForEndOfFrame();
             m_lifeTimer += Time.deltaTime;
             if (m_lifeTimer >= WeaponProperty.Life)

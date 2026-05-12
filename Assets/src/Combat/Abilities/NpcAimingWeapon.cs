@@ -90,11 +90,11 @@ public class NpcAimingWeapon : UseWeapon
     protected override Vector2 AimDirection()
     {
         // override all cases if forced to
-        if (m_aimOverride.OverrideAttackDirection) return m_aimOverride.AttackDirection;
+        if (m_aimOverride.OverrideAttackDirection) return m_aimOverride.AttackDirection.normalized;
         // get result
         var result = base.AimDirection();
         // set target for attack, override to static direction if no target is found (direction is zero)
-        return result == Vector2.zero? m_aimOverride.AttackDirection : base.AimDirection();
+        return result == Vector2.zero? m_aimOverride.AttackDirection.normalized : base.AimDirection();
     }
     void ShootOrWait() 
     {

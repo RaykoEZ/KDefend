@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6539579118262690698}
   - component: {fileID: 3947369081315355638}
   - component: {fileID: 3519316906288525762}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: P_RailCannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 031392f7e961aed43a256d008b729f14, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_blockingLayers:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 131648
   m_origin: {fileID: 762699798729349450}
   m_lineRender: {fileID: 5020729400498068470}
   m_lengthScale: 50000
@@ -215,7 +215,7 @@ MonoBehaviour:
     Speed: 0
     Life: 1
     DelayPerAttack: 0.1
-    DelayPerCycle: 3
+    DelayPerCycle: 2
     PushPower: 0.5
   m_onHitSfx: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
   m_onLaunchSfx: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}

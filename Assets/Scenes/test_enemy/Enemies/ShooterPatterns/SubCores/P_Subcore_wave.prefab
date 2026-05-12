@@ -28,6 +28,14 @@ PrefabInstance:
       propertyPath: OnChargeFinish.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: WaveStrike, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 4274812983065639053, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5396002096139608796, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5733506426119868081, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_Name
       value: P_Subcore_wave
