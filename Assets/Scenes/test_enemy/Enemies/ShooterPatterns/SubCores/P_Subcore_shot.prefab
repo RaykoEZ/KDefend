@@ -12,9 +12,9 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -0.000045776367
       objectReference: {fileID: 0}
-    - target: {fileID: 4198696518014794181, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
-      propertyPath: m_chargingDuration
-      value: 3
+    - target: {fileID: 2127158043267865824, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4198696518014794181, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_rechargeCooldown
@@ -51,6 +51,10 @@ PrefabInstance:
     - target: {fileID: 5733506426119868081, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_Name
       value: P_Subcore_shot
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361658897017431886, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9162241260338012535, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_Pivot.x
@@ -135,6 +139,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2452898657200954660, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+    - {fileID: 7361658897017431886, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8166557940ebb74ba1dab0441869f19, type: 3}

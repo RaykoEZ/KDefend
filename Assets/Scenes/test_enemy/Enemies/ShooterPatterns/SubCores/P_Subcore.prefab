@@ -70,9 +70,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 9162241260338012535}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000045776367, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!58 &8339603554721472520
@@ -109,8 +109,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.03, y: 0}
-  m_Radius: 11
+  m_Offset: {x: 3, y: 0}
+  m_Radius: 30
 --- !u!114 &4451727608075873051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,146 +264,6 @@ MonoBehaviour:
     OverrideAttackDirection: 0
     AttackDirection: {x: 0, y: 1, z: 0}
   m_aimLaser: {fileID: 0}
---- !u!1 &5396002096139608796
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6352300430776931105}
-  - component: {fileID: 4274812983065639053}
-  - component: {fileID: 7047741965783454665}
-  m_Layer: 8
-  m_Name: detect
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &6352300430776931105
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5396002096139608796}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9162241260338012535}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!58 &4274812983065639053
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5396002096139608796}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 500
---- !u!114 &7047741965783454665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5396002096139608796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 174edf9a9086cfc4d961ec83983f88e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RangeDetector
-  m_detectAnyEntity: 0
-  m_targetSighted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2704865638724044160}
-        m_TargetAssemblyTypeName: NpcAttackHandler, Assembly-CSharp
-        m_MethodName: UpdateTarget
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4902640016902223357}
-        m_TargetAssemblyTypeName: NpcAimingWeapon, Assembly-CSharp
-        m_MethodName: set_Target
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  m_targetLost:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2704865638724044160}
-        m_TargetAssemblyTypeName: NpcAttackHandler, Assembly-CSharp
-        m_MethodName: ResetTarget
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4902640016902223357}
-        m_TargetAssemblyTypeName: NpcAimingWeapon, Assembly-CSharp
-        m_MethodName: ResetTarget
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &5733506426119868081
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +284,7 @@ GameObject:
   - component: {fileID: 5275632149523798125}
   - component: {fileID: 2704865638724044160}
   m_Layer: 7
-  m_Name: P_shooter_Subcore
+  m_Name: P_Subcore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -444,7 +304,6 @@ RectTransform:
   m_Children:
   - {fileID: 6518648940558632333}
   - {fileID: 1598455585813942747}
-  - {fileID: 6352300430776931105}
   - {fileID: 7647842982861960642}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -536,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b13e5b97a02d2149a2e38c5dffef078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChargeUnit
-  m_chargingDuration: 0
+  m_chargingDuration: 1
   m_chargeLoop: {fileID: 11400000, guid: 5822fe2e774173541a46077b62ea7731, type: 2}
   m_shargeFinishing: {fileID: 11400000, guid: 2c32aacb5b917e44b82def93cd9c5d19, type: 2}
   m_sequencer: {fileID: 5275632149523798125}
@@ -681,7 +540,7 @@ AudioSource:
   m_GameObject: {fileID: 5733506426119868081}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -46474087053656555, guid: a5ea6c6056ba3f649a894720792c9b3d, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -810,7 +669,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_autoAttack: 0
-  m_targeting: {fileID: 7047741965783454665}
+  m_targeting: {fileID: 0}
 --- !u!1 &7361658897017431886
 GameObject:
   m_ObjectHideFlags: 0

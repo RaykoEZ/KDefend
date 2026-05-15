@@ -15,7 +15,7 @@ public class WaveStrike : UseWeapon
     {
         m_angleInterval = m_attackArc / m_numAttacksPerCycle;
     }
-    protected override Vector2 AimDirection()
+    protected override Vector2 AimDirectionNormalized()
     {
         return VectorExtension.VectorFromDegree(m_currentAimAngle);
     }

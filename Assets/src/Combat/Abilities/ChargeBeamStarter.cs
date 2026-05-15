@@ -23,7 +23,6 @@ public class ChargeBeamStarter : MonoBehaviour
     void Start()
     {
         m_idle = new List<ChargeUnit> (m_chargeUnits);
-        BeginCharging();
     }
     void OnEnable()
     {

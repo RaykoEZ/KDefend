@@ -24,15 +24,15 @@ public class UseWeapon : ActiveAbility
             PostAttack();
         }
     }
-    protected virtual Vector2 AimDirection()
+    protected virtual Vector2 AimDirectionNormalized()
     {    
         return Target != null? 
-            Target.transform.position - transform.position.normalized :
+            (Target.transform.position - transform.position).normalized :
             m_attackHandler.GetAimDirectionNormalized();
     }
     protected virtual void OnAttack() 
     {
-        Vector3 dir = AimDirection();
+        Vector3 dir = AimDirectionNormalized();
         m_attackHandler.UseWeaponOneShot(m_weaponRotation, dir);
     }
     protected virtual void PostAttack() 

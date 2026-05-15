@@ -20,7 +20,7 @@ public class NpcAimingWeapon : UseWeapon
     protected bool m_aiming = false;
     public override bool CanUse()
     {
-        return base.CanUse() && Target != null && !m_aiming;
+        return base.CanUse() && !m_aiming && Target != null;
     }
     void FixedUpdate()
     {
@@ -30,7 +30,6 @@ public class NpcAimingWeapon : UseWeapon
         }
         else if (CanUse())
         {
-            Debug.Log("New Aiming");
             // start aiming
             Init();
         }
@@ -50,25 +49,23 @@ public class NpcAimingWeapon : UseWeapon
     // during aiming mode...update target positions & status
     void OnAimingUpdate()
     {
+        Debug.Log(Target);
         (m_attackHandler as NpcAttackHandler)?.UpdateTarget(Target);
         if (m_aimOverride.OverrideAimUpdate) 
         {
             return;
         }
-        Vector3 dir = AimDirection();
-        var hit = m_aimLaser.PointTowardsDirection(dir.normalized, passThroughTarget: false);
+        Vector3 dir = AimDirectionNormalized();
+        var hit = m_aimLaser.PointTowardsDirection(dir, passThroughTarget: false);
         // collision check for target or obstacles
         m_targetAcquired =
         hit.rigidbody == null ?
         false :
         hit.rigidbody.TryGetComponent(out BaseEntity result) && result == Target;
-
         if (!m_targetAcquired) 
         {
             m_aimLaser?.Clear();
-            OnInterrupted();
-            m_targetAcquired = false;
-        }        
+        }
     }
     protected override void OnAttack()
     {
@@ -85,24 +82,25 @@ public class NpcAimingWeapon : UseWeapon
         // (ray blinking with sfx)
         // delay
         // sniper shot releases to target position
-        StartChanneling(0.25f, ShootOrWait);       
+        StartChanneling(0.2f, ShootOrWait);       
     }
-    protected override Vector2 AimDirection()
+    protected override Vector2 AimDirectionNormalized()
     {
         // override all cases if forced to
         if (m_aimOverride.OverrideAttackDirection) return m_aimOverride.AttackDirection.normalized;
         // get result
-        var result = base.AimDirection();
+        var result = base.AimDirectionNormalized();
         // set target for attack, override to static direction if no target is found (direction is zero)
-        return result == Vector2.zero? m_aimOverride.AttackDirection.normalized : base.AimDirection();
+        return result == Vector2.zero? m_aimOverride.AttackDirection.normalized : base.AimDirectionNormalized();
     }
     void ShootOrWait() 
     {
         if (m_targetAcquired)
         {
             // set target for attack
-            m_attackHandler.UseWeaponOneShot(m_weaponRotation, AimDirection());
+            m_attackHandler.UseWeaponOneShot(m_weaponRotation, AimDirectionNormalized());
         }
+
         m_onCooldown = StartCoroutine(Cooldown(CooldownTime));
         // reset skill states
         m_aimLaser?.Clear();

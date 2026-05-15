@@ -157,12 +157,12 @@ MonoBehaviour:
   m_detachFromUser: 1
   m_weaponProperty:
     PassWalls: 0
-    Damage: 99
+    Damage: 50
     AttackPerCycle: 2
     Speed: 3000
     Life: 5
-    DelayPerAttack: 0.5
-    DelayPerCycle: 1.2
+    DelayPerAttack: 1.5
+    DelayPerCycle: 2
     PushPower: 20
   m_onHitSfx: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
   m_onLaunchSfx: {fileID: 8300000, guid: 881e3f52c86c94f26a60718d35627cd8, type: 3}

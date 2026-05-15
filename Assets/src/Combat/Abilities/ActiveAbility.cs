@@ -20,7 +20,9 @@ public abstract class ActiveAbility : MonoBehaviour
     protected delegate void AbilityUpdate();
     // listen to change animation for each skill charge update
     protected event AbilityUpdate OnChannelInterrupt;
-    public BaseEntity Target { get => m_target; set => m_target = value; }
+    public BaseEntity Target { 
+        get => m_target; 
+        set => m_target = value; }
     public virtual float CooldownTime { get => m_cooldownTime; set => m_cooldownTime = value; }
     public virtual void Init() 
     {
