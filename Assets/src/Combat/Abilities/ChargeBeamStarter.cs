@@ -15,6 +15,7 @@ public class ChargeBeamStarter : MonoBehaviour
     [SerializeField] List<ChargeAttackGroup> m_lanes = default;
     // when lanes fail enough times
     [SerializeField] UnityEvent m_onChargeUnitFail = default;
+    [SerializeField] UnityEvent<ChargeUnit> m_onChargeUnitInit = default;
     bool m_isCharging = false;
     // no. lanes failed
     int m_numFail = 0;
@@ -63,6 +64,7 @@ public class ChargeBeamStarter : MonoBehaviour
         // get cooldown
         item?.BeginCharging();
         m_charging?.Add(item);
+        m_onChargeUnitInit?.Invoke(item);
         m_idle.Remove(item);
     }
     // cancel all charging

@@ -18,7 +18,7 @@ public class ReflectProjectile : ActiveAbility
             projectile?.Reflect(gameObject.layer);
         }
     }
-    void StopReflect() 
+    public void StopReflect() 
     {
         m_reflectParent.gameObject.SetActive(false);
     }

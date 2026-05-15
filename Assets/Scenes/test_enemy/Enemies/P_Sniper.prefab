@@ -1258,6 +1258,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6838980710058385863, guid: f18002fc7e109604b8ddd7671458a3a8, type: 3}
+      propertyPath: m_aimTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6838980710058385863, guid: f18002fc7e109604b8ddd7671458a3a8, type: 3}
       propertyPath: m_attackHandler
       value: 
       objectReference: {fileID: 3191618185914313528}

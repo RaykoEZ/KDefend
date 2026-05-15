@@ -36,9 +36,9 @@ MonoBehaviour:
     m_Value: 0
   downscale:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: 1
   maxIterations:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 2
   dirtTexture:
     m_OverrideState: 0

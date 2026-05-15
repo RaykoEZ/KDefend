@@ -49,7 +49,6 @@ public class NpcAimingWeapon : UseWeapon
     // during aiming mode...update target positions & status
     void OnAimingUpdate()
     {
-        Debug.Log(Target);
         (m_attackHandler as NpcAttackHandler)?.UpdateTarget(Target);
         if (m_aimOverride.OverrideAimUpdate) 
         {
