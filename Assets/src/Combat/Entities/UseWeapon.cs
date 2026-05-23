@@ -1,5 +1,4 @@
-﻿using Curry.Util;
-using System;
+﻿using System;
 using UnityEngine;
 // use weapon to attack
 public class UseWeapon : ActiveAbility
@@ -12,7 +11,8 @@ public class UseWeapon : ActiveAbility
     public override float CooldownTime { get => Mathf.Min(m_weaponRotation.WeaponProperty.DelayPerCycle, m_cooldownTime); set => m_cooldownTime = value; }
     protected override void Effect_Internal()
     {
-        Attack();
+        if (m_weaponRotation == null) return;
+        PrepareAttack();
     }
     protected void Attack()
     {
@@ -29,6 +29,11 @@ public class UseWeapon : ActiveAbility
         return Target != null? 
             (Target.transform.position - transform.position).normalized :
             m_attackHandler.GetAimDirectionNormalized();
+    }
+    // called before all attack actions, when finished, invokes attack when finished
+    protected virtual void PrepareAttack() 
+    {
+        Attack();
     }
     protected virtual void OnAttack() 
     {

@@ -151,6 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8231461363488993684}
   - component: {fileID: 2167051657566231503}
+  - component: {fileID: 4789455046365563017}
   m_Layer: 7
   m_Name: WaveStriker
   m_TagString: Untagged
@@ -190,9 +191,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveStrike
   m_activateOnInit: 0
+  m_playSequenceOnUse: 0
   m_cooldownTime: 0
   m_hitsToEnd: 0
-  m_activationSequence: {fileID: 0}
+  m_activationSequence: {fileID: 4789455046365563017}
   m_activateEffects:
     m_PersistentCalls:
       m_Calls: []
@@ -200,6 +202,23 @@ MonoBehaviour:
   m_attackHandler: {fileID: 2704865638724044160}
   m_weaponRotation: {fileID: 1602223389555719483}
   m_attackArc: 360
+--- !u!320 &4789455046365563017
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2452898657200954660}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 0}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings: []
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &3751037112788974116
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,6 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcAimingWeapon
   m_activateOnInit: 0
+  m_playSequenceOnUse: 0
   m_cooldownTime: 0
   m_hitsToEnd: 0
   m_activationSequence: {fileID: 0}

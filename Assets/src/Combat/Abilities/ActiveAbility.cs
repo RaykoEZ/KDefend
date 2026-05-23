@@ -93,7 +93,7 @@ public abstract class ActiveAbility : MonoBehaviour
             OnInterrupted();
         }
     }
-    protected virtual void StartChanneling(float duration, Action onChannelingFinish, Action<float, float> onInterval = null) 
+    protected virtual void StartChanneling(float duration, Action onChannelingFinish = null, Action<float, float> onInterval = null) 
     {
         m_channeling = StartCoroutine(Channeling(duration, onChannelingFinish, onInterval));
     }

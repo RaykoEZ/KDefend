@@ -40,10 +40,9 @@ public class NpcAimingWeapon : UseWeapon
         m_aimLaser?.Clear();
         m_aiming = false;
     }
-    protected override void Effect_Internal()
+    protected override void PrepareAttack()
     {
         m_aiming = true;
-        // aim, then attack
         StartChanneling(m_aimTime, Attack);
     }
     // during aiming mode...update target positions & status
@@ -110,4 +109,3 @@ public class NpcAimingWeapon : UseWeapon
         m_attackHandler.UseWeaponOneShot(m_weaponRotation, AimDirectionNormalized());
     }
 }
-

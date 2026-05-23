@@ -944,8 +944,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2719820528439755635}
-  - component: {fileID: 8226433591564878348}
-  - component: {fileID: 4798165226732635388}
   m_Layer: 7
   m_Name: Abilities
   m_TagString: Untagged
@@ -973,47 +971,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!320 &8226433591564878348
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5560274180112906838}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 0d42b708442efc34b9d58f2566e25531, type: 2}
-  m_InitialState: 0
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: -199194801489269432, guid: 0d42b708442efc34b9d58f2566e25531, type: 2}
-    value: {fileID: 4798165226732635388}
-  m_ExposedReferences:
-    m_References: []
---- !u!95 &4798165226732635388
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5560274180112906838}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 08d3a222e46094e498dcca98b6b12a2c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6907594699860758178
 GameObject:
   m_ObjectHideFlags: 0

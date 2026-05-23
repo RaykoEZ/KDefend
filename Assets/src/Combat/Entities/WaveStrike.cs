@@ -8,7 +8,7 @@ public class WaveStrike : UseWeapon
 {
     // Angle of range to shoot
     [Range(0, 360f)]
-    [SerializeField] protected float m_attackArc = default; 
+    [SerializeField] protected float m_attackArc = default;
     protected float m_angleInterval = 0f;
     protected float m_currentAimAngle = 0f;
     void OnEnable()
@@ -18,6 +18,11 @@ public class WaveStrike : UseWeapon
     protected override Vector2 AimDirectionNormalized()
     {
         return VectorExtension.VectorFromDegree(m_currentAimAngle);
+    }
+    protected override void PrepareAttack()
+    {
+        m_activationSequence?.Play();
+        StartChanneling((float)m_activationSequence.duration, Attack);
     }
     protected override void PostAttack()
     {
