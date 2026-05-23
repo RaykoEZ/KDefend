@@ -1,9 +1,6 @@
 ﻿using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Playables;
-
 [Serializable]
 public struct EntityProperty
 {

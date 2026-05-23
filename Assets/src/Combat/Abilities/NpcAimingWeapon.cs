@@ -81,7 +81,7 @@ public class NpcAimingWeapon : UseWeapon
         // (ray blinking with sfx)
         // delay
         // sniper shot releases to target position
-        StartChanneling(0.2f, ShootOrWait);       
+        ShootOrWait();       
     }
     protected override Vector2 AimDirectionNormalized()
     {
@@ -92,18 +92,22 @@ public class NpcAimingWeapon : UseWeapon
         // set target for attack, override to static direction if no target is found (direction is zero)
         return result == Vector2.zero? m_aimOverride.AttackDirection.normalized : base.AimDirectionNormalized();
     }
+    // trigger this to shoot after aiming finishes
     void ShootOrWait() 
     {
         if (m_targetAcquired)
         {
-            // set target for attack
-            m_attackHandler.UseWeaponOneShot(m_weaponRotation, AimDirectionNormalized());
+            m_activationSequence?.Play();
         }
-
         m_onCooldown = StartCoroutine(Cooldown(CooldownTime));
         // reset skill states
         m_aimLaser?.Clear();
         m_aiming = false;
+    }
+    public void Shoot() 
+    {
+        // set target for attack
+        m_attackHandler.UseWeaponOneShot(m_weaponRotation, AimDirectionNormalized());
     }
 }
 

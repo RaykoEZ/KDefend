@@ -21,6 +21,13 @@ namespace Curry.UI
         {
             StartCoroutine(BgmTransition_Internal(clip));        
         }
+        public void ChangeBGMInstant(AudioClip clip) 
+        {
+            m_bgmSource.Stop();
+            // start new bgm
+            m_bgmSource.clip = clip;
+            m_bgmSource.Play();
+        }
         IEnumerator BgmTransition_Internal(AudioClip clip) 
         {
             // Fade out old bgm

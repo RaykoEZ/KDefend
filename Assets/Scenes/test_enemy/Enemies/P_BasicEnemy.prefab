@@ -418,18 +418,6 @@ MonoBehaviour:
   m_onDefeat:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3605618064992875526}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: PlayOneShot
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1526858461598899063}
         m_TargetAssemblyTypeName: DropItemOnDefeat, Assembly-CSharp
         m_MethodName: TryDropItem
@@ -457,6 +445,18 @@ MonoBehaviour:
           m_StringArgument: takeHit
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3605618064992875526}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: takeHit
+          m_BoolArgument: 0
+        m_CallState: 2
   m_attackHandler: {fileID: 7931186853949798028}
   m_contactDamage: 2
   m_movementHandler: {fileID: 3419066620989487351}
@@ -475,7 +475,8 @@ MonoBehaviour:
   m_warpDistanceThreshold: 2500
   m_teleportCooldownTime: 5
   m_updateTimeInterval: 0.5
-  m_formation: {fileID: 3906125752563693410}
+  m_defaultFormation: {fileID: 0}
+  m_navMode: 0
 --- !u!50 &1817311363580228822
 Rigidbody2D:
   serializedVersion: 5
@@ -705,6 +706,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d8b09441dacf84da036ff03600a725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EncircleHandler
+  m_onFormationInit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_onFormationEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  m_members: []
   m_encircleAngleRange: 42.6
   m_predictionDistance: 1405
 --- !u!1 &5281512484494855909

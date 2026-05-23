@@ -86,7 +86,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1818725071
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -210,13 +210,13 @@ MonoBehaviour:
   m_detachFromUser: 0
   m_weaponProperty:
     PassWalls: 0
-    Damage: 3
+    Damage: 10
     AttackPerCycle: 1
     Speed: 0
     Life: 1
     DelayPerAttack: 0.1
     DelayPerCycle: 2
-    PushPower: 0.5
+    PushPower: 1
   m_onHitSfx: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
   m_onLaunchSfx: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
   m_onHitEffects: []

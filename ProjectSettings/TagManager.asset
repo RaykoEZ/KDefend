@@ -23,9 +23,9 @@ TagManager:
   - Item
   - AimTarget
   - Building_Bridge
-  - 
-  - 
-  - 
+  - PP_BG
+  - PP_MidG
+  - PP_Player
   - 
   - 
   - 
@@ -44,6 +44,9 @@ TagManager:
   - name: Background
     uniqueID: 2626677081
     locked: 0
+  - name: Midground
+    uniqueID: 3335106005
+    locked: 0
   - name: Player
     uniqueID: 847777625
     locked: 0
@@ -55,3 +58,4 @@ TagManager:
     locked: 0
   m_RenderingLayers:
   - Default
+  - Layer 1

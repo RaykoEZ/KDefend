@@ -8,6 +8,7 @@ using UnityEngine.Playables;
 public abstract class ActiveAbility : MonoBehaviour 
 {
     [SerializeField] protected bool m_activateOnInit = default;
+    [SerializeField] protected bool m_playSequenceOnUse = default;
     [Range(0f, 999f)]
     [SerializeField] protected float m_cooldownTime = default;
     [SerializeField] protected int m_hitsToEnd = default;
@@ -27,7 +28,7 @@ public abstract class ActiveAbility : MonoBehaviour
     public virtual void Init() 
     {
         if (!CanUse()) return;
-        if(m_activationSequence != null) 
+        if (m_activationSequence != null && m_playSequenceOnUse) 
         {
             m_activationSequence.Play();
         }

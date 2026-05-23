@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 579bfee80951a1d4aa17ce82b35b322e, type: 2}
-  m_Color: {r: 0.764151, g: 0.7300886, b: 0.6668299, a: 0.6392157}
+  m_Color: {r: 0.4507941, g: 0.468, b: 0.4507941, a: 0.24705882}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -96,7 +96,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -1668290215
+  m_SortingLayerID: -959861291
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &2406201296791056334
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 4162562364406661699}
   - component: {fileID: 8597283790815187803}
   - component: {fileID: 3080064247859496339}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: curb_shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.311917, g: 0.823, b: 0.66822606, a: 0.45490196}
+  m_Color: {r: 0.33854702, g: 0.43811965, b: 0.466, a: 0.29803923}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -196,7 +196,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -1668290215
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &2742530058375852813
 GameObject:
@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 5239491906165333387}
   - component: {fileID: 3725241918378274857}
   - component: {fileID: 7226147139706457870}
+  - component: {fileID: 5403193985873754655}
   m_Layer: 9
   m_Name: building
   m_TagString: Untagged
@@ -273,6 +274,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!223 &5403193985873754655
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2742530058375852813}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: -1668290215
+  m_SortingOrder: 3
+  m_TargetDisplay: 0
 --- !u!1 &4547294332499695189
 GameObject:
   m_ObjectHideFlags: 0

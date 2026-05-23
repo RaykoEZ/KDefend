@@ -646,18 +646,6 @@ MonoBehaviour:
   m_onDefeat:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1352278719641674224}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: PlayOneShot
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3985701953762306913}
         m_TargetAssemblyTypeName: DropItemOnDefeat, Assembly-CSharp
         m_MethodName: TryDropItem
@@ -680,6 +668,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: takeHit
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1352278719641674224}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: takeHit
@@ -1155,7 +1155,7 @@ PrefabInstance:
       objectReference: {fileID: 4325537609493398499}
     - target: {fileID: 2655935914774179688, guid: f18002fc7e109604b8ddd7671458a3a8, type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2655935914774179688, guid: f18002fc7e109604b8ddd7671458a3a8, type: 3}
       propertyPath: m_SortingLayerID
@@ -1259,12 +1259,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6838980710058385863, guid: f18002fc7e109604b8ddd7671458a3a8, type: 3}
       propertyPath: m_aimTime
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6838980710058385863, guid: f18002fc7e109604b8ddd7671458a3a8, type: 3}
       propertyPath: m_attackHandler
       value: 
       objectReference: {fileID: 3191618185914313528}
+    - target: {fileID: 6838980710058385863, guid: f18002fc7e109604b8ddd7671458a3a8, type: 3}
+      propertyPath: m_activateEffects.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

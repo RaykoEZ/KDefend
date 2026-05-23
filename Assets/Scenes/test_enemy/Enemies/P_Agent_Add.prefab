@@ -367,9 +367,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_stealth: {fileID: 293262353951969813}
   m_callHelp: {fileID: 0}
-  m_attack: {fileID: 0}
   m_onLowHealth:
-  - {fileID: 5641416596222669894, guid: 31c3a0596f3477c49812b0c5fb023f53, type: 3}
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3847191369092980020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,6 +450,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: takeHit
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3755754206439444329}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: takeHit
@@ -662,7 +674,8 @@ MonoBehaviour:
   m_warpDistanceThreshold: 2000
   m_teleportCooldownTime: 7
   m_updateTimeInterval: 1
-  m_formation: {fileID: 2995466180879248310}
+  m_defaultFormation: {fileID: 0}
+  m_navMode: 0
 --- !u!114 &2995466180879248310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,6 +688,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d8b09441dacf84da036ff03600a725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EncircleHandler
+  m_onFormationInit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_onFormationEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  m_members: []
   m_encircleAngleRange: 10.9
   m_predictionDistance: 628
 --- !u!1 &6330907610716409922
@@ -975,8 +995,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1267c32b120564840ab25953fe45eb65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_activateOnInit: 0
   m_cooldownTime: 35
   m_hitsToEnd: 0
+  m_activationSequence: {fileID: 0}
+  m_activateEffects:
+    m_PersistentCalls:
+      m_Calls: []
   m_anim: {fileID: 3115157289695613641}
   m_duration: 40
 --- !u!1 &9061027466069622586

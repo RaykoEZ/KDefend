@@ -70,9 +70,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _puddlePower: 50
+    - _puddlePower: 70
     - _riipleSpeed: 0.03
-    - _rippleStrength: 0.35
+    - _rippleStrength: 0.3
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
