@@ -945,6 +945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_activateOnInit: 1
+  m_playSequenceOnUse: 0
   m_cooldownTime: 2
   m_hitsToEnd: -1
   m_activationSequence: {fileID: 0}
@@ -1591,6 +1592,10 @@ PrefabInstance:
       propertyPath: m_attackHandler
       value: 
       objectReference: {fileID: 1492414745406935436}
+    - target: {fileID: 6838980710058385863, guid: f18002fc7e109604b8ddd7671458a3a8, type: 3}
+      propertyPath: m_weaponRotation
+      value: 
+      objectReference: {fileID: 3947369081315355638, guid: 09395f8ecdb20c946980af0fa90251fb, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

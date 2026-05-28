@@ -14,7 +14,7 @@ public class UseWeapon : ActiveAbility
         if (m_weaponRotation == null) return;
         PrepareAttack();
     }
-    protected void Attack()
+    public void Attack()
     {
         if (m_weaponRotation == null) return;
         // for each strike angle interval, attack with weapon from rotation list

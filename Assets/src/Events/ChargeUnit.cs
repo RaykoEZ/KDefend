@@ -9,6 +9,7 @@ public delegate void OnChargeUnitUpdate(ChargeUnit toUpdate);
 public class ChargeUnit : MonoBehaviour 
 {
     [SerializeField] float m_chargingDuration = default;
+    [SerializeField] PlayableAsset m_idle = default;
     [SerializeField] PlayableAsset m_chargeLoop = default;
     [SerializeField] PlayableAsset m_shargeFinishing = default;
     [SerializeField] PlayableDirector m_sequencer = default;
@@ -24,9 +25,14 @@ public class ChargeUnit : MonoBehaviour
     }
     public void CancelCharging() 
     {
-        m_charging = false;
+        ResetCharge();
         OnCancel?.Invoke(this);
         OnChargeFail?.Invoke();
+    }
+    public void ResetCharge() 
+    {
+        m_charging = false;
+        m_sequencer?.Play(m_idle, DirectorWrapMode.Hold);
     }
     public void OnFinished() 
     {

@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 792987912367956665}
   - component: {fileID: 906978621635688639}
   m_Layer: 11
-  m_Name: P_BaseShot_Enemy
+  m_Name: P_Shot_Snipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,11 +123,11 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4937486622570112720}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0
   m_GravityScale: 0
@@ -157,17 +157,17 @@ MonoBehaviour:
   m_detachFromUser: 1
   m_weaponProperty:
     PassWalls: 0
-    Damage: 2
-    AttackPerCycle: 2
-    Speed: 800
+    Damage: 10
+    AttackPerCycle: 1
+    Speed: 1200
     Life: 3
-    DelayPerAttack: 0.2
-    DelayPerCycle: 1
-    PushPower: 2.5
+    DelayPerAttack: 0
+    DelayPerCycle: 5
+    PushPower: 5
   m_onHitSfx: {fileID: 8300000, guid: 881e3f52c86c94f26a60718d35627cd8, type: 3}
   m_onLaunchSfx: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
   m_onHitEffects: []
-  m_spreadAngleRange: 5
+  m_spreadAngleRange: 0
   m_delayBeforeAttack: 0
   m_beforeAttack:
     m_PersistentCalls:
@@ -201,7 +201,7 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 131648
+    m_Bits: 576
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295

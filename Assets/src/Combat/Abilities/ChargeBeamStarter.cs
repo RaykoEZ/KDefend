@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 // spawn all charge units gradually
 // when a group of units finish charging, fire beam in that direction
 // if enough units fail, trigger fail sequence
@@ -12,10 +13,10 @@ public class ChargeBeamStarter : MonoBehaviour
     [SerializeField] float m_spawnTimeInterval = default;
     [SerializeField] float m_cooldown = default;
     [SerializeField] List<ChargeUnit> m_chargeUnits = default;
-    [SerializeField] List<ChargeAttackGroup> m_lanes = default;
+    [SerializeField] ChargeAttackGroup m_chargeGroup = default;
+    [SerializeField] PlayableDirector m_sequencer = default;
     // when lanes fail enough times
     [SerializeField] UnityEvent m_onChargeUnitFail = default;
-    [SerializeField] UnityEvent<ChargeUnit> m_onChargeUnitInit = default;
     bool m_isCharging = false;
     // no. lanes failed
     int m_numFail = 0;
@@ -27,10 +28,7 @@ public class ChargeBeamStarter : MonoBehaviour
     }
     void OnEnable()
     {
-        foreach (var lane in m_lanes) 
-        {
-            lane.OnLaneAttack += OnLaneFinish;
-        }
+        m_chargeGroup.OnChargeFinish += OnGroupChargeFinish;
         foreach (var unit in m_chargeUnits) 
         {
             unit.OnCancel += OnChargeUnitFail;
@@ -38,10 +36,7 @@ public class ChargeBeamStarter : MonoBehaviour
     }
     void OnDisable()
     {
-        foreach (var lane in m_lanes)
-        {
-            lane.OnLaneAttack -= OnLaneFinish;
-        }
+        m_chargeGroup.OnChargeFinish -= OnGroupChargeFinish;
         foreach (var unit in m_chargeUnits)
         {
             unit.OnCancel -= OnChargeUnitFail;
@@ -64,7 +59,6 @@ public class ChargeBeamStarter : MonoBehaviour
         // get cooldown
         item?.BeginCharging();
         m_charging?.Add(item);
-        m_onChargeUnitInit?.Invoke(item);
         m_idle.Remove(item);
     }
     // cancel all charging
@@ -84,8 +78,11 @@ public class ChargeBeamStarter : MonoBehaviour
             m_onChargeUnitFail?.Invoke();
         }
     }
-    public void OnLaneFinish(ChargeAttackGroup item)
+    public void OnGroupChargeFinish(ChargeAttackGroup item)
     {
+        // start sequence to activate attack pattern
+        m_sequencer.time = 0;
+        m_sequencer.Play();
         m_isCharging = false;
         // stop all other charge units
         StopAll();

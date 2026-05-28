@@ -13,11 +13,14 @@ public class ChargeAttackGroup : MonoBehaviour
     [SerializeField] List<ChargeUnit> m_chargeUnits = default;
     // fire beam here
     [SerializeField] UnityEvent m_onChargeAttack = default;
-    public event OnChargeGroupUpdate OnLaneAttack = default;
+    public event OnChargeGroupUpdate OnChargeFinish = default;
+    bool m_readyToStrike;
     public List<ChargeUnit> ChargeUnits => m_chargeUnits;
-    HashSet<ChargeUnit> m_charged = new HashSet<ChargeUnit>();
+    public bool ReadyToStrike { get => m_readyToStrike; private set => m_readyToStrike = value; }
+    int m_numCharged = 0;
     void OnEnable()
     {
+        ReadyToStrike = false;
         foreach (var item in ChargeUnits)
         {
             item.OnFinish += OnUnitFinish;
@@ -25,20 +28,38 @@ public class ChargeAttackGroup : MonoBehaviour
     }
     void OnDisable()
     {
+        ReadyToStrike = false;
         foreach (var item in ChargeUnits)
         {
             item.OnFinish -= OnUnitFinish;
         }
     }
+    void ResetUnits() 
+    {
+        foreach (var item in ChargeUnits)
+        {
+            item?.ResetCharge();
+        }
+        ReadyToStrike = false;
+    }
+    public void Activate() 
+    {
+        if (!ReadyToStrike) return;
+        m_onChargeAttack?.Invoke();
+    }
     void OnUnitFinish(ChargeUnit unit) 
     {
-        m_charged.Add(unit);
+        m_numCharged++;
         // check is all have chanrged
-        if (m_charged.Count == m_chargeUnits.Count) 
+        if (m_numCharged == m_chargeUnits.Count) 
         {
-            m_charged.Clear();
-            OnLaneAttack?.Invoke(this);
-            m_onChargeAttack?.Invoke();
+            // set this to ready
+            ReadyToStrike = true;
+            // attack
+            OnChargeFinish?.Invoke(this);
+            // reset charge states
+            m_numCharged = 0;
+            ResetUnits();
         }
     }
 }

@@ -20,13 +20,17 @@ PrefabInstance:
       propertyPath: m_rechargeCooldown
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4198696518014794181, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: OnChargeFinish.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Shoot
+      objectReference: {fileID: 0}
     - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_PlayableAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 5822fe2e774173541a46077b62ea7731, type: 2}
+      objectReference: {fileID: 11400000, guid: 2c32aacb5b917e44b82def93cd9c5d19, type: 2}
     - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_SceneBindings.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_SceneBindings.Array.data[3].key
@@ -37,6 +41,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1879678859499911586, guid: 5822fe2e774173541a46077b62ea7731, type: 2}
     - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_SceneBindings.Array.data[5].key
+      value: 
+      objectReference: {fileID: 3485405635038611667, guid: 227621a2f6fad304592f8add6142d616, type: 2}
+    - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_SceneBindings.Array.data[3].value
       value: 
       objectReference: {fileID: 7936422156888570448}
@@ -44,6 +52,10 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[4].value
       value: 
       objectReference: {fileID: 3952864751055770758}
+    - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_SceneBindings.Array.data[5].value
+      value: 
+      objectReference: {fileID: 7936422156888570448}
     - target: {fileID: 5396002096139608796, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_Layer
       value: 8

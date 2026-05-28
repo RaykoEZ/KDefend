@@ -21,8 +21,9 @@ public class WaveStrike : UseWeapon
     }
     protected override void PrepareAttack()
     {
+        // play initate sequence
+        // sequence signal will trigger the attack frame during playback
         m_activationSequence?.Play();
-        StartChanneling((float)m_activationSequence.duration, Attack);
     }
     protected override void PostAttack()
     {
