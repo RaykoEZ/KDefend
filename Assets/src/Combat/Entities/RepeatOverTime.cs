@@ -7,11 +7,11 @@ public interface IEffectOverTime<T>
 }
 public class RepeatOverTime : EffectModule, IEffectOverTime<BaseEntity>
 {
-    [SerializeField] float m_waitSecondsPerTick = default;
+    [SerializeField] protected float m_waitSecondsPerTick = default;
     /// <summary>
     /// If value < 1, unlimited uses
     /// </summary>
-    [SerializeField] int m_numTicks = default;
+    [SerializeField] protected int m_numTicks = default;
     public float TimeInterval => m_waitSecondsPerTick;
     /// <summary>
     /// Start Effect cycle

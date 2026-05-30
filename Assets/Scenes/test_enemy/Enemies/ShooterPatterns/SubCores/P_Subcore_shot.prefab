@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1016462513838371467, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1016462513838371467, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1598455585813942747, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.000045776367
@@ -63,6 +71,14 @@ PrefabInstance:
     - target: {fileID: 5733506426119868081, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_Name
       value: P_Subcore_shot
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339498675749871583, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339498675749871583, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7361658897017431886, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_IsActive

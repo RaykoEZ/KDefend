@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_targetSighted.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_base.Health
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 7258360770455429820, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_Layer
       value: 7
