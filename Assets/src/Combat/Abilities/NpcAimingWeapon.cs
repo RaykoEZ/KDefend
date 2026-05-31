@@ -20,7 +20,7 @@ public class NpcAimingWeapon : UseWeapon
     protected bool m_aiming = false;
     public override bool CanUse()
     {
-        return base.CanUse() && !m_aiming && Target != null;
+        return base.CanUse() && !m_aiming && Target != null && LineOfSight();
     }
     void FixedUpdate()
     {
@@ -40,10 +40,16 @@ public class NpcAimingWeapon : UseWeapon
         m_aimLaser?.Clear();
         m_aiming = false;
     }
+    protected bool LineOfSight() 
+    {
+        Vector3 dir = AimDirectionNormalized();
+        var hit = m_aimLaser.PointTowardsDirection(dir, passThroughTarget: false);
+        return hit.rigidbody != null && hit.rigidbody.TryGetComponent(out BaseEntity target) && target == Target;
+    }
     protected override void PrepareAttack()
     {
         m_aiming = true;
-        StartChanneling(m_aimTime, Attack);
+        StartChanneling(m_aimTime, Attack);      
     }
     // during aiming mode...update target positions & status
     void OnAimingUpdate()
@@ -53,13 +59,8 @@ public class NpcAimingWeapon : UseWeapon
         {
             return;
         }
-        Vector3 dir = AimDirectionNormalized();
-        var hit = m_aimLaser.PointTowardsDirection(dir, passThroughTarget: false);
         // collision check for target or obstacles
-        m_targetAcquired =
-        hit.rigidbody == null ?
-        false :
-        hit.rigidbody.TryGetComponent(out BaseEntity result) && result == Target;
+        m_targetAcquired = LineOfSight();
         if (!m_targetAcquired) 
         {
             m_aimLaser?.Clear();
@@ -96,7 +97,7 @@ public class NpcAimingWeapon : UseWeapon
     {
         if (m_targetAcquired)
         {
-            m_activationSequence?.Play();
+            GameUtil.PlayActivationSequence(m_activationSequence);
         }
         m_onCooldown = StartCoroutine(Cooldown(CooldownTime));
         // reset skill states

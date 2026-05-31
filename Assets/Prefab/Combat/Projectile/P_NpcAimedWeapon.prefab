@@ -55,24 +55,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcAimingWeapon
   m_activateOnInit: 1
+  m_playSequenceOnUse: 0
   m_cooldownTime: 7
   m_hitsToEnd: 0
   m_activationSequence: {fileID: 701640743986962175}
   m_activateEffects:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 701640743986962175}
-        m_TargetAssemblyTypeName: UnityEngine.Playables.PlayableDirector, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_numAttacksPerCycle: 1
   m_attackHandler: {fileID: 0}
   m_weaponRotation: {fileID: 3947369081315355638, guid: 9c1a788816ae56a4885939efc9725a0e, type: 3}

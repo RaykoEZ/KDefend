@@ -33,7 +33,7 @@ public class SequencePlayer : MonoBehaviour
     }
     protected virtual IEnumerator PlaySequence_Internal(PlayableAsset toPlay) 
     {
-        m_director.Play(toPlay);
+        GameUtil.PlayActivationSequence(m_director, toPlay);
         yield return new WaitForSeconds((float)m_director.playableAsset.duration);
         yield return new WaitForSeconds(m_waitAfterSequenceFinishes);
         OnFinish?.Invoke();

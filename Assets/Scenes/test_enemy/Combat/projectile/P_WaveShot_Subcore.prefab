@@ -88,6 +88,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 906978621635688639, guid: 916bc2afb7bcb4341b76822b12598538, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4937486622570112720, guid: 916bc2afb7bcb4341b76822b12598538, type: 3}
       propertyPath: m_Name
       value: P_WaveShot_Subcore

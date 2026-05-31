@@ -10,7 +10,7 @@ public class ChargeUnit : MonoBehaviour
 {
     [SerializeField] float m_chargingDuration = default;
     [SerializeField] PlayableAsset m_chargeLoop = default;
-    [SerializeField] PlayableAsset m_shargeFinishing = default;
+    [SerializeField] PlayableAsset m_chargeFinishing = default;
     [SerializeField] PlayableDirector m_sequencer = default;
     [SerializeField] UnityEvent OnChargeFinish = default;
     [SerializeField] UnityEvent OnChargeFail = default;
@@ -42,10 +42,8 @@ public class ChargeUnit : MonoBehaviour
     IEnumerator Charging() 
     {
         m_charging = true;
-        m_sequencer.time = 0;
-        m_sequencer?.Play(m_chargeLoop, DirectorWrapMode.Loop);
+        GameUtil.PlayActivationSequence(m_sequencer, m_chargeLoop, DirectorWrapMode.Loop);
         yield return new WaitForSeconds(m_chargingDuration);
-        m_sequencer.time = 0;
-        m_sequencer?.Play(m_shargeFinishing, DirectorWrapMode.Hold);
+        GameUtil.PlayActivationSequence(m_sequencer, m_chargeFinishing, DirectorWrapMode.Hold);
     }
 }

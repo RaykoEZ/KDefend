@@ -15,6 +15,7 @@ public class ChargeAttackGroup : MonoBehaviour
     [SerializeField] UnityEvent m_onChargeAttack = default;
     // when lanes fail enough times
     [SerializeField] UnityEvent m_onChargeUnitFail = default;
+    [SerializeField] UnityEvent m_onChargeFinish = default;
     public event OnChargeGroupUpdate OnChargeFinish = default;
     bool m_readyToStrike;
     bool m_isCharging = false;
@@ -86,6 +87,7 @@ public class ChargeAttackGroup : MonoBehaviour
             ReadyToStrike = true;
             // attack
             OnChargeFinish?.Invoke(this);
+            m_onChargeFinish?.Invoke();
         }
     }
     void ChargeUnit(ChargeUnit toCharge)

@@ -24,6 +24,34 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3906793077323897239, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onHpThresholdReached.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3906793077323897239, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onHpThresholdReached.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 5322109696065111505}
+    - target: {fileID: 3906793077323897239, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onHpThresholdReached.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3906793077323897239, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onHpThresholdReached.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: Stop
+      objectReference: {fileID: 0}
+    - target: {fileID: 3906793077323897239, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onHpThresholdReached.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: UnityEngine.Playables.PlayableDirector, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3906793077323897239, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onHpThresholdReached.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3906793077323897239, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onHpThresholdReached.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4198696518014794181, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_rechargeCooldown
       value: 5
@@ -32,38 +60,6 @@ PrefabInstance:
       propertyPath: OnChargeFinish.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Shoot
       objectReference: {fileID: 0}
-    - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
-      propertyPath: m_PlayableAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 2c32aacb5b917e44b82def93cd9c5d19, type: 2}
-    - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
-      propertyPath: m_SceneBindings.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
-      propertyPath: m_SceneBindings.Array.data[3].key
-      value: 
-      objectReference: {fileID: 6762556651806505105, guid: 5822fe2e774173541a46077b62ea7731, type: 2}
-    - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
-      propertyPath: m_SceneBindings.Array.data[4].key
-      value: 
-      objectReference: {fileID: 1879678859499911586, guid: 5822fe2e774173541a46077b62ea7731, type: 2}
-    - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
-      propertyPath: m_SceneBindings.Array.data[5].key
-      value: 
-      objectReference: {fileID: 3485405635038611667, guid: 227621a2f6fad304592f8add6142d616, type: 2}
-    - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
-      propertyPath: m_SceneBindings.Array.data[3].value
-      value: 
-      objectReference: {fileID: 7936422156888570448}
-    - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
-      propertyPath: m_SceneBindings.Array.data[4].value
-      value: 
-      objectReference: {fileID: 3952864751055770758}
-    - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
-      propertyPath: m_SceneBindings.Array.data[5].value
-      value: 
-      objectReference: {fileID: 7936422156888570448}
     - target: {fileID: 5396002096139608796, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -171,13 +167,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
---- !u!82 &3952864751055770758 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 3906384920657201466, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
-  m_PrefabInstance: {fileID: 66746880605855164}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &7936422156888570448 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7984587505452279788, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+--- !u!320 &5322109696065111505 stripped
+PlayableDirector:
+  m_CorrespondingSourceObject: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
   m_PrefabInstance: {fileID: 66746880605855164}
   m_PrefabAsset: {fileID: 0}

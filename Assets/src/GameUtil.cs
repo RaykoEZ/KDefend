@@ -1,10 +1,11 @@
-﻿using Curry.Events;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Curry.Events;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public struct FloatRange
 {
@@ -45,6 +46,18 @@ public static class GameUtil
     public static bool TextHasNoAlphaNumeric(string toCheck)
     {
         return s_regexNoAlphaNumeric.IsMatch(toCheck);
+    }
+    public static void PlayActivationSequence(PlayableDirector toPlay)
+    {
+        toPlay.RebuildGraph();
+        toPlay.time = 0;
+        toPlay.Play();
+    }
+    public static void PlayActivationSequence(PlayableDirector toPlay, PlayableAsset content, DirectorWrapMode wrapMode = DirectorWrapMode.None)
+    {
+        toPlay.RebuildGraph();
+        toPlay.time = 0;
+        toPlay.Play(content, wrapMode);
     }
     // *if both lists are null, return true
     public static bool ListEqual<T>(List<T> a, List<T> b) 

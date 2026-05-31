@@ -18,6 +18,6 @@ public class MeleeAttack : BaseWeapon
         }
         // determine combo behaviour
         InProgress = true;
-        m_director.Play(m_attackPattern);
+        GameUtil.PlayActivationSequence(m_director, m_attackPattern);
     }
 }

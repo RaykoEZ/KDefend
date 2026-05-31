@@ -462,7 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChargeUnit
   m_chargingDuration: 0.5
   m_chargeLoop: {fileID: 11400000, guid: 5822fe2e774173541a46077b62ea7731, type: 2}
-  m_shargeFinishing: {fileID: 11400000, guid: 2c32aacb5b917e44b82def93cd9c5d19, type: 2}
+  m_chargeFinishing: {fileID: 11400000, guid: 2c32aacb5b917e44b82def93cd9c5d19, type: 2}
   m_sequencer: {fileID: 5275632149523798125}
   OnChargeFinish:
     m_PersistentCalls:
@@ -731,7 +731,7 @@ PlayableDirector:
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 5ed88cd94f2c9864c9d404147866c433, type: 2}
   m_InitialState: 0
-  m_WrapMode: 0
+  m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -754,7 +754,8 @@ PlayableDirector:
   - key: {fileID: -1310147187199325905, guid: 5ed88cd94f2c9864c9d404147866c433, type: 2}
     value: {fileID: 3069100835644329735}
   m_ExposedReferences:
-    m_References: []
+    m_References:
+    - 9e069d25b5920894ca265723cbd1b3ca: {fileID: 3751037112788974116}
 --- !u!114 &2704865638724044160
 MonoBehaviour:
   m_ObjectHideFlags: 0

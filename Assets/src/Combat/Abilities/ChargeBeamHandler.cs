@@ -19,8 +19,7 @@ public class ChargeBeamHandler : MonoBehaviour
     public void OnGroupChargeFinish(ChargeAttackGroup item)
     {
         // start sequence to activate attack pattern
-        m_sequencer.time = 0;
-        m_sequencer.Play();
+        GameUtil.PlayActivationSequence(m_sequencer);
         // stop all other charge units
         StopAllCoroutines();
         // charge again later
