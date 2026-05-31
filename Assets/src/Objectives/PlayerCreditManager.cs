@@ -1,4 +1,5 @@
 ﻿using Curry.Events;
+using Curry.UI;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class PlayerCreditManager : MonoBehaviour
     [SerializeField] Player m_player = default;
     [SerializeField] TextMeshProUGUI m_display = default;
     [SerializeField] TextMeshProUGUI m_animate = default;
+    [SerializeField] ResourceDisplayHandler m_hpBar = default;
     [SerializeField] UnityEvent m_onCreditUpdate = default;
     [SerializeField] UnityEvent m_onCreditTargetReached = default;
     Dictionary<string, CreditChangeOverTime> m_changesOverTime = new Dictionary<string, CreditChangeOverTime>();
@@ -21,6 +23,8 @@ public class PlayerCreditManager : MonoBehaviour
     {
         m_player.OnHeal += RefreshDisplay;
         m_player.OnTakeDamage += RefreshDisplay;
+        m_hpBar.SetMaxValue(TargetCredit);
+        m_hpBar.SetCurrentValue(m_player.CurrentStats.Property.Health);
         KDEventHandler.ListenToGlobal(GameEventTriggerType.CreditOverTime, CreditOverTime);
     }
     void OnDisable()
@@ -39,6 +43,8 @@ public class PlayerCreditManager : MonoBehaviour
         m_animate.color = change < 0 ? Color.red : Color.green;
         m_animate.text = $"{sign}{change}";
         m_onCreditUpdate?.Invoke();
+        m_hpBar.SetMaxValue(TargetCredit);
+        m_hpBar.SetCurrentValue(m_player.CurrentStats.Property.Health);
         m_display.text = $"{CurrentCredit.ToString()} / {m_targetCredit}";
         // when credit target reached, call level event
         if (CurrentCredit >= m_targetCredit) 
