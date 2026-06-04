@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthThresholdListener
   m_compareMode: 4
-  m_triggerHealthThreshold: 1
+  m_triggerHealthThreshold: 0.8
   m_target: {fileID: 7080463277299594758}
   m_onHpThresholdReached:
     m_PersistentCalls:
@@ -252,30 +252,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: RepeatOverTime, Assembly-CSharp
         m_MethodName: Deactivate
         m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 8339603554721472520}
-        m_TargetAssemblyTypeName: UnityEngine.CircleCollider2D, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 5275632149523798125}
-        m_TargetAssemblyTypeName: UnityEngine.Playables.PlayableDirector, UnityEngine
-        m_MethodName: Stop
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -479,9 +455,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnChargeFail:
+  OnChargeInterrupt:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5275632149523798125}
+        m_TargetAssemblyTypeName: UnityEngine.Playables.PlayableDirector, UnityEngine
+        m_MethodName: Play
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 5ed88cd94f2c9864c9d404147866c433, type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Playables.PlayableAsset,
+            UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &3543514502354448624
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -570,6 +559,8 @@ MonoBehaviour:
     m_Signals:
     - {fileID: 11400000, guid: 5eaca8b8fdbfe9a419f0d3311fd9f3cb, type: 2}
     - {fileID: 11400000, guid: fa528ee3e1142da4a898902b47df869f, type: 2}
+    - {fileID: 11400000, guid: e4104d21c178aa54e801e8bfe6d01c6c, type: 2}
+    - {fileID: 11400000, guid: 139d76240052fe348a549c36da029164, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -587,6 +578,18 @@ MonoBehaviour:
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
+        - m_Target: {fileID: 4198696518014794181}
+          m_TargetAssemblyTypeName: ChargeUnit, Assembly-CSharp
+          m_MethodName: set_Operational
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
         - m_Target: {fileID: 4198696518014794181}
           m_TargetAssemblyTypeName: ChargeUnit, Assembly-CSharp
           m_MethodName: CancelCharging
@@ -618,6 +621,46 @@ MonoBehaviour:
           m_Arguments:
             m_ObjectArgument: {fileID: 7080463277299594758}
             m_ObjectArgumentAssemblyTypeName: BaseEntity, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8339603554721472520}
+          m_TargetAssemblyTypeName: UnityEngine.CircleCollider2D, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 4198696518014794181}
+          m_TargetAssemblyTypeName: ChargeUnit, Assembly-CSharp
+          m_MethodName: set_Operational
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4198696518014794181}
+          m_TargetAssemblyTypeName: ChargeUnit, Assembly-CSharp
+          m_MethodName: BeginCharging
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 

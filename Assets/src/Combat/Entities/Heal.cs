@@ -14,9 +14,8 @@ public class Heal : EffectModule
         // if we don't overheal, clamp heal value
         if (!m_healAboveMaxHealth) 
         {
-            heal = Mathf.Clamp(m_healAmount, 0, hpLost);
+            heal = Mathf.Clamp(m_healAmount, 0, hpLost + 1);
         }
-        if (heal == 0) return;
         target?.Heal(heal);
     }
 }

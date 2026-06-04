@@ -20,9 +20,6 @@ public class ChargeBeamHandler : MonoBehaviour
     {
         // start sequence to activate attack pattern
         GameUtil.PlayActivationSequence(m_sequencer);
-        // stop all other charge units
-        StopAllCoroutines();
-        // charge again later
     }
     // called after unleashing a charge attack
     public void OnAttackFinish() 

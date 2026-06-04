@@ -19,8 +19,7 @@ public class ChargeAttackGroup : MonoBehaviour
     public event OnChargeGroupUpdate OnChargeFinish = default;
     bool m_readyToStrike;
     bool m_isCharging = false;
-    // no. lanes failed
-    int m_numFail = 0;
+    Coroutine m_charging;
     public List<ChargeUnit> ChargeUnits => m_chargeUnits;
     public bool ReadyToStrike { get => m_readyToStrike; private set => m_readyToStrike = value; }
     int m_numCharged = 0;
@@ -54,13 +53,9 @@ public class ChargeAttackGroup : MonoBehaviour
     }
     void OnChargeUnitFail(ChargeUnit item)
     {
-        m_numFail++;
         // enter fail state
-        if (m_numFail > ChargeUnits.Count)
-        {
-            m_numFail = 0;
-            m_onChargeUnitFail?.Invoke();
-        }
+        m_onChargeUnitFail?.Invoke();
+        
     }
     // call this to start charging sequence
     public void BeginCharging()
@@ -68,7 +63,7 @@ public class ChargeAttackGroup : MonoBehaviour
         if (m_isCharging) return;
         m_isCharging = true;
         ResetUnits();
-        StartCoroutine(BeginCharging_Internal());
+        m_charging = StartCoroutine(BeginCharging_Internal());
     }
     public void Activate() 
     {
@@ -81,8 +76,9 @@ public class ChargeAttackGroup : MonoBehaviour
     {
         m_numCharged++;
         // check is all have chanrged
-        if (m_numCharged == m_chargeUnits.Count) 
+        if (m_numCharged >= m_chargeUnits.Count) 
         {
+            StopCoroutine(m_charging);
             // set this to ready
             ReadyToStrike = true;
             // attack

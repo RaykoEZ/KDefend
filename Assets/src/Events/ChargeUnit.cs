@@ -13,35 +13,47 @@ public class ChargeUnit : MonoBehaviour
     [SerializeField] PlayableAsset m_chargeFinishing = default;
     [SerializeField] PlayableDirector m_sequencer = default;
     [SerializeField] UnityEvent OnChargeFinish = default;
-    [SerializeField] UnityEvent OnChargeFail = default;
+    [SerializeField] UnityEvent OnChargeInterrupt = default;
     public event OnChargeUnitUpdate OnFinish;
     public event OnChargeUnitUpdate OnCancel;
-    bool m_charging = false;
+    bool m_operational = true;
+    Coroutine m_charge;
+    // for temporarily disabling this unit in scene events
+    public bool Operational { get => m_operational; set => m_operational = value; }
+
     public void BeginCharging() 
     {
-        if (m_charging) return;
-        StartCoroutine(Charging());
+        if (m_charge != null || !Operational) return;
+        m_charge = StartCoroutine(Charging());
     }
     public void CancelCharging() 
     {
         ResetCharge();
         OnCancel?.Invoke(this);
-        OnChargeFail?.Invoke();
     }
     public void ResetCharge() 
     {
-        m_charging = false;
-        m_sequencer.Stop();
+        if (m_charge != null)
+        {
+            StopCoroutine(m_charge);
+            m_charge = null;
+        }
     }
     public void OnFinished() 
     {
-        m_charging = false;
         OnChargeFinish?.Invoke();
         OnFinish?.Invoke(this);
+        ResetCharge();
     }
     IEnumerator Charging() 
     {
-        m_charging = true;
+        yield return new WaitForEndOfFrame();
+        // check if the core was disabled on the same frame it tried to charge up
+        if (!Operational) 
+        {
+            OnChargeInterrupt?.Invoke();
+            yield break;
+        }
         GameUtil.PlayActivationSequence(m_sequencer, m_chargeLoop, DirectorWrapMode.Loop);
         yield return new WaitForSeconds(m_chargingDuration);
         GameUtil.PlayActivationSequence(m_sequencer, m_chargeFinishing, DirectorWrapMode.Hold);

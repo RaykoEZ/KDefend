@@ -17,12 +17,12 @@ public class HealthThresholdListener : MonoBehaviour
     [SerializeField, Range(0f, 1f)] float m_triggerHealthThreshold = default;
     [SerializeField] BaseEntity m_target = default;
     [SerializeField] UnityEvent<BaseEntity> m_onHpThresholdReached = default;
-    void OnEnable()
+    public void Activate()
     {
         m_target.OnHeal += OnUpdate;
         m_target.OnTakeDamage += OnUpdate;
     }
-    void OnDisable()
+    public void Deactivate()
     {
         m_target.OnHeal -= OnUpdate;
         m_target.OnTakeDamage -= OnUpdate;
@@ -53,6 +53,9 @@ public class HealthThresholdListener : MonoBehaviour
                 trigger = false;
                 break;
         }
-        if (trigger) m_onHpThresholdReached?.Invoke(m_target);
+        if (trigger) 
+        {
+            m_onHpThresholdReached?.Invoke(m_target); 
+        }
     }
 }
