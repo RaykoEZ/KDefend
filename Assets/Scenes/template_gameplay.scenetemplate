@@ -17,6 +17,8 @@ MonoBehaviour:
   description: test level for enemy mehcanics
   preview: {fileID: 0}
   dependencies:
+  - dependency: {fileID: 8300000, guid: 84e427d6b66ab4066b6a4dcd0ce819ee, type: 3}
+    instantiationMode: 1
   - dependency: {fileID: 2800000, guid: 979f8000927b9d94086cf391cd2e48b8, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 11400000, guid: 936dc76bf104e824982e5dcaaaf0967d, type: 2}
@@ -147,6 +149,8 @@ MonoBehaviour:
     instantiationMode: 1
   - dependency: {fileID: 11400000, guid: 1fadbfe929af577498b5bda159dfe254, type: 2}
     instantiationMode: 1
+  - dependency: {fileID: 8300000, guid: fe9ba864205f1c14588ee900d107461b, type: 3}
+    instantiationMode: 1
   - dependency: {fileID: 5838720543059406538, guid: 287a3337807f12a41834c0008396a9d8, type: 3}
     instantiationMode: 0
   - dependency: {fileID: -944628639613478452, guid: 30eaa1422e2aefb4c88373f47f9bcca5, type: 3}
@@ -163,6 +167,8 @@ MonoBehaviour:
     instantiationMode: 1
   - dependency: {fileID: 2800000, guid: 9829015ca4d83b547a7861b188c76fc0, type: 3}
     instantiationMode: 0
+  - dependency: {fileID: 8300000, guid: 15ee3ad25d6c2a949af34384e632785a, type: 3}
+    instantiationMode: 1
   - dependency: {fileID: 2100000, guid: 877a3637c5309be47a225f00b20565bb, type: 2}
     instantiationMode: 0
   - dependency: {fileID: 11400000, guid: 71c96f78a5aa8c848ba6754204906712, type: 2}
@@ -266,8 +272,6 @@ MonoBehaviour:
   - dependency: {fileID: 2800000, guid: 646d77235d639ba4baa45483dac363e9, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 11400000, guid: fce0cf026adca2f4faf8663d4a54d03a, type: 2}
-    instantiationMode: 1
-  - dependency: {fileID: 8300000, guid: 881e3f52c86c94f26a60718d35627cd8, type: 3}
     instantiationMode: 1
   - dependency: {fileID: 5730841169875127470, guid: 525bc216ac8e3514f98909b8af055a6d, type: 3}
     instantiationMode: 0
