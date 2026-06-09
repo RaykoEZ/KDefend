@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-
 [RequireComponent(typeof(Laser))]
 public class RailCannon : BaseProjectile 
 {
@@ -31,6 +30,7 @@ public class RailCannon : BaseProjectile
     }
     public override void OnHit<T>(T hit)
     {
+        if (hit.IsInvincible) return;
         Hit_Internal(hit);
     }
     protected override IEnumerator InProgress()

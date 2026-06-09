@@ -72,7 +72,7 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
     }
     public override void OnHit<T>(T hit)
     {
-        Hit_Internal(hit);
+        base.OnHit(hit);
         // kill object when hitting a target, unless we pierce
         EndProjectile();
     }

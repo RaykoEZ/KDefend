@@ -104,10 +104,10 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: -152
+    x: -153
     y: -219
-    width: 2408
-    height: 2656
+    width: 2410
+    height: 2650
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -678,7 +678,7 @@ MonoBehaviour:
   flipbookBlendFrames: 0
   flipbookMotionVectors: 0
   useSoftParticle: 1
-  vfxSystemSortPriority: 1
+  vfxSystemSortPriority: 2
   sort: 1
   sortMode: 1
   revertSorting: 0
@@ -3706,7 +3706,7 @@ MonoBehaviour:
   flipbookBlendFrames: 0
   flipbookMotionVectors: 0
   useSoftParticle: 1
-  vfxSystemSortPriority: 2
+  vfxSystemSortPriority: 1
   sort: 1
   sortMode: 1
   revertSorting: 0
@@ -5197,7 +5197,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.1
+      m_SerializableObject: 0.15
     m_Space: -1
   m_Property:
     name: A
@@ -5231,7 +5231,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.4
+      m_SerializableObject: 0.5
     m_Space: -1
   m_Property:
     name: B

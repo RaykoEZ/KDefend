@@ -8,7 +8,7 @@ using UnityEngine.Playables;
 public abstract class ActiveAbility : MonoBehaviour 
 {
     [SerializeField] protected bool m_activateOnInit = default;
-    [SerializeField] protected bool m_playSequenceOnUse = default;
+    [SerializeField] protected bool m_playSequenceOnInit = default;
     [Range(0f, 999f)]
     [SerializeField] protected float m_cooldownTime = default;
     [SerializeField] protected int m_hitsToEnd = default;
@@ -28,7 +28,7 @@ public abstract class ActiveAbility : MonoBehaviour
     public virtual void Init() 
     {
         if (!CanUse()) return;
-        if (m_activationSequence != null && m_playSequenceOnUse) 
+        if (m_activationSequence != null && m_playSequenceOnInit) 
         {
             GameUtil.PlayActivationSequence(m_activationSequence);
         }
@@ -51,20 +51,14 @@ public abstract class ActiveAbility : MonoBehaviour
     public virtual void Activate(Vector2 direction)
     {
         HandleAbilityStates();
-        Effect_Internal();
-        if (Target != null) 
-        {
-            m_activateEffects?.Invoke(Target);
-        }
+        Effect_Internal();     
+        m_activateEffects?.Invoke(Target);     
     }
     public virtual void Activate()
     {
         HandleAbilityStates();
         Effect_Internal();
-        if (Target != null)
-        {
-            m_activateEffects?.Invoke(Target);
-        }
+        m_activateEffects?.Invoke(Target);
     }
     public virtual void ResetTarget()
     {

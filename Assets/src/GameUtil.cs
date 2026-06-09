@@ -138,11 +138,11 @@ public static class GameUtil
         toAim.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
     // Spawn a gameobject a prefab reference (preferrably)
-    public static T SpawnObject<T>(T spawnRef, Vector3 position, Transform parent = null) where T : MonoBehaviour
+    public static T SpawnObject<T>(T spawnRef, Vector3 localposition, Transform parent = null) where T : MonoBehaviour
     {
         T ret = UnityEngine.Object.Instantiate(spawnRef);
         ret.transform.SetParent(parent, false);
-        ret.transform.localPosition = position;
+        ret.transform.localPosition = localposition;
         return ret;
     }
     public static Vector3 RandomPositionInBounds(Bounds bounds) 

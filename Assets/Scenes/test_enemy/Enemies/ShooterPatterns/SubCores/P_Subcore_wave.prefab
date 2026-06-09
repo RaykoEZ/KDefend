@@ -85,10 +85,6 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
-      propertyPath: m_PlayableAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 2c32aacb5b917e44b82def93cd9c5d19, type: 2}
-    - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_ExposedReferences.m_References.Array.data[0].second
       value: 
       objectReference: {fileID: 0}

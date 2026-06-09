@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2901837130448357240, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_waitSecondsPerTick
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3906793077323897239, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_onHpThresholdReached.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
       value: 1

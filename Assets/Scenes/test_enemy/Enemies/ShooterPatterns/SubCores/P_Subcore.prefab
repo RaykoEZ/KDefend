@@ -228,7 +228,7 @@ MonoBehaviour:
   m_onDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_waitSecondsPerTick: 0.2
+  m_waitSecondsPerTick: 0.1
   m_numTicks: 50
 --- !u!114 &3906793077323897239
 MonoBehaviour:
@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcAimingWeapon
   m_activateOnInit: 0
-  m_playSequenceOnUse: 0
+  m_playSequenceOnInit: 0
   m_cooldownTime: 0
   m_hitsToEnd: 0
   m_activationSequence: {fileID: 5275632149523798125}

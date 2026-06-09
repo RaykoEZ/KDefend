@@ -59,6 +59,7 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
     }
     public virtual void OnHit<T>(T hit) where T : BaseEntity
     {
+        if (hit.IsInvincible) return;
         Hit_Internal(hit);
     }
     protected void Hit_Internal<T>(T hit) where T : BaseEntity
