@@ -26,7 +26,6 @@ public class BaseEntity : MonoBehaviour
     public event OnHpUpdate OnTakeDamage;
     public event OnHpUpdate OnHeal;
     public bool IsInvincible { get => m_isInvincible; set => m_isInvincible = value; }
-    public Vector2 CurrentContactPoint { get; set; }
     public EntityState BaseStats => new EntityState
     {
         Property = m_base,
@@ -53,11 +52,6 @@ public class BaseEntity : MonoBehaviour
         // when projectile hit this body, trigger on hit effects from projectile
         if (collision.attachedRigidbody.TryGetComponent(out IHitsEntity result))
         {
-            // get latest contact point, the latest contact made
-            ContactPoint2D[] contacts = new ContactPoint2D[] { };
-            int numContacts = collision.GetContacts(contacts);
-            CurrentContactPoint = numContacts  > 0? 
-                contacts[numContacts - 1].point : transform.position;
             // trigger on hit events
             result?.OnHit(this);
         }

@@ -59,24 +59,24 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 0.3, y: 0.3, z: 1}
+      - m_Value: {x: 0.8, y: 0.8, z: 1}
         m_Name: scale_spark
         m_Overridden: 1
-      - m_Value: {x: 0.3, y: 2, z: 1}
+      - m_Value: {x: 0.5, y: 3, z: 1}
         m_Name: scale_cross
         m_Overridden: 1
-      - m_Value: {x: 0.7, y: 1.5, z: 1}
+      - m_Value: {x: 2, y: 3, z: 1}
         m_Name: scale_splash
         m_Overridden: 1
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 8, y: 3.0591, z: 0.4905663, w: 1}
+      - m_Value: {x: 1.7577869, y: 0.07362458, z: 0.3475337, w: 1}
         m_Name: col_spark
         m_Overridden: 1
-      - m_Value: {x: 8, y: 3.0591, z: 0.4905663, w: 1}
+      - m_Value: {x: 3.526622, y: 0, z: 0.121850505, w: 1}
         m_Name: col_cross
         m_Overridden: 1
-      - m_Value: {x: 8, y: 3.0591, z: 0.4905663, w: 1}
+      - m_Value: {x: 0.45342296, y: 0.006416351, z: 0.08318849, w: 1}
         m_Name: col_splash
         m_Overridden: 1
     m_Uint:
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 3874869245171283132}
   - component: {fileID: 7561837114160707810}
   m_Layer: 10
-  m_Name: P_HitImpact
+  m_Name: P_Impact_Melee0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
