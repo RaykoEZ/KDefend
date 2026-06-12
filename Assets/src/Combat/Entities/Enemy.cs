@@ -67,10 +67,10 @@ public class Enemy : BaseCharacter, IHitsEntity
     }
     public virtual void OnHit<T>(T hit) where T : BaseEntity
     {
-        if (hit is Player)
+        if (hit is Player player)
         {
             // contact damage
-            hit?.TakeDamage(m_contactDamage);
+            player?.ContactDamage(m_contactDamage);
         }
         Vector2 dir = hit.transform.position - transform.position;
         if (hit is IPushable push && !(hit is Enemy))

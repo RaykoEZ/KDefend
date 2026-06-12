@@ -878,7 +878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_defaultWeapons:
-  - {fileID: 5641416596222669894, guid: 3b640f676c0fa6a47bef2b28535862c6, type: 3}
+  - {fileID: 5641416596222669894, guid: 31c3a0596f3477c49812b0c5fb023f53, type: 3}
   m_onAttack:
     m_PersistentCalls:
       m_Calls:

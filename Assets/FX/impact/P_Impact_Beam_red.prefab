@@ -59,24 +59,24 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 2, y: 2, z: 1}
+      - m_Value: {x: 1.2, y: 1.2, z: 1}
         m_Name: scale_spark
         m_Overridden: 1
-      - m_Value: {x: 2, y: 3.5, z: 1}
+      - m_Value: {x: 0.5, y: 1.2, z: 1}
         m_Name: scale_cross
         m_Overridden: 1
-      - m_Value: {x: 3, y: 5, z: 1}
+      - m_Value: {x: 2, y: 3, z: 1}
         m_Name: scale_splash
         m_Overridden: 1
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 4.2370944, y: 1.5520432, z: 0.29979438, w: 1}
+      - m_Value: {x: 4.9255776, y: 1.4183599, z: 1.4837028, w: 1}
         m_Name: col_spark
         m_Overridden: 1
-      - m_Value: {x: 0.15192999, y: 1.9539485, z: 2.07276, w: 0.5019608}
+      - m_Value: {x: 34.006226, y: 1.2212121, z: 0.8902151, w: 1}
         m_Name: col_cross
         m_Overridden: 1
-      - m_Value: {x: 1.7333335, y: 0.8699012, z: 0.3448516, w: 1}
+      - m_Value: {x: 34.006226, y: 0.8902151, z: 19.563654, w: 1}
         m_Name: col_splash
         m_Overridden: 1
     m_Uint:
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 3874869245171283132}
   - component: {fileID: 7561837114160707810}
   m_Layer: 10
-  m_Name: P_Impact_Melee0
+  m_Name: P_Impact_Beam_red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,7 +298,7 @@ PlayableDirector:
   m_GameObject: {fileID: 5161109190820235104}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 93bf8bd9c301b064595e531b4461467d, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: f407ce109dff9e244a5cfc8494439238, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -309,12 +309,6 @@ PlayableDirector:
   - key: {fileID: 5309560498203590612, guid: f407ce109dff9e244a5cfc8494439238, type: 2}
     value: {fileID: 1265900090641636128}
   - key: {fileID: -8404765982342865423, guid: f407ce109dff9e244a5cfc8494439238, type: 2}
-    value: {fileID: 3874869245171283132}
-  - key: {fileID: -2912414775799778268, guid: 93bf8bd9c301b064595e531b4461467d, type: 2}
-    value: {fileID: 7137009246794986143}
-  - key: {fileID: 5309560498203590612, guid: 93bf8bd9c301b064595e531b4461467d, type: 2}
-    value: {fileID: 1265900090641636128}
-  - key: {fileID: -8404765982342865423, guid: 93bf8bd9c301b064595e531b4461467d, type: 2}
     value: {fileID: 3874869245171283132}
   m_ExposedReferences:
     m_References: []

@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &121389117212604723
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2924297952565386661}
+  - component: {fileID: 1478778719105693880}
+  m_Layer: 11
+  m_Name: HitFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2924297952565386661
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121389117212604723}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 108585022606909534}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1478778719105693880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121389117212604723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e093c2651fb6f4f9c5b6f2413c6f25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitImpactHandler
+  m_impactAssetRef: {fileID: 8654509719372115399, guid: b5f56682e6d393149b2130c78d6bc3df, type: 3}
+  m_detectHitFrom:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1710315751991308264
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,6 +160,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7070725024773549861}
+  - {fileID: 2924297952565386661}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -167,6 +220,21 @@ MonoBehaviour:
   m_onHitSfx: {fileID: 8300000, guid: 15ee3ad25d6c2a949af34384e632785a, type: 3}
   m_onLaunchSfx: {fileID: 8300000, guid: fe9ba864205f1c14588ee900d107461b, type: 3}
   m_onHitEffects: []
+  m_onHitCallbacks:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1478778719105693880}
+        m_TargetAssemblyTypeName: HitImpactHandler, Assembly-CSharp
+        m_MethodName: SpawnImpactAt
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_spreadAngleRange: 5
   m_delayBeforeAttack: 0
   m_beforeAttack:

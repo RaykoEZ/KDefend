@@ -7,7 +7,6 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
     // when attacking, the spawned instance will be released from the parent given
     [SerializeField] bool m_detachFromUser = default;
     [SerializeField] protected WeaponProperty m_weaponProperty = default;
-    [SerializeField] AudioClip m_onHitSfx = default;
     [SerializeField] AudioClip m_onLaunchSfx = default;
     [SerializeField] List<EffectModule> m_onHitEffects = default;
     [SerializeField] UnityEvent<BaseEntity> m_onHitCallbacks = default;
@@ -65,7 +64,6 @@ public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
     protected void Hit_Internal<T>(T hit) where T : BaseEntity
     {
         hit?.TakeDamage(WeaponProperty.Damage);
-        hit?.GetComponent<AudioSource>()?.PlayOneShot(m_onHitSfx);
         m_onHitCallbacks?.Invoke(hit);
         // trigger on hit effects
         foreach (var item in m_onHitEffects)

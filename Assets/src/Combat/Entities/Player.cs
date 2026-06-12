@@ -3,6 +3,7 @@ using UnityEngine;
 public class Player : BaseCharacter 
 {
     [SerializeField] InventoryManager m_inventory = default;
+    [SerializeField] AudioSource m_contactDamageAudio = default;
     DeliveryDetail m_currentlyDelivering;
     public DeliveryDetail CurrentlyDelivering { get => m_currentlyDelivering; set => m_currentlyDelivering = value; }
     public InventoryManager Inventory => m_inventory;
@@ -14,5 +15,10 @@ public class Player : BaseCharacter
         {
             result?.OnHit(this);
         }
+    }
+    public void ContactDamage(int damage) 
+    {
+        TakeDamage(damage);
+        m_contactDamageAudio?.Play();
     }
 }
