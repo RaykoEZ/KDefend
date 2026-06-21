@@ -23,7 +23,7 @@ public class WaveStrike : UseWeapon
     {
         // play initate sequence
         // sequence signal will trigger the attack frame during playback
-        GameUtil.PlayActivationSequence(m_activationSequence);
+        GameUtil.PlaySequence(m_activationSequence);
     }
     protected override void PostAttack()
     {

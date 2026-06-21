@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using Curry.Game;
 public interface IItem
 {
     public ItemProperty Property { get; }
@@ -32,16 +33,18 @@ public class ItemRankStack
         return CurrentStack;
     }
 }
+public delegate void ItemUpdate(Item sender);
 [RequireComponent(typeof(Collider2D))]
 // class to contain item property and interaction triggers
 public class Item : MonoBehaviour , IItem
 {
     [SerializeField] protected bool m_pickupImmediately = default;
+    [SerializeField] protected ItemProperty m_property = default;
     [SerializeField] protected UnityEvent<Player> m_onUse = default;
     [SerializeField] protected UnityEvent<Player> m_onPickup = default;
     [SerializeField] protected TemporaryInputAction m_pickUpCommand = default;
     [SerializeField] private Image m_cardArt = default;
-    protected ItemProperty m_property;
+    public event ItemUpdate OnItemPickup;
     protected bool m_isEffectActive = false;
     protected Player m_user;
     // for handling item stacks or ranks
@@ -80,7 +83,6 @@ public class Item : MonoBehaviour , IItem
     }
     public void Init(ItemAsset asset)
     {
-        m_property = asset.Property;
         m_cardArt.sprite = asset.CardArt;
     }
     // when player presses pickup for weapons
@@ -90,9 +92,17 @@ public class Item : MonoBehaviour , IItem
     }
     public virtual void OnPickup()
     {
+        OnItemPickup?.Invoke(this);
         m_onPickup?.Invoke(m_user);
         m_pickUpCommand?.Disable();
-        Destroy(gameObject);
+        if (TryGetComponent(out PoolableBehaviour result)) 
+        {
+            result.ReturnToPool();
+        }
+        else 
+        {
+            Destroy(gameObject);
+        }
     }
     public void OnPickup(Player player) 
     {

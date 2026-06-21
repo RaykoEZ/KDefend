@@ -97,7 +97,7 @@ public class NpcAimingWeapon : UseWeapon
     {
         if (m_targetAcquired)
         {
-            GameUtil.PlayActivationSequence(m_activationSequence);
+            GameUtil.PlaySequence(m_activationSequence);
         }
         m_onCooldown = StartCoroutine(Cooldown(CooldownTime));
         // reset skill states

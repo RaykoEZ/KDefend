@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Curry.UI;
+using PixelCrushers.DialogueSystem;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
@@ -54,8 +55,8 @@ public class ChargeUnit : MonoBehaviour
             OnChargeInterrupt?.Invoke();
             yield break;
         }
-        GameUtil.PlayActivationSequence(m_sequencer, m_chargeLoop, DirectorWrapMode.Loop);
+        GameUtil.PlaySequence(m_sequencer, m_chargeLoop, DirectorWrapMode.Loop);
         yield return new WaitForSeconds(m_chargingDuration);
-        GameUtil.PlayActivationSequence(m_sequencer, m_chargeFinishing, DirectorWrapMode.Hold);
+        GameUtil.PlaySequence(m_sequencer, m_chargeFinishing, DirectorWrapMode.Hold);
     }
 }

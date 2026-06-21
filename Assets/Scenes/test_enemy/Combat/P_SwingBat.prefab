@@ -338,14 +338,13 @@ MonoBehaviour:
   m_detachFromUser: 0
   m_weaponProperty:
     PassWalls: 0
-    Damage: 10
+    Damage: 25
     AttackPerCycle: 1
     Speed: 0
     Life: 0
     DelayPerAttack: 0
     DelayPerCycle: 0.6
     PushPower: 5
-  m_onHitSfx: {fileID: 0}
   m_onLaunchSfx: {fileID: 0}
   m_onHitEffects: []
   m_onHitCallbacks:

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Investment101 : Collectible 
 {
-    [SerializeField] GainCredit m_gainCredit = default;
+    [SerializeField] RandomGainCredit m_gainCredit = default;
     [SerializeField] int m_baseTimeInterval = default;
     int m_currentTimeInterval = 200;
     static Coroutine s_gain;

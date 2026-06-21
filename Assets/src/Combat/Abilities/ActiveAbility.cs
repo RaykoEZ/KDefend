@@ -30,7 +30,7 @@ public abstract class ActiveAbility : MonoBehaviour
         if (!CanUse()) return;
         if (m_activationSequence != null && m_playSequenceOnInit) 
         {
-            GameUtil.PlayActivationSequence(m_activationSequence);
+            GameUtil.PlaySequence(m_activationSequence);
         }
         if (m_activateOnInit) 
         {

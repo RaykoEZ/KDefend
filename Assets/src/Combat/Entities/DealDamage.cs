@@ -9,5 +9,3 @@ public class DealDamage : EffectModule
         target?.TakeDamage(m_damage);
     }
 }
-
-

@@ -1,6 +1,8 @@
 ﻿using System;
+using Curry.Explore;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 [Serializable]
 public struct EntityProperty
 {

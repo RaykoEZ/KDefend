@@ -35,6 +35,7 @@ public class KDefenderStateManager : MonoBehaviour
     [SerializeField] InventoryManager m_inventoryManager = default;
     [SerializeField] GameTimer m_timer = default;
     [SerializeField] UnityEvent m_onGameOver = default;
+    [SerializeField] UnityEvent m_onRetry = default;
     [SerializeField] UnityEvent<DayOfWeek> m_onNewDay = default;
     static bool s_isPaused = false;
     DayCounter m_dayOfWeek = new DayCounter();
@@ -70,6 +71,12 @@ public class KDefenderStateManager : MonoBehaviour
             ShopStates = m_shopPoolUpdater.CurrentShopPool
         };
         m_save.Current.KDGameState = newState;
+    }
+    public void RetryDay() 
+    {
+        m_player.ResetFromDeath();
+        SetDayOfWeek(CurrentDayOfWeek);
+        m_onRetry?.Invoke();
     }
     public void OnGameOver() 
     {

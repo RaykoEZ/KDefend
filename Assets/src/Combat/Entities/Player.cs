@@ -21,4 +21,9 @@ public class Player : BaseCharacter
         TakeDamage(damage);
         m_contactDamageAudio?.Play();
     }
+    public void ResetFromDeath()
+    {
+        m_current.Health = 0;
+        Heal(BaseStats.Property.Health);
+    }
 }

@@ -2,7 +2,7 @@
 
 public class ModifyKnockback : EffectModule
 {
-    [Range(0.1f, 2f)]
+    [Range(0.1f, 10f)]
     [SerializeField] float m_knockbackMultiplier = default;
     public override void Activate(BaseEntity target)
     {

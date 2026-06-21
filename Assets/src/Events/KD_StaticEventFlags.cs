@@ -42,6 +42,8 @@ public enum GameEventTriggerType
     CreditUpdate,
     CreditOverTime,
     ItemObtained,
+    ItemDragIn,
+    ItemDragOut,
     ItemOption,
     Spawn,
     EnemyDefeated,

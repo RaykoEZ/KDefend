@@ -14,6 +14,8 @@ public class PlayerCreditManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI m_animate = default;
     [SerializeField] ResourceDisplayHandler m_hpBar = default;
     [SerializeField] UnityEvent m_onCreditUpdate = default;
+    [SerializeField] UnityEvent<int> m_onCreditLoss = default;
+    [SerializeField] UnityEvent<int> m_onCreditGain = default;
     [SerializeField] UnityEvent m_onCreditTargetReached = default;
     Dictionary<string, CreditChangeOverTime> m_changesOverTime = new Dictionary<string, CreditChangeOverTime>();
     public int CurrentCredit => m_player.CurrentStats.Property.Health;
@@ -39,10 +41,19 @@ public class PlayerCreditManager : MonoBehaviour
     }
     void RefreshDisplay(int change) 
     {
-        char sign = change < 0 ? ' ' : '+';
-        m_animate.color = change < 0 ? Color.red : Color.green;
+        bool isLosingCredit = change < 0;
+        char sign = isLosingCredit ? ' ' : '+';
+        m_animate.color = isLosingCredit ? Color.red : Color.green;
         m_animate.text = $"{sign}{change}";
         m_onCreditUpdate?.Invoke();
+        if (isLosingCredit) 
+        {
+            m_onCreditLoss?.Invoke(change);
+        }
+        else 
+        {
+            m_onCreditGain?.Invoke(change);
+        }
         m_hpBar.SetMaxValue(TargetCredit);
         m_hpBar.SetCurrentValue(m_player.CurrentStats.Property.Health);
         m_display.text = $"{CurrentCredit.ToString()} / {m_targetCredit}";

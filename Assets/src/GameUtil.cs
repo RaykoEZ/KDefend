@@ -47,13 +47,13 @@ public static class GameUtil
     {
         return s_regexNoAlphaNumeric.IsMatch(toCheck);
     }
-    public static void PlayActivationSequence(PlayableDirector toPlay)
+    public static void PlaySequence(PlayableDirector toPlay)
     {
         toPlay.RebuildGraph();
         toPlay.time = 0;
         toPlay.Play();
     }
-    public static void PlayActivationSequence(PlayableDirector toPlay, PlayableAsset content, DirectorWrapMode wrapMode = DirectorWrapMode.None)
+    public static void PlaySequence(PlayableDirector toPlay, PlayableAsset content, DirectorWrapMode wrapMode = DirectorWrapMode.None)
     {
         toPlay.RebuildGraph();
         toPlay.time = 0;

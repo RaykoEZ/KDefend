@@ -4,10 +4,20 @@ public delegate void OnRoutineUpdate();
 // sets one coroutine to repeat with time interval
 public class RoutineCaller : MonoBehaviour 
 {
-    float m_timeInterval = 1f;
+    [Range(1, 9999)]
+    [SerializeField] float m_timeInterval = default;
+    float m_defaultTimeInterval = 0f;
     bool m_inProgress = false;
     public float TimeInterval { get => m_timeInterval; set => m_timeInterval = value; }
     public event OnRoutineUpdate OnNewInterval;
+    void Awake()
+    {
+        m_defaultTimeInterval = m_timeInterval;
+    }
+    public void ResetTimeInterval() 
+    {
+        TimeInterval = m_defaultTimeInterval;
+    }
     IEnumerator Routine_Internal(IEnumerator routine) 
     {
         while (m_inProgress)
