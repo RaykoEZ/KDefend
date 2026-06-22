@@ -68,7 +68,7 @@ public class BaseEntity : MonoBehaviour
         float change = Mathf.Abs(mod) * m_base.MoveSpeed;
         if (mod > 0f) 
         {
-            m_current.MoveSpeed = Mathf.Min(3f, m_current.MoveSpeed + change);
+            m_current.MoveSpeed = Mathf.Min(3f * m_base.MoveSpeed, m_current.MoveSpeed + change);
         }
         else 
         {

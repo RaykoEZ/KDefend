@@ -43,7 +43,6 @@ public class Item : MonoBehaviour , IItem
     [SerializeField] protected UnityEvent<Player> m_onUse = default;
     [SerializeField] protected UnityEvent<Player> m_onPickup = default;
     [SerializeField] protected TemporaryInputAction m_pickUpCommand = default;
-    [SerializeField] private Image m_cardArt = default;
     public event ItemUpdate OnItemPickup;
     protected bool m_isEffectActive = false;
     protected Player m_user;
@@ -51,8 +50,6 @@ public class Item : MonoBehaviour , IItem
     protected ItemRankStack m_rank = new ItemRankStack();
     public ItemProperty Property => m_property;
     public int CurrentStack { get => m_rank.CurrentStack; }
-    public Image CardArt { get => m_cardArt; }
-
     // instantiate and initialize an item
     public static Item SpawnItem(ItemAsset asset, Transform parent, Vector2 localposition) 
     {
@@ -83,7 +80,6 @@ public class Item : MonoBehaviour , IItem
     }
     public void Init(ItemAsset asset)
     {
-        m_cardArt.sprite = asset.CardArt;
     }
     // when player presses pickup for weapons
     public virtual void PickupDrop(InputAction.CallbackContext _) 
@@ -95,14 +91,7 @@ public class Item : MonoBehaviour , IItem
         OnItemPickup?.Invoke(this);
         m_onPickup?.Invoke(m_user);
         m_pickUpCommand?.Disable();
-        if (TryGetComponent(out PoolableBehaviour result)) 
-        {
-            result.ReturnToPool();
-        }
-        else 
-        {
-            Destroy(gameObject);
-        }
+        gameObject.SetActive(false);
     }
     public void OnPickup(Player player) 
     {
