@@ -41,7 +41,7 @@ MonoBehaviour:
           KnockbackModifier: 0.5
           MoveSpeed: 120
           AtkModifier: 0
-        Position: {x: 49043, y: -546}
+        Position: {x: 50000, y: 0}
       HostileStates: []
       HeldItems: []
       ShopStates: []

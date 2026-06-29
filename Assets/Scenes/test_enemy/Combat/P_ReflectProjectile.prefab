@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_activateOnInit: 1
+  m_playSequenceOnInit: 0
   m_cooldownTime: 10
   m_hitsToEnd: 1
   m_activationSequence: {fileID: 3689493941313596276}
@@ -175,7 +176,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_autoReactivate: 0
-  m_duration: 1.5
+  m_duration: 5
   m_reflectParent: {fileID: 3907185731961708660}
 --- !u!320 &3689493941313596276
 PlayableDirector:

@@ -43,7 +43,7 @@ public class BaseEntity : MonoBehaviour
     public float HpRatio => CurrentStats.Property.Health / (float)m_base.Health;
     // for testing stats
 #if UNITY_EDITOR
-    void Start() 
+    void Awake() 
     {
         m_current = m_base;
     }
@@ -86,6 +86,11 @@ public class BaseEntity : MonoBehaviour
         {
             m_current.KnockbackModifier = Mathf.Max(0f, m_current.KnockbackModifier - change);
         }
+    }
+    public void SetBaseHp(int value) 
+    {
+        if (value <= 0) return;
+        m_base.Health = value;
     }
     public void Heal(int heal) 
     {

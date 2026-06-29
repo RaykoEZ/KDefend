@@ -23,6 +23,8 @@ public class Player : BaseCharacter
     }
     public void ResetFromDeath()
     {
+        // TODO: deactivate all non-persistent effect modules
+
         m_current.Health = 0;
         Heal(BaseStats.Property.Health);
     }

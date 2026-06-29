@@ -19,13 +19,13 @@ public class RepeatOverTime : EffectModule, IEffectOverTime<BaseEntity>
     /// <param name="target"></param> User of this effect module.
     public override void Activate(BaseEntity target)
     {
-        m_activated = true;
+        base.Activate(target);
         StartCoroutine(OnTick(target));
     }
     public override void Deactivate(BaseEntity target)
     {
-        base.Deactivate(target);
         StopAllCoroutines();
+        base.Deactivate(target);
     }
     public virtual IEnumerator OnTick(BaseEntity target)
     {
@@ -33,11 +33,15 @@ public class RepeatOverTime : EffectModule, IEffectOverTime<BaseEntity>
         while (Activated)
         {
             // check if we repeat, tick limit <= 0 means unlimited repeats
-            if (m_numTicks >= 0 && i >= m_numTicks) yield break;
+            if (m_numTicks >= 0 && i >= m_numTicks) 
+            {
+                Activated = false;
+            }
             m_onActivate?.Invoke(target);
             yield return new WaitForSeconds(m_waitSecondsPerTick);
             i++;          
         }
+        Deactivate(target);
     }
 }
 

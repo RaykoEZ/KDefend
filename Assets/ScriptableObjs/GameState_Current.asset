@@ -32,7 +32,8 @@ MonoBehaviour:
         m_EditorAssetChanged: 0
     SimulationTime: 0
     KDGameState:
-      Timer: 600
+      SecondsLeft: 600
+      DayOfWeek: 1
       StaticFlags: 0
       PlayerValue:
         Property:
@@ -40,7 +41,7 @@ MonoBehaviour:
           KnockbackModifier: 0.5
           MoveSpeed: 120
           AtkModifier: 0
-        Position: {x: 49043, y: -546}
+        Position: {x: 50000, y: 0}
       HostileStates: []
       HeldItems: []
       ShopStates:

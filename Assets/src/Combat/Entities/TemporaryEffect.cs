@@ -7,13 +7,14 @@ public class TemporaryEffect : EffectModule
     [SerializeField] protected float m_duration = default;
     public override void Activate(BaseEntity target)
     {
+        base.Activate(target);
+        // trigger effect once
+        m_toTrigger?.Activate(target);
         StartCoroutine(OnTick(target));
     }
     public IEnumerator OnTick(BaseEntity target)
     {
         float t = 0f;
-        // trigger effect once
-        m_toTrigger?.Activate(target);
         while (t < m_duration)
         {
             yield return new WaitForEndOfFrame();
