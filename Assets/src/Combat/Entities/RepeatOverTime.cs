@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using UnityEngine.Events;
 using UnityEngine;
 public interface IEffectOverTime<T>
 {
@@ -7,6 +8,7 @@ public interface IEffectOverTime<T>
 }
 public class RepeatOverTime : EffectModule, IEffectOverTime<BaseEntity>
 {
+    [SerializeField] protected UnityEvent<BaseEntity> m_onTick = default;
     [SerializeField] protected float m_waitSecondsPerTick = default;
     /// <summary>
     /// If value < 1, unlimited uses
@@ -37,7 +39,7 @@ public class RepeatOverTime : EffectModule, IEffectOverTime<BaseEntity>
             {
                 Activated = false;
             }
-            m_onActivate?.Invoke(target);
+            m_onTick?.Invoke(target);
             yield return new WaitForSeconds(m_waitSecondsPerTick);
             i++;          
         }

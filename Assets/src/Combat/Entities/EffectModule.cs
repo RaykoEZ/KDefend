@@ -4,6 +4,7 @@ using UnityEngine.Events;
 public abstract class EffectModule : MonoBehaviour 
 {
     [SerializeField] protected bool m_persistAfterUsage = default;
+    [SerializeField] protected bool m_reparentToUser = default;
     [SerializeField] protected UnityEvent<BaseEntity> m_onActivate = default;
     [SerializeField] protected UnityEvent<BaseEntity> m_onDeactivate = default;
     bool m_activated = false;
@@ -11,7 +12,10 @@ public abstract class EffectModule : MonoBehaviour
     public virtual void Activate(BaseEntity target) 
     {
         // attach to target
-        gameObject.transform.SetParent(target.transform, false);
+        if (m_reparentToUser) 
+        {
+            gameObject.transform.SetParent(target.transform, false);
+        }
         m_onActivate?.Invoke(target);
         m_activated = true;
     }
@@ -27,4 +31,3 @@ public abstract class EffectModule : MonoBehaviour
         }
     }
 }
-

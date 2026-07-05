@@ -7,8 +7,11 @@ public class DropsItem : MonoBehaviour
     [SerializeField] ItemDropList m_dropList = default;
     protected delegate void OnDrop(Item drop);
     protected event OnDrop OnItemDropped;
+    bool m_hasDropped = false;
     public virtual void TryDropItem() 
     {
+        if (m_hasDropped) return;
+        m_hasDropped = true;
         // drop check
         float rand = Random.Range(0f, 1f);
         if (rand > m_dropRate)

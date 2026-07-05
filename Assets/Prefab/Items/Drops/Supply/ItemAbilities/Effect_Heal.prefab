@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Heal
   m_persistAfterUsage: 0
+  m_reparentToUser: 1
   m_onActivate:
     m_PersistentCalls:
       m_Calls:

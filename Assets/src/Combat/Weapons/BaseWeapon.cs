@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+
 public abstract class BaseWeapon : MonoBehaviour, IHitsEntity
 {
     // when attacking, the spawned instance will be released from the parent given

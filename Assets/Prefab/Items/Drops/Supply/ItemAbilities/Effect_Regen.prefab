@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4162421666651257664}
   - component: {fileID: 3188062545001296248}
   m_Layer: 15
-  m_Name: Effects_Regen
+  m_Name: Effect_Regen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,21 +52,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RepeatOverTime
   m_persistAfterUsage: 0
+  m_reparentToUser: 1
   m_onActivate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3188062545001296248}
-        m_TargetAssemblyTypeName: Heal, Assembly-CSharp
-        m_MethodName: Activate
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3643761792861832282}
         m_TargetAssemblyTypeName: UnityEngine.VFX.VisualEffect, UnityEngine
         m_MethodName: set_enabled
@@ -94,6 +83,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_onTick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3188062545001296248}
+        m_TargetAssemblyTypeName: Heal, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_waitSecondsPerTick: 3
   m_numTicks: 10
 --- !u!114 &3188062545001296248
@@ -109,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Heal
   m_persistAfterUsage: 0
+  m_reparentToUser: 0
   m_onActivate:
     m_PersistentCalls:
       m_Calls:

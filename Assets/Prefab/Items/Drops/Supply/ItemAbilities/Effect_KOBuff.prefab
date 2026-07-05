@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 80720695399369505}
   - component: {fileID: 9121649521400304179}
   m_Layer: 15
-  m_Name: Effects_KOBuff
+  m_Name: Effect_KOBuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TemporaryEffect
   m_persistAfterUsage: 0
+  m_reparentToUser: 1
   m_onActivate:
     m_PersistentCalls:
       m_Calls:
@@ -96,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ModifyKnockback
   m_persistAfterUsage: 0
+  m_reparentToUser: 0
   m_onActivate:
     m_PersistentCalls:
       m_Calls: []
