@@ -72,6 +72,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Subcore_shot
       objectReference: {fileID: 0}
+    - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_base.Health
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5727629129049428749}
+    - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Enemy, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 5ed88cd94f2c9864c9d404147866c433, type: 2}
+    - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7339498675749871583, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -174,5 +214,10 @@ PrefabInstance:
 --- !u!320 &5322109696065111505 stripped
 PlayableDirector:
   m_CorrespondingSourceObject: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+  m_PrefabInstance: {fileID: 66746880605855164}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5727629129049428749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5733506426119868081, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
   m_PrefabInstance: {fileID: 66746880605855164}
   m_PrefabAsset: {fileID: 0}

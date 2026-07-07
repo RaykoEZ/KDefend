@@ -583,6 +583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd96b0c2b3bc5443b3038673514d60f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_dropLimit: 1
   m_dropRate: 1
   m_dropList: {fileID: 11400000, guid: f873e06106342ca4b8fb3f3baa149a6e, type: 2}
 --- !u!114 &4430035897266289553
@@ -598,7 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_base:
-    Health: 150
+    Health: 5000
     KnockbackModifier: 1
     MoveSpeed: 80
     AtkModifier: 0
@@ -762,7 +763,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -777,7 +778,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.41666666
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1236,6 +1237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_activateOnInit: 1
+  m_playSequenceOnInit: 0
   m_cooldownTime: 30
   m_hitsToEnd: 5
   m_activationSequence: {fileID: 0}
@@ -1257,6 +1259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_activateOnInit: 1
+  m_playSequenceOnInit: 0
   m_cooldownTime: 999
   m_hitsToEnd: 3
   m_activationSequence: {fileID: 0}

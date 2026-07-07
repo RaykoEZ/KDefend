@@ -163,9 +163,11 @@ MonoBehaviour:
     DelayPerAttack: 0.1
     DelayPerCycle: 1
     PushPower: 2.5
-  m_onHitSfx: {fileID: 0}
-  m_onLaunchSfx: {fileID: 0}
+  m_onLaunchSfx: {fileID: 8300000, guid: fe9ba864205f1c14588ee900d107461b, type: 3}
   m_onHitEffects: []
+  m_onHitCallbacks:
+    m_PersistentCalls:
+      m_Calls: []
   m_spreadAngleRange: 0
   m_delayBeforeAttack: 0
   m_beforeAttack:

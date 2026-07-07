@@ -5,10 +5,10 @@ using UnityEngine.Events;
 // a key event.
 // e.g. deactivate locks from protected locations
 [RequireComponent(typeof(BaseEntity))]
-public class LockEntity : MonoBehaviour
+public class LockedEntity : MonoBehaviour
 {
     [SerializeField] bool m_lockByDefault = default;
-    [SerializeField] List<LockHandler> m_toListen = default;
+    [SerializeField] List<LockHandler> m_toUnlock = default;
     // when the entity is fully locked/unlocked
     [SerializeField] UnityEvent m_onLock = default;
     [SerializeField] UnityEvent m_onUnlock = default;
@@ -17,7 +17,7 @@ public class LockEntity : MonoBehaviour
     // Use this for initialization
     void OnEnable()
     {
-        foreach (var handler in m_toListen) 
+        foreach (var handler in m_toUnlock) 
         {
             handler.OnLocked += OnLock;
             handler.OnUnlocked += OnUnlock;
@@ -25,7 +25,7 @@ public class LockEntity : MonoBehaviour
     }
     void OnDisable()
     {
-        foreach (var handler in m_toListen)
+        foreach (var handler in m_toUnlock)
         {
             handler.OnLocked -= OnLock;
             handler.OnUnlocked -= OnUnlock;
@@ -55,7 +55,7 @@ public class LockEntity : MonoBehaviour
     void OnUnlock(LockHandler toUnlock) 
     {
         m_unlocked.Add(toUnlock);
-        if (m_unlocked.Count == m_toListen.Count) 
+        if (m_unlocked.Count == m_toUnlock.Count) 
         {
             m_onUnlock?.Invoke();
         }

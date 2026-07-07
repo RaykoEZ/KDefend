@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_base:
-    Health: 100
+    Health: 1000
     KnockbackModifier: 1
     MoveSpeed: 50
     AtkModifier: 0
@@ -547,11 +547,11 @@ AudioSource:
   m_GameObject: {fileID: 5266097158630861302}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -46474087053656555, guid: a5ea6c6056ba3f649a894720792c9b3d, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -595,7 +595,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -610,7 +610,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.41666666
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -647,7 +647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd96b0c2b3bc5443b3038673514d60f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dropRate: 0.2
+  m_dropLimit: 1
+  m_dropRate: 1
   m_dropList: {fileID: 11400000, guid: 297f7acff236c984f96a64c0bdac92d5, type: 2}
 --- !u!114 &1549148453402818636
 MonoBehaviour:

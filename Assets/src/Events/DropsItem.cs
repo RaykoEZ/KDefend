@@ -2,16 +2,18 @@
 // handles item drop, usually for upon defeating an enemy
 public class DropsItem : MonoBehaviour 
 {
+    // -1 for unlimited
+    [SerializeField] int m_dropLimit = default;
     [Range(0f, 1f)]
     [SerializeField] float m_dropRate = default;
     [SerializeField] ItemDropList m_dropList = default;
     protected delegate void OnDrop(Item drop);
     protected event OnDrop OnItemDropped;
-    bool m_hasDropped = false;
+    int m_numDropped = 0;
     public virtual void TryDropItem() 
     {
-        if (m_hasDropped) return;
-        m_hasDropped = true;
+        if (m_numDropped >= m_dropLimit && m_dropLimit >= 0) return;
+        m_numDropped++;
         // drop check
         float rand = Random.Range(0f, 1f);
         if (rand > m_dropRate)

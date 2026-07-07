@@ -104,7 +104,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -190,6 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f46bd906559f64ebec06f1bf6c6f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Heal
+  m_persistAfterUsage: 0
+  m_reparentToUser: 0
   m_onActivate:
     m_PersistentCalls:
       m_Calls: []
@@ -197,7 +199,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_healAboveMaxHealth: 0
-  m_healAmount: 2
+  m_healAmount: 2000
 --- !u!114 &2901837130448357240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ec65d7dff5fa3408f3e23c74f45b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RepeatOverTime
+  m_persistAfterUsage: 0
+  m_reparentToUser: 0
   m_onActivate:
     m_PersistentCalls:
       m_Calls:
@@ -226,6 +230,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_onDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_onTick:
     m_PersistentCalls:
       m_Calls: []
   m_waitSecondsPerTick: 0.1
@@ -346,6 +353,7 @@ GameObject:
   - component: {fileID: 2704865638724044160}
   - component: {fileID: 4592678496323955673}
   - component: {fileID: 2458118582752826596}
+  - component: {fileID: 5958309022919898666}
   m_Layer: 7
   m_Name: P_Subcore
   m_TagString: Untagged
@@ -723,7 +731,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -738,7 +746,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -854,6 +862,33 @@ MonoBehaviour:
   m_location: {fileID: 9162241260338012535}
   m_initTarget: {fileID: 7080463277299594758}
   m_movement: {fileID: 0}
+--- !u!50 &5958309022919898666
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5733506426119868081}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &181697324176556212
 PrefabInstance:
   m_ObjectHideFlags: 0

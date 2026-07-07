@@ -26,6 +26,6 @@ public class Player : BaseCharacter
         // TODO: deactivate all non-persistent effect modules
 
         m_current.Health = 0;
-        Heal(BaseStats.Property.Health);
+        Heal(100);
     }
 }

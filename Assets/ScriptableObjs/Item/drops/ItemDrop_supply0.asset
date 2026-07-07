@@ -17,7 +17,7 @@ MonoBehaviour:
       m_asset: {fileID: 6385640104035231319, guid: 630857f474644004fa37893eb810a18d, type: 3}
       m_cardArt: {fileID: 0}
       m_cardBack: {fileID: 0}
-    m_dropWeight: 1
+    m_dropWeight: 5
   - m_toDrop:
       m_asset: {fileID: 6385640104035231319, guid: 8931a7c78ca633449a4d707ca43d2e99, type: 3}
       m_cardArt: {fileID: 0}
@@ -32,4 +32,4 @@ MonoBehaviour:
       m_asset: {fileID: 6385640104035231319, guid: 5d1d89820bd806d4b8227f5391b5f56f, type: 3}
       m_cardArt: {fileID: 0}
       m_cardBack: {fileID: 0}
-    m_dropWeight: 59
+    m_dropWeight: 55

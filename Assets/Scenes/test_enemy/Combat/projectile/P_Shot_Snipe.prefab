@@ -158,14 +158,13 @@ MonoBehaviour:
   m_detachFromUser: 1
   m_weaponProperty:
     PassWalls: 0
-    Damage: 10
+    Damage: 200
     AttackPerCycle: 1
     Speed: 1200
     Life: 3
     DelayPerAttack: 0
-    DelayPerCycle: 5
-    PushPower: 5
-  m_onHitSfx: {fileID: 8300000, guid: 881e3f52c86c94f26a60718d35627cd8, type: 3}
+    DelayPerCycle: 3
+    PushPower: 20
   m_onLaunchSfx: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
   m_onHitEffects: []
   m_onHitCallbacks:
@@ -284,7 +283,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -299,7 +298,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
