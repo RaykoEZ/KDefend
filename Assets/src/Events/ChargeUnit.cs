@@ -12,6 +12,7 @@ public class ChargeUnit : MonoBehaviour
     [SerializeField] float m_chargingDuration = default;
     [SerializeField] PlayableAsset m_chargeLoop = default;
     [SerializeField] PlayableAsset m_chargeFinishing = default;
+    [SerializeField] PlayableAsset m_onDefeat = default;
     [SerializeField] PlayableDirector m_sequencer = default;
     [SerializeField] UnityEvent OnChargeFinish = default;
     [SerializeField] UnityEvent OnChargeInterrupt = default;
@@ -39,6 +40,10 @@ public class ChargeUnit : MonoBehaviour
             StopCoroutine(m_charge);
             m_charge = null;
         }
+    }
+    public void Shutdown() 
+    {
+        m_sequencer?.Play(m_onDefeat);
     }
     public void OnFinished() 
     {

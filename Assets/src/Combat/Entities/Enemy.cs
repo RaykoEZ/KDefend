@@ -16,6 +16,7 @@ public delegate void OnEnemyUpdate(Enemy toUpdate);
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : BaseCharacter, IHitsEntity
 {
+    [SerializeField] bool m_deferDespawnOnDefeat = default;
     [NonSerialized] int m_type = default;
     [SerializeField] int m_contactDamage = default;
     [SerializeField] protected NpcMovement m_movementHandler = default;
@@ -54,7 +55,10 @@ public class Enemy : BaseCharacter, IHitsEntity
         base.OnDefeat();
         OnDefeated?.Invoke(this);
         yield return new WaitForSeconds(0.5f);
-        Despawn();
+        if (!m_deferDespawnOnDefeat) 
+        {
+            Despawn();
+        }
     }
     public void Despawn() 
     {

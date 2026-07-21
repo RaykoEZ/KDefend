@@ -12,7 +12,8 @@ public class PlayerMovement : MonoBehaviour, IMovement
     public static Vector2 PlayerPosition => s_playerPosition;
     public Vector2 DirectionNormalized => PlayerMovementDirection;
     public Vector2 Position => PlayerPosition;
-    Rigidbody2D RB2D => GetComponent<Rigidbody2D>();
+    Rigidbody2D RB2D => m_controlling?.GetComponent<Rigidbody2D>();
+    Animator Anim => m_controlling?.GetComponent<Animator>();
 
     void OnEnable()
     {
@@ -38,14 +39,29 @@ public class PlayerMovement : MonoBehaviour, IMovement
         m_movementDirection = value.ReadValue<Vector2>();
         // update static direction report
         s_moveDirection = m_movementDirection;
+        Anim?.SetBool("isMoving", m_movementDirection.sqrMagnitude > 0f);
+        if (m_movementDirection.x < 0f)
+        {
+            Anim?.SetTrigger("faceLeft");
+        }
+        // face forawrd when neither left or right
+        else if (Mathf.Approximately(m_movementDirection.x, 0f)) 
+        {
+            Anim?.SetTrigger("faceForward");
+        }
+        else
+        {
+            Anim?.SetTrigger("faceRight");
+        }
     }
     void FixedUpdate()
     {
         s_playerPosition = transform.position;
         if (m_movable)
         {
-            RB2D?.AddForce(m_controlling.CurrentStats.Property.MoveSpeed *
-                m_movementDirection * Time.fixedDeltaTime, ForceMode2D.Impulse);
+            Vector2 force = m_controlling.CurrentStats.Property.MoveSpeed *
+                m_movementDirection * Time.fixedDeltaTime;
+            RB2D?.AddForce(force, ForceMode2D.Impulse);
         }
 
     }

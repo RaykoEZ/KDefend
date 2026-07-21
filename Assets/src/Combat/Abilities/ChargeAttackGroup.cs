@@ -86,6 +86,13 @@ public class ChargeAttackGroup : MonoBehaviour
             m_onChargeFinish?.Invoke();
         }
     }
+    public void ShutdownAll() 
+    { 
+        foreach (var item in ChargeUnits) 
+        {
+            item?.Shutdown();
+        }
+    }
     void ChargeUnit(ChargeUnit toCharge)
     {
         // get cooldown

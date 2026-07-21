@@ -9,7 +9,7 @@ public class DropsItem : MonoBehaviour
     [SerializeField] ItemDropList m_dropList = default;
     protected delegate void OnDrop(Item drop);
     protected event OnDrop OnItemDropped;
-    int m_numDropped = 0;
+    protected int m_numDropped = 0;
     public virtual void TryDropItem() 
     {
         if (m_numDropped >= m_dropLimit && m_dropLimit >= 0) return;

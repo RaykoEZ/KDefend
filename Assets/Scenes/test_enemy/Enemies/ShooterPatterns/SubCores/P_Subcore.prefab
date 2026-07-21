@@ -447,6 +447,7 @@ MonoBehaviour:
   m_chargingDuration: 0.5
   m_chargeLoop: {fileID: 11400000, guid: 5822fe2e774173541a46077b62ea7731, type: 2}
   m_chargeFinishing: {fileID: 11400000, guid: 2c32aacb5b917e44b82def93cd9c5d19, type: 2}
+  m_onDefeat: {fileID: 11400000, guid: 15fae833612dc1d44ada644efebf5500, type: 2}
   m_sequencer: {fileID: 5275632149523798125}
   OnChargeFinish:
     m_PersistentCalls:
@@ -528,7 +529,7 @@ CanvasGroup:
   m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
+  m_IgnoreParentGroups: 1
 --- !u!95 &7984587505452279788
 Animator:
   serializedVersion: 7
@@ -617,18 +618,6 @@ MonoBehaviour:
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2901837130448357240}
-          m_TargetAssemblyTypeName: RepeatOverTime, Assembly-CSharp
-          m_MethodName: Activate
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 7080463277299594758}
-            m_ObjectArgumentAssemblyTypeName: BaseEntity, Assembly-CSharp
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -731,7 +720,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -746,7 +735,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.5
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -780,7 +769,7 @@ PlayableDirector:
   m_GameObject: {fileID: 5733506426119868081}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 5ed88cd94f2c9864c9d404147866c433, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 15fae833612dc1d44ada644efebf5500, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -804,6 +793,10 @@ PlayableDirector:
     value: {fileID: 3906384920657201466}
   - key: {fileID: -1310147187199325905, guid: 5ed88cd94f2c9864c9d404147866c433, type: 2}
     value: {fileID: 3069100835644329735}
+  - key: {fileID: -1310147187199325905, guid: 15fae833612dc1d44ada644efebf5500, type: 2}
+    value: {fileID: 3069100835644329735}
+  - key: {fileID: 3485405635038611667, guid: 15fae833612dc1d44ada644efebf5500, type: 2}
+    value: {fileID: 7984587505452279788}
   m_ExposedReferences:
     m_References:
     - 9e069d25b5920894ca265723cbd1b3ca: {fileID: 3751037112788974116}
@@ -1047,6 +1040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10714d241de647e4d99b56959c9978fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHUDHandler
+  m_showOnStart: 0
   m_onShowEvent:
     m_PersistentCalls:
       m_Calls: []

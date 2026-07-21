@@ -458,6 +458,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_attackHandler: {fileID: 7931186853949798028}
+  m_deferDespawnOnDefeat: 0
   m_contactDamage: 2
   m_movementHandler: {fileID: 3419066620989487351}
 --- !u!114 &8026254218230414548
@@ -595,7 +596,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -610,7 +611,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.41666666
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

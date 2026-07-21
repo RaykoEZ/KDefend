@@ -4,11 +4,16 @@ using UnityEngine.Events;
 namespace Curry.Explore
 {
     [RequireComponent(typeof(Animator))]
-    public class HideableUI : MonoBehaviour 
+    public class HideableUI : MonoBehaviour
     {
+        [SerializeField] bool m_showOnStart = default;
         [SerializeField] UnityEvent m_onShowEvent = default;
         [SerializeField] UnityEvent m_onHideEvent = default;
         protected Animator GetAnim => GetComponent<Animator>();
+        void Start()
+        {
+            GetAnim?.SetBool("Show", m_showOnStart);
+        }
         public virtual void Show() 
         {
             GetAnim?.SetBool("Show", true);

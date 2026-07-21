@@ -8,7 +8,6 @@ public class SupplyDrop : DropsItem
     [Range(-1, 999)]
     [SerializeField] int m_numDropLimit = default;
     [SerializeField] RoutineCaller m_routineCaller = default;
-    int m_numDropped = 0;
     void OnEnable()
     {
         OnItemDropped += OnItemDrop;

@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveStrike
   m_activateOnInit: 0
-  m_playSequenceOnUse: 0
+  m_playSequenceOnInit: 0
   m_cooldownTime: 0
   m_hitsToEnd: 0
   m_activationSequence: {fileID: 5492186838237994379}

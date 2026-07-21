@@ -1,8 +1,6 @@
 ﻿using Curry.Events;
 using System;
 using UnityEngine;
-
-
 [Serializable]
 public abstract class KDEvent 
 {
