@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
@@ -11,21 +11,21 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Hostile
+  - Detection
+  - Building
+  - Attack_Player
+  - Attack_Hostile
+  - PP1
+  - Destination
+  - OverlapsPlayer
+  - Item
+  - AimTarget
+  - Building_Bridge
+  - PP_BG
+  - PP_MidG
+  - PP_Player
   - 
   - 
   - 
@@ -41,3 +41,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 2626677081
+    locked: 0
+  - name: Midground
+    uniqueID: 3335106005
+    locked: 0
+  - name: Player
+    uniqueID: 847777625
+    locked: 0
+  - name: Gameplay
+    uniqueID: 1818725071
+    locked: 0
+  - name: UI
+    uniqueID: 1893958443
+    locked: 0
+  m_RenderingLayers:
+  - Default
+  - Layer 1

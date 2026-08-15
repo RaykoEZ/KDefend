@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AOC_Talking
+  m_Controller: {fileID: 9100000, guid: 4e49d5a1e1fa67340b1aefe914f16bb4, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 5e8ff0d23dc563244b6870c20cc95b96, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5e8ff0d23dc563244b6870c20cc95b96, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 0bd2f3095596d8c41b6ac1ee6e72ee59, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9ff81a8e70a27294ca3a7cbea41a8e00, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9ff81a8e70a27294ca3a7cbea41a8e00, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 51c3601948072664798b09fdccade460, type: 2}

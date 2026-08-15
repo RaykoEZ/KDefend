@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01e8f0c7665e314faa769e443ef583b, type: 3}
+  m_Name: ShopPool_dailyReshresh
+  m_EditorClassIdentifier: 
+  m_itemPoolLookup: {fileID: 11400000, guid: a9d1e6b121ea546418d56542d0c2ea0a, type: 2}
+  m_defaultPoolStates:
+  - m_shopOperation: 0
+    ItemId: sh1_hp
+    Price: 50
+    BuyLimit: 1
+  - m_shopOperation: 0
+    ItemId: sh2_spd
+    Price: 250
+    BuyLimit: 3
+  - m_shopOperation: 2
+    ItemId: sh3_atk
+    Price: 500
+    BuyLimit: 3
+  - m_shopOperation: 2
+    ItemId: sh4_hp
+    Price: 100
+    BuyLimit: 3
+  - m_shopOperation: 2
+    ItemId: sh5_kb
+    Price: 1500
+    BuyLimit: 1
+  - m_shopOperation: 2
+    ItemId: sh6_shoot
+    Price: 2000
+    BuyLimit: 3
+  - m_shopOperation: 2
+    ItemId: sh12_idol
+    Price: 5000
+    BuyLimit: 1

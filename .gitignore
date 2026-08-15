@@ -57,13 +57,23 @@ sysinfo.txt
 
 # TextMeshPro assets
 Assets/TextMesh Pro*
+Assets/JsonDotNet*
+Assets/Imported*
 
 # Builds
 *.apk
 *.aab
 *.unitypackage
 *.app
+# Media files
+/[Aa]ssets/Audio/*
+#packages and plugins
+/[Aa]ssets/Editor*
+/[Aa]ssets/Plugins*
+/[Aa]ssets/Gizmos*
 
+*.mp3
+*.wav
 # Crashlytics generated file
 crashlytics-build.properties
 
