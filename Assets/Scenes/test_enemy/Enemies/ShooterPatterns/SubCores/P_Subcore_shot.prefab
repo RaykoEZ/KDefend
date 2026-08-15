@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: OnChargeFinish.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Shoot
       objectReference: {fileID: 0}
+    - target: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
+      propertyPath: m_PlayableAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 2c32aacb5b917e44b82def93cd9c5d19, type: 2}
     - target: {fileID: 5396002096139608796, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -74,27 +78,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_base.Health
-      value: 100000
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
-      propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 5727629129049428749}
-    - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
+      value: TakeDamage
       objectReference: {fileID: 0}
     - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -107,7 +107,7 @@ PrefabInstance:
     - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 11400000, guid: 5ed88cd94f2c9864c9d404147866c433, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
@@ -214,10 +214,5 @@ PrefabInstance:
 --- !u!320 &5322109696065111505 stripped
 PlayableDirector:
   m_CorrespondingSourceObject: {fileID: 5275632149523798125, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
-  m_PrefabInstance: {fileID: 66746880605855164}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5727629129049428749 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5733506426119868081, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
   m_PrefabInstance: {fileID: 66746880605855164}
   m_PrefabAsset: {fileID: 0}

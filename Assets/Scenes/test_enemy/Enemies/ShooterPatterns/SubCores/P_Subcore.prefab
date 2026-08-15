@@ -352,7 +352,6 @@ GameObject:
   - component: {fileID: 5275632149523798125}
   - component: {fileID: 2704865638724044160}
   - component: {fileID: 4592678496323955673}
-  - component: {fileID: 2458118582752826596}
   - component: {fileID: 5958309022919898666}
   m_Layer: 7
   m_Name: P_Subcore
@@ -835,26 +834,6 @@ MonoBehaviour:
     Name: 
     ObjectReference: {fileID: 7080463277299594758}
   m_display: {fileID: 6474834738990378957}
---- !u!114 &2458118582752826596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5733506426119868081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f59df5cd20978a40981078601c98a7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InitTester
-  m_initStats:
-    Health: 100
-    KnockbackModifier: 0
-    MoveSpeed: 0
-    AtkModifier: 0
-  m_location: {fileID: 9162241260338012535}
-  m_initTarget: {fileID: 7080463277299594758}
-  m_movement: {fileID: 0}
 --- !u!50 &5958309022919898666
 Rigidbody2D:
   serializedVersion: 5

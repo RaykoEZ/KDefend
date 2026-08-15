@@ -62,6 +62,9 @@ public class RailCannon : BaseProjectile
         m_laserRef?.Clear();
         StopCoroutine(m_hit);
         m_hit = null;
-        Destroy(gameObject);
+        if (!m_doNotDestroyOnEnd)
+        {
+            Destroy(gameObject);
+        }
     }
 }

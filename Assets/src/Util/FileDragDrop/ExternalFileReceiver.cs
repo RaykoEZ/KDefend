@@ -23,14 +23,26 @@ public class ExternalFileEvent
 public delegate void ExternalFileDropped(ExternalFileDropInfo dropInfo);
 public class ExternalFileReceiver : MonoBehaviour
 {
+    [SerializeField] bool m_activateOnEnable = default;
     [SerializeField] List<ExternalFileEvent> m_fileEvents = default;
     public event ExternalFileDropped FileDropped;
     private void OnEnable()
     {
+        if (m_activateOnEnable) 
+        {
+            Activate();
+        }
+    }
+    private void OnDisable()
+    {
+        Deactivate();
+    }
+    public void Activate() 
+    {
         UnityDragAndDropHook.InstallHook();
         UnityDragAndDropHook.OnDroppedFiles += OnFiles;
     }
-    private void OnDisable()
+    public void Deactivate() 
     {
         UnityDragAndDropHook.UninstallHook();
         UnityDragAndDropHook.OnDroppedFiles -= OnFiles;

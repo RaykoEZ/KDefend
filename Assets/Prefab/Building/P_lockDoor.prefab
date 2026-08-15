@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 8182045144343363497}
   - component: {fileID: 4001742751695715642}
   - component: {fileID: 6647230100479257327}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Ambient_Proximity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,9 +485,9 @@ AudioSource:
   m_GameObject: {fileID: 8773473272465116823}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 418668591116468870, guid: a5ea6c6056ba3f649a894720792c9b3d, type: 2}
+  OutputAudioMixerGroup: {fileID: -46474087053656555, guid: a5ea6c6056ba3f649a894720792c9b3d, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: d5defe1c64b353047b7b3f9ef6ed404f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1
@@ -500,7 +500,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -548,7 +548,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.475
+      value: 0.41666666
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -586,7 +586,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0

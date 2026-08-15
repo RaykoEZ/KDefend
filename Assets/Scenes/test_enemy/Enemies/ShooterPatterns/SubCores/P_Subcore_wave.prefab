@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 3309863107450943547}
     - target: {fileID: 4198696518014794181, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: OnChargeFinish.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Attack
+      value: Activate
       objectReference: {fileID: 0}
     - target: {fileID: 4198696518014794181, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: OnChargeFinish.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -114,7 +114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_base.Health
-      value: 150000
+      value: 8000
       objectReference: {fileID: 0}
     - target: {fileID: 7080463277299594758, guid: b8166557940ebb74ba1dab0441869f19, type: 3}
       propertyPath: m_onDefeat.m_PersistentCalls.m_Calls.Array.size

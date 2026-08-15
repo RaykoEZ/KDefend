@@ -101,8 +101,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 75eb3638312834f48b13ad8e6496eaaa, type: 3}
     - target: {fileID: 5641416596222669894, guid: 916bc2afb7bcb4341b76822b12598538, type: 3}
+      propertyPath: m_onLaunchSfx
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5641416596222669894, guid: 916bc2afb7bcb4341b76822b12598538, type: 3}
       propertyPath: m_weaponProperty.Damage
-      value: 5
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 5641416596222669894, guid: 916bc2afb7bcb4341b76822b12598538, type: 3}
       propertyPath: m_weaponProperty.AttackPerCycle
@@ -110,7 +114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8875515838101310566, guid: 916bc2afb7bcb4341b76822b12598538, type: 3}
       propertyPath: m_Color.b
-      value: 0.34867558
+      value: 0.31602407
       objectReference: {fileID: 0}
     - target: {fileID: 8875515838101310566, guid: 916bc2afb7bcb4341b76822b12598538, type: 3}
       propertyPath: m_Color.g
@@ -118,7 +122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8875515838101310566, guid: 916bc2afb7bcb4341b76822b12598538, type: 3}
       propertyPath: m_Color.r
-      value: 0.8773585
+      value: 0.8867924
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -24,6 +24,7 @@ public abstract class ActiveAbility : MonoBehaviour
     public BaseEntity Target { 
         get => m_target; 
         set => m_target = value; }
+
     public virtual float CooldownTime { get => m_cooldownTime; set => m_cooldownTime = value; }
     public virtual void Init() 
     {
@@ -36,6 +37,11 @@ public abstract class ActiveAbility : MonoBehaviour
         {
             Activate();
         }
+    }
+    public void ActivateSequence()
+    {
+        HandleAbilityStates();
+        GameUtil.PlaySequence(m_activationSequence);
     }
     public virtual bool CanUse() => (m_onCooldown == null && m_channeling == null);
     protected virtual void Effect_Internal() { }
@@ -64,7 +70,7 @@ public abstract class ActiveAbility : MonoBehaviour
     {
         Target = null;
     }
-    void HandleAbilityStates() 
+    protected void HandleAbilityStates() 
     {
         m_onCooldown = StartCoroutine(Cooldown(m_cooldownTime));
         if (m_channeling != null)

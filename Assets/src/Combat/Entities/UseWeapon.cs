@@ -14,6 +14,13 @@ public class UseWeapon : ActiveAbility
         if (m_weaponRotation == null) return;
         PrepareAttack();
     }
+    // activate on a set target object
+    public void Attack(Transform target) 
+    {
+        Vector3 dir = (target.position - transform.position).normalized;
+        m_attackHandler.UseWeaponOneShot(m_weaponRotation, dir);
+        m_activateEffects?.Invoke(Target);
+    }
     public void Attack()
     {
         if (m_weaponRotation == null) return;

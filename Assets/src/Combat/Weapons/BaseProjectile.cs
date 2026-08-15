@@ -23,6 +23,7 @@ public interface IHitsEntity
 [RequireComponent(typeof(Rigidbody2D))]
 public class BaseProjectile : BaseWeapon, IHitsEntity
 {
+    [SerializeField] protected bool m_doNotDestroyOnEnd = default;
     [Range(0, 60)]
     [SerializeField] protected int m_spreadAngleRange = default;
     [Range(0f, 10f)]
@@ -103,6 +104,9 @@ public class BaseProjectile : BaseWeapon, IHitsEntity
         }
         m_isFlying = false;
         m_lifeTimer = 0f;
-        Destroy(gameObject);
+        if (!m_doNotDestroyOnEnd) 
+        {
+            Destroy(gameObject);
+        }
     }
 }

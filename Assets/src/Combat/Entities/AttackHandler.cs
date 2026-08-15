@@ -31,7 +31,6 @@ public abstract class AttackHandler : MonoBehaviour
     {
         StartCoroutine(Attack_Internal(toUse, direction));
     }
-
     protected virtual IEnumerator AttackCycle_Internal(int weaponIndex)
     {
         BaseWeapon weapon = m_currentWeapons[weaponIndex];

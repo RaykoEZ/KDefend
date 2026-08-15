@@ -19,7 +19,7 @@ TagManager:
   - Attack_Hostile
   - PP1
   - Destination
-  - SeeThrough
+  - OverlapsPlayer
   - Item
   - AimTarget
   - Building_Bridge

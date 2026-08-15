@@ -13,7 +13,6 @@ public interface IMovement
 }
 // base enemy behaviour
 public delegate void OnEnemyUpdate(Enemy toUpdate);
-[RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : BaseCharacter, IHitsEntity
 {
     [SerializeField] bool m_deferDespawnOnDefeat = default;
