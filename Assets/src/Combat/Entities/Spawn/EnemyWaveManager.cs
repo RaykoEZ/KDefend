@@ -46,7 +46,7 @@ public class EnemyWaveManager : MonoBehaviour
             StopRoutineWave();
             StartCoroutine(DelayRoutineWave());
         }
-        m_routineSpawn.TimeInterval = UnityEngine.Random.Range(30f, 60f);
+        m_routineSpawn.TimeInterval = UnityEngine.Random.Range(3f, 10f);
     }
     public void RoutineWave() 
     {
@@ -115,16 +115,17 @@ public class EnemyWaveManager : MonoBehaviour
     // spawn one wave of enemies
     IEnumerator RoutineSpawn_Internal() 
     {
-        // wait for a set duration if spawn count exceeded
-        yield return SpawnCooldown();
         // spawn a wave of enemies
         int index = Mathf.Clamp((int)DayCounter.Current, 0, m_routineSpawnStages.Count);
         SpawnWave wave = m_routineSpawnStages[index];
         SpawnWave(wave);
+        // wait for a set duration if spawn count exceeded
+        yield return SpawnCooldown();
     }
     IEnumerator SpawnCooldown()
     {
-        yield return new WaitForSeconds(5f);
+        float wait = UnityEngine.Random.Range(2f, 6f);
+        yield return new WaitForSeconds(wait);
     }
     void PrepareEnemy(Enemy spawned) 
     {

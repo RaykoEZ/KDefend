@@ -13,13 +13,17 @@ public abstract class AttackHandler : MonoBehaviour
     protected List<BaseWeapon> m_currentWeapons = new List<BaseWeapon>();
     public bool KeepFiring { get => m_keepFiring; set => m_keepFiring = value; }
     public abstract Vector2 GetAimDirectionNormalized();
+    protected virtual bool CannotAttack() 
+    { 
+        return KDefenderStateManager.IsPaused || m_keepFiring || m_currentWeapons.Count == 0;
+    } 
     protected virtual void OnEnable()
     {
         ResetWeapons();
     }
     public virtual void UseWeapon()
     {
-        if (KDefenderStateManager.IsPaused ||  m_keepFiring || m_currentWeapons.Count == 0) return;
+        if (CannotAttack()) return;
         for (int i = 0; i < m_currentWeapons.Count; i++)
         {
             if (m_attackingWeapons[i]) continue;

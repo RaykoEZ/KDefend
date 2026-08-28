@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
-using PixelCrushers.DialogueSystem;                                                                                         
-
+using PixelCrushers.DialogueSystem;
 // You can use these functions as models and then replace them with your own.
 
 // Triggers KDefender Game Event to spawn enemies, and include flag for this spawn event, for Dialogue System toolkit

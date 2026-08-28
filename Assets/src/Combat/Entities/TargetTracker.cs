@@ -4,7 +4,6 @@ using UnityEngine.AI;
 public enum NavigationMode 
 { 
     Seek,
-    Formation
 }
 // output position of tracked entity or follow formation
 [RequireComponent(typeof(NavMeshAgent))]
@@ -14,21 +13,16 @@ public class TargetTracker : MonoBehaviour
     [SerializeField] float m_warpDistanceThreshold = default;
     [SerializeField] float m_teleportCooldownTime = default;
     [SerializeField] float m_updateTimeInterval = default;
-    [SerializeField] Formation m_defaultFormation = default;
     [SerializeField] NavigationMode m_navMode = default;
+    [SerializeField] EncircleHandler m_encircle = default;
     protected Vector2 m_currentTarget;
     protected Vector2 m_defaultTarget;
     BaseEntity m_target;
     Coroutine m_tracking;
     Coroutine m_teleportCooldown;
-    Formation m_currentFormationRef;
-    public bool IsReady => m_target != null || m_currentFormationRef != null;
+    public bool IsReady => m_target != null;
     public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
     public NavigationMode Mode { get => m_navMode; set => m_navMode = value; }
-    void Start()
-    {
-        SetNewFormation(m_defaultFormation);
-    }
     void OnEnable()
     {
         m_teleportCooldown = StartCoroutine(Cooldown());
@@ -41,10 +35,6 @@ public class TargetTracker : MonoBehaviour
         {
             case NavigationMode.Seek:
                 return m_currentTarget;
-            case NavigationMode.Formation:
-                m_currentFormationRef.TryGetFormationPosition(m_target, out Vector3 ret);
-                m_currentTarget = ret;
-                break;
             default:
                 break;
         }
@@ -60,27 +50,9 @@ public class TargetTracker : MonoBehaviour
         }
         m_tracking = StartCoroutine(TrackTarget());
     }
-    public void SetNewFormation(Formation newFormation) 
-    {
-        if (newFormation == null) return;
-        if (m_currentFormationRef != null) 
-        {
-            m_currentFormationRef.OnFormationEnd -= OnFormationEnd;
-        }
-        m_currentFormationRef = newFormation;
-        m_currentFormationRef.OnFormationEnd += OnFormationEnd;
-    }
-    public void OnFormationEnd() 
-    { 
-        m_navMode = NavigationMode.Seek;
-    }
     public void ResetTarget() 
     {
         m_currentTarget = m_defaultTarget;
-    }
-    public void ResetFormation() 
-    {
-        m_currentFormationRef = m_defaultFormation;
     }
     protected IEnumerator TrackTarget()
     {
@@ -116,6 +88,6 @@ public class TargetTracker : MonoBehaviour
     bool TryGetWarpPosition(out Vector3 warpPosition) 
     {
         warpPosition = m_target.transform.position;
-        return m_currentFormationRef == null? false : m_currentFormationRef.TryGetFormationPosition(m_target, out warpPosition);
+        return m_encircle == null? false : m_encircle.TryGetFormationPosition(m_target, out warpPosition);
     }
 }

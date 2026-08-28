@@ -877,8 +877,8 @@ MonoBehaviour:
   m_warpDistanceThreshold: 5000
   m_teleportCooldownTime: 7
   m_updateTimeInterval: 1
-  m_defaultFormation: {fileID: 7339454252143745524}
   m_navMode: 0
+  m_encircle: {fileID: 7339454252143745524}
 --- !u!114 &7339454252143745524
 MonoBehaviour:
   m_ObjectHideFlags: 0

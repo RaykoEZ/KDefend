@@ -39,11 +39,6 @@ public class SupplyDrop : DropsItem
         drop.OnItemPickup -= OnPickup;
         Begin();
     }
-    // when drop fails, increase next drop check speed
-    protected override void OnDropFail()
-    {
-        m_routineCaller.TimeInterval *= 0.6f;
-    }
     public void Begin() 
     {
         m_routineCaller.StartRoutine(SupplyDrop_Internal());

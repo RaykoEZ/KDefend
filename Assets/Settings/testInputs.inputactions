@@ -34,15 +34,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pickup",
-                    "type": "Button",
-                    "id": "f5403e14-a357-4c69-aa4a-4e56881c84ec",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "c56d67b1-da3a-457a-89a5-d2bedac2fa30",
@@ -288,17 +279,6 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b9470e05-117a-4379-bed1-0039148d4037",
-                    "path": "<Keyboard>/e",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Pickup",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -13,15 +13,41 @@ MonoBehaviour:
   m_Name: Wave_r0_Sun
   m_EditorClassIdentifier: 
   m_enemyGroups:
-  - m_spawnLocationIndex: 0
+  - m_spawnLocationIndex: 7
+    m_groupsToSpawn:
+    - m_numToSpawn: 1
+      m_enemyRefIndex: 0
+    - m_numToSpawn: 2
+      m_enemyRefIndex: 1
+  - m_spawnLocationIndex: 6
+    m_groupsToSpawn:
+    - m_numToSpawn: 5
+      m_enemyRefIndex: 0
+  - m_spawnLocationIndex: 5
     m_groupsToSpawn:
     - m_numToSpawn: 2
       m_enemyRefIndex: 0
+  - m_spawnLocationIndex: 4
+    m_groupsToSpawn:
+    - m_numToSpawn: 2
+      m_enemyRefIndex: 0
+    - m_numToSpawn: 3
+      m_enemyRefIndex: 1
+  - m_spawnLocationIndex: 3
+    m_groupsToSpawn:
+    - m_numToSpawn: 2
+      m_enemyRefIndex: 0
+    - m_numToSpawn: 3
+      m_enemyRefIndex: 1
   - m_spawnLocationIndex: 2
     m_groupsToSpawn:
     - m_numToSpawn: 2
       m_enemyRefIndex: 0
-  - m_spawnLocationIndex: 1
+    - m_numToSpawn: 3
+      m_enemyRefIndex: 1
+  - m_spawnLocationIndex: 2
     m_groupsToSpawn:
     - m_numToSpawn: 2
       m_enemyRefIndex: 0
+    - m_numToSpawn: 3
+      m_enemyRefIndex: 1

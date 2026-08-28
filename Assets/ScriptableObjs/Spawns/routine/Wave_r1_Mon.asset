@@ -13,23 +13,29 @@ MonoBehaviour:
   m_Name: Wave_r1_Mon
   m_EditorClassIdentifier: 
   m_enemyGroups:
+  - m_spawnLocationIndex: 10
+    m_groupsToSpawn:
+    - m_numToSpawn: 1
+      m_enemyRefIndex: 0
+    - m_numToSpawn: 2
+      m_enemyRefIndex: 1
+  - m_spawnLocationIndex: 9
+    m_groupsToSpawn:
+    - m_numToSpawn: 5
+      m_enemyRefIndex: 0
+  - m_spawnLocationIndex: 8
+    m_groupsToSpawn:
+    - m_numToSpawn: 2
+      m_enemyRefIndex: 0
+  - m_spawnLocationIndex: 7
+    m_groupsToSpawn:
+    - m_numToSpawn: 2
+      m_enemyRefIndex: 0
+    - m_numToSpawn: 3
+      m_enemyRefIndex: 1
   - m_spawnLocationIndex: 0
     m_groupsToSpawn:
     - m_numToSpawn: 2
-      m_enemyRefIndex: 0
-  - m_spawnLocationIndex: 3
-    m_groupsToSpawn:
-    - m_numToSpawn: 1
-      m_enemyRefIndex: 0
-  - m_spawnLocationIndex: 5
-    m_groupsToSpawn:
-    - m_numToSpawn: 2
-      m_enemyRefIndex: 0
-    - m_numToSpawn: 1
-      m_enemyRefIndex: 1
-  - m_spawnLocationIndex: 2
-    m_groupsToSpawn:
-    - m_numToSpawn: 1
       m_enemyRefIndex: 0
     - m_numToSpawn: 1
       m_enemyRefIndex: 1

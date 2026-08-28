@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 // Dash for player
-[RequireComponent(typeof(Player), typeof(Rigidbody2D), typeof(IMovement))]
+[RequireComponent(typeof(Player), typeof(Rigidbody2D), typeof(PlayerMovement))]
 public class PlayerDash : Dash 
 {
     [Range(0f, 999f)]
@@ -9,6 +9,7 @@ public class PlayerDash : Dash
     [SerializeField] RegenerateCounter m_dashCounter = default;
     [SerializeField] UnityEvent m_onDashFinish = default;
     Player PlayerRef => GetComponent<Player>();
+    PlayerMovement Movement => GetComponent<PlayerMovement>();
     Coroutine iFrame;
     void FixedUpdate()
     {
@@ -16,7 +17,7 @@ public class PlayerDash : Dash
     }
     public override bool CanUse()
     {
-        return base.CanUse() && m_dashCounter.IsFree;
+        return base.CanUse() && m_dashCounter.IsFree && Movement.CanMove;
     }
     protected override void Effect_Internal()
     {

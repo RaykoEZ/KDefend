@@ -21,7 +21,6 @@ public class DayCounter
     }
 }
 // initialises and saves game state
-//TODO: Delay Delivery features for now
 public class KDefenderStateManager : MonoBehaviour 
 {
     [SerializeField] GameSaveSource m_save = default;

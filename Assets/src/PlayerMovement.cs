@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour, IMovement
     Rigidbody2D RB2D => m_controlling?.GetComponent<Rigidbody2D>();
     Animator Anim => m_controlling?.GetComponent<Animator>();
 
+    public bool CanMove { get => m_movable; set => m_movable = value; }
+
     void OnEnable()
     {
         KDEventHandler.ListenToGlobal(GameEventTriggerType.PauseGame, OnPause);
@@ -36,6 +38,7 @@ public class PlayerMovement : MonoBehaviour, IMovement
     
     public void OnMove(InputAction.CallbackContext value)
     {
+        if (!CanMove) return;
         m_movementDirection = value.ReadValue<Vector2>();
         // update static direction report
         s_moveDirection = m_movementDirection;

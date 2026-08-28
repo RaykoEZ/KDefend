@@ -6,24 +6,14 @@ public enum KD_StaticEventFlags
     None = 0,
     NewGame = 1 << 0,
     Tut_Control_Movement = 1 << 1,
-    Tut_Deli_Intel = 1 << 2,
-    Shop_Visited = 1 << 3,  
     // player defeated snipe boss
     Sniper_Defeat = 1 << 4,
     // player used R.I Letter to mediate conflict vs sniper
     Sniper_Mediated = 1<< 5,
-    // Player extracts & clones the power of Dev0 from pause menu.
-    // Dev0 is dropped into level and collected by the Shopkeeper.
-    Pause_Clone = 1<< 6,
     // Purchased Dev0_Pause (fragment) from shop
     // Make watch appear on screen
     // Allow waych to be dragged out of game window
     Dev0_Obtained = 1 << 7,
-    // flag for player dragging Dev0 out of game window
-    // output clue files to player desktop
-    Dev0_Extract = 1 << 8,
-    // Raise after player drag in dev0's full access version
-    Dev0_FullAccess = 1 << 9,
     // Unlocks Monday & devtool 13 (part 1) in shop
     // 1. defeat Tuesday/Friday boss
     Boss_Defeated = 1 << 10,

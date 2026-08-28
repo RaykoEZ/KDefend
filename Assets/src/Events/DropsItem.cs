@@ -18,7 +18,6 @@ public class DropsItem : MonoBehaviour
         float rand = Random.Range(0f, 1f);
         if (rand > m_dropRate)
         {
-            OnDropFail();
             return; 
         }
         // get drops from drop list
@@ -28,9 +27,5 @@ public class DropsItem : MonoBehaviour
         //set instance child order behind the dropper, to display on top of dropper
         instance.transform.SetSiblingIndex(transform.GetSiblingIndex() - 1);
         OnItemDropped?.Invoke(instance);
-    }
-    // When a drop rate check fails
-    protected virtual void OnDropFail() 
-    {    
     }
 }

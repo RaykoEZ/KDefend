@@ -29,6 +29,7 @@ public class TemporaryInputAction
     }
     protected virtual void Trigger(InputAction.CallbackContext c) 
     {
+        // if only allow 1 trigger per enable, disable listener now
         if (m_disableOnTrigger) 
         {
             Disable();
