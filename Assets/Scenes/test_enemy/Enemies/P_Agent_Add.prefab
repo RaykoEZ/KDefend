@@ -382,6 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd96b0c2b3bc5443b3038673514d60f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_dropLimit: 0
   m_dropRate: 0.25
   m_dropList: {fileID: 11400000, guid: f873e06106342ca4b8fb3f3baa149a6e, type: 2}
 --- !u!114 &4430035897266289553
@@ -468,6 +469,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_attackHandler: {fileID: 0}
+  m_deferDespawnOnDefeat: 0
   m_contactDamage: 5
   m_movementHandler: {fileID: 1742133721172013432}
 --- !u!225 &9166003067599549407
@@ -674,8 +676,8 @@ MonoBehaviour:
   m_warpDistanceThreshold: 2000
   m_teleportCooldownTime: 7
   m_updateTimeInterval: 1
-  m_defaultFormation: {fileID: 0}
   m_navMode: 0
+  m_encircle: {fileID: 0}
 --- !u!114 &2995466180879248310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -848,8 +850,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278386432
-  m_fontColor: {r: 0, g: 1, b: 0.008930683, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -996,6 +998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_activateOnInit: 0
+  m_playSequenceOnInit: 0
   m_cooldownTime: 35
   m_hitsToEnd: 0
   m_activationSequence: {fileID: 0}

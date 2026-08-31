@@ -455,6 +455,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_attackHandler: {fileID: 1492414745406935436}
+  m_deferDespawnOnDefeat: 0
   m_contactDamage: 2
   m_movementHandler: {fileID: 6083768987087643707}
 --- !u!114 &5398323281690144578
@@ -696,8 +697,8 @@ MonoBehaviour:
   m_warpDistanceThreshold: 2000
   m_teleportCooldownTime: 5
   m_updateTimeInterval: 1
-  m_defaultFormation: {fileID: 1142432487560067998}
   m_navMode: 0
+  m_encircle: {fileID: 0}
 --- !u!114 &1142432487560067998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -795,8 +796,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278386432
-  m_fontColor: {r: 0, g: 1, b: 0.008930683, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

@@ -592,7 +592,8 @@ GameObject:
   - component: {fileID: 2100439032905026316}
   - component: {fileID: 2809997561916802366}
   - component: {fileID: 3376547670856185291}
-  m_Layer: 5
+  - component: {fileID: 1243450056329518062}
+  m_Layer: 7
   m_Name: hpTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -655,8 +656,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278386432
-  m_fontColor: {r: 0, g: 1, b: 0.008930683, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -731,6 +732,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_testDisplay: {fileID: 2809997561916802366}
   m_toTest: {fileID: 2273697011688774770}
+--- !u!223 &1243450056329518062
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5281512484494855909}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 1893958443
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &7290552231440194145
 GameObject:
   m_ObjectHideFlags: 0

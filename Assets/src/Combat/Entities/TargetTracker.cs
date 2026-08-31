@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public enum NavigationMode 
 { 
     Seek,
+    Reset
 }
 // output position of tracked entity or follow formation
 [RequireComponent(typeof(NavMeshAgent))]
@@ -23,7 +24,7 @@ public class TargetTracker : MonoBehaviour
     public bool IsReady => m_target != null;
     public NavMeshAgent Navigator => GetComponent<NavMeshAgent>();
     public NavigationMode Mode { get => m_navMode; set => m_navMode = value; }
-    void OnEnable()
+    void Start()
     {
         m_teleportCooldown = StartCoroutine(Cooldown());
         m_defaultTarget = transform.position;
@@ -35,6 +36,8 @@ public class TargetTracker : MonoBehaviour
         {
             case NavigationMode.Seek:
                 return m_currentTarget;
+            case NavigationMode.Reset:
+                return m_defaultTarget;
             default:
                 break;
         }
@@ -44,6 +47,7 @@ public class TargetTracker : MonoBehaviour
     {
         if (newTarget == null) return;
         m_target = newTarget;
+        Mode = NavigationMode.Seek;
         if (m_tracking != null)
         {
             StopCoroutine(m_tracking);
@@ -52,6 +56,7 @@ public class TargetTracker : MonoBehaviour
     }
     public void ResetTarget() 
     {
+        Mode = NavigationMode.Reset;
         m_currentTarget = m_defaultTarget;
     }
     protected IEnumerator TrackTarget()

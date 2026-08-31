@@ -124,12 +124,8 @@ public class NpcMovement : MonoBehaviour, IMovement
     protected virtual IEnumerator Standby(float duration)
     {
         StopMoving();
+        m_tracker?.ResetTarget();
         yield return new WaitForSeconds(duration);
-        // if still on standby after waiting, reset destination to origin
-        if (Navigator.isStopped) 
-        {
-            m_tracker?.ResetTarget();
-        }
         Navigator?.SetDestination(m_tracker.GetPrecisePosition());
         StartMoving();
     }
