@@ -14,9 +14,9 @@ public class ExternalFileDropInfo
 // item in a list to check whenever a file is dragged in
 public class ExternalFileEvent 
 {
-    [SerializeField] DefaultFileValidor m_fileValidator = default;
+    [SerializeField] List<BaseFileValidators> m_fileValidators = default;
     [SerializeField] UnityEvent<ExternalFileDropInfo> m_triggerOnDraggedIn = default;
-    public DefaultFileValidor FileValidator => m_fileValidator;
+    public List<BaseFileValidators> FileValidators => m_fileValidators;
     public UnityEvent<ExternalFileDropInfo> TriggerOnDraggedIn => m_triggerOnDraggedIn;
 }
 // Listens to files dragged into game window, trigger events
@@ -78,11 +78,20 @@ public class ExternalFileReceiver : MonoBehaviour
         foreach (var e in m_fileEvents)
         {
             // check if file dropped is what we want
-            if (e.FileValidator.Validate(fileInfo, content))
+            if (ValidateAll(fileInfo, content, e.FileValidators))
             {
                 e.TriggerOnDraggedIn?.Invoke(info);
             }
         }
         FileDropped?.Invoke(info);
+    }
+    bool ValidateAll(FileInfo fileInfo, string content, List<BaseFileValidators> validators) 
+    {
+        bool ret = true;
+        foreach (var valid in validators) 
+        {
+            ret &= valid.Validate(fileInfo, content);
+        }
+        return ret;
     }
 }

@@ -55,7 +55,6 @@ public class Item : MonoBehaviour , IItem
     {
         if (asset == null) return null;
         Item instance = GameUtil.SpawnObject(asset.PrefabRef, localposition, parent);
-        instance?.Init(asset);
         return instance;
     }
     // Pickup trigger
@@ -77,9 +76,6 @@ public class Item : MonoBehaviour , IItem
     void OnTriggerExit2D() 
     {
         m_pickUpCommand?.Disable();
-    }
-    public void Init(ItemAsset asset)
-    {
     }
     // when player presses pickup for weapons
     public virtual void PickupDrop(InputAction.CallbackContext _) 

@@ -10,4 +10,11 @@ public class DropItem_Single : MonoBehaviour
         //set instance child order behind the dropper, to display on top of dropper
         instance.transform.SetSiblingIndex(transform.GetSiblingIndex() - 1);
     }
+    public void DropItem(Transform spawnAt) 
+    {
+        // spawn
+        var instance = Item.SpawnItem(m_dropAssetRef, spawnAt.parent, spawnAt.localPosition);
+        //set instance child order behind the dropper, to display on top of dropper
+        instance.transform.SetSiblingIndex(transform.GetSiblingIndex() - 1);
+    }
 }

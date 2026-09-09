@@ -1,6 +1,8 @@
 ﻿using Curry.Events;
 using System;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 // Persistent event listener to handle scene changes
 [RequireComponent(typeof(LevelLoader))]
@@ -32,14 +34,11 @@ public class LevelEventHandler : MonoBehaviour
     }
     public void QuitGame()
     {
-        if (Application.isEditor)
-        {
-            EditorApplication.ExitPlaymode();
-        }
-        else
-        {
-            Application.Quit();
-        }
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();
+#endif
     }
     void GoToGameScene() 
     {

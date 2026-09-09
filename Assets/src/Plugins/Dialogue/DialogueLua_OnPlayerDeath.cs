@@ -5,7 +5,6 @@ public class DialogueLua_OnPlayerDeath : MonoBehaviour
 {
     [Tooltip("Typically leave unticked so temporary Dialogue Managers don't unregister your functions.")]
     public bool unregisterOnDisable = false;
-    [SerializeField] DialogueDatabase m_database = default;
     string m_spawnFunctionID => nameof(OnPlayerDeath);
 
     void OnEnable()

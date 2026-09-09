@@ -1,17 +1,10 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using UnityEngine;
 public interface IFileValidator
 {
     public bool Validate(FileInfo info, string content);
 }
-[Serializable]
-public class DefaultFileValidor : IFileValidator
+public abstract class BaseFileValidators : MonoBehaviour, IFileValidator 
 {
-    public string AcceptedFilenames = default;
-    public virtual bool Validate(FileInfo info, string content)
-    {
-        if (info == null) return false;
-        bool ret = AcceptedFilenames == info.Name;
-        return ret;
-    }
+    public abstract bool Validate(FileInfo info, string content);
 }
