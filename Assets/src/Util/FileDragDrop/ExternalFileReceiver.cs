@@ -25,6 +25,7 @@ public class ExternalFileReceiver : MonoBehaviour
 {
     [SerializeField] bool m_activateOnEnable = default;
     [SerializeField] List<ExternalFileEvent> m_fileEvents = default;
+    [SerializeField] UnityEvent m_onFileInvalid = default;
     public event ExternalFileDropped FileDropped;
     private void OnEnable()
     {
@@ -47,23 +48,28 @@ public class ExternalFileReceiver : MonoBehaviour
         UnityDragAndDropHook.UninstallHook();
         UnityDragAndDropHook.OnDroppedFiles -= OnFiles;
     }
-    void OnFiles(List<string> aFiles, Vector2 aPos)
+    void OnFiles(List<string> draggInFiles, Vector2 aPos)
     {
         string file = "";
         FileInfo fi = null;
-        foreach (var f in aFiles)
+        foreach (var currentFile in draggInFiles)
         {
-            fi = new FileInfo(f);
+            fi = new FileInfo(currentFile);
             string ext = fi.Extension.ToLower();
             // detect file extensions to respond to
-            if (string.IsNullOrEmpty(ext))
+            if (!string.IsNullOrEmpty(ext))
             {
-                file = f;
+                file = currentFile;
                 break;
             }
         }
-        // go through event list to trigger valid events
-        ProcessEvents(fi, file, aPos);
+        if (!string.IsNullOrEmpty(file)) 
+        {
+            var contentBytes = File.ReadAllBytes(file);
+            string content = System.Text.Encoding.Default.GetString(contentBytes);
+            // go through event list to trigger valid events
+            ProcessEvents(fi, content, aPos);
+        }
     }
     void ProcessEvents(FileInfo fileInfo, string content, Vector2 aPos) 
     {
@@ -75,13 +81,19 @@ public class ExternalFileReceiver : MonoBehaviour
             fileInfo = fileInfo,
             pos = aPos
         };
+        int n = 0;
         foreach (var e in m_fileEvents)
         {
             // check if file dropped is what we want
             if (ValidateAll(fileInfo, content, e.FileValidators))
             {
                 e.TriggerOnDraggedIn?.Invoke(info);
+                ++n;
             }
+        }        
+        if (n == 0) 
+        {
+            m_onFileInvalid?.Invoke();
         }
         FileDropped?.Invoke(info);
     }

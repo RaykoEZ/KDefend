@@ -25,6 +25,12 @@ public class NotificationHandler : MonoBehaviour
             KDEventHandler.UnlistenFromGlobal(item, OnNotification);
         }
     }
+    public void Notify(string message) 
+    {
+        if (message == null) return;
+        m_textField.text = message;
+        GameUtil.PlaySequence(m_sequencer, m_toPlay);
+    }
     void OnNotification(object sender, KDEventInfo args) 
     {
         if (args.Payload == null) return;

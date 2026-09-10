@@ -215,7 +215,7 @@ MonoBehaviour:
     Speed: 800
     Life: 3
     DelayPerAttack: 0.2
-    DelayPerCycle: 1
+    DelayPerCycle: 1.2
     PushPower: 2.5
   m_onLaunchSfx: {fileID: 8300000, guid: fe9ba864205f1c14588ee900d107461b, type: 3}
   m_onHitEffects: []
@@ -234,6 +234,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_doNotDestroyOnEnd: 0
   m_spreadAngleRange: 5
   m_delayBeforeAttack: 0
   m_beforeAttack:

@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_base:
-    Health: 5000
+    Health: 3000
     KnockbackModifier: 1
     MoveSpeed: 80
     AtkModifier: 0

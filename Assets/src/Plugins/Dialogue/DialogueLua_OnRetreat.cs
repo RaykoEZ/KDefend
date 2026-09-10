@@ -23,7 +23,7 @@ public class DialogueLua_OnRetreat : MonoBehaviour
     public void OnRetreat()
     {
         int num = DialogueLua.GetVariable("NumRetreat").AsInt;
-        DialogueLua.SetVariable("NumRetreat", num++);
+        DialogueLua.SetVariable("NumRetreat", num + 1);
     }
 }
 /**/

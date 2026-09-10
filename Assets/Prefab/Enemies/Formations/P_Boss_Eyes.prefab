@@ -6357,8 +6357,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_base:
-    Health: 9999
-    KnockbackModifier: 1.22
+    Health: 99999
+    KnockbackModifier: 0
     MoveSpeed: 0
     AtkModifier: 0
   m_onDefeat:
@@ -6598,8 +6598,8 @@ MonoBehaviour:
   m_warpDistanceThreshold: 10000
   m_teleportCooldownTime: 7
   m_updateTimeInterval: 1
-  m_defaultFormation: {fileID: 3713787268986347121}
   m_navMode: 0
+  m_encircle: {fileID: 0}
 --- !u!114 &3713787268986347121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6631,6 +6631,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1597156526882697559}
   - component: {fileID: 8973760494343533195}
+  - component: {fileID: 8951278230936189669}
   m_Layer: 7
   m_Name: AbyssBackdrop
   m_TagString: Untagged
@@ -6671,6 +6672,29 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!223 &8951278230936189669
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6070574926794583101}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 1818725071
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &7002843676436289177
 GameObject:
   m_ObjectHideFlags: 0

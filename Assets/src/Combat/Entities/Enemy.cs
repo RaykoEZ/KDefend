@@ -33,8 +33,6 @@ public class Enemy : BaseCharacter, IHitsEntity
     }
     public virtual void InitTarget(BaseEntity defaultTarget = null)
     {
-        base.Init(BaseStats);
-
         EnemyAggroHandler.Add(this);
         m_movementHandler?.Init(defaultTarget);
         m_movementHandler?.StartMoving();
