@@ -199,7 +199,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_healAboveMaxHealth: 0
-  m_healAmount: 2000
+  m_healAmount: 1500
 --- !u!114 &2901837130448357240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,6 +217,36 @@ MonoBehaviour:
   m_onActivate:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 3906793077323897239}
+        m_TargetAssemblyTypeName: HealthThresholdListener, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_onDeactivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3906793077323897239}
+        m_TargetAssemblyTypeName: HealthThresholdListener, Assembly-CSharp
+        m_MethodName: Deactivate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_onTick:
+    m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 7879078874121999021}
         m_TargetAssemblyTypeName: Heal, Assembly-CSharp
         m_MethodName: Activate
@@ -229,14 +259,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_onDeactivate:
-    m_PersistentCalls:
-      m_Calls: []
-  m_onTick:
-    m_PersistentCalls:
-      m_Calls: []
-  m_waitSecondsPerTick: 0.1
-  m_numTicks: 50
+  m_waitSecondsPerTick: 1
+  m_numTicks: 6
 --- !u!114 &3906793077323897239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,6 +437,30 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Playables.PlayableAsset,
             UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: TakeDamage
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 5ed88cd94f2c9864c9d404147866c433, type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2500
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2901837130448357240}
+        m_TargetAssemblyTypeName: RepeatOverTime, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2500
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

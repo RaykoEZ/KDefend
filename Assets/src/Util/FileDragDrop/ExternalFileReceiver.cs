@@ -27,6 +27,9 @@ public class ExternalFileReceiver : MonoBehaviour
     [SerializeField] List<ExternalFileEvent> m_fileEvents = default;
     [SerializeField] UnityEvent m_onFileInvalid = default;
     public event ExternalFileDropped FileDropped;
+    // Number of active listeners, if zero uninstall hook
+    static int m_numActive = 0;
+    bool m_isActive = false;
     private void OnEnable()
     {
         if (m_activateOnEnable) 
@@ -40,12 +43,22 @@ public class ExternalFileReceiver : MonoBehaviour
     }
     public void Activate() 
     {
+        if (m_isActive) return;
+        m_isActive = true;
+        m_numActive++;
         UnityDragAndDropHook.InstallHook();
         UnityDragAndDropHook.OnDroppedFiles += OnFiles;
     }
     public void Deactivate() 
     {
-        UnityDragAndDropHook.UninstallHook();
+        if (!m_isActive) return;
+        m_isActive = false;
+        m_numActive--;
+        if (m_numActive == 0) 
+        {
+            // Number of active listeners, if zero uninstall hook
+            UnityDragAndDropHook.UninstallHook();
+        }
         UnityDragAndDropHook.OnDroppedFiles -= OnFiles;
     }
     void OnFiles(List<string> draggInFiles, Vector2 aPos)

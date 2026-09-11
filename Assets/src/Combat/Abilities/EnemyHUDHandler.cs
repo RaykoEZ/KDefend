@@ -25,7 +25,7 @@ public class EnemyHUDHandler : HideableUI
         m_hpDisplay.SetCurrentValue(m_displayingRef.CurrentStats.Property.Health);
         if (m_name != null) 
         {
-            m_name.text = name;
+            m_name.text = info.Name;
         }
         Show();
     }

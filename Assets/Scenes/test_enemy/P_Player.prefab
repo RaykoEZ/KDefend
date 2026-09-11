@@ -1462,7 +1462,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    runOnConversationEndEventsAtEndOfFrame: 1
+    runOnConversationEndEventsAtEndOfFrame: 0
     onConversationCancelled:
       m_PersistentCalls:
         m_Calls: []

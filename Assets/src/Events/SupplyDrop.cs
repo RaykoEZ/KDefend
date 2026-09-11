@@ -41,19 +41,18 @@ public class SupplyDrop : DropsItem
     }
     public void Begin() 
     {
-        m_routineCaller.StartRoutine(SupplyDrop_Internal());
+        m_routineCaller.StartRoutine(SupplyDrop_Internal);
     }
     public void Stop() 
     {
         m_routineCaller.StopRoutine();
     }
-    IEnumerator SupplyDrop_Internal() 
+    void SupplyDrop_Internal() 
     {
         // check for drop limit and whether a supply was already dropped and unclaimed
         if (m_numDropLimit < 0 || m_numDropped < m_numDropLimit) 
         {
             TryDropItem();
         }
-        yield return null;
     }
 }

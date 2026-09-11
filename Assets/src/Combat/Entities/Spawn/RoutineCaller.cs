@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using UnityEngine;
 public delegate void OnRoutineUpdate();
 // sets one coroutine to repeat with time interval
@@ -18,17 +19,17 @@ public class RoutineCaller : MonoBehaviour
     {
         TimeInterval = m_defaultTimeInterval;
     }
-    IEnumerator Routine_Internal(IEnumerator routine) 
+    IEnumerator Routine_Internal(Action routine) 
     {
         while (m_inProgress)
         {
             // Notify for each interval if changes are needed
             OnNewInterval?.Invoke();
             yield return new WaitForSeconds(TimeInterval);
-            yield return StartCoroutine(routine);
+            routine?.Invoke();
         }
     }
-    public void StartRoutine(IEnumerator routine)
+    public void StartRoutine(Action routine)
     {
         if (m_inProgress) return;
         m_inProgress = true;
