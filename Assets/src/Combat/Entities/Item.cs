@@ -77,7 +77,7 @@ public class Item : MonoBehaviour , IItem
     {
         m_pickUpCommand?.Disable();
     }
-    // when player presses pickup for weapons
+    // when player presses pickup button for weapons
     public virtual void PickupDrop(InputAction.CallbackContext _) 
     {
         OnPickup();
