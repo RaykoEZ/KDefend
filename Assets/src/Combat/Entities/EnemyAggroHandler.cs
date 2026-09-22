@@ -27,15 +27,4 @@ public class EnemyAggroHandler : MonoBehaviour
             enemy?.ResetTarget();
         }
     }
-    public static void SetAllAggroActive(bool enable = true) 
-    {
-        foreach (var item in m_currentAggroList)
-        {
-            SetAggroActive(item, enable);
-        }
-    }
-    public static void SetAggroActive(Enemy enemy, bool enable) 
-    {
-        enemy?.SetAggro(enable);
-    }
 }

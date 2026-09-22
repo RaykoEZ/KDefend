@@ -19,10 +19,12 @@ namespace Curry.UI
         }
         public void ChangeBGM(AudioClip clip) 
         {
+            if (m_bgmSource.clip == clip) return;
             StartCoroutine(BgmTransition_Internal(clip));        
         }
         public void ChangeBGMInstant(AudioClip clip) 
         {
+            if (m_bgmSource.clip == clip) return;
             m_bgmSource.Stop();
             // start new bgm
             m_bgmSource.clip = clip;

@@ -37,11 +37,6 @@ public class Enemy : BaseCharacter, IHitsEntity
         m_movementHandler?.Init(defaultTarget);
         m_movementHandler?.StartMoving();
     }
-    public void SetAggro(bool enable = true) 
-    {
-        m_movementHandler?.ResetTarget();
-        (m_attackHandler as NpcAttackHandler)?.ResetTarget();
-    }
     protected override void OnDefeat()
     {
         StartCoroutine(Defeat_Internal());
