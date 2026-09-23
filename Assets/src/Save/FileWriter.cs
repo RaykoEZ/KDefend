@@ -18,8 +18,8 @@ public class FileWriter
         FileUtil.Base64TextTo(FileUtil.s_desktopPath, folder, filename, content);
 
     }
-    public void SendPngToDesktop(string filename, string foldername, Texture2D texture) 
+    public void SendPngToDesktop(string filenameNoExtension, string foldername, Texture2D texture) 
     {
-        FileUtil.PngImageTo(FileUtil.s_desktopPath, foldername, filename, texture);
+        FileUtil.PngImageTo(FileUtil.s_desktopPath, foldername, filenameNoExtension, texture);
     }
 }

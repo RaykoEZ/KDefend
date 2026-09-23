@@ -11,6 +11,6 @@ public class RILetter : Collectible
         FileWriter writer = new FileWriter();
         // write to player desktop, do it silently if possible
         writer.WriteToDesktop(m_fileWriteDetail.Filename, m_folderName, m_fileWriteDetail.RawContent);
-        writer.SendPngToDesktop(filename: "fromRI", foldername: m_folderName, m_photoSent);
+        writer.SendPngToDesktop(filenameNoExtension: "fromRI", foldername: m_folderName, m_photoSent);
     }
 }
